@@ -611,6 +611,18 @@
         .urgency-badge-subtext { font-size: 0.87rem; color: var(--gray-mid); }
 
         /* FOOTER */
+        /* TESTEMUNHOS */
+        #testemunhos { background: #0D0D0D; border-top: 1px solid rgba(255,255,255,0.05); padding: 5rem 0; }
+        .testemunhos-header { text-align: center; margin-bottom: 3rem; }
+        .testemunhos-header .t-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.75rem; }
+        .testemunhos-header h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; color: #fff; line-height: 1.2; }
+        .testemunhos-header h2 em { font-style: normal; color: var(--orange); }
+        .testemunhos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; padding: 0 2rem; align-items: start; }
+        .testemunho-card { background: #1E1E1E; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+        .testemunho-card:hover { transform: translateY(-5px); border-color: rgba(232,93,4,0.4); }
+        .testemunho-img { width: 100%; display: block; }
+        @media (max-width: 860px) { .testemunhos-grid { grid-template-columns: 1fr; max-width: 380px; } }
+
         footer { background: var(--black); text-align: center; padding: 2.3rem 2rem; color: rgba(255,255,255,0.45); border-top: 1px solid rgba(255,255,255,0.05); }
         footer p + p { margin-top: 0.7rem; font-size: 0.87rem; }
 
@@ -1396,6 +1408,19 @@
             <p style="margin-top:2rem; color:rgba(255,255,255,0.45); font-size:0.9rem;">
                 ✓ Acesso imediato após pagamento &nbsp;·&nbsp; ✓ Garantia de 7 dias &nbsp;·&nbsp; ✓ Suporte via WhatsApp
             </p>
+        </div>
+    </section>
+
+    <!-- TESTEMUNHOS -->
+    <section id="testemunhos">
+        <div class="testemunhos-header">
+            <span class="t-badge">Quem já passou por aqui</span>
+            <h2>Palavras de quem<br><em>já viveu na prática</em></h2>
+        </div>
+        <div class="testemunhos-grid">
+            <div class="testemunho-card"><img src="../images/testemunho-1.jpg" alt="Depoimento" class="testemunho-img"></div>
+            <div class="testemunho-card"><img src="../images/testemunho-2.jpg" alt="Depoimento" class="testemunho-img"></div>
+            <div class="testemunho-card"><img src="../images/testemunho-3.jpg" alt="Depoimento" class="testemunho-img"></div>
         </div>
     </section>
 

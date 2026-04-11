@@ -840,6 +840,46 @@
             margin-top: 0.75rem;
         }
 
+        /* ── TESTEMUNHOS ────────────────────────────────────── */
+        #testemunhos {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .testemunhos-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .testemunhos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .testemunho-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .testemunho-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--orange-border);
+        }
+
+        .testemunho-img {
+            width: 100%;
+            display: block;
+        }
+
+        @media (max-width: 860px) {
+            .testemunhos-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+        }
+
         /* ── CONTATO ────────────────────────────────────────── */
         #contato {
             background: var(--black);
@@ -1230,6 +1270,27 @@
             </div>
         </div>
 
+    </div>
+</section>
+
+<!-- TESTEMUNHOS -->
+<section id="testemunhos">
+    <div class="container">
+        <div class="testemunhos-header">
+            <span class="badge">Quem já passou por aqui</span>
+            <h2 class="section-title">Palavras de quem<br><em>já viveu na prática</em></h2>
+        </div>
+        <div class="testemunhos-grid">
+            <div class="testemunho-card">
+                <img src="images/testemunho-1.jpg" alt="Depoimento de aluno" class="testemunho-img">
+            </div>
+            <div class="testemunho-card">
+                <img src="images/testemunho-2.jpg" alt="Depoimento de aluno" class="testemunho-img">
+            </div>
+            <div class="testemunho-card">
+                <img src="images/testemunho-3.jpg" alt="Depoimento de aluno" class="testemunho-img">
+            </div>
+        </div>
     </div>
 </section>
 
