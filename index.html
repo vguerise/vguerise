@@ -596,48 +596,164 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .consultoria-inner {
+        .consultoria-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .consultoria-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        /* 4 passos */
+        .passos {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-bottom: 5rem;
+            position: relative;
         }
 
-        .consultoria-content .section-subtitle {
-            max-width: 100%;
-            margin-bottom: 2rem;
+        .passos::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: calc(12.5% + 0.5rem);
+            right: calc(12.5% + 0.5rem);
+            height: 1px;
+            background: linear-gradient(to right, var(--orange) 0%, rgba(232,93,4,0.15) 100%);
         }
 
-        .consultoria-list {
-            list-style: none;
-            margin-bottom: 2.5rem;
+        .passo {
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .consultoria-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            font-size: 1rem;
-            color: var(--gray-light);
-            padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .consultoria-list li:last-child { border-bottom: none; }
-
-        .check {
-            width: 20px;
-            height: 20px;
-            background: var(--orange-glow);
+        .passo-num {
+            width: 4rem;
+            height: 4rem;
+            background: var(--black-soft);
+            border: 2px solid var(--orange);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            margin-top: 3px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--orange);
+            margin-bottom: 1.5rem;
         }
 
-        .check svg { width: 10px; height: 10px; color: var(--orange); }
+        .passo-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+        }
+
+        .passo-desc {
+            font-size: 0.88rem;
+            color: var(--gray-mid);
+            line-height: 1.65;
+        }
+
+        /* Preços */
+        .precos-titulo {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--orange);
+            margin-bottom: 2rem;
+        }
+
+        .precos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .preco-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+
+        .preco-card:hover {
+            border-color: var(--orange-border);
+            transform: translateY(-4px);
+        }
+
+        .preco-card.destaque {
+            border-color: var(--orange);
+            background: linear-gradient(160deg, rgba(232,93,4,0.1) 0%, var(--charcoal) 60%);
+        }
+
+        .preco-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--orange);
+            background: var(--orange-glow);
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .preco-modalidade {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.4rem;
+        }
+
+        .preco-local {
+            font-size: 0.82rem;
+            color: var(--gray-mid);
+            margin-bottom: 1.25rem;
+        }
+
+        .preco-valor {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .preco-valor sup {
+            font-size: 1rem;
+            vertical-align: top;
+            margin-top: 0.4rem;
+            display: inline-block;
+        }
+
+        .preco-obs {
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            line-height: 1.5;
+        }
+
+        /* Form consultoria */
+        .consultoria-form-outer {
+            max-width: 640px;
+            margin: 0 auto;
+        }
 
         .consultoria-form-wrap {
             background: var(--charcoal);
@@ -652,12 +768,14 @@
             font-weight: 800;
             margin-bottom: 0.5rem;
             color: var(--white);
+            text-align: center;
         }
 
         .form-subtitle {
             font-size: 0.9rem;
             color: var(--gray-mid);
             margin-bottom: 2rem;
+            text-align: center;
         }
 
         .form-group {
@@ -791,6 +909,12 @@
         }
 
         /* ── MOBILE ─────────────────────────────────────────── */
+        @media (max-width: 1000px) {
+            .passos { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+            .passos::before { display: none; }
+            .precos-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+        }
+
         @media (max-width: 900px) {
             .nav-links { display: none; }
 
@@ -825,8 +949,9 @@
             .hero-photo-wrap { width: 260px; margin: 0 auto; }
             .hero-card { left: 0; right: 0; width: fit-content; margin: 0 auto; bottom: -1rem; }
 
-            .sobre-grid,
-            .consultoria-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .passos { grid-template-columns: 1fr; }
+            .precos-grid { max-width: 100%; }
 
             .sobre-img-wrap { max-width: 340px; margin: 0 auto; }
 
@@ -888,16 +1013,16 @@
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-number">+5K</div>
-                        <div class="stat-label">Seguidores</div>
+                        <div class="stat-number">+16K</div>
+                        <div class="stat-label">Instagram</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">+200</div>
+                        <div class="stat-number">+6K</div>
+                        <div class="stat-label">TikTok</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+2K</div>
                         <div class="stat-label">Alunos</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Produtos</div>
                     </div>
                 </div>
             </div>
@@ -1027,51 +1152,65 @@
 <!-- CONSULTORIA -->
 <section id="consultoria">
     <div class="container">
-        <div class="consultoria-inner">
-            <div class="consultoria-content">
-                <span class="badge">Consultoria Pessoal</span>
-                <h2 class="section-title" style="text-align:left;">
-                    Sua coleção com<br>
-                    <em>estratégia real</em>
-                </h2>
-                <p class="section-subtitle" style="margin-bottom:2rem;">
-                    Chega de comprar por impulso e se arrepender. Em uma sessão de consultoria eu analiso seu perfil, seu estilo e seu orçamento — e entrego um roteiro personalizado.
-                </p>
-                <ul class="consultoria-list">
-                    <li>
-                        <span class="check">
-                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 5l2.5 2.5L8 3"/>
-                            </svg>
-                        </span>
-                        Análise do seu perfil olfativo e estilo de vida
-                    </li>
-                    <li>
-                        <span class="check">
-                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 5l2.5 2.5L8 3"/>
-                            </svg>
-                        </span>
-                        Recomendação de perfumes por ocasião e orçamento
-                    </li>
-                    <li>
-                        <span class="check">
-                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 5l2.5 2.5L8 3"/>
-                            </svg>
-                        </span>
-                        Como aplicar, conservar e quando usar cada perfume
-                    </li>
-                    <li>
-                        <span class="check">
-                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 5l2.5 2.5L8 3"/>
-                            </svg>
-                        </span>
-                        Revisão da coleção atual — o que fica, o que sai
-                    </li>
-                </ul>
+
+        <div class="consultoria-header">
+            <span class="badge">Consultoria Pessoal</span>
+            <h2 class="section-title">Como funciona a<br><em>consultoria</em></h2>
+            <p class="section-subtitle">Uma sessão individual, do diagnóstico à entrega — sem enrolação e com resultado concreto para a sua coleção.</p>
+        </div>
+
+        <!-- 4 PASSOS -->
+        <div class="passos">
+            <div class="passo">
+                <div class="passo-num">01</div>
+                <div class="passo-title">Questionário de Perfil</div>
+                <p class="passo-desc">Após a contratação, você recebe um questionário sobre estilo de vida, rotina, personalidade e os momentos em que usa perfume.</p>
             </div>
+            <div class="passo">
+                <div class="passo-num">02</div>
+                <div class="passo-title">Diagnóstico Olfativo</div>
+                <p class="passo-desc">Analiso suas respostas para mapear seu perfil olfativo dominante, suas preferências reais e os gaps da sua coleção atual.</p>
+            </div>
+            <div class="passo">
+                <div class="passo-num">03</div>
+                <div class="passo-title">Curadoria Personalizada</div>
+                <p class="passo-desc">Monto uma seleção exclusiva de perfumes para o seu perfil — com indicação de ocasião, como e quando usar, e onde comprar.</p>
+            </div>
+            <div class="passo">
+                <div class="passo-num">04</div>
+                <div class="passo-title">Entrega & Acompanhamento</div>
+                <p class="passo-desc">Você recebe um documento completo com tudo documentado e fica disponível para tirar dúvidas nos dias seguintes.</p>
+            </div>
+        </div>
+
+        <!-- PREÇOS -->
+        <p class="precos-titulo">Investimento</p>
+        <div class="precos-grid">
+            <div class="preco-card">
+                <span class="preco-tag">Online</span>
+                <div class="preco-modalidade">Consultoria Online</div>
+                <div class="preco-local">Via videochamada · qualquer lugar do Brasil</div>
+                <div class="preco-valor"><sup>R$</sup>600</div>
+                <p class="preco-obs">Sessão individual completa com entrega do documento personalizado.</p>
+            </div>
+            <div class="preco-card destaque">
+                <span class="preco-tag">Presencial</span>
+                <div class="preco-modalidade">Consultoria Presencial</div>
+                <div class="preco-local">Rio de Janeiro · RJ</div>
+                <div class="preco-valor"><sup>R$</sup>1.000</div>
+                <p class="preco-obs">Sessão presencial no Rio de Janeiro com experiência olfativa ao vivo.</p>
+            </div>
+            <div class="preco-card">
+                <span class="preco-tag">Presencial Fora do RJ</span>
+                <div class="preco-modalidade">Fora do Rio de Janeiro</div>
+                <div class="preco-local">Outras cidades · sob orçamento</div>
+                <div class="preco-valor" style="font-size:1.4rem; padding-top:0.3rem;">Sob consulta</div>
+                <p class="preco-obs">R$1.000 + custos de deslocamento e hospedagem. Solicite orçamento.</p>
+            </div>
+        </div>
+
+        <!-- FORMULÁRIO -->
+        <div class="consultoria-form-outer">
             <div class="consultoria-form-wrap">
                 <div class="form-title">Solicite sua consultoria</div>
                 <div class="form-subtitle">Preencha e entrarei em contato em até 24h.</div>
@@ -1082,15 +1221,15 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">WhatsApp</label>
-                        <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+                        <input type="tel" class="form-input" placeholder="(21) 99999-9999" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Você já tem perfumes?</label>
+                        <label class="form-label">Modalidade de interesse</label>
                         <select class="form-select form-input">
                             <option value="">Selecione</option>
-                            <option>Sim, tenho uma coleção</option>
-                            <option>Tenho alguns mas quero evoluir</option>
-                            <option>Não tenho nenhum ainda</option>
+                            <option>Online — R$600</option>
+                            <option>Presencial — Rio de Janeiro (R$1.000)</option>
+                            <option>Presencial — Fora do Rio (sob consulta)</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -1102,6 +1241,7 @@
                 </form>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -1186,7 +1326,7 @@
         );
 
         // Substitua pelo seu número com DDI: 5511999999999
-        window.open(`https://wa.me/5511999999999?text=${text}`, '_blank');
+        window.open(`https://wa.me/5521976462812?text=${text}`, '_blank');
     }
 </script>
 </body>
