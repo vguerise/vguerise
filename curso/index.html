@@ -182,8 +182,8 @@
         .hero::before {
             content: '';
             position: absolute; inset: 0;
-            background-image: url('images/victor-terno.jpg');
-            background-size: cover; background-position: 70% 4%;
+            background-image: url('images/victor-hero.jpg');
+            background-size: cover; background-position: 65% top;
             opacity: 1; z-index: 1;
         }
 
@@ -862,6 +862,99 @@
             .trust-badges, .highlights-footer { flex-direction: column; gap: 1rem; }
             .social-proof-badge { flex-direction: column; text-align: center; }
         }
+
+        /* ── TEMA ESCURO ─────────────────────────────────────── */
+        body { background: #0D0D0D; color: #CCCCCC; }
+
+        .section-title { color: #FFFFFF; }
+        .section-subtitle { color: #888888; }
+
+        /* Intro */
+        .intro-section { background: #141414; border-color: rgba(255,255,255,0.05); }
+        .intro-box { background: #1E1E1E; border-color: rgba(255,255,255,0.08); border-left-color: var(--orange); }
+        .intro-hook { color: #FFFFFF; }
+        .intro-text { color: #CCCCCC; }
+        .intro-text strong { color: #FFFFFF; }
+
+        /* Pain */
+        .pain-section { background: #0D0D0D; }
+        .pain-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .pain-card:hover { border-color: var(--orange); }
+        .pain-text { color: #CCCCCC; }
+        .pain-verdict { color: #FFFFFF; background: rgba(232,93,4,0.1); }
+
+        /* Before/After */
+        .before-after { background: #141414; }
+        .ba-col.before { background: rgba(214,40,40,0.1); border-color: rgba(214,40,40,0.5); }
+        .ba-col.after { background: rgba(42,157,92,0.1); border-color: rgba(42,157,92,0.5); }
+        .ba-item { color: #CCCCCC; }
+
+        /* Modules */
+        .modules-section { background: #0D0D0D; }
+        .module-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .module-card:hover { border-color: rgba(232,93,4,0.5); box-shadow: 0 8px 28px rgba(232,93,4,0.1); }
+        .module-body { background: #1E1E1E; }
+        .lesson-item { color: #CCCCCC; }
+        .lesson-subitem { color: #888888; }
+
+        /* Why */
+        .why-section { background: #141414; }
+        .why-card { background: #1E1E1E; box-shadow: none; border-left-color: var(--orange); }
+        .why-card-title { color: #FFFFFF; }
+        .why-card-content { color: #CCCCCC; }
+        .why-card-content strong { color: #FFFFFF; }
+
+        /* Comparison */
+        .comparison-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .comparison-card.real { border-color: var(--success); }
+        .comparison-card.fake { border-color: rgba(214,40,40,0.5); }
+        .comparison-item { color: #CCCCCC; }
+        .comparison-cards-grid .comparison-card-item { background: #1E1E1E; }
+        .comparison-card-recommended { border-color: var(--success); }
+        .comparison-card-alt { border-color: rgba(255,255,255,0.07); }
+
+        /* Price */
+        .price-section { background: #141414; }
+        .price-box { background: #1E1E1E; }
+        .price-question { color: #888888; }
+        .price-reality { color: #CCCCCC; }
+        .price-reality strong { color: #FFFFFF; }
+        .price-comparison { background: rgba(255,255,255,0.04); color: #CCCCCC; }
+        .price-comparison strong { color: #FFFFFF; }
+        .trust-badge { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+        .trust-badge-text { color: #888888; }
+        .trust-badge-text strong { color: #FFFFFF; }
+        .guarantee-text { color: #888888; }
+
+        /* FAQ */
+        .faq-section { background: #141414; }
+        .faq-item { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .faq-item:hover { border-color: var(--orange); }
+        .faq-question { color: #FFFFFF; }
+        .faq-answer { color: #CCCCCC; }
+
+        /* About */
+        .about-section { background: #0D0D0D; }
+        .about-content { color: #CCCCCC; }
+        .about-content strong { color: #FFFFFF; }
+
+        /* Social proof */
+        .social-proof-badge { background: #1E1E1E; border-color: rgba(255,255,255,0.1); }
+        .social-proof-number { color: #FFFFFF; }
+        .social-proof-text { color: #888888; }
+        .economy-badge { background: rgba(42,157,92,0.08); }
+        .economy-badge-text { color: #CCCCCC; }
+        .economy-counter { background: rgba(42,157,92,0.08); }
+        .economy-counter-title { color: #888888; }
+        .economy-counter-subtitle { color: #CCCCCC; }
+
+        /* Testimonials section (old) */
+        .testimonials-section { background: #0D0D0D; }
+        .testimonial-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .testimonial-caption { background: #1E1E1E; color: #888888; }
+
+        /* Divider */
+        .divider { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
     </style>
 </head>
 <body>
