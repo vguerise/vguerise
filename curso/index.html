@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Prático da Perfumaria - Do Zero ao Colecionador Consciente</title>
+    <meta name="description" content="O curso mais completo de perfumaria masculina do Brasil. 3 módulos, 11 aulas, do absoluto zero ao colecionador que sabe exatamente o que comprar.">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '804720092315209');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=804720092315209&ev=PageView&noscript=1"
+    /></noscript>
+
+    <!-- Google Analytics 4 -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLFFRKHHFB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TLFFRKHHFB');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --orange: #E85D04;
+            --orange-light: #F48C06;
+            --orange-dark: #C14B00;
+            --orange-muted: rgba(232, 93, 4, 0.1);
+            --black: #111111;
+            --black-soft: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --gray-dark: #444444;
+            --gray-mid: #777777;
+            --gray-light: #E8E8E8;
+            --white: #FFFFFF;
+            --off-white: #F8F8F8;
+            --success: #2A9D5C;
+            --danger: #D62828;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.2; }
+
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 5.5rem 0; }
+
+        .section-label {
+            display: block;
+            text-align: center;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 0.8rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .section-title em { font-style: normal; color: var(--orange); }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--gray-mid);
+            margin-bottom: 3rem;
+            max-width: 660px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CTA */
+        .cta-button {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            padding: 1.2rem 3rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 3px;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            animation: ctaPulse 2.5s ease-in-out infinite;
+        }
+
+        .cta-button:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(232, 93, 4, 0.45);
+            animation: none;
+        }
+
+        @keyframes ctaPulse {
+            0%,100% { box-shadow: 0 0 10px 2px rgba(232,93,4,0.45), 0 5px 22px rgba(232,93,4,0.3); }
+            50% { box-shadow: 0 0 30px 8px rgba(232,93,4,0.75), 0 8px 40px rgba(232,93,4,0.55); }
+        }
+
+        /* Floating */
+        .whatsapp-float {
+            position: fixed;
+            width: 56px; height: 56px;
+            bottom: 100px; right: 22px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.25);
+            z-index: 999;
+            transition: all 0.3s;
+            animation: waPulse 2s infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        @keyframes waPulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); }
+            50% { box-shadow: 0 0 0 13px rgba(37,211,102,0); }
+        }
+
+        .floating-cta { display: none; }
+
+        .live-viewers { display: none; }
+
+        /* Grain overlay sutil no hero */
+        .hero-grain {
+            position: absolute; inset: 0; z-index: 2; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.35;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 620px;
+            max-height: 820px;
+            height: 88vh;
+            background: var(--black);
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 3rem 2rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: url('images/victor-terno.jpg');
+            background-size: cover; background-position: 70% 4%;
+            opacity: 0.72; z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(to right, rgba(10,10,10,0.80) 20%, rgba(10,10,10,0.50) 45%, rgba(10,10,10,0.10) 100%);
+            z-index: 1;
+        }
+
+        @media (min-width: 1600px) {
+            .hero::before {
+                background-size: 50% auto;
+                background-position: right 9%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                min-height: 100svh;
+                max-height: none;
+            }
+            .hero::before {
+                background-position: 80% center;
+                opacity: 0.35;
+            }
+            .hero::after {
+                background: linear-gradient(to bottom, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.75) 60%, rgba(10,10,10,0.92) 100%);
+            }
+        }
+
+        .hero-container { max-width: 880px; width: 100%; position: relative; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(232,93,4,0.15);
+            border: 1px solid rgba(232,93,4,0.35);
+            color: var(--orange-light);
+            padding: 0.45rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.82rem; font-weight: 600; letter-spacing: 1px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-question-box {
+            background: rgba(232,93,4,0.09);
+            border-left: 4px solid var(--orange);
+            padding: 1.1rem 1.4rem;
+            border-radius: 0 8px 8px 0;
+            margin: 0 auto 2.5rem;
+            display: flex; align-items: flex-start; gap: 1rem;
+            max-width: 660px; text-align: left;
+        }
+
+        .hero-question-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .hero-question-text { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.5; font-weight: 500; }
+
+        .hero-headline {
+            font-size: clamp(1.9rem, 4.5vw, 3rem);
+            font-weight: 700;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: var(--white);
+            line-height: 1.28;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-headline .highlight { color: var(--orange); }
+
+        .hero-subheadline {
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            color: rgba(255,255,255,0.68);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-subheadline strong { color: white; }
+
+        .hero-checklist { list-style: none; margin: 0 auto 3rem; max-width: 640px; }
+
+        .hero-checklist-item {
+            display: flex; align-items: flex-start; gap: 1rem;
+            margin-bottom: 0.9rem;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.82);
+            line-height: 1.5; text-align: left;
+        }
+
+        .hci { color: var(--orange); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.15rem; }
+
+        .divider { height: 4px; background: linear-gradient(90deg, transparent, var(--orange), transparent); }
+
+        /* INTRO */
+        .intro-section { background: var(--off-white); border-top: 1px solid var(--gray-light); border-bottom: 1px solid var(--gray-light); }
+
+        .intro-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .intro-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .intro-box {
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-left: 6px solid var(--orange);
+            border-radius: 12px;
+            padding: 2.5rem 3rem;
+            max-width: 800px; margin: 0 auto;
+        }
+
+        .intro-hook {
+            font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+            color: var(--black);
+            font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            margin-bottom: 1.5rem; text-align: center;
+        }
+
+        .intro-hook strong { color: var(--orange); }
+        .intro-text { font-size: 1.08rem; color: var(--gray-dark); line-height: 1.8; margin-bottom: 1.1rem; }
+        .intro-text strong { color: var(--black); font-weight: 700; }
+        .intro-cta-line { font-size: 1.5rem; font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; text-align: center; color: var(--orange); margin-top: 1.8rem; font-style: italic; }
+
+        /* PAIN */
+        .pain-section { background: var(--white); }
+
+        .pain-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.2rem; max-width: 840px; margin: 0 auto; }
+
+        .pain-card {
+            background: var(--white);
+            padding: 1.6rem;
+            border-radius: 12px;
+            border: 2px solid var(--gray-light);
+            position: relative;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.7rem;
+        }
+
+        .pain-card:hover { border-color: var(--orange); box-shadow: 0 6px 22px rgba(232,93,4,0.12); transform: translateY(-2px); }
+
+        .pain-card .pain-icon {
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+
+        .pain-checkbox { display: none; }
+
+        .pain-text { font-size: 0.98rem; color: var(--charcoal); line-height: 1.5; }
+
+        @media (max-width: 768px) {
+            .pain-grid { grid-template-columns: 1fr; gap: 0.9rem; max-width: 480px; }
+        }
+
+        .pain-verdict {
+            text-align: center; margin: 2.5rem auto 0;
+            font-size: 1.25rem; font-weight: 700; color: var(--black);
+            background: var(--orange-muted);
+            padding: 1.4rem; border-radius: 10px; border: 2px solid var(--orange);
+            opacity: 0.5; transition: all 0.3s;
+            max-width: 840px;
+        }
+
+        .pain-verdict.active { opacity: 1; animation: verdictGlow 1.5s ease-in-out infinite; }
+        @keyframes verdictGlow { 0%,100% { box-shadow: 0 0 12px rgba(232,93,4,0.25); } 50% { box-shadow: 0 0 28px rgba(232,93,4,0.5); } }
+
+        /* BEFORE/AFTER */
+        .before-after { background: var(--off-white); }
+
+        .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 940px; margin: 3rem auto; }
+
+        .ba-col { padding: 2rem; border-radius: 12px; }
+        .ba-col.before { background: #fff5f5; border: 2.5px solid var(--danger); }
+        .ba-col.after { background: #f0faf5; border: 2.5px solid var(--success); }
+
+        .ba-title { font-size: 1.2rem; font-family: 'DM Sans', sans-serif; font-weight: 800; text-align: center; margin-bottom: 1.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .ba-col.before .ba-title { color: var(--danger); }
+        .ba-col.after .ba-title { color: var(--success); }
+
+        .ba-item { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.9rem; font-size: 0.98rem; line-height: 1.5; color: var(--charcoal); }
+        .ba-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .ba-icon.cross { color: var(--danger); }
+        .ba-icon.check { color: var(--success); }
+
+        /* SOLUTION */
+        .solution-section { background: var(--black); }
+        .solution-section .section-title { color: white; }
+        .solution-section .section-subtitle { color: rgba(255,255,255,0.58); }
+
+        .course-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); gap: 1.4rem; margin: 3rem 0; }
+
+        .feature-card {
+            background: var(--black-soft);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.07);
+            transition: all 0.3s;
+            position: relative; overflow: hidden;
+        }
+
+        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--orange); }
+        .feature-card:hover { transform: translateY(-4px); border-color: rgba(232,93,4,0.35); box-shadow: 0 10px 30px rgba(232,93,4,0.15); }
+
+        .feature-icon { font-size: 1.1rem; color: var(--success); font-weight: 900; flex-shrink: 0; margin-top: 0.1rem; }
+        .feature-title { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif; font-size: 1.05rem; margin-bottom: 0.5rem; color: white; font-weight: 700; }
+        .feature-header { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.6rem; }
+        .feature-description { color: rgba(255,255,255,0.58); font-size: 0.95rem; line-height: 1.6; padding-left: 1.7rem; }
+
+        /* MODULES */
+        .modules-section { background: var(--white); }
+        .modules-grid { display: grid; gap: 2rem; margin-top: 3rem; }
+
+        .module-card { background: var(--white); border: 2px solid var(--gray-light); border-radius: 12px; overflow: hidden; transition: all 0.3s; }
+        .module-card:hover { border-color: var(--orange); box-shadow: 0 8px 28px rgba(232,93,4,0.1); }
+
+        .module-header { background: var(--black); padding: 1.4rem 2rem; display: flex; align-items: center; gap: 1.3rem; }
+
+        .module-num { background: var(--orange); color: white; font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1.5rem; font-weight: 900; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+        .module-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.25rem; }
+        .module-title { font-family: 'DM Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: white; }
+
+        .module-body { padding: 2rem; }
+
+        .lesson-list { list-style: none; display: grid; gap: 1.1rem; }
+
+        .lesson-item { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 1rem; color: var(--charcoal); line-height: 1.5; }
+        .lesson-icon { color: var(--orange); font-size: 1rem; flex-shrink: 0; margin-top: 0.2rem; }
+
+        .lesson-subitems { list-style: none; padding-left: 1.8rem; margin-top: 0.4rem; display: grid; gap: 0.3rem; }
+        .lesson-subitem { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.92rem; color: var(--gray-mid); line-height: 1.4; }
+        .lesson-subitem::before { content: '·'; color: var(--orange); font-weight: 900; flex-shrink: 0; }
+
+        /* HIGHLIGHTS */
+        .highlights-section { background: var(--black); position: relative; overflow: hidden; }
+        .highlights-section::before { content: '◆'; position: absolute; font-size: 500px; color: rgba(232,93,4,0.025); top: 50%; left: 50%; transform: translate(-50%,-50%); line-height: 1; }
+
+        .highlights-box {
+            background: rgba(255,255,255,0.035);
+            border: 2px solid rgba(232,93,4,0.38);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 680px; margin: 0 auto;
+            position: relative; z-index: 2;
+        }
+
+        .highlights-title { font-family: 'DM Sans', sans-serif; font-size: 1.45rem; font-weight: 800; color: white; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.7rem; }
+
+        .highlights-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.3rem; font-size: 1.02rem; color: rgba(255,255,255,0.82); line-height: 1.6; }
+        .highlights-item-icon { color: var(--orange); font-size: 1.2rem; flex-shrink: 0; margin-top: 0.15rem; }
+        .highlights-item strong { color: white; }
+
+        .highlights-footer { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; }
+        .highlights-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.92rem; font-weight: 600; color: var(--orange-light); }
+
+        /* WHY */
+        .why-section { background: var(--off-white); }
+        .why-grid { display: grid; gap: 2rem; max-width: 880px; margin: 3rem auto 0; }
+
+        .why-card { background: white; padding: 2.5rem; border-radius: 12px; border-left: 5px solid var(--orange); box-shadow: 0 4px 18px rgba(0,0,0,0.05); }
+        .why-card-title { display: flex; align-items: center; gap: 0.8rem; font-family: 'DM Sans', sans-serif; font-size: 1.35rem; font-weight: 800; margin-bottom: 1.1rem; color: var(--black); }
+        .why-card-icon { font-size: 1.7rem; }
+        .why-card-content { font-size: 1.03rem; line-height: 1.7; color: var(--gray-dark); }
+        .why-card-content strong { color: var(--black); }
+        .why-list { list-style: none; margin-top: 0.9rem; display: grid; gap: 0.7rem; }
+        .why-list-item { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.98rem; }
+        .why-list-icon { color: var(--orange); flex-shrink: 0; margin-top: 0.2rem; }
+
+        .comparison-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 860px;
+            margin: 2.5rem auto 0;
+        }
+        .comparison-card-item {
+            border-radius: 14px;
+            padding: 2rem;
+            position: relative;
+        }
+        .comparison-card-recommended {
+            border: 2px solid var(--success);
+            box-shadow: 0 8px 28px rgba(42,157,92,0.1);
+            order: 1;
+        }
+        .comparison-card-alt {
+            border: 2px solid var(--gray-light);
+            order: 2;
+        }
+        .comparison-card-badge {
+            position: absolute; top: -13px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--success); color: white;
+            padding: 0.3rem 1.2rem; border-radius: 20px;
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 1px; white-space: nowrap;
+        }
+        .comparison-card-title {
+            font-size: 0.8rem; font-weight: 800;
+            letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 1.2rem; margin-top: 0.4rem;
+        }
+        .comparison-card-title-green { color: var(--success); }
+        .comparison-card-title-gray { color: var(--gray-mid); }
+        @media (max-width: 768px) {
+            .comparison-cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .comparison-card-recommended { order: 1; }
+            .comparison-card-alt { order: 2; }
+        }
+
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; max-width: 1020px; margin: 3rem auto; }
+
+        .comparison-card { background: white; padding: 2.5rem; border-radius: 14px; border: 2.5px solid var(--gray-light); }
+        .comparison-card.real { border-color: var(--success); box-shadow: 0 10px 38px rgba(42,157,92,0.13); position: relative; }
+        .comparison-card.real::before { content: '⭐ RECOMENDADO'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--success); color: white; padding: 0.35rem 1.2rem; border-radius: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; }
+        .comparison-card.fake { border-color: var(--danger); }
+
+        .comparison-title { font-family: 'DM Sans', sans-serif; font-size: 1.4rem; margin-bottom: 1.7rem; text-align: center; font-weight: 800; text-transform: uppercase; }
+        .comparison-title.fake { color: var(--danger); }
+        .comparison-title.real { color: var(--success); }
+
+        .comparison-item { display: flex; align-items: flex-start; margin-bottom: 1.1rem; font-size: 0.98rem; line-height: 1.5; color: var(--charcoal); }
+        .comparison-icon { margin-right: 0.9rem; font-size: 1.2rem; flex-shrink: 0; }
+        .comparison-icon.cross { color: var(--danger); }
+        .comparison-icon.check { color: var(--success); }
+
+        /* COUNTDOWN */
+        .countdown-container { background: linear-gradient(135deg,#c62828,#8b0000); padding: 1.4rem 2rem; border-radius: 12px; text-align: center; margin: 2rem auto; max-width: 560px; box-shadow: 0 8px 28px rgba(198,40,40,0.3); }
+        .countdown-title { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .countdown-timer { display: flex; justify-content: center; gap: 1rem; }
+        .countdown-item { background: rgba(255,255,255,0.15); padding: 0.85rem 1.3rem; border-radius: 8px; min-width: 72px; }
+        .countdown-number { font-size: 2.3rem; font-weight: 800; color: white; line-height: 1; font-family: 'Courier New', monospace; }
+        .countdown-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-transform: uppercase; margin-top: 0.25rem; font-weight: 600; }
+
+        /* PRICE */
+        .price-section { background: var(--off-white); text-align: center; }
+        .price-questions { max-width: 660px; margin: 0 auto 3rem; }
+        .price-question { font-size: 1.15rem; margin-bottom: 0.7rem; color: var(--gray-mid); font-style: italic; }
+        .price-reality { font-size: 1.2rem; margin: 2rem 0; color: var(--charcoal); line-height: 1.7; }
+        .price-reality strong { color: var(--black); }
+
+        .price-box { background: white; border: 3px solid var(--orange); border-radius: 20px; padding: 3rem; max-width: 560px; margin: 3rem auto; box-shadow: 0 18px 55px rgba(232,93,4,0.1); }
+
+        .price-fire { font-size: 2.3rem; margin-bottom: 0.7rem; }
+        .price-value { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 3.5rem; color: var(--orange); font-weight: 900; margin-bottom: 0.4rem; line-height: 1; }
+        .price-period { font-size: 1.05rem; color: var(--gray-mid); margin-bottom: 1.4rem; }
+        .price-comparison { font-size: 1.02rem; color: var(--gray-dark); margin-bottom: 1.4rem; padding: 1.1rem; background: var(--off-white); border-radius: 10px; line-height: 1.7; }
+        .price-comparison strong { color: var(--black); }
+        .price-savings { font-size: 1.2rem; color: var(--success); font-weight: 700; margin-bottom: 1.4rem; }
+
+        .trust-badges { display: flex; justify-content: center; align-items: center; gap: 1.3rem; margin: 1.8rem 0; flex-wrap: wrap; }
+        .trust-badge { display: flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.2rem; background: var(--off-white); border-radius: 8px; border: 1px solid var(--gray-light); }
+        .trust-badge-icon { font-size: 1.9rem; }
+        .trust-badge-text { font-size: 0.82rem; color: var(--gray-mid); line-height: 1.4; }
+        .trust-badge-text strong { display: block; color: var(--black); font-weight: 700; }
+
+        .guarantee { margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px solid var(--gray-light); }
+        .guarantee-badge { display: inline-block; background: var(--success); color: white; padding: 0.65rem 1.5rem; border-radius: 5px; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.7rem; }
+        .guarantee-text { color: var(--gray-mid); font-size: 0.92rem; }
+
+        /* TESTIMONIALS */
+        .testimonials-section { background: white; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(295px, 1fr)); gap: 1.4rem; margin-top: 3rem; }
+        .testimonial-card { border-radius: 12px; overflow: hidden; border: 2px solid var(--gray-light); transition: all 0.3s; }
+        .testimonial-card:hover { border-color: var(--orange); box-shadow: 0 7px 28px rgba(232,93,4,0.1); transform: translateY(-3px); }
+        .testimonial-image { width: 100%; height: auto; display: block; }
+        .testimonial-caption { padding: 0.85rem 1.2rem; background: white; text-align: center; font-size: 0.87rem; color: var(--gray-mid); font-weight: 600; }
+        .t-verified { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--success); }
+
+        /* FAQ */
+        .faq-section { background: var(--off-white); }
+        .faq-container { max-width: 840px; margin: 3rem auto 0; }
+        .faq-item { background: white; margin-bottom: 0.9rem; border-radius: 10px; overflow: hidden; border: 2px solid var(--gray-light); transition: all 0.3s; }
+        .faq-item:hover { border-color: var(--orange); }
+        .faq-question { font-size: 1.08rem; font-weight: 700; padding: 1.25rem 1.7rem; cursor: pointer; position: relative; color: var(--black); }
+        .faq-question::after { content: '+'; position: absolute; right: 1.7rem; font-size: 1.7rem; transition: transform 0.3s; color: var(--orange); }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+        .faq-answer { padding: 0 1.7rem; max-height: 0; overflow: hidden; transition: all 0.3s; color: var(--gray-dark); font-size: 0.98rem; line-height: 1.7; }
+        .faq-item.active .faq-answer { padding: 0.9rem 1.7rem 1.7rem; max-height: 500px; }
+
+        /* ABOUT */
+        .about-section { background: white; }
+        .about-container { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center; max-width: 960px; margin: 3rem auto 0; }
+        .about-image { width: 100%; max-width: 330px; border-radius: 14px; box-shadow: 0 18px 55px rgba(0,0,0,0.1); display: block; margin: 0 auto; }
+        .about-content { font-size: 1.08rem; line-height: 1.8; color: var(--gray-dark); }
+        .about-content p { margin-bottom: 1.2rem; }
+        .about-content strong { color: var(--black); font-weight: 700; }
+        .about-signature { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1.15rem; color: var(--orange); font-style: italic; margin-top: 1.3rem; }
+
+        /* FINAL CTA */
+        .final-cta { background: var(--black); text-align: center; padding: 5rem 2rem; }
+        .final-cta .section-title { color: white; margin-bottom: 1.4rem; }
+        .final-cta .section-subtitle { color: rgba(255,255,255,0.62); margin-bottom: 3rem; }
+
+        /* BADGES */
+        .social-proof-badge { background: var(--off-white); border: 2px solid var(--black); border-radius: 12px; padding: 1.2rem 2rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .social-proof-icon { font-size: 2rem; }
+        .social-proof-number { font-size: 1.75rem; font-weight: 800; color: var(--black); line-height: 1; margin-bottom: 0.2rem; }
+        .social-proof-text { font-size: 0.92rem; color: var(--gray-mid); }
+
+        .economy-badge { background: rgba(42,157,92,0.07); border: 2px solid var(--success); border-radius: 12px; padding: 1.2rem 2rem; text-align: center; margin-bottom: 1rem; }
+        .economy-badge-text { font-size: 1.15rem; color: var(--charcoal); font-weight: 600; }
+        .economy-badge-text strong { color: var(--success); font-weight: 800; font-size: 1.25rem; }
+
+        .economy-counter { background: rgba(42,157,92,0.07); border: 3px solid var(--success); border-radius: 14px; padding: 1.8rem; text-align: center; }
+        .economy-counter-title { font-size: 1.05rem; color: var(--gray-mid); margin-bottom: 0.7rem; font-weight: 600; }
+        .economy-counter-amount { font-size: 2.7rem; font-weight: 900; color: var(--success); line-height: 1; margin-bottom: 0.4rem; font-family: 'Courier New', monospace; }
+        .economy-counter-subtitle { font-size: 0.92rem; color: var(--charcoal); font-weight: 600; }
+
+        .urgency-badge { background: rgba(232,93,4,0.07); border: 2px solid var(--orange); border-radius: 12px; padding: 0.95rem 1.4rem; text-align: center; margin: 2rem auto; max-width: 460px; animation: urgencyGlow 2s infinite; }
+        @keyframes urgencyGlow { 0%,100% { box-shadow: 0 0 8px rgba(232,93,4,0.22); } 50% { box-shadow: 0 0 20px rgba(232,93,4,0.45); } }
+        .urgency-badge-text { font-size: 1.02rem; font-weight: 700; color: var(--orange); margin-bottom: 0.18rem; }
+        .urgency-badge-subtext { font-size: 0.87rem; color: var(--gray-mid); }
+
+        /* FOOTER */
+        footer { background: var(--black); text-align: center; padding: 2.3rem 2rem; color: rgba(255,255,255,0.45); border-top: 1px solid rgba(255,255,255,0.05); }
+        footer p + p { margin-top: 0.7rem; font-size: 0.87rem; }
+
+        /* BONUS BANNER */
+        .bonus-banner {
+            background: var(--black);
+            color: rgba(255,255,255,0.88);
+            padding: 0.85rem 2rem;
+            display: flex; align-items: center; justify-content: center;
+            gap: 1rem; flex-wrap: wrap;
+            font-size: 0.92rem;
+            border-bottom: 2px solid var(--orange);
+            text-align: center;
+        }
+        .bonus-banner strong { color: var(--orange-light); }
+        .bonus-banner-dot {
+            width: 8px; height: 8px; background: var(--orange);
+            border-radius: 50%; flex-shrink: 0;
+            animation: blink 1.5s infinite;
+        }
+        .bonus-banner-count {
+            background: var(--orange);
+            color: white; font-weight: 700; font-size: 0.78rem;
+            padding: 0.25rem 0.75rem; border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* BONUS SLOTS COUNTER */
+        .bonus-slots-counter {
+            margin: 1.5rem 0 2rem;
+        }
+        .bonus-slots-bar-wrap {
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px; height: 10px;
+            overflow: hidden; margin-bottom: 0.7rem;
+        }
+        .bonus-slots-bar {
+            height: 100%; border-radius: 50px;
+            background: linear-gradient(90deg, var(--orange-dark), var(--orange));
+            width: 27%; transition: width 1s ease;
+        }
+        .bonus-slots-text {
+            display: flex; justify-content: space-between;
+            font-size: 0.88rem;
+        }
+        .bonus-slots-taken { color: rgba(255,255,255,0.55); }
+        .bonus-slots-left { color: var(--orange-light); font-weight: 600; }
+        .bonus-slots-left strong { font-size: 1.05rem; }
+
+        /* BONUS VALUE ROW */
+        .bonus-value-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1.5rem; margin: 2rem 0 1.5rem;
+            padding: 1.2rem 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .bonus-value-item { text-align: center; }
+        .bonus-value-label { display: block; font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 1px; }
+        .bonus-value-price { font-size: 1.8rem; font-weight: 900; color: rgba(255,255,255,0.65); }
+        .strikethrough { text-decoration: line-through; }
+        .bonus-value-arrow { font-size: 1.5rem; color: var(--orange); font-weight: 800; }
+        .bonus-value-free { font-size: 1.8rem; font-weight: 900; color: var(--success); font-family: 'DM Sans', sans-serif; }
+        @media (max-width: 768px) {
+            .bonus-value-row { flex-direction: column; gap: 0.8rem; padding: 1.2rem 1.5rem; }
+            .bonus-value-arrow { transform: rotate(90deg); }
+        }
+
+        /* PRICE INCLUDES */
+        .price-includes {
+            background: var(--off-white);
+            border-radius: 10px; padding: 1.2rem 1.5rem;
+            margin: 1.2rem 0 1.4rem; text-align: left;
+        }
+        .price-includes-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-mid); margin-bottom: 0.8rem; }
+        .price-includes-item { display: flex; align-items: center; gap: 0.7rem; font-size: 0.97rem; color: var(--charcoal); padding: 0.4rem 0; border-bottom: 1px solid var(--gray-light); }
+        .price-includes-item:last-child { border-bottom: none; }
+        .price-includes-item span:first-child { color: var(--success); font-weight: 700; flex-shrink: 0; }
+        .bonus-highlight { background: rgba(232,93,4,0.07); border-radius: 8px; padding: 0.9rem 1rem !important; margin: 0.4rem 0; border: 1.5px solid rgba(232,93,4,0.3) !important; align-items: flex-start !important; }
+        .bonus-highlight span:first-child { font-size: 1.1rem; margin-top: 0.1rem; flex-shrink: 0; }
+        .bonus-highlight-content { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 0; }
+        .bonus-highlight-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .price-includes-free { background: var(--orange); color: white; font-size: 0.72rem; font-weight: 800; padding: 0.25rem 0.7rem; border-radius: 20px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; }
+
+        /* BONUS */
+        .bonus-section { background: var(--off-white); }
+
+        .bonus-box {
+            background: var(--black);
+            border: 2px solid var(--orange);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bonus-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(232,93,4,0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .bonus-tag {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.45rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.4rem;
+        }
+
+        .bonus-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .bonus-title em { font-style: normal; color: var(--orange); }
+
+        .bonus-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(232,93,4,0.3);
+            border-radius: 14px;
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.8rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .bonus-icon {
+            font-size: 3.5rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .bonus-name {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.8rem;
+        }
+
+        .bonus-description {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+            margin-bottom: 1.3rem;
+        }
+
+        .bonus-description strong { color: var(--orange-light); }
+
+        .bonus-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .bonus-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 0.97rem;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 0.4rem;
+        }
+
+        .bonus-feature span { color: var(--orange); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+        .bonus-feature strong { color: white; }
+
+        .bonus-urgency {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: rgba(232,93,4,0.12);
+            border: 1px solid rgba(232,93,4,0.4);
+            border-radius: 50px;
+            padding: 0.65rem 1.4rem;
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .bonus-urgency strong { color: var(--orange-light); }
+
+        .bonus-urgency-dot {
+            width: 8px; height: 8px;
+            background: var(--orange);
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: blink 1.5s infinite;
+        }
+
+        .bonus-mockup { flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+
+        .bonus-media {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            width: 380px;
+        }
+
+        .bonus-mockup-img {
+            width: 100%;
+            max-width: 420px;
+            filter: drop-shadow(0 16px 40px rgba(0,0,0,0.6));
+        }
+
+        @media (max-width: 768px) {
+            .bonus-card { flex-direction: column; gap: 1.2rem; }
+            .bonus-media { width: 100%; }
+            .bonus-mockup-img { max-width: 100%; }
+            .bonus-box { padding: 2rem 1.5rem; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .pain-grid, .ba-grid, .comparison-grid, .about-container { grid-template-columns: 1fr; }
+            section { padding: 3rem 0; }
+            .hero { min-height: 80vh; padding: 2rem 1.5rem; }
+            .about-image { max-width: 230px; margin: 0 auto; }
+            .intro-box { padding: 2rem 1.5rem; }
+            .intro-split { grid-template-columns: 1fr; gap: 2rem; }
+            .trust-badges, .highlights-footer { flex-direction: column; gap: 1rem; }
+            .social-proof-badge { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/5521976462812?text=Olá!%20Vim%20do%20site%20do%20Curso%20Prático%20da%20Perfumaria" target="_blank" class="whatsapp-float" title="Fale comigo no WhatsApp">
+        <svg width="27" height="27" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <!-- live viewers removido -->
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grain"></div>
+        <div class="hero-container">
+            <div class="hero-badge">🎓 Curso em Vídeo &nbsp;·&nbsp; 3 Módulos &nbsp;·&nbsp; 11 Aulas &nbsp;·&nbsp; 🤖 App com I.A. Integrada</div>
+
+            <h1 class="hero-headline">
+                Perfume não é só cheiro.<br><span class="highlight">É presença. É identidade. É ser lembrado.</span>
+            </h1>
+
+            <p class="hero-subheadline">
+                Aprenda perfumaria de verdade e descubra como o perfume certo pode te destacar, te dar confiança e representar quem você é.
+            </p>
+
+            <ul class="hero-checklist">
+                <li class="hero-checklist-item">
+                    <span class="hci" style="color:#2A9D5C;">✅</span>
+                    <span>Quer parar de cheirar igual a todo mundo</span>
+                </li>
+                <li class="hero-checklist-item">
+                    <span class="hci" style="color:#2A9D5C;">✅</span>
+                    <span>Quer entrar em qualquer ambiente com confiança</span>
+                </li>
+                <li class="hero-checklist-item">
+                    <span class="hci" style="color:#2A9D5C;">✅</span>
+                    <span>Quer se destacar na multidão</span>
+                </li>
+                <li class="hero-checklist-item">
+                    <span class="hci" style="color:#2A9D5C;">✅</span>
+                    <span>Cansou de comprar perfume errado e jogar dinheiro fora</span>
+                </li>
+                <li class="hero-checklist-item">
+                    <span class="hci" style="color:#2A9D5C;">✅</span>
+                    <span><strong>Quer se sentir bem, onde for e com quem estiver</strong></span>
+                </li>
+            </ul>
+
+            <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'InitiateCheckout');">Quero dominar a perfumaria!</a>
+
+            <p style="margin-top: 1.4rem; color: rgba(255,255,255,0.45); font-size: 0.87rem;">
+                Acesso imediato &nbsp;·&nbsp; Curso 100% online &nbsp;·&nbsp; Garantia de 7 dias
+            </p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- BONUS URGENCY BANNER -->
+    <div class="bonus-banner">
+        <div class="bonus-banner-dot"></div>
+        <span>⚡ <strong>Oferta especial</strong> expira em <strong id="banner-countdown">--:--:--</strong></span>
+    </div>
+
+    <!-- IMPACTO / IDENTIDADE -->
+    <section style="background: var(--black); padding: 4rem 2rem; text-align:center;">
+        <div class="container" style="max-width:860px;">
+            <span style="display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:1rem;">O que a perfumaria realmente faz por você</span>
+            <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(1.8rem,4vw,2.8rem); color:white; font-weight:700; line-height:1.3; margin-bottom:3rem;">Não quero só te ensinar sobre perfumes.<br><span style="color:var(--orange);">Quero mudar como você se sente e como te percebem.</span></h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem; text-align:left;">
+                <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(232,93,4,0.2); border-radius:14px; padding:2rem;">
+                    <div style="font-size:2rem; margin-bottom:1rem;">🔥</div>
+                    <h3 style="font-family:'Montserrat',sans-serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Destacar na multidão</h3>
+                    <p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.7;">O perfume certo é percebido antes de você falar. É o detalhe que separa quem passa despercebido de quem deixa uma marca.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(232,93,4,0.2); border-radius:14px; padding:2rem;">
+                    <div style="font-size:2rem; margin-bottom:1rem;">💎</div>
+                    <h3 style="font-family:'Montserrat',sans-serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Segurança sem esforço</h3>
+                    <p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.7;">Saber que você está cheirando bem muda sua postura, sua confiança e como você entra em qualquer ambiente.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(232,93,4,0.2); border-radius:14px; padding:2rem;">
+                    <div style="font-size:2rem; margin-bottom:1rem;">✦</div>
+                    <h3 style="font-family:'Montserrat',sans-serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Ser lembrado</h3>
+                    <p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.7;">Cheiro é o sentido mais ligado à memória. Uma assinatura olfativa única faz as pessoas te associarem a algo especial — sem que você precise dizer uma palavra.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTRO / PROBLEM -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-box">
+                <p class="intro-hook">Você provavelmente já passou por isso…</p>
+                <p class="intro-text">Entra na perfumaria decidido a comprar. Testa alguns perfumes. O vendedor fala de notas, projeção, fixação… Você escolhe <strong>"o que parece melhor".</strong></p>
+                <p class="intro-text">Alguns dias depois percebe:</p>
+                <ul style="list-style:none; margin: 0.8rem 0 1rem 0;">
+                    <li style="padding: 0.3rem 0; color: var(--gray-dark);">❌ Não combina com você</li>
+                    <li style="padding: 0.3rem 0; color: var(--gray-dark);">❌ Não dura quase nada</li>
+                    <li style="padding: 0.3rem 0; color: var(--gray-dark);">❌ Você quase não usa</li>
+                    <li style="padding: 0.3rem 0; color: var(--gray-dark);">❌ O dinheiro foi embora</li>
+                </ul>
+                <p class="intro-text"><strong>E o pior?</strong> Você continua sem saber exatamente por que errou.</p>
+                <p class="intro-text">Enquanto não entende o básico, cada compra vira aposta.</p>
+                <p class="intro-cta-line">E perfume não é barato para virar aposta.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUEBRA DE CRENÇA -->
+    <section class="pain-section">
+        <div class="container">
+            <span class="section-label">Antes de continuar</span>
+            <h2 class="section-title">Você <em>Não Precisa</em> de Nada Disso</h2>
+
+            <div class="pain-grid">
+                <div class="pain-card" style="cursor:default; border-color:#fdd; background:#fff8f8;">
+                    <div class="pain-icon">❌</div>
+                    <p class="pain-text">Ter 20 perfumes na coleção</p>
+                </div>
+                <div class="pain-card" style="cursor:default; border-color:#fdd; background:#fff8f8;">
+                    <div class="pain-icon">❌</div>
+                    <p class="pain-text">Entender termos técnicos complicados</p>
+                </div>
+                <div class="pain-card" style="cursor:default; border-color:#fdd; background:#fff8f8;">
+                    <div class="pain-icon">❌</div>
+                    <p class="pain-text">Gastar caro para cheirar bem</p>
+                </div>
+                <div class="pain-card" style="cursor:default; border-color:var(--orange); background:rgba(232,93,4,0.04); box-shadow: 0 6px 22px rgba(232,93,4,0.12);">
+                    <div class="pain-icon">✅</div>
+                    <p class="pain-text"><strong>Você precisa saber o essencial</strong> — o que realmente importa antes de tirar o cartão do bolso.</p>
+                </div>
+            </div>
+
+            <p class="pain-verdict active" style="opacity:1;">É isso que o Curso Prático da Perfumaria ensina.</p>
+        </div>
+    </section>
+
+    <!-- SOLUTION / O QUE VOCÊ VAI APRENDER -->
+    <section class="solution-section" id="curso">
+        <div class="container">
+            <span class="section-label" style="color:var(--orange);">O Curso</span>
+            <h2 class="section-title">O Curso Prático da Perfumaria</h2>
+            <p class="section-subtitle">Criado para homens que querem entender perfumaria de verdade — e usar esse conhecimento para construir presença, confiança e uma identidade olfativa que é só sua.</p>
+
+            <!-- MÉTODO DA PERFUMARIA INTELIGENTE -->
+            <div style="background: var(--black-soft); border: 1px solid rgba(232,93,4,0.25); border-radius: 16px; padding: 2.5rem 2rem; margin-bottom: 3rem; text-align:center;">
+                <span style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:0.8rem;">A estrutura do curso</span>
+                <h3 style="font-family:'Montserrat',sans-serif; font-size:clamp(1.4rem,3vw,2rem); color:white; margin-bottom:0.6rem;">Três módulos. Uma progressão lógica.</h3>
+                <p style="color:rgba(255,255,255,0.5); font-size:0.97rem; max-width:520px; margin:0 auto 2.5rem;">Do vocabulário básico à coleção equilibrada — cada módulo aprofunda o anterior e constrói conhecimento real.</p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; text-align:left;">
+                    <div style="background:rgba(232,93,4,0.07); border:1px solid rgba(232,93,4,0.2); border-radius:12px; padding:1.5rem;">
+                        <div style="font-size:1.8rem; margin-bottom:0.6rem;">🧠</div>
+                        <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 1 — Fundamentos</div>
+                        <p style="color:white; font-weight:700; font-size:1rem; margin-bottom:0.4rem;">A linguagem da perfumaria</p>
+                        <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.6;">Concentrações, notas, acordes, famílias, pirâmide olfativa e aplicação — tudo que forma a base do conhecimento.</p>
+                    </div>
+                    <div style="background:rgba(232,93,4,0.07); border:1px solid rgba(232,93,4,0.2); border-radius:12px; padding:1.5rem;">
+                        <div style="font-size:1.8rem; margin-bottom:0.6rem;">🧭</div>
+                        <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 2 — Perfil Olfativo</div>
+                        <p style="color:white; font-weight:700; font-size:1rem; margin-bottom:0.4rem;">Seu gosto, suas escolhas</p>
+                        <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.6;">Descobrir preferências, entender ocasiões, navegar entre designer, nicho, contratipo e árabe com critério.</p>
+                    </div>
+                    <div style="background:rgba(232,93,4,0.07); border:1px solid rgba(232,93,4,0.2); border-radius:12px; padding:1.5rem;">
+                        <div style="font-size:1.8rem; margin-bottom:0.6rem;">🎯</div>
+                        <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 3 — Colecionador</div>
+                        <p style="color:white; font-weight:700; font-size:1rem; margin-bottom:0.4rem;">Nariz educado, coleção equilibrada</p>
+                        <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.6;">Análise comparativa, layering e como estruturar uma coleção com inteligência e identidade.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-features">
+                <div class="feature-card">
+                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Concentrações e composição</h3></div>
+                    <p class="feature-description">Entenda o que diferencia um EDP de um EDT e como a composição influencia a experiência olfativa.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Fixação e projeção</h3></div>
+                    <p class="feature-description">Aprenda a ler e interpretar o comportamento de um perfume no seu corpo ao longo do tempo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Perfume por ocasião</h3></div>
+                    <p class="feature-description">Como contexto, clima e momento influenciam a escolha — e como usar isso a seu favor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Universo de fragrâncias</h3></div>
+                    <p class="feature-description">Designer, nicho, contratipo, dupes e árabes — diferenças reais e como navegar com conhecimento.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Layering olfativo</h3></div>
+                    <p class="feature-description">A arte de combinar fragrâncias para criar algo único, pessoal e que representa quem você é.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Coleção com identidade</h3></div>
+                    <p class="feature-description">Como estruturar uma coleção equilibrada com rotação, respiro olfativo e sem redundâncias.</p>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:2rem;">
+                <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'AddToCart');">Quero começar agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">Quem Criou o <em>Curso Prático da Perfumaria?</em></h2>
+
+            <div class="about-container">
+                <div>
+                    <img src="images/victor-guerise.jpg" alt="Victor Guerise" class="about-image">
+                </div>
+                <div class="about-content">
+                    <p>Depois de testar centenas de fragrâncias, estudar perfumaria masculina e analisar os erros mais comuns que homens cometem ao comprar, ficou claro um padrão:</p>
+                    <p><strong>A maioria não erra por falta de dinheiro. Erra por falta de base.</strong></p>
+                    <p>Ao longo dos anos, investi <strong>mais de R$ 100.000,00 em perfumes</strong> — testando, errando, aprendendo e refinando o que realmente funciona. Caí em conto de vendedor. Comprei clones ruins achando que eram originais. Levei anos acertando na tentativa e erro o que poderia ter aprendido em horas.</p>
+                    <p>O Curso Prático da Perfumaria foi criado para você não precisar fazer o mesmo caminho. Peguei tudo que aprendi nesse processo — os acertos, os erros e os atalhos — e coloquei em aulas diretas ao ponto. <strong>Você aprende em horas o que me custou anos e R$ 100 mil.</strong></p>
+                    <p class="about-signature">"Direto. Aplicável. Sem complicação."</p>
+                    <p style="margin-top:1.3rem; font-weight:700; color:var(--black);">— Victor Guerise</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE/AFTER -->
+    <section class="before-after">
+        <div class="container">
+            <span class="section-label">A transformação</span>
+            <h2 class="section-title">Antes e Depois do <em>Curso</em></h2>
+
+            <div class="ba-grid">
+                <div class="ba-col after">
+                    <h3 class="ba-title">✓ Com o Curso</h3>
+                    <div class="ba-item"><span class="ba-icon check">✓</span><span>Sabe o que comprar antes mesmo de entrar na loja</span></div>
+                    <div class="ba-item"><span class="ba-icon check">✓</span><span>Entende por que perfumes duram ou somem — e como escolher certo</span></div>
+                    <div class="ba-item"><span class="ba-icon check">✓</span><span>Tem um perfume certo para cada situação e clima</span></div>
+                    <div class="ba-item"><span class="ba-icon check">✓</span><span>Coleção equilibrada, estratégica e sem redundância</span></div>
+                    <div class="ba-item"><span class="ba-icon check">✓</span><span>Autonomia total para decidir sozinho com confiança</span></div>
+                </div>
+                <div class="ba-col before">
+                    <h3 class="ba-title">❌ Sem o Curso</h3>
+                    <div class="ba-item"><span class="ba-icon cross">✕</span><span>Compras por impulso — e arrependimento depois</span></div>
+                    <div class="ba-item"><span class="ba-icon cross">✕</span><span>Não sabe a diferença entre EDT, EDP, Parfum</span></div>
+                    <div class="ba-item"><span class="ba-icon cross">✕</span><span>Usa o mesmo perfume em todas as ocasiões</span></div>
+                    <div class="ba-item"><span class="ba-icon cross">✕</span><span>Coleção cheia de repetições e lacunas</span></div>
+                    <div class="ba-item"><span class="ba-icon cross">✕</span><span>Depende de vendedor ou influenciador para decidir</span></div>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:2.5rem;">
+                <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'AddToCart');">Quero aprender do jeito certo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULES -->
+    <section class="modules-section">
+        <div class="container">
+            <span class="section-label">Conteúdo completo</span>
+            <h2 class="section-title">O Que Você Vai <em>Aprender</em></h2>
+            <p class="section-subtitle">11 aulas organizadas em 3 módulos progressivos. Do absoluto zero à coleção equilibrada.</p>
+
+            <div class="modules-grid">
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-num">1</div>
+                        <div>
+                            <div class="module-tag">Módulo 1</div>
+                            <div class="module-title">Fundamentos da Perfumaria</div>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <ul class="lesson-list">
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Como é feito o perfume e as diferentes concentrações</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Diferença entre acordes, notas e famílias</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Pirâmide olfativa</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Aplicação correta e conservação</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-num">2</div>
+                        <div>
+                            <div class="module-tag">Módulo 2</div>
+                            <div class="module-title">Seu Perfil Olfativo</div>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <ul class="lesson-list">
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Descobrindo preferências, erros de iniciante e vocabulário</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Perfumes para cada ocasião</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Seus primeiros 3 perfumes</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Nicho, designer, contratipo, dupes e árabes</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-num">3</div>
+                        <div>
+                            <div class="module-tag">Módulo 3</div>
+                            <div class="module-title">Colecionador Consciente</div>
+                        </div>
+                    </div>
+                    <div class="module-body">
+                        <ul class="lesson-list">
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Desenvolvendo seu nariz e análise comparativa</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Combinações olfativas e layering</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Anatomia de uma coleção equilibrada</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Coleção Cápsula — uma coleção enxuta para todas as situações</span></li>
+                            <li class="lesson-item"><span class="lesson-icon">▸</span><span>Material extra: onde comprar</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BONUS -->
+    <section class="bonus-section">
+        <div class="container">
+            <div class="bonus-box">
+                <div class="bonus-tag">🎁 BÔNUS EXCLUSIVO — INCLUSO NO CURSO</div>
+                <h2 class="bonus-title">Bônus <em>Exclusivo</em> Incluso no Curso</h2>
+
+                <div class="bonus-slots-counter" style="background:linear-gradient(135deg,#c62828,#8b0000); border-radius:14px; padding:1.8rem 1rem; margin:1.5rem 0; box-shadow:0 8px 28px rgba(198,40,40,0.35); overflow:hidden;">
+                    <div style="text-align:center; margin-bottom: 1rem;">
+                        <span style="font-size:0.78rem; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:2px; font-weight:700;">⏰ Oferta expira em</span>
+                    </div>
+                    <div style="display:flex; justify-content:center; gap:0.5rem; margin-bottom:1rem; flex-wrap:nowrap;">
+                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-days">00</div><div class="countdown-label">dias</div></div>
+                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-hours">00</div><div class="countdown-label">horas</div></div>
+                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-minutes">00</div><div class="countdown-label">min</div></div>
+                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-seconds">00</div><div class="countdown-label">seg</div></div>
+                    </div>
+                    <div style="text-align:center;">
+                        <span style="font-size:0.82rem; color:rgba(255,255,255,0.6);">Domingo · 23h59 · Preço pode aumentar após essa data</span>
+                    </div>
+                </div>
+
+                <div class="bonus-card" style="flex-direction: column; align-items: center; text-align: center;">
+                    <div class="bonus-media" style="width:100%; max-width:420px; margin:0 auto;">
+                        <img src="images/app-mockup.png" alt="Mapa da Coleção Perfeita — App com I.A." class="bonus-mockup-img">
+                    </div>
+                    <div class="bonus-content" style="width:100%;">
+                        <h3 class="bonus-name"> Perfumap - Organizador de Coleções Exclusivo!</h3>
+                        <p class="bonus-description">
+                            Aplicativo com <strong>I.A. integrada</strong> que analisa, sugere e classifica sua coleção baseado nos seus gostos — para você nunca mais errar na próxima compra.
+                        </p>
+                        <div class="bonus-features" style="display:inline-block; text-align:left;">
+                            <span class="bonus-feature"><span>✓</span> Diagnóstico personalizado da sua coleção</span>
+                            <span class="bonus-feature"><span>✓</span> Sugestões de compra baseadas no seu perfil</span>
+                            <span class="bonus-feature"><span>✓</span> Classificação inteligente por ocasião, clima e perfil</span>
+                            <span class="bonus-feature"><span>✓</span> Acesso <strong>vitalício</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bonus-value-row">
+                    <div class="bonus-value-item">
+                        <span class="bonus-value-label">Valor separado</span>
+                        <span class="bonus-value-price strikethrough">R$ 97</span>
+                    </div>
+                    <div class="bonus-value-arrow">→</div>
+                    <div class="bonus-value-item">
+                        <span class="bonus-value-label">Incluso no curso</span>
+                        <span class="bonus-value-free">GRÁTIS</span>
+                    </div>
+                </div>
+
+                <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" style="display:block;text-align:center;margin-top:2rem;" onclick="fbq('track', 'AddToCart');">Garantir Minha Vaga + Bônus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <!-- PRICE -->
+    <section class="price-section" id="oferta">
+        <div class="container">
+            <span class="section-label">Investimento</span>
+            <h2 class="section-title">Tudo Isso por <em>Menos que um Perfume<br>Comprado Errado</em></h2>
+
+            <div class="price-box">
+                <div class="price-fire">🔥</div>
+                <div class="price-value">R$ 147</div>
+                <p class="price-period">Pagamento Único — Acesso Completo</p>
+
+                <div class="price-includes">
+                    <div class="price-includes-title">Ao se inscrever hoje, você recebe:</div>
+                    <div class="price-includes-item"><span>✓</span> Curso Prático da Perfumaria — 11 aulas em vídeo</div>
+                    <div class="price-includes-item"><span>✓</span> Acesso imediato após o pagamento</div>
+                    <div class="price-includes-item"><span>✓</span> Atualizações do conteúdo inclusas</div>
+                    <div class="price-includes-item bonus-highlight" style="background:rgba(232,93,4,0.06); border-radius:8px; padding:0.6rem 0.8rem; border-bottom:none; margin: 0.4rem 0;">
+                        <span>📋</span>
+                        <div class="bonus-highlight-content">
+                            <strong>Bônus: Lista exclusiva de fornecedores</strong>
+                            <div style="font-size:0.85rem; color:var(--gray-mid); margin-top:0.2rem;">Onde comprar com segurança — originais, bom preço e sem enganação</div>
+                        </div>
+                    </div>
+                    <div class="price-includes-item bonus-highlight">
+                        <span>🎁</span>
+                        <div class="bonus-highlight-content">
+                            <strong>Bônus: Perfumap: O App com I.A integrada para organizar sua Coleção! </strong>
+                            <div class="bonus-highlight-meta">
+                                <span style="color:var(--gray-mid); text-decoration:line-through; font-size:0.85rem; white-space:nowrap;">R$ 97</span>
+                                <span class="price-includes-free">incluso no curso</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price-includes-item"><span>✓</span> Garantia incondicional de 7 dias</div>
+                </div>
+
+                <div class="price-comparison">Investimento menor que o valor de um perfume comprado errado.</div>
+
+                <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" style="width:100%;display:block;text-align:center;margin-top:1.4rem;" onclick="fbq('track', 'AddToCart');">Quero aprender perfumaria de verdade</a>
+
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">🔒</div>
+                        <div class="trust-badge-text"><strong>Pagamento Seguro</strong>Processado pela Hotmart</div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">✅</div>
+                        <div class="trust-badge-text"><strong>100% Seguro</strong>Certificado SSL</div>
+                    </div>
+                </div>
+
+                <div class="guarantee">
+                    <div class="guarantee-badge">✓ GARANTIA DE 7 DIAS</div>
+                    <p class="guarantee-text">Você tem 7 dias para testar. Se não fizer sentido para você, basta pedir reembolso. Simples assim. Sem risco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <span class="section-label">Prova social</span>
+            <h2 class="section-title">Homens que <em>Pararam de Errar</em></h2>
+            <p class="section-subtitle">Mais segurança ao comprar. Menos arrependimento. Escolhas mais inteligentes.</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card"><img src="images/depoimento-1.jpg" alt="Depoimento aluno" class="testimonial-image"><div class="testimonial-caption"><span class="t-verified">✓ Depoimento Real</span></div></div>
+                <div class="testimonial-card"><img src="images/depoimento-2.jpg" alt="Depoimento aluno" class="testimonial-image"><div class="testimonial-caption"><span class="t-verified">✓ Instagram Real</span></div></div>
+                <div class="testimonial-card"><img src="images/depoimento-3.jpg" alt="Depoimento aluno" class="testimonial-image"><div class="testimonial-caption"><span class="t-verified">✓ Depoimento Real</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPACT COMPARISON -->
+    <section style="background: white; padding: 3rem 0;">
+        <div class="container">
+            <span class="section-label">A escolha é sua</span>
+            <h2 class="section-title">Por que não aprender no <em>YouTube?</em></h2>
+            <p class="section-subtitle">Você pode. Mas conteúdo solto não constrói conhecimento de verdade.</p>
+
+            <div class="comparison-cards-grid">
+                <div class="comparison-card-item comparison-card-recommended">
+                    <div class="comparison-card-badge">⭐ RECOMENDADO</div>
+                    <div class="comparison-card-title comparison-card-title-green">Curso Prático da Perfumaria</div>
+                    <div style="display:flex; flex-direction:column; gap:0.85rem;">
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>3 módulos em progressão lógica, do zero ao avançado</div>
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>Conhecimento estruturado que você realmente absorve</div>
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>Você sai com uma visão completa do mundo da perfumaria</div>
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>Criado por quem tem +100 perfumes e já errou muito</div>
+                    </div>
+                </div>
+                <div class="comparison-card-item comparison-card-alt">
+                    <div class="comparison-card-title comparison-card-title-gray">YouTube e PDFs gratuitos</div>
+                    <div style="display:flex; flex-direction:column; gap:0.85rem;">
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Vídeos soltos, sem progressão lógica</div>
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Sem profundidade real — você assiste mas não aprende</div>
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Ninguém te ensina a construir uma visão completa</div>
+                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Ninguém te ensina a montar uma coleção</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <span class="section-label">Dúvidas</span>
+            <h2 class="section-title">Perguntas <em>Frequentes</em></h2>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">"Mas eu não consigo aprender isso no YouTube de graça?"</div>
+                    <div class="faq-answer">Você pode tentar, mas vai levar MUITO mais tempo sem progressão lógica. No YouTube você encontra vídeos soltos, sem ordem, sem aprofundamento. Aqui você tem um sistema estruturado em 3 módulos, do básico ao avançado em 11 aulas objetivas.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">"Preciso ter experiência com perfumes antes?"</div>
+                    <div class="faq-answer">Zero. O Módulo 1 começa do absoluto zero. Se você só sabe que "perfume tem cheiro", já é suficiente para começar.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">"E se eu não gostar do curso?"</div>
+                    <div class="faq-answer">7 dias de garantia incondicional. Se você assistir as aulas e achar que não valeu, basta enviar um email e eu devolvo 100% do seu dinheiro. Sem perguntas, sem burocracia.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">"Já tenho uma coleção grande. O curso serve pra mim?"</div>
+                    <div class="faq-answer">ESPECIALMENTE pra você! No Módulo 3 você vai identificar lacunas e redundâncias na coleção atual, aplicar o respiro olfativo e montar seu sistema de rotação para levar tudo para outro nível.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">"Quanto tempo tenho de acesso?"</div>
+                    <div class="faq-answer">Acesso por 12 meses ao valor de R$ 147, pagamento único. As aulas ficam disponíveis 24/7 durante todo o período, no seu ritmo.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">"Posso parcelar?"</div>
+                    <div class="faq-answer">Sim! Você pode parcelar no cartão de crédito ou pagar à vista via PIX/boleto. A Hotmart aceita todos os principais cartões com máxima segurança.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">"Isso funciona só para perfumes caros?"</div>
+                    <div class="faq-answer">NÃO. O método funciona para qualquer perfume, de qualquer faixa de preço. O que importa é a estratégia, não o preço do frasco.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2 class="section-title">Você Pode <em>Continuar Assim</em>...</h2>
+            <p class="section-subtitle" style="margin-bottom:1.5rem;">Comprando no impulso. Cheirando igual a todo mundo. Sem identidade, sem presença, sem ser lembrado.</p>
+            <p class="section-subtitle"><strong style="color:white;">Ou pode descobrir o que a perfumaria realmente pode fazer por você.</strong></p>
+            <p class="section-subtitle" style="margin-top:0.5rem; color:rgba(255,255,255,0.5);">A decisão é sua.</p>
+
+            <div class="urgency-badge">
+                <p class="urgency-badge-text">⚡ Vagas com desconto — por tempo limitado</p>
+                <p class="urgency-badge-subtext">Preço pode aumentar a qualquer momento</p>
+            </div>
+
+            <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" style="font-size:1.15rem; padding:1.3rem 4rem;" onclick="fbq('track', 'InitiateCheckout');">Quero construir minha identidade olfativa</a>
+
+            <p style="margin-top:2rem; color:rgba(255,255,255,0.45); font-size:0.9rem;">
+                ✓ Acesso imediato após pagamento &nbsp;·&nbsp; ✓ Garantia de 7 dias &nbsp;·&nbsp; ✓ Suporte via WhatsApp
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Curso Prático da Perfumaria. Todos os direitos reservados.</p>
+        <p>Desenvolvido com dedicação para homens que querem dominar a perfumaria.</p>
+    </footer>
+
+    <!-- FLOATING CTA -->
+    <div class="floating-cta">
+        <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'InitiateCheckout');">Quero aprender perfumaria agora</a>
+    </div>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const wasActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Hide floating CTA near footer
+        window.addEventListener('scroll', () => {
+            const fc = document.querySelector('.floating-cta');
+            const footer = document.querySelector('footer');
+            if (!footer) return;
+            const show = (window.scrollY + window.innerHeight) <= (footer.offsetTop - 100);
+            fc.style.opacity = show ? '1' : '0';
+            fc.style.pointerEvents = show ? 'auto' : 'none';
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pain cards
+            document.querySelectorAll('.pain-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    const count = document.querySelectorAll('.pain-card.checked').length;
+                    document.querySelector('.pain-verdict').classList.toggle('active', count >= 2);
+                });
+            });
+
+            // Countdown até domingo 23h59 (sempre o próximo domingo)
+            function getNextSunday2359() {
+                const now = new Date();
+                const brt = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+                const day = brt.getDay(); // 0=dom, 1=seg...6=sab
+                const daysUntilSunday = day === 0 ? 7 : 7 - day; // se hoje é domingo, próximo domingo
+                const target = new Date(brt);
+                target.setDate(brt.getDate() + daysUntilSunday);
+                target.setHours(23, 59, 0, 0);
+                return target;
+            }
+
+            function updateBonusCountdown() {
+                const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+                const target = getNextSunday2359();
+                const diff = target - now;
+
+                if (diff <= 0) {
+                    ['bonus-days','bonus-hours','bonus-minutes','bonus-seconds'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = '00';
+                    });
+                    const banner = document.getElementById('banner-countdown');
+                    if (banner) banner.textContent = '00:00:00';
+                    return;
+                }
+
+                const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                const pad = n => String(n).padStart(2, '0');
+
+                const dEl = document.getElementById('bonus-days');
+                const hEl = document.getElementById('bonus-hours');
+                const mEl = document.getElementById('bonus-minutes');
+                const sEl = document.getElementById('bonus-seconds');
+                if (dEl) dEl.textContent = pad(days);
+                if (hEl) hEl.textContent = pad(hours);
+                if (mEl) mEl.textContent = pad(minutes);
+                if (sEl) sEl.textContent = pad(seconds);
+
+                const banner = document.getElementById('banner-countdown');
+                if (banner) banner.textContent = `${pad(days)}d ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+            }
+
+            updateBonusCountdown();
+            setInterval(updateBonusCountdown, 1000);
+
+            // Live viewers removido
+
+            // Economy counter
+            const economyObserver = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        const el = document.getElementById('economy-amount');
+                        const target = 75427;
+                        const steps = 60;
+                        let current = 0;
+                        const inc = target / steps;
+                        const timer = setInterval(() => {
+                            current += inc;
+                            if (current >= target) { current = target; clearInterval(timer); }
+                            el.textContent = 'R$ ' + Math.floor(current).toLocaleString('pt-BR');
+                        }, 2000 / steps);
+                        economyObserver.unobserve(e.target);
+                    }
+                });
+            });
+            const ec = document.getElementById('economy-counter');
+            if (ec) economyObserver.observe(ec);
+
+            // Scroll depth
+            let scrollDepth = 0;
+            window.addEventListener('scroll', function() {
+                const pct = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+                if (pct > 25 && scrollDepth < 25) { fbq('trackCustom','Scroll25'); scrollDepth = 25; }
+                else if (pct > 50 && scrollDepth < 50) { fbq('trackCustom','Scroll50'); scrollDepth = 50; }
+                else if (pct > 75 && scrollDepth < 75) { fbq('trackCustom','Scroll75'); scrollDepth = 75; }
+            });
+
+            // Bonus slots bar animation
+            const bonusBar = document.getElementById('bonus-bar');
+            if (bonusBar) {
+                const bonusObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => { bonusBar.style.width = '27%'; }, 200);
+                            bonusObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                bonusObserver.observe(bonusBar);
+            }
+        });
+    </script>
+
+</body>
+</html>
