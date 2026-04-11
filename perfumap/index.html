@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumap — Organize sua coleção. A IA cuida do resto.</title>
+    <meta name="description" content="O app inteligente de perfumaria masculina. Organize sua coleção, receba diagnósticos da IA e descubra os próximos perfumes certos para você.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --orange: #E85D04;
+            --orange-light: #F48C06;
+            --orange-dark: #C14B00;
+            --orange-glow: rgba(232, 93, 4, 0.12);
+            --orange-border: rgba(232, 93, 4, 0.3);
+            --black: #0D0D0D;
+            --black-soft: #141414;
+            --charcoal: #1E1E1E;
+            --gray-dark: #2A2A2A;
+            --gray-mid: #888888;
+            --gray-light: #CCCCCC;
+            --white: #FFFFFF;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; line-height: 1.15; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 6rem 0; }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .section-title em { font-style: normal; color: var(--orange); }
+
+        /* ── NAVBAR ─────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            transition: background 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(13,13,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--orange-border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span { color: var(--orange); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-back {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-mid);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover { color: var(--white); }
+
+        .nav-cta-pill {
+            background: var(--orange);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.88rem;
+            padding: 0.55rem 1.3rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .nav-cta-pill:hover { background: var(--orange-dark); }
+
+        /* ── HERO ────────────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 0 5rem;
+        }
+
+        /* Subtle grid pattern background */
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(232,93,4,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(232,93,4,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-glow-1 {
+            position: absolute;
+            top: 10%; left: -10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(232,93,4,0.08) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-glow-2 {
+            position: absolute;
+            bottom: 0; right: -5%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(232,93,4,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--orange-glow);
+            border: 1px solid var(--orange-border);
+            border-radius: 100px;
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 2rem;
+        }
+
+        .hero-chip-dot {
+            width: 6px; height: 6px;
+            background: var(--orange);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.7); }
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            color: var(--orange);
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--gray-light);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 1rem 2.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--gray-light);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 1rem 1.8rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 5px;
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .btn-ghost:hover { border-color: var(--orange); color: var(--white); }
+
+        /* Mock UI preview */
+        .hero-mockup {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .mockup-frame {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(232,93,4,0.1);
+        }
+
+        .mockup-bar {
+            background: var(--gray-dark);
+            padding: 0.9rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .mockup-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot:nth-child(1) { background: #FF5F57; }
+        .mockup-dot:nth-child(2) { background: #FEBC2E; }
+        .mockup-dot:nth-child(3) { background: #28C840; }
+
+        .mockup-url {
+            margin-left: 0.5rem;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            padding: 0.25rem 1rem;
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            font-family: monospace;
+        }
+
+        .mockup-body {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1rem;
+            min-height: 240px;
+        }
+
+        .mockup-panel {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .mockup-panel-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .mockup-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .mockup-item:last-child { border-bottom: none; }
+
+        .mockup-item-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--orange);
+            flex-shrink: 0;
+        }
+
+        .mockup-item-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            flex: 1;
+        }
+
+        .mockup-item-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+        }
+
+        .ai-bubble {
+            background: linear-gradient(135deg, rgba(232,93,4,0.15), rgba(232,93,4,0.05));
+            border: 1px solid var(--orange-border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .ai-bubble-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--orange);
+            margin-bottom: 0.35rem;
+        }
+
+        .ai-bubble-text {
+            font-size: 0.78rem;
+            color: var(--gray-light);
+            line-height: 1.5;
+        }
+
+        .ai-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.7rem;
+            color: var(--gray-light);
+            margin: 0.2rem 0.2rem 0 0;
+        }
+
+        /* ── COMO FUNCIONA ───────────────────────────────── */
+        #como-funciona {
+            background: var(--black-soft);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .como-header { text-align: center; margin-bottom: 4rem; }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: calc(16.66% + 1rem);
+            right: calc(16.66% + 1rem);
+            height: 1px;
+            background: linear-gradient(to right, var(--orange), rgba(232,93,4,0.2));
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 56px; height: 56px;
+            background: var(--black);
+            border: 2px solid var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--orange);
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .step-desc {
+            font-size: 0.92rem;
+            color: var(--gray-mid);
+            line-height: 1.65;
+            max-width: 240px;
+            margin: 0 auto;
+        }
+
+        /* ── FEATURES ────────────────────────────────────── */
+        #features {
+            background: var(--black);
+        }
+
+        .features-header { text-align: center; margin-bottom: 4rem; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: border-color 0.25s;
+        }
+
+        .feature-card:hover { border-color: var(--orange-border); }
+
+        .feature-card.featured {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(232,93,4,0.08) 0%, var(--charcoal) 60%);
+            border-color: var(--orange-border);
+        }
+
+        .feature-icon {
+            width: 48px; height: 48px;
+            background: var(--orange-glow);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-icon svg { color: var(--orange); }
+
+        .feature-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .feature-desc {
+            font-size: 0.93rem;
+            color: var(--gray-mid);
+            line-height: 1.7;
+        }
+
+        .feature-visual {
+            background: var(--black-soft);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .ai-response {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ai-msg {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .ai-avatar {
+            width: 28px; height: 28px;
+            background: var(--orange-glow);
+            border: 1px solid var(--orange-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: var(--orange);
+            letter-spacing: 0.5px;
+        }
+
+        .ai-msg-text {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.82rem;
+            color: var(--gray-light);
+            line-height: 1.55;
+        }
+
+        .ai-msg-text strong { color: var(--orange); }
+
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem 0 0.2rem 2.5rem;
+        }
+
+        .typing span {
+            width: 6px; height: 6px;
+            background: var(--gray-mid);
+            border-radius: 50%;
+            animation: typing 1.2s infinite;
+        }
+
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-3px); }
+        }
+
+        /* ── CTA FINAL ───────────────────────────────────── */
+        #cta {
+            background: var(--black-soft);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cta-box {
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .cta-box .section-title { font-size: clamp(2rem, 5vw, 3.2rem); }
+
+        .cta-box p {
+            font-size: 1.05rem;
+            color: var(--gray-light);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        /* ── FOOTER ──────────────────────────────────────── */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-logo span { color: var(--orange); }
+
+        .footer-copy { font-size: 0.8rem; color: var(--gray-mid); }
+
+        .footer-back {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray-mid);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .footer-back:hover { color: var(--orange); }
+
+        /* ── MOBILE ──────────────────────────────────────── */
+        @media (max-width: 860px) {
+            .steps { grid-template-columns: 1fr; }
+            .steps::before { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card.featured {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .mockup-body { grid-template-columns: 1fr; }
+            .hero-title { font-size: clamp(2.5rem, 10vw, 4rem); }
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 4rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="/perfumap" class="nav-logo">Perfu<span>map</span></a>
+        <div class="nav-right">
+            <a href="/" class="nav-back">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                vguerise.com.br
+            </a>
+            <a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank" class="nav-cta-pill">Usar agora</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-chip">
+                <span class="hero-chip-dot"></span>
+                IA integrada
+            </div>
+            <h1 class="hero-title">
+                Organize sua coleção.<br>
+                A <em>inteligência</em><br>
+                cuida do resto.
+            </h1>
+            <p class="hero-sub">
+                Perfumap analisa seus perfumes, identifica lacunas no seu repertório olfativo e sugere os próximos passos certos para a sua coleção.
+            </p>
+            <div class="hero-actions">
+                <a href="#usar" class="btn-primary">
+                    Começar agora — é grátis
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="#features" class="btn-ghost">Ver como funciona</a>
+            </div>
+
+            <!-- Mockup UI -->
+            <div class="hero-mockup">
+                <div class="mockup-frame">
+                    <div class="mockup-bar">
+                        <div class="mockup-dot"></div>
+                        <div class="mockup-dot"></div>
+                        <div class="mockup-dot"></div>
+                        <span class="mockup-url">vguerise.com.br/perfumap</span>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="mockup-panel">
+                            <div class="mockup-panel-title">Minha Coleção</div>
+                            <div class="mockup-item">
+                                <div class="mockup-item-dot"></div>
+                                <span class="mockup-item-name">Bleu de Chanel EDP</span>
+                                <span class="mockup-item-tag">Amadeirado</span>
+                            </div>
+                            <div class="mockup-item">
+                                <div class="mockup-item-dot" style="background:#888"></div>
+                                <span class="mockup-item-name">Sauvage Dior EDT</span>
+                                <span class="mockup-item-tag">Fougère</span>
+                            </div>
+                            <div class="mockup-item">
+                                <div class="mockup-item-dot"></div>
+                                <span class="mockup-item-name">Y EDP YSL</span>
+                                <span class="mockup-item-tag">Aromático</span>
+                            </div>
+                            <div class="mockup-item">
+                                <div class="mockup-item-dot" style="background:#888"></div>
+                                <span class="mockup-item-name">Invictus Paco Rabanne</span>
+                                <span class="mockup-item-tag">Aquático</span>
+                            </div>
+                        </div>
+                        <div class="mockup-panel">
+                            <div class="mockup-panel-title">Diagnóstico IA</div>
+                            <div class="ai-bubble">
+                                <div class="ai-bubble-label">Análise</div>
+                                <div class="ai-bubble-text">Sua coleção é forte em <strong style="color:var(--orange)">frescos</strong> mas sem cobertura oriental para o inverno.</div>
+                            </div>
+                            <div style="margin-bottom:0.5rem;">
+                                <span class="ai-chip">🌿 Frescos ✓</span>
+                                <span class="ai-chip">🌊 Aquáticos ✓</span>
+                                <span class="ai-chip" style="border-color:var(--orange-border); color:var(--orange);">🌙 Orientais ✗</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+    <div class="container">
+        <div class="como-header">
+            <span class="badge">Como funciona</span>
+            <h2 class="section-title">Três passos.<br><em>Resultado imediato.</em></h2>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <div class="step-title">Cadastre sua coleção</div>
+                <p class="step-desc">Adicione os perfumes que você tem, que quer ter ou que já testou. Busca por nome, marca ou família olfativa.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <div class="step-title">A IA analisa tudo</div>
+                <p class="step-desc">O Perfumap mapeia seu perfil olfativo, identifica padrões e detecta lacunas na sua coleção automaticamente.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-title">Receba sugestões precisas</div>
+                <p class="step-desc">Perfumes recomendados de acordo com o seu gosto real — não baseado em hype, baseado em você.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+    <div class="container">
+        <div class="features-header">
+            <span class="badge">Funcionalidades</span>
+            <h2 class="section-title">Tudo que você precisa<br>para <em>evoluir de verdade</em></h2>
+        </div>
+        <div class="features-grid">
+
+            <!-- FEATURE DESTAQUE: IA -->
+            <div class="feature-card featured">
+                <div>
+                    <div class="feature-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4"/>
+                            <path d="M12 10v4M8 14h8M6 18a6 6 0 0 1 12 0"/>
+                        </svg>
+                    </div>
+                    <div class="feature-title">Diagnóstico com Inteligência Artificial</div>
+                    <p class="feature-desc">
+                        A IA do Perfumap vai além de listar perfumes. Ela entende o conjunto da sua coleção, identifica o que está faltando, o que está repetido e o que faz mais sentido comprar a seguir — com base no seu estilo, uso e orçamento.
+                    </p>
+                </div>
+                <div class="feature-visual">
+                    <div class="ai-response">
+                        <div class="ai-msg">
+                            <div class="ai-avatar">AI</div>
+                            <div class="ai-msg-text">
+                                Com base na sua coleção atual, você tem <strong>boa cobertura para o dia a dia</strong>, mas nenhum perfume adequado para noite formal. Recomendo explorar a família <strong>Oriental Amadeirada</strong>.
+                            </div>
+                        </div>
+                        <div class="ai-msg">
+                            <div class="ai-avatar">AI</div>
+                            <div class="ai-msg-text">
+                                Top 3 pra você agora: <strong>Armani Code EDP</strong>, <strong>Valentino Uomo Born in Roma</strong> e <strong>YSL La Nuit de L'Homme</strong> — todos dentro do seu padrão de qualidade e orçamento.
+                            </div>
+                        </div>
+                        <div class="typing">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organização -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1"/>
+                    </svg>
+                </div>
+                <div class="feature-title">Organize sua coleção</div>
+                <p class="feature-desc">Todos os seus perfumes em um só lugar — com família olfativa, notas, ocasião, sazonalidade e avaliação pessoal. Sem planilha, sem bagunça.</p>
+            </div>
+
+            <!-- Mapa Olfativo -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 2v20M2 12h20"/>
+                        <path d="M12 12 m-4-4 a4 4 0 0 1 8 0"/>
+                    </svg>
+                </div>
+                <div class="feature-title">Mapa olfativo pessoal</div>
+                <p class="feature-desc">Visualize seu perfil olfativo: quais famílias domina, quais ainda não explorou e onde há espaço para crescer. Uma leitura única do seu gosto.</p>
+            </div>
+
+            <!-- Lista de desejo -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <div class="feature-title">Lista de desejos inteligente</div>
+                <p class="feature-desc">Salve perfumes que quer experimentar. A IA prioriza a lista com base no que faria mais diferença na sua coleção — não só no que está na moda.</p>
+            </div>
+
+            <!-- Histórico -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18"/>
+                        <path d="M18 17V9M13 17V5M8 17v-3"/>
+                    </svg>
+                </div>
+                <div class="feature-title">Evolução da coleção</div>
+                <p class="feature-desc">Acompanhe como seu gosto olfativo evoluiu ao longo do tempo. Veja padrões, acertos e o crescimento do seu repertório.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta">
+    <div class="container">
+        <div class="cta-box">
+            <span class="badge">Comece agora</span>
+            <h2 class="section-title">
+                Sua coleção merece<br>
+                <em>mais do que uma prateleira.</em>
+            </h2>
+            <p>Perfumap é gratuito. Acesse agora, cadastre seus perfumes e deixa a IA trabalhar por você.</p>
+            <div id="usar">
+                <a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank" class="btn-primary" style="font-size:1.05rem; padding:1.1rem 2.5rem;">
+                    Acessar o Perfumap
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <p style="margin-top:1rem; font-size:0.82rem; color:var(--gray-mid);">Por Victor Guerise · <a href="/" style="color:var(--gray-mid);">vguerise.com.br</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <a href="/perfumap" class="footer-logo">Perfu<span>map</span></a>
+            <p class="footer-copy">© 2026 Victor Guerise</p>
+            <a href="/" class="footer-back">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Voltar para vguerise.com.br
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+</script>
+</body>
+</html>

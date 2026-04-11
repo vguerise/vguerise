@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Guerise — Perfumaria Masculina</title>
+    <meta name="description" content="Victor Guerise — referência em perfumaria masculina no Brasil. Cursos, consultoria e ferramentas para quem quer entender e usar perfume de verdade.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --orange: #E85D04;
+            --orange-light: #F48C06;
+            --orange-dark: #C14B00;
+            --orange-glow: rgba(232, 93, 4, 0.15);
+            --black: #0D0D0D;
+            --black-soft: #141414;
+            --charcoal: #1E1E1E;
+            --gray-dark: #2A2A2A;
+            --gray-mid: #888888;
+            --gray-light: #CCCCCC;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.15;
+        }
+
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 6rem 0; }
+
+        .badge {
+            display: inline-block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .section-title em { font-style: normal; color: var(--orange); }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-light);
+            max-width: 580px;
+        }
+
+        /* ── NAVBAR ─────────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            transition: background 0.3s, backdrop-filter 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(13, 13, 13, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(232, 93, 4, 0.15);
+        }
+
+        .nav-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span { color: var(--orange); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+
+        .nav-cta {
+            background: var(--orange);
+            color: var(--white) !important;
+            padding: 0.55rem 1.3rem;
+            border-radius: 4px;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: var(--orange-dark) !important; }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: transform 0.3s;
+        }
+
+        /* ── HERO ───────────────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            background: var(--black);
+        }
+
+        .hero-bg-line {
+            position: absolute;
+            top: 0; bottom: 0;
+            right: 42%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(232,93,4,0.3), transparent);
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%; left: 55%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(232,93,4,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            min-height: 100vh;
+            padding: 7rem 0 4rem;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 2px;
+            background: var(--orange);
+        }
+
+        .hero-eyebrow span {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+        }
+
+        .hero-title {
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.08;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            color: var(--orange);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--gray-light);
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.9rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 0.2px;
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.9rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--orange);
+            background: var(--orange-glow);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .stat-item {}
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            width: 380px;
+            max-width: 100%;
+        }
+
+        .hero-photo-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--orange) 0%, transparent 50%);
+            border-radius: 8px;
+            z-index: 0;
+        }
+
+        .hero-photo {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            border-radius: 6px;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 3/4;
+        }
+
+        .hero-photo-placeholder {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: var(--charcoal);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-mid);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-card {
+            position: absolute;
+            bottom: 2rem;
+            left: -2rem;
+            background: rgba(30,30,30,0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(232,93,4,0.3);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            z-index: 2;
+        }
+
+        .hero-card-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--orange);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-card-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        /* ── SOBRE ──────────────────────────────────────────── */
+        #sobre {
+            background: var(--black-soft);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .sobre-img-wrap {
+            position: relative;
+        }
+
+        .sobre-img {
+            width: 100%;
+            border-radius: 6px;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 4/5;
+        }
+
+        .sobre-img-placeholder {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: var(--charcoal);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-mid);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sobre-accent {
+            position: absolute;
+            top: -1.5rem;
+            left: -1.5rem;
+            width: 100px;
+            height: 100px;
+            border-top: 3px solid var(--orange);
+            border-left: 3px solid var(--orange);
+            border-radius: 2px;
+        }
+
+        .sobre-content {}
+
+        .sobre-text {
+            font-size: 1.05rem;
+            color: var(--gray-light);
+            margin-bottom: 1.2rem;
+            line-height: 1.85;
+        }
+
+        .sobre-text strong { color: var(--white); font-weight: 600; }
+
+        .sobre-pillars {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .pillar {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 6px;
+            padding: 1.25rem;
+            transition: border-color 0.2s;
+        }
+
+        .pillar:hover { border-color: rgba(232,93,4,0.4); }
+
+        .pillar-icon {
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .pillar-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pillar-desc {
+            font-size: 0.82rem;
+            color: var(--gray-mid);
+            line-height: 1.5;
+        }
+
+        /* ── PRODUTOS ───────────────────────────────────────── */
+        #produtos {
+            background: var(--black);
+        }
+
+        .produtos-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .produto-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--orange);
+        }
+
+        .produto-card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .produto-card-img-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--gray-dark), var(--black-soft));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .produto-card-img-placeholder svg {
+            opacity: 0.2;
+        }
+
+        .produto-card-body {
+            padding: 1.75rem 2rem 2rem;
+        }
+
+        .produto-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+            background: var(--orange-glow);
+            padding: 0.3rem 0.75rem;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .produto-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .produto-desc {
+            font-size: 0.95rem;
+            color: var(--gray-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .produto-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--orange);
+            transition: gap 0.2s;
+        }
+
+        .produto-card:hover .produto-cta { gap: 0.8rem; }
+
+        .produto-cta svg { transition: transform 0.2s; }
+        .produto-card:hover .produto-cta svg { transform: translateX(3px); }
+
+        /* ── CONSULTORIA ────────────────────────────────────── */
+        #consultoria {
+            background: var(--black-soft);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .consultoria-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .consultoria-content .section-subtitle {
+            max-width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .consultoria-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .consultoria-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 1rem;
+            color: var(--gray-light);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .consultoria-list li:last-child { border-bottom: none; }
+
+        .check {
+            width: 20px;
+            height: 20px;
+            background: var(--orange-glow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .check svg { width: 10px; height: 10px; color: var(--orange); }
+
+        .consultoria-form-wrap {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 2.5rem;
+        }
+
+        .form-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .form-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray-mid);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray-light);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 5px;
+            padding: 0.75rem 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--white);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder { color: var(--gray-mid); }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--orange);
+        }
+
+        .form-select option { background: var(--charcoal); }
+
+        .form-textarea { resize: vertical; min-height: 100px; }
+
+        .form-btn {
+            width: 100%;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .form-btn:hover { background: var(--orange-dark); }
+
+        .form-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            margin-top: 0.75rem;
+        }
+
+        /* ── CONTATO ────────────────────────────────────────── */
+        #contato {
+            background: var(--black);
+        }
+
+        .contato-inner {
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .contato-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .contato-link {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 5px;
+            color: var(--gray-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .contato-link:hover {
+            border-color: var(--orange);
+            color: var(--white);
+        }
+
+        /* ── FOOTER ─────────────────────────────────────────── */
+        footer {
+            background: var(--black-soft);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer-logo span { color: var(--orange); }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            color: var(--gray-mid);
+        }
+
+        /* ── MOBILE ─────────────────────────────────────────── */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(13,13,13,0.98);
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                z-index: 99;
+            }
+
+            .nav-links.open a { font-size: 1.3rem; }
+
+            .nav-toggle { display: flex; z-index: 200; }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 8rem 0 4rem;
+                gap: 3rem;
+            }
+
+            .hero-eyebrow { justify-content: center; }
+            .hero-desc { margin: 0 auto 2.5rem; }
+            .hero-actions { justify-content: center; }
+            .hero-stats { justify-content: center; }
+
+            .hero-photo-wrap { width: 260px; margin: 0 auto; }
+            .hero-card { left: 0; right: 0; width: fit-content; margin: 0 auto; bottom: -1rem; }
+
+            .sobre-grid,
+            .consultoria-inner { grid-template-columns: 1fr; gap: 3rem; }
+
+            .sobre-img-wrap { max-width: 340px; margin: 0 auto; }
+
+            .produtos-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 4rem 0; }
+            .sobre-pillars { grid-template-columns: 1fr; }
+            .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">Victor<span>.</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#consultoria">Consultoria</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#consultoria" class="nav-cta">Fale Comigo</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-bg-line"></div>
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span>Perfumaria Masculina</span>
+                </div>
+                <h1 class="hero-title">
+                    Cheiro bom é<br>
+                    <em>intencional.</em><br>
+                    Não é sorte.
+                </h1>
+                <p class="hero-desc">
+                    Sou Victor Guerise — colecionador, pesquisador e criador de conteúdo sobre perfumaria masculina. Ajudo homens a entender, escolher e usar perfume com propósito.
+                </p>
+                <div class="hero-actions">
+                    <a href="#produtos" class="btn-primary">
+                        Ver Produtos
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#consultoria" class="btn-ghost">Quero Consultoria</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">+5K</div>
+                        <div class="stat-label">Seguidores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+200</div>
+                        <div class="stat-label">Alunos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Produtos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-photo-wrap">
+                    <!-- Substitua pelo caminho da sua foto -->
+                    <img src="images/victor-guerise.jpg" alt="Victor Guerise" class="hero-photo"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hero-photo-placeholder" style="display:none;">Sua foto aqui</div>
+                </div>
+                <div class="hero-card">
+                    <div class="hero-card-label">Último lançamento</div>
+                    <div class="hero-card-value">Curso Prático da Perfumaria</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+    <div class="container">
+        <div class="sobre-grid">
+            <div class="sobre-img-wrap">
+                <div class="sobre-accent"></div>
+                <!-- Substitua pelo caminho de outra foto -->
+                <img src="images/victor-terno.jpg" alt="Victor Guerise" class="sobre-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="sobre-img-placeholder" style="display:none;">Sua foto aqui</div>
+            </div>
+            <div class="sobre-content">
+                <span class="badge">Sobre mim</span>
+                <h2 class="section-title" style="text-align:left;">
+                    Do interesse casual à<br>
+                    <em>obsessão com propósito</em>
+                </h2>
+                <p class="sobre-text">
+                    Comecei a me aprofundar em perfumaria sem saber o que estava fazendo — comprava por impulso, usava errado e não entendia por que os perfumes não duravam. <strong>Foi a frustração que me transformou em estudante.</strong>
+                </p>
+                <p class="sobre-text">
+                    Hoje, depois de anos colecionando, testando e pesquisando, traduzo o universo da perfumaria masculina de forma direta: sem jargão inútil, sem elitismo, com foco total em <strong>resultados práticos para o homem moderno.</strong>
+                </p>
+                <div class="sobre-pillars">
+                    <div class="pillar">
+                        <div class="pillar-icon">🎓</div>
+                        <div class="pillar-title">Educação</div>
+                        <div class="pillar-desc">Conteúdo que ensina do absoluto zero ao colecionador avançado.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-icon">🧪</div>
+                        <div class="pillar-title">Curadoria</div>
+                        <div class="pillar-desc">Reviews e comparações honestas baseadas em uso real.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-icon">🗺️</div>
+                        <div class="pillar-title">Ferramentas</div>
+                        <div class="pillar-desc">Recursos práticos para organizar e descobrir novos perfumes.</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-icon">🤝</div>
+                        <div class="pillar-title">Consultoria</div>
+                        <div class="pillar-desc">Orientação pessoal para montar sua coleção do jeito certo.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUTOS -->
+<section id="produtos">
+    <div class="container">
+        <div class="produtos-header">
+            <span class="badge">O que eu criei</span>
+            <h2 class="section-title">Produtos para quem<br><em>leva perfume a sério</em></h2>
+            <p class="section-subtitle" style="margin: 0 auto;">Do aprendizado à descoberta — cada produto foi criado para resolver uma dor real de quem quer entender perfumaria.</p>
+        </div>
+        <div class="produtos-grid">
+
+            <!-- CARD 1: Curso -->
+            <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" target="_blank" class="produto-card">
+                <div class="produto-card-img-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="produto-card-body">
+                    <span class="produto-tag">Curso Online</span>
+                    <div class="produto-title">Curso Prático da Perfumaria</div>
+                    <p class="produto-desc">Do absoluto zero ao colecionador consciente. 3 módulos, 11 aulas — aprenda a entender famílias olfativas, durabilidade, aplicação e como montar sua coleção sem desperdício.</p>
+                    <span class="produto-cta">
+                        Conhecer o curso
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+            <!-- CARD 2: Perfumap -->
+            <a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank" class="produto-card">
+                <div class="produto-card-img-placeholder">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 8v4l3 3"/>
+                        <path d="M3.05 11h2M18.95 11h2M11 3.05v2M11 18.95v2"/>
+                    </svg>
+                </div>
+                <div class="produto-card-body">
+                    <span class="produto-tag">Ferramenta Digital</span>
+                    <div class="produto-title">Perfumap</div>
+                    <p class="produto-desc">A ferramenta para mapear, organizar e descobrir sua jornada olfativa. Registre sua coleção, descubra novos perfumes por família e saiba exatamente o que faz sentido para o seu estilo.</p>
+                    <span class="produto-cta">
+                        Conhecer o Perfumap
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONSULTORIA -->
+<section id="consultoria">
+    <div class="container">
+        <div class="consultoria-inner">
+            <div class="consultoria-content">
+                <span class="badge">Consultoria Pessoal</span>
+                <h2 class="section-title" style="text-align:left;">
+                    Sua coleção com<br>
+                    <em>estratégia real</em>
+                </h2>
+                <p class="section-subtitle" style="margin-bottom:2rem;">
+                    Chega de comprar por impulso e se arrepender. Em uma sessão de consultoria eu analiso seu perfil, seu estilo e seu orçamento — e entrego um roteiro personalizado.
+                </p>
+                <ul class="consultoria-list">
+                    <li>
+                        <span class="check">
+                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 5l2.5 2.5L8 3"/>
+                            </svg>
+                        </span>
+                        Análise do seu perfil olfativo e estilo de vida
+                    </li>
+                    <li>
+                        <span class="check">
+                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 5l2.5 2.5L8 3"/>
+                            </svg>
+                        </span>
+                        Recomendação de perfumes por ocasião e orçamento
+                    </li>
+                    <li>
+                        <span class="check">
+                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 5l2.5 2.5L8 3"/>
+                            </svg>
+                        </span>
+                        Como aplicar, conservar e quando usar cada perfume
+                    </li>
+                    <li>
+                        <span class="check">
+                            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 5l2.5 2.5L8 3"/>
+                            </svg>
+                        </span>
+                        Revisão da coleção atual — o que fica, o que sai
+                    </li>
+                </ul>
+            </div>
+            <div class="consultoria-form-wrap">
+                <div class="form-title">Solicite sua consultoria</div>
+                <div class="form-subtitle">Preencha e entrarei em contato em até 24h.</div>
+                <form id="consultoriaForm" onsubmit="handleForm(event)">
+                    <div class="form-group">
+                        <label class="form-label">Nome completo</label>
+                        <input type="text" class="form-input" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">WhatsApp</label>
+                        <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Você já tem perfumes?</label>
+                        <select class="form-select form-input">
+                            <option value="">Selecione</option>
+                            <option>Sim, tenho uma coleção</option>
+                            <option>Tenho alguns mas quero evoluir</option>
+                            <option>Não tenho nenhum ainda</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">O que você busca?</label>
+                        <textarea class="form-textarea" placeholder="Ex: quero montar uma coleção para o trabalho, tenho budget de R$500..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-btn">Enviar pelo WhatsApp</button>
+                    <p class="form-note">Sem spam. Resposta rápida e direta.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+    <div class="container">
+        <div class="contato-inner">
+            <span class="badge">Redes & Contato</span>
+            <h2 class="section-title">Me encontre<br><em>por aí</em></h2>
+            <p class="section-subtitle" style="margin: 0 auto 1rem;">Conteúdo sobre perfumaria masculina no Instagram e YouTube. Dúvidas rápidas pelo Instagram mesmo.</p>
+            <div class="contato-links">
+                <a href="https://instagram.com/vguerise" target="_blank" class="contato-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                    @vguerise
+                </a>
+                <a href="https://youtube.com/@vguerise" target="_blank" class="contato-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+                    </svg>
+                    YouTube
+                </a>
+                <a href="mailto:contato@vguerise.com.br" class="contato-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                    contato@vguerise.com.br
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <a href="#" class="footer-logo">Victor<span>.</span></a>
+            <p class="footer-copy">© 2026 Victor Guerise. Todos os direitos reservados.</p>
+            <p class="footer-copy"><a href="https://vguerise.com.br" style="color:inherit; text-decoration:none;">vguerise.com.br</a></p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+        links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Formulário → WhatsApp
+    function handleForm(e) {
+        e.preventDefault();
+        const form = e.target;
+        const nome = form.querySelector('input[type="text"]').value;
+        const tel  = form.querySelector('input[type="tel"]').value;
+        const coll = form.querySelector('select').value;
+        const msg  = form.querySelector('textarea').value;
+
+        const text = encodeURIComponent(
+            `Olá Victor! Quero solicitar uma consultoria.\n\n` +
+            `*Nome:* ${nome}\n` +
+            `*WhatsApp:* ${tel}\n` +
+            `*Tenho perfumes?* ${coll}\n` +
+            `*O que busco:* ${msg}`
+        );
+
+        // Substitua pelo seu número com DDI: 5511999999999
+        window.open(`https://wa.me/5511999999999?text=${text}`, '_blank');
+    }
+</script>
+</body>
+</html>
