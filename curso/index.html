@@ -174,7 +174,7 @@
             background: var(--black);
             display: flex; align-items: center; justify-content: center;
             text-align: center;
-            padding: 3rem 2rem 2.5rem;
+            padding: 5rem 2rem 2.5rem;
             position: relative;
             overflow: hidden;
         }
@@ -955,9 +955,67 @@
 
         /* Divider */
         .divider { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
+
+        /* NAVBAR */
+        .curso-navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0.85rem 2rem;
+            background: transparent;
+            transition: background 0.3s, backdrop-filter 0.3s;
+        }
+        .curso-navbar.scrolled {
+            background: rgba(13,13,13,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(232,93,4,0.15);
+        }
+        .curso-navbar-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .curso-navbar-back {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
+        }
+        .curso-navbar-back:hover { color: #ffffff; }
+        .curso-navbar-cta {
+            background: var(--orange);
+            color: #ffffff !important;
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .curso-navbar-cta:hover { background: var(--orange-dark); }
     </style>
 </head>
 <body>
+
+    <!-- NAVBAR -->
+    <nav class="curso-navbar" id="cursoNavbar">
+        <div class="curso-navbar-inner">
+            <a href="https://vguerise.com.br" class="curso-navbar-back">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+                Voltar
+            </a>
+            <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="curso-navbar-cta" onclick="fbq('track','InitiateCheckout');">Quero o curso</a>
+        </div>
+    </nav>
 
     <a href="https://wa.me/5521976462812?text=Olá!%20Vim%20do%20site%20do%20Curso%20Prático%20da%20Perfumaria" target="_blank" class="whatsapp-float" title="Fale comigo no WhatsApp">
         <svg width="27" height="27" fill="currentColor" viewBox="0 0 16 16">
@@ -1529,6 +1587,12 @@
     </div>
 
     <script>
+        // Navbar scroll effect
+        const cursoNavbar = document.getElementById('cursoNavbar');
+        window.addEventListener('scroll', () => {
+            cursoNavbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(q => {
             q.addEventListener('click', () => {
