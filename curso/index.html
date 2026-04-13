@@ -185,14 +185,8 @@
             background-image: url('images/victor-hero.jpg');
             background-size: 50% auto; background-position: right center; background-repeat: no-repeat;
             opacity: 1; z-index: 1;
-            -webkit-mask-image:
-                linear-gradient(to right, transparent 0%, black 20%),
-                linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
-            -webkit-mask-composite: destination-in;
-            mask-image:
-                linear-gradient(to right, transparent 0%, black 20%),
-                linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
-            mask-composite: intersect;
+            -webkit-mask-image: linear-gradient(to right, transparent 38%, black 58%, black 100%);
+            mask-image: linear-gradient(to right, transparent 38%, black 58%, black 100%);
         }
 
         .hero::after {
@@ -201,10 +195,6 @@
             background: linear-gradient(to left, rgba(10,10,10,0) 0%, rgba(10,10,10,0.0) 35%, rgba(10,10,10,0.75) 55%, rgba(10,10,10,0.95) 70%, rgba(10,10,10,0.95) 100%);
             z-index: 1;
         }
-
-
-
-
 
         @media (max-width: 768px) {
             .hero {
@@ -216,13 +206,12 @@
                 background-size: cover;
                 background-position: center center;
                 opacity: 0.35;
+    
                 -webkit-mask-image: none;
                 mask-image: none;
             }
             .hero::after { background: none; }
         }
-
-
 
         .hero-container { max-width: 880px; width: 100%; position: relative; z-index: 2; }
 
@@ -1054,8 +1043,6 @@
 
     </section>
 
-
-
     <div class="divider"></div>
 
     <!-- BONUS URGENCY BANNER -->
@@ -1171,15 +1158,11 @@
                     </div>
                 </div>
             </div>
-
-
             <div style="text-align:center; margin-top:2rem;">
                 <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'AddToCart');">Quero começar agora</a>
             </div>
         </div>
     </section>
-
-
     <!-- ABOUT -->
     <section class="about-section">
         <div class="container">
@@ -1433,6 +1416,9 @@
                 </div>
                 <div class="testemunho-card" style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; transition:transform 0.3s, border-color 0.3s;">
                     <img src="images/testemunho-3.jpg" alt="Depoimento aluno" style="width:100%; display:block;">
+                <div class="testemunho-card" style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; transition:transform 0.3s, border-color 0.3s;">
+                    <img src="images/testemunho-4.jpg" alt="Depoimento aluno" style="width:100%; display:block;">
+                </div>
                 </div>
             </div>
         </div>
@@ -1507,7 +1493,7 @@
             <div class="testemunho-card"><img src="../images/testemunho-1.jpg" alt="Depoimento" class="testemunho-img"></div>
             <div class="testemunho-card"><img src="../images/testemunho-2.jpg" alt="Depoimento" class="testemunho-img"></div>
             <div class="testemunho-card"><img src="../images/testemunho-3.jpg" alt="Depoimento" class="testemunho-img"></div>
-        </div>
+            <div class="testemunho-card"><img src="../images/testemunho-4.jpg" alt="Depoimento" class="testemunho-img"></div>
     </section>
 
     <!-- FOOTER -->
