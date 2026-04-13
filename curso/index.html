@@ -198,7 +198,7 @@
         .hero::after {
             content: '';
             position: absolute; inset: 0;
-            background: linear-gradient(to left, rgba(10,10,10,0) 0%, rgba(10,10,10,0.5) 40%, rgba(10,10,10,0.92) 60%, rgba(10,10,10,0.92) 100%);
+            background: linear-gradient(to left, rgba(10,10,10,0) 0%, rgba(10,10,10,0.0) 35%, rgba(10,10,10,0.75) 55%, rgba(10,10,10,0.95) 70%, rgba(10,10,10,0.95) 100%);
             z-index: 1;
         }
 
@@ -213,8 +213,11 @@
                 max-height: none;
             }
             .hero::before {
+                background-size: cover;
                 background-position: center center;
-                opacity: 0.3;
+                opacity: 0.35;
+                -webkit-mask-image: none;
+                mask-image: none;
             }
             .hero::after { background: none; }
         }
