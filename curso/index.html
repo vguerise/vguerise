@@ -174,7 +174,7 @@
             background: var(--black);
             display: flex; align-items: center; justify-content: center;
             text-align: center;
-            padding: 5rem 2rem 0;
+            padding: 5rem 2rem 2.5rem;
             position: relative;
             overflow: hidden;
         }
@@ -183,7 +183,7 @@
             content: '';
             position: absolute; inset: 0;
             background-image: url('images/victor-hero.jpg');
-            background-size: auto 88%; background-repeat: no-repeat; background-position: right 12%;
+            background-size: auto 62%; background-repeat: no-repeat; background-position: right bottom;
             opacity: 1; z-index: 1;
         }
 
@@ -216,8 +216,8 @@
             }
         }
 
-        .hero-cta-bar { position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; }
-        .hero-cta-bar .cta-button { display: block; width: 100%; text-align: center; border-radius: 0; font-size: 1.25rem; padding: 1.4rem 2rem; }
+
+
         .hero-container { max-width: 880px; width: 100%; position: relative; z-index: 2; }
 
         .hero-badge {
@@ -1066,11 +1066,13 @@
 
             
 
+            <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'InitiateCheckout');">Quero dominar a perfumaria!</a>
+
             <p style="margin-top: 1.4rem; color: rgba(255,255,255,0.45); font-size: 0.87rem;">
                 Acesso imediato &nbsp;·&nbsp; Curso 100% online &nbsp;·&nbsp; Garantia de 7 dias
             </p>
         </div>
-    <div class="hero-cta-bar"><a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'InitiateCheckout');">Quero dominar a perfumaria!</a></div>
+
     </section>
 
     <div class="divider"></div>
