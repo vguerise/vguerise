@@ -179,12 +179,16 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute; inset: 0;
-            background-image: url('images/victor-hero.jpg');
-            background-size: cover; background-position: right bottom;
-            opacity: 1; z-index: 1;
+        .hero-photo {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            object-position: right bottom;
+            z-index: 1;
+            filter: grayscale(100%);
         }
 
         .hero::after {
@@ -202,9 +206,8 @@
                 min-height: 100svh;
                 max-height: none;
             }
-            .hero::before {
-                background-position: center center;
-                opacity: 0.3;
+            .hero-photo {
+                opacity: 0.25;
             }
             .hero::after {
                 background: none;
@@ -1024,6 +1027,7 @@
 
     <!-- HERO -->
     <section class="hero">
+        <img class="hero-photo" src="images/victor-hero.jpg" alt="">
         <div class="hero-grain"></div>
         <div class="hero-container">
             <div class="hero-badge">🎓 Curso em Vídeo &nbsp;·&nbsp; 3 Módulos &nbsp;·&nbsp; 11 Aulas &nbsp;·&nbsp; 🤖 App com I.A. Integrada</div>
