@@ -190,7 +190,7 @@
         .hero::after {
             content: '';
             position: absolute; inset: 0;
-            background: linear-gradient(to right, rgba(10,10,10,0.75) 20%, rgba(10,10,10,0.30) 55%, rgba(10,10,10,0.0) 100%);
+            background: linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,0.92) 38%, rgba(10,10,10,0.55) 54%, rgba(10,10,10,0.12) 70%, rgba(10,10,10,0) 84%);
             z-index: 1;
         }
 
@@ -1145,7 +1145,7 @@
                     <div class="pain-icon">❌</div>
                     <p class="pain-text">Gastar caro para cheirar bem</p>
                 </div>
-                <div class="pain-card" style="cursor:default; border-color:var(--orange); background:rgba(232,93,4,0.04); box-shadow: 0 6px 22px rgba(232,93,4,0.12);">
+                <div class="pain-card" style="cursor:default; border-color:#fdd; background:#fff8f8;">
                     <div class="pain-icon">✅</div>
                     <p class="pain-text"><strong>Você precisa saber o essencial</strong> — o que realmente importa antes de tirar o cartão do bolso.</p>
                 </div>
@@ -1459,21 +1459,26 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="testimonials-section">
+    <!-- TESTEMUNHOS -->
+    <section id="testemunhos" style="background:var(--black); border-top:1px solid rgba(255,255,255,0.05); padding:5rem 0;">
         <div class="container">
-            <span class="section-label">Prova social</span>
-            <h2 class="section-title">Homens que <em>Pararam de Errar</em></h2>
-            <p class="section-subtitle">Mais segurança ao comprar. Menos arrependimento. Escolhas mais inteligentes.</p>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card"><img src="images/depoimento-1.jpg" alt="Depoimento aluno" class="testimonial-image"><div class="testimonial-caption"><span class="t-verified">✓ Depoimento Real</span></div></div>
-                <div class="testimonial-card"><img src="images/depoimento-2.jpg" alt="Depoimento aluno" class="testimonial-image"><div class="testimonial-caption"><span class="t-verified">✓ Instagram Real</span></div></div>
-                <div class="testimonial-card"><img src="images/depoimento-3.jpg" alt="Depoimento aluno" class="testimonial-image"><div class="testimonial-caption"><span class="t-verified">✓ Depoimento Real</span></div></div>
+            <div class="testemunhos-header" style="text-align:center; margin-bottom:3.5rem;">
+                <span class="section-label">Quem já passou por aqui</span>
+                <h2 class="section-title">Palavras de quem<br><em>já viveu na prática</em></h2>
+            </div>
+            <div class="testemunhos-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; align-items:start;">
+                <div class="testemunho-card" style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; transition:transform 0.3s, border-color 0.3s;">
+                    <img src="images/depoimento-1.jpg" alt="Depoimento aluno" style="width:100%; display:block;">
+                </div>
+                <div class="testemunho-card" style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; transition:transform 0.3s, border-color 0.3s;">
+                    <img src="images/depoimento-2.jpg" alt="Depoimento aluno" style="width:100%; display:block;">
+                </div>
+                <div class="testemunho-card" style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; transition:transform 0.3s, border-color 0.3s;">
+                    <img src="images/depoimento-3.jpg" alt="Depoimento aluno" style="width:100%; display:block;">
+                </div>
             </div>
         </div>
     </section>
-
     <!-- FAQ -->
     <section class="faq-section">
         <div class="container">
