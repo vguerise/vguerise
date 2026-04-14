@@ -614,7 +614,7 @@
         .testemunho-card { background: #1E1E1E; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
         .testemunho-card:hover { transform: translateY(-5px); border-color: rgba(232,93,4,0.4); }
         .testemunho-img { width: 100%; display: block; }
-        @media (max-width: 860px) { .testemunhos-grid { grid-template-columns: 1fr; max-width: 380px; } }
+        @media (max-width: 860px) { .testemunhos-grid { grid-template-columns: 1fr; max-width: 100%; padding: 0 1.25rem; } }
 
         footer { background: var(--black); text-align: center; padding: 2.3rem 2rem; color: rgba(255,255,255,0.45); border-top: 1px solid rgba(255,255,255,0.05); }
         footer p + p { margin-top: 0.7rem; font-size: 0.87rem; }
@@ -1397,7 +1397,7 @@
                 <span class="section-label">Quem já passou por aqui</span>
                 <h2 class="section-title">Palavras de quem<br><em>já viveu na prática</em></h2>
             </div>
-            <div class="testemunhos-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; align-items:start;">
+            <div class="testemunhos-grid">
                 <div class="testemunho-card" style="background:#1E1E1E; border:1px solid rgba(255,255,255,0.06); border-radius:12px; overflow:hidden; transition:transform 0.3s, border-color 0.3s;">
                     <img src="images/testemunho-1.jpg" alt="Depoimento aluno" style="width:100%; display:block;">
                 </div>
