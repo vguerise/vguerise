@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -738,6 +738,41 @@
             line-height: 1.5;
         }
 
+        .preco-ancora {
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--gray-mid);
+            max-width: 520px;
+            margin: -0.5rem auto 2.5rem;
+            line-height: 1.65;
+        }
+        .preco-ancora strong {
+            color: var(--white);
+        }
+        .preco-lista {
+            list-style: none;
+            text-align: left;
+            margin: 1rem 0 0.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+        .preco-lista li {
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            line-height: 1.4;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .preco-lista li::before {
+            content: 'u2736';
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-size: 0.55rem;
+            top: 0.2rem;
+        }
+
         /* Form consultoria */
         .consultoria-form-outer {
             max-width: 640px;
@@ -1170,27 +1205,28 @@
 
         <!-- PREÇOS -->
         <p class="precos-titulo">Investimento</p>
+        <p class="preco-ancora">Um frasco de nicho custa em média <strong>R$800</strong>. A consultoria custa <strong>R$750</strong> — e garante que o próximo que você comprar vai ser certeiro.</p>
         <div class="precos-grid">
             <div class="preco-card">
                 <span class="preco-tag">Online</span>
                 <div class="preco-modalidade">Consultoria Online</div>
                 <div class="preco-local">Via videochamada · qualquer lugar do Brasil</div>
                 <div class="preco-valor"><sup>R$</sup>750</div>
-                <p class="preco-obs">Sessão individual completa com entrega do documento personalizado.</p>
+                <ul class="preco-lista"><li>Sessão individual via videochamada</li><li>Diagnóstico do seu perfil olfativo</li><li>Curadoria de 5 a 8 perfumes para o seu estilo</li><li>Guia escrito com ocasião, onde comprar e como usar</li><li>7 dias de suporte para dúvidas</li></ul>
             </div>
             <div class="preco-card destaque">
                 <span class="preco-tag">Presencial</span>
-                <div class="preco-modalidade">Consultoria Presencial</div>
+                <div class="preco-modalidade">Imersão Olfativa Presencial</div>
                 <div class="preco-local">Rio de Janeiro · RJ</div>
                 <div class="preco-valor"><sup>R$</sup>2.000</div>
-                <p class="preco-obs">Sessão presencial no Rio de Janeiro com experiência olfativa ao vivo.</p>
+                <ul class="preco-lista"><li>Sessão presencial de até 90 min no RJ</li><li>Você testa os perfumes na sua pele, em tempo real</li><li>Diagnóstico e curadoria ao vivo</li><li>Guia escrito entregue após a sessão</li><li>7 dias de suporte para dúvidas</li></ul><p class="preco-obs" style="margin-top:0.8rem;">O único jeito de ter certeza antes de comprar.</p>
             </div>
             <div class="preco-card">
                 <span class="preco-tag">Presencial Fora do RJ</span>
                 <div class="preco-modalidade">Fora do Rio de Janeiro</div>
                 <div class="preco-local">Outras cidades · sob orçamento</div>
                 <div class="preco-valor" style="font-size:1.4rem; padding-top:0.3rem;">Sob consulta</div>
-                <p class="preco-obs">R$2.000 + custos de deslocamento e hospedagem. Solicite orçamento.</p>
+                <p class="preco-obs">A partir de R$2.000 + custos de deslocamento e hospedagem. Solicite orçamento.</p>
             </div>
         </div>
 
