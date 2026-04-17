@@ -571,8 +571,8 @@
 
         /* ABOUT */
         .about-section { background: white; }
-        .about-container { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center; max-width: 960px; margin: 3rem auto 0; }
-        .about-image { width: 100%; max-width: 330px; border-radius: 14px; box-shadow: 0 18px 55px rgba(0,0,0,0.1); display: block; margin: 0 auto; }
+        .about-container { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1100px; margin: 3rem auto 0; }
+        .about-image { width: 100%; border-radius: 6px; display: block; object-fit: cover; aspect-ratio: 4/5; }
         .about-content { font-size: 1.08rem; line-height: 1.8; color: #FFFFFF; }
         .about-content p { margin-bottom: 1.2rem; }
         .about-content strong { color: var(--black); font-weight: 700; }
@@ -1064,7 +1064,8 @@
             .hero-badge { justify-content: flex-start; }
         }
         /* === FONT SIZE: non-title +2 sizes === */
-        body p, .intro-text, .about-content p { font-size: 1.25rem !important; line-height: 1.85 !important; }
+        body p, .intro-text { font-size: 1.25rem !important; line-height: 1.85 !important; }
+        .about-content p { font-size: 1.05rem !important; line-height: 1.85 !important; }
         .lesson-item { font-size: 1.2rem !important; }
         .lesson-subitem { font-size: 1.1rem !important; }
         .faq-answer { font-size: 1.2rem !important; }
@@ -1243,18 +1244,21 @@
     <!-- ABOUT -->
     <section class="about-section">
         <div class="container">
-            <h2 class="section-title">Conheça seu professor:</h2>
+            <h2 class="section-title">Conheça <em>seu Professor</em>:</h2>
 
             <div class="about-container">
                 <div>
                     <img src="images/victor-guerise.jpg" alt="Victor Guerise" class="about-image">
                 </div>
-                <div class="about-content">
-                    <p>Me chamo Victor Guerise. Internacionalista de formação, aprendi cedo que imagem comunica antes de qualquer palavra — e passei anos refinando cada detalhe da minha apresentação.</p>
-                    <p>Em 2022, ganhei um perfume de presente quase por acidente. O Vibrant Leather da Zara. Os elogios vieram — um, dois, três. Na semana seguinte, me perguntaram qual era. Aquilo ficou na minha mente.</p>
-                    <p>Entrei fundo na perfumaria: testei centenas de fragrâncias, errei caro, estudei o que ninguém ensina. E percebi que a maioria dos homens não erra por falta de dinheiro — <strong>erra por falta de base.</strong></p>
-                    <p>Investi mais de R$ 100 mil e anos aprendendo o que coloquei em horas de aula. O Curso Prático da Perfumaria existe para você não precisar fazer esse caminho. <strong>Você aprende em horas o que me custou anos.</strong></p>
-                    <p class="about-signature">"O perfume certo muda como as pessoas te percebem. Esse curso te dá essa base."</p>
+                    <p>Me chamo Victor Guerise. Internacionalista de formação e desde sempre na área comercial, aprendi cedo que a imagem comunica antes de qualquer palavra. Mas mesmo assim, ainda tinha algo que faltava.</p>
+                    <p>Me sentia ignorado, mesmo usando as melhores roupas que eu podia comprar.</p>
+                    <p>Até que, em 2022, ganhei um perfume de presente: Vibrant Leather, da Zara.</p>
+                    <p>Comecei usando por educação, sem prestar muita atenção, até que os elogios vieram — um, dois, três.</p>
+                    <p>Na semana seguinte, me perguntaram qual era e aquilo ficou na minha mente.</p>
+                    <p>Decidi entrar fundo na perfumaria: testei centenas de fragrâncias, errei caro, estudei o que ninguém ensina e no meio do caminho, percebi que a maioria dos homens não erra por falta de dinheiro — erra por falta de base.</p>
+                    <p>Investi mais de R$ 100 mil e anos aprendendo o que coloquei em horas de aula.</p>
+                    <p>O Curso Prático da Perfumaria existe para você não precisar fazer esse caminho. Você aprende em horas o que me custou anos.</p>
+                    <p class="about-signature">“O perfume certo muda não só o seu cheiro, mas a sua imagem.”</p>
                     <p style="margin-top:1.3rem; font-weight:700; color:var(--white);">— Victor Guerise</p>
                 </div>
             </div>
