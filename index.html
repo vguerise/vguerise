@@ -286,11 +286,12 @@
 
         .hero-stats {
             display: flex;
-            gap: 2.5rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
+            gap: 2rem;
+            padding-top: 1.25rem;
             border-top: 1px solid rgba(255,255,255,0.08);
+            width: 100%;
         }
+
 
         .stat-item {}
 
@@ -312,10 +313,10 @@
         }
 
         .hero-visual {
-            position: relative;
             display: flex;
-            justify-content: center;
-            align-items: flex-end;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
         }
 
         .hero-photo-wrap {
@@ -1098,10 +1099,10 @@
                     <img src="images/victor-hero.jpg" alt="Victor Guerise" class="hero-photo"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="hero-photo-placeholder" style="display:none;">Sua foto aqui</div>
-                </div>
-                <div class="hero-card">
-                    <div class="hero-card-label">Último lançamento</div>
-                    <div class="hero-card-value">Curso Prático da Perfumaria</div>
+                    <div class="hero-card">
+                        <div class="hero-card-label">Último lançamento</div>
+                        <div class="hero-card-value">Curso Prático da Perfumaria</div>
+                    </div>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -1117,6 +1118,7 @@
                         <div class="stat-label">Alunos</div>
                     </div>
                 </div>
+            </div>
             </div>
 </section>
 
