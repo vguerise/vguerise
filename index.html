@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿﻿﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +18,7 @@
             --orange-light: #F48C06;
             --orange-dark: #C14B00;
             --orange-glow: rgba(232, 93, 4, 0.15);
-            --black: #0D0D0D;
+            --black: #0A0909;
             --black-soft: #141414;
             --charcoal: #1E1E1E;
             --gray-dark: #2A2A2A;
@@ -39,7 +39,7 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             line-height: 1.15;
         }
 
@@ -218,6 +218,15 @@
             color: var(--orange);
         }
 
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray-light);
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+
         .hero-desc {
             font-size: 1.1rem;
             color: var(--gray-light);
@@ -277,16 +286,17 @@
 
         .hero-stats {
             display: flex;
-            gap: 2.5rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
+            gap: 2rem;
+            padding-top: 1.25rem;
             border-top: 1px solid rgba(255,255,255,0.08);
+            width: 100%;
         }
+
 
         .stat-item {}
 
         .stat-number {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
             font-weight: 900;
             color: var(--orange);
@@ -303,11 +313,12 @@
         }
 
         .hero-visual {
-            position: relative;
             display: flex;
-            justify-content: center;
-            align-items: flex-end;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
         }
+
 
         .hero-photo-wrap {
             position: relative;
@@ -373,7 +384,7 @@
         }
 
         .hero-card-value {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
             font-weight: 800;
             color: var(--white);
@@ -464,7 +475,7 @@
         }
 
         .pillar-title {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 0.85rem;
             font-weight: 800;
             color: var(--white);
@@ -628,7 +639,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
             font-weight: 900;
             color: var(--orange);
@@ -636,7 +647,7 @@
         }
 
         .passo-title {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 0.85rem;
             font-weight: 800;
             text-transform: uppercase;
@@ -654,7 +665,7 @@
         /* Preços */
         .precos-titulo {
             text-align: center;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
             font-weight: 800;
             text-transform: uppercase;
@@ -703,7 +714,7 @@
         }
 
         .preco-modalidade {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
             font-weight: 800;
             color: var(--white);
@@ -717,7 +728,7 @@
         }
 
         .preco-valor {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             font-weight: 900;
             color: var(--orange);
@@ -738,6 +749,41 @@
             line-height: 1.5;
         }
 
+        .preco-ancora {
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--gray-mid);
+            max-width: 520px;
+            margin: -0.5rem auto 2.5rem;
+            line-height: 1.65;
+        }
+        .preco-ancora strong {
+            color: var(--white);
+        }
+        .preco-lista {
+            list-style: none;
+            text-align: left;
+            margin: 1rem 0 0.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+        .preco-lista li {
+            font-size: 0.78rem;
+            color: var(--gray-mid);
+            line-height: 1.4;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .preco-lista li::before {
+            content: '✶';
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-size: 0.55rem;
+            top: 0.2rem;
+        }
+
         /* Form consultoria */
         .consultoria-form-outer {
             max-width: 640px;
@@ -752,7 +798,7 @@
         }
 
         .form-title {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
@@ -923,7 +969,7 @@
         }
 
         .footer-logo {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 900;
             font-size: 1.1rem;
             color: var(--white);
@@ -993,15 +1039,27 @@
             .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
         }
     </style>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W8W2QNJ6');</script>
+    <!-- End Google Tag Manager -->
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8W2QNJ6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
 <!-- NAVBAR -->
 <nav id="navbar">
     <div class="nav-inner">
         <ul class="nav-links" id="navLinks">
             <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="/curso">Curso</a></li>
+            <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
             <li><a href="#consultoria">Consultoria</a></li>
             <li><a href="#contato">Contato</a></li>
             <li><a href="#consultoria" class="nav-cta">Fale Comigo</a></li>
@@ -1023,20 +1081,25 @@
                     <span>Perfumaria Masculina</span>
                 </div>
                 <h1 class="hero-title">
-                    Perfume é o catalisador<br>
-                    <em>da sua imagem</em> —<br>
-                    só que quase ninguém<br>
-                    sabe usar isso a favor.
+                    O que você não vê<br>
+                    é o que te torna <em>inesquecível</em>
                 </h1>
+                <p class="hero-subtitle">Consultoria Olfativa para homens que entendem o valor da sua imagem</p>
                 <div class="hero-actions">
-                    <a href="#produtos" class="btn-primary">
-                        Ver Produtos
+                    <a href="#consultoria" class="btn-primary">
+                        Quero Consultoria
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
-                    <a href="#consultoria" class="btn-ghost">Quero Consultoria</a>
                 </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-photo-wrap">
+                    <img src="images/victor-hero.jpg" alt="Victor Guerise" class="hero-photo"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hero-photo-placeholder" style="display:none;">Sua foto aqui</div>
                 <div class="hero-stats">
                     <div class="stat-item">
                         <div class="stat-number">+16K</div>
@@ -1052,20 +1115,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="hero-visual">
-                <div class="hero-photo-wrap">
-                    <img src="images/victor-hero.jpg" alt="Victor Guerise" class="hero-photo"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="hero-photo-placeholder" style="display:none;">Sua foto aqui</div>
-                </div>
-                <div class="hero-card">
-                    <div class="hero-card-label">Último lançamento</div>
-                    <div class="hero-card-value">Curso Prático da Perfumaria</div>
-                </div>
             </div>
-        </div>
-    </div>
 </section>
 
 <!-- SOBRE -->
@@ -1079,46 +1129,32 @@
                 <div class="sobre-img-placeholder" style="display:none;">Sua foto aqui</div>
             </div>
             <div class="sobre-content">
+            <div class="sobre-content">
                 <span class="badge">Sobre mim</span>
                 <h2 class="section-title" style="text-align:left;">
-                    O que não se vê<br>
-                    é o que <em>ninguém esquece</em>
+                    Prazer, <em>Victor Guerise</em>
                 </h2>
                 <p class="sobre-text">
-                    Sou do comercial — e quem trabalha com vendas aprende cedo que imagem comunica antes da primeira palavra. Cuidava de tudo: roupa, corte, postura. Achei que estava completo.
+                    Me chamo Victor, internacionalista de formação e trabalho com clientes high profile desde o início da carreira.
                 </p>
                 <p class="sobre-text">
-                    Tudo mudou quando ganhei um perfume de presente. No mesmo dia, me perguntaram qual era. No dia seguinte, de novo. Dias depois, alguém ainda lembrava. Ali entendi o que estava faltando.
+                    E com eles, aprendi desde cedo algo que nunca mais esqueci: a imagem comunica antes da primeira palavra.
                 </p>
                 <p class="sobre-text">
-                    O começo foi uma bagunça. Gastei dinheiro em perfumes indicados que não gostei. Usava o mesmo pra tudo sem saber que cada ocasião pede uma escolha diferente. A partir de 2022, parei de comprar no impulso e comecei a estudar de verdade.
+                    Isso me levou a ter muito cuidado com a minha imagem, mas ainda sim, faltava algo que eu não sabia o que era. E foi por acidente, em 2022, que esbarrei na perfumaria. Ganhei um perfume de presente e passei a usá-lo, sem pretensão, por educação até.
                 </p>
                 <p class="sobre-text">
-                    Hoje ajudo homens a entender, escolher e usar perfume com propósito — sem precisar errar tanto quanto eu errei.
+                    E aí, o primeiro elogio veio. E o segundo. E na semana seguinte me perguntaram dele. O perfume? Vibrant Leather, da Zara.
                 </p>
-                <div class="sobre-pillars">
-                    <div class="pillar">
-                        <div class="pillar-icon">🎓</div>
-                        <div class="pillar-title">Educação</div>
-                        <div class="pillar-desc">Conteúdo que ensina do absoluto zero ao colecionador avançado.</div>
-                    </div>
-                    <div class="pillar">
-                        <div class="pillar-icon">🧪</div>
-                        <div class="pillar-title">Curadoria</div>
-                        <div class="pillar-desc">Reviews e comparações honestas baseadas em uso real.</div>
-                    </div>
-                    <div class="pillar">
-                        <div class="pillar-icon">🗺️</div>
-                        <div class="pillar-title">Ferramentas</div>
-                        <div class="pillar-desc">Recursos práticos para organizar e descobrir novos perfumes.</div>
-                    </div>
-                    <div class="pillar">
-                        <div class="pillar-icon">🤝</div>
-                        <div class="pillar-title">Consultoria</div>
-                        <div class="pillar-desc">Orientação pessoal para montar sua coleção do jeito certo.</div>
-                    </div>
-                </div>
-            </div>
+                <p class="sobre-text">
+                    Isso ficou na minha mente e depois daí, não tive como fugir e entrei no mundo da perfumaria e descobri o que todos deveriam saber: a fragrância certa muda a percepção que as pessoas têm de você antes mesmo de você abrir a boca.
+                </p>
+                <p class="sobre-text">
+                    Estudei a fundo, errei caro, e desde 2022 ajudo homens a usar perfume como instrumento de imagem — para transmitir autoridade, presença e intenção em qualquer ambiente.
+                </p>
+                <p class="sobre-text">
+                    Se você, assim como eu, entende o valor da sua imagem, quer uma coleção que representa quem você é e está pronto para usar a perfumaria a seu favor — veio ao lugar certo.
+                </p>
         </div>
     </div>
 </section>
@@ -1159,27 +1195,28 @@
 
         <!-- PREÇOS -->
         <p class="precos-titulo">Investimento</p>
+        <p class="preco-ancora">Um frasco de perfume de nicho pode custar milhares de reais. A consultoria garante que o próximo que você comprar vai ser o certo.</p>
         <div class="precos-grid">
             <div class="preco-card">
                 <span class="preco-tag">Online</span>
-                <div class="preco-modalidade">Consultoria Online</div>
+                <div class="preco-modalidade">Mapeamento Olfativo Online</div>
                 <div class="preco-local">Via videochamada · qualquer lugar do Brasil</div>
-                <div class="preco-valor"><sup>R$</sup>1.000</div>
-                <p class="preco-obs">Sessão individual completa com entrega do documento personalizado.</p>
+                <div class="preco-valor"><sup>R$</sup>750</div>
+                <ul class="preco-lista"><li>Sessão individual via videochamada</li><li>Diagnóstico do seu perfil olfativo</li><li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li><li>Guia escrito com ocasião, onde comprar e como usar</li><li>Suporte para tirar dúvidas</li></ul>
             </div>
             <div class="preco-card destaque">
                 <span class="preco-tag">Presencial</span>
-                <div class="preco-modalidade">Consultoria Presencial</div>
+                <div class="preco-modalidade">Imersão Olfativa Presencial</div>
                 <div class="preco-local">Rio de Janeiro · RJ</div>
-                <div class="preco-valor"><sup>R$</sup>3.000</div>
-                <p class="preco-obs">Sessão presencial no Rio de Janeiro com experiência olfativa ao vivo.</p>
+                <div class="preco-valor" style="font-size:1.15rem; letter-spacing:0.5px;">Solicite valor</div>
+                <ul class="preco-lista"><li>Sessão presencial de até 90 min no RJ</li><li>Você descobre as notas que gosta em tempo real</li><li>Diagnóstico e curadoria ao vivo</li><li>Guia escrito entregue após a sessão</li><li>Suporte para tirar dúvidas</li><li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li></ul>
             </div>
             <div class="preco-card">
                 <span class="preco-tag">Presencial Fora do RJ</span>
                 <div class="preco-modalidade">Fora do Rio de Janeiro</div>
                 <div class="preco-local">Outras cidades · sob orçamento</div>
                 <div class="preco-valor" style="font-size:1.4rem; padding-top:0.3rem;">Sob consulta</div>
-                <p class="preco-obs">R$3.000 + custos de deslocamento e hospedagem. Solicite orçamento.</p>
+                <p class="preco-obs">Custos de deslocamento e hospedagem incluídos. Solicite orçamento.</p>
             </div>
         </div>
 
@@ -1201,8 +1238,8 @@
                         <label class="form-label">Modalidade de interesse</label>
                         <select class="form-select form-input">
                             <option value="">Selecione</option>
-                            <option>Online — R$600</option>
-                            <option>Presencial — Rio de Janeiro (R$1.000)</option>
+                            <option>Online — R$750</option>
+                            <option>Presencial — Rio de Janeiro (sob consulta)</option>
                             <option>Presencial — Fora do Rio (sob consulta)</option>
                         </select>
                     </div>
@@ -1216,52 +1253,6 @@
             </div>
         </div>
 
-    </div>
-</section>
-
-<!-- PRODUTOS -->
-<section id="produtos">
-    <div class="container">
-        <div class="produtos-header">
-            <span class="badge">O que eu criei</span>
-            <h2 class="section-title">Produtos para quem<br><em>leva perfume a sério</em></h2>
-            <p class="section-subtitle" style="margin: 0 auto;">Do aprendizado à descoberta — cada produto foi criado para resolver uma dor real de quem quer entender perfumaria.</p>
-        </div>
-        <div class="produtos-grid">
-
-            <!-- CARD 1: Curso -->
-            <a href="/curso" class="produto-card">
-                <img src="images/curso-card.png" alt="Curso Prático da Perfumaria" class="produto-card-img">
-                <div class="produto-card-body">
-                    <span class="produto-tag">Curso Online</span>
-                    <div class="produto-title">Curso Prático da Perfumaria</div>
-                    <p class="produto-desc">Do absoluto zero ao colecionador consciente. 3 módulos, 11 aulas — aprenda a entender famílias olfativas, durabilidade, aplicação e como montar sua coleção sem desperdício.</p>
-                    <span class="produto-cta">
-                        Conhecer o curso
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                </div>
-            </a>
-
-            <!-- CARD 2: Perfumap -->
-            <a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank" class="produto-card">
-                <img src="images/perfumap-card.png" alt="Perfumap" class="produto-card-img">
-                <div class="produto-card-body">
-                    <span class="produto-tag">Ferramenta Digital</span>
-                    <div class="produto-title">Perfumap</div>
-                    <p class="produto-desc">A ferramenta para mapear, organizar e descobrir sua jornada olfativa. Registre sua coleção, descubra novos perfumes por família e saiba exatamente o que faz sentido para o seu estilo.</p>
-                    <span class="produto-cta">
-                        Conhecer o Perfumap
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                </div>
-            </a>
-
-        </div>
     </div>
 </section>
 
@@ -1282,6 +1273,15 @@
             <div class="testemunho-card">
                 <img src="images/testemunho-3.jpg" alt="Depoimento de aluno" class="testemunho-img">
             </div>
+            <div class="testemunho-card">
+                <img src="images/testemunho-4.jpg" alt="Depoimento de aluno" class="testemunho-img">
+            </div>
+            <div class="testemunho-card">
+                <img src="images/testemunho-5.jpg" alt="Depoimento de aluno" class="testemunho-img">
+            </div>
+            <div class="testemunho-card">
+                <img src="images/testemunho-6.jpg" alt="Depoimento de aluno" class="testemunho-img">
+            </div>
         </div>
     </div>
 </section>
@@ -1291,8 +1291,8 @@
     <div class="container">
         <div class="contato-inner">
             <span class="badge">Redes & Contato</span>
-            <h2 class="section-title">Me encontre<br><em>por aí</em></h2>
-            <p class="section-subtitle" style="margin: 0 auto 1rem;">Conteúdo sobre perfumaria masculina no Instagram e TikTok. Dúvidas rápidas pelo Instagram mesmo.</p>
+            <h2 class="section-title">Me encontre</h2>
+            <p class="section-subtitle" style="margin: 0 auto 1rem;">Conteúdo sobre perfumaria masculina no Instagram e TikTok.</p>
             <div class="contato-links">
                 <a href="https://instagram.com/vguerise" target="_blank" class="contato-link">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1308,12 +1308,12 @@
                     </svg>
                     @vguerise
                 </a>
-                <a href="mailto:contato@vguerise.com.br" class="contato-link">
+                <a href="mailto:vguerise@gmail.com" class="contato-link">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2"/>
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                     </svg>
-                    contato@vguerise.com.br
+                    vguerise@gmail.com
                 </a>
             </div>
         </div>

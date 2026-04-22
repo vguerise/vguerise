@@ -36,7 +36,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,14 +46,14 @@
             --orange-light: #F48C06;
             --orange-dark: #C14B00;
             --orange-muted: rgba(232, 93, 4, 0.1);
-            --black: #111111;
+            --black: #0A0909;
             --black-soft: #1A1A1A;
             --charcoal: #2D2D2D;
             --gray-dark: #444444;
             --gray-mid: #777777;
             --gray-light: #E8E8E8;
             --white: #FFFFFF;
-            --off-white: #F8F8F8;
+            --off-white: #141414;
             --success: #2A9D5C;
             --danger: #D62828;
         }
@@ -61,14 +61,14 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'DM Sans', sans-serif;
             background: var(--white);
             color: var(--black);
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.2; }
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; line-height: 1.2; }
 
         .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
         section { padding: 5.5rem 0; }
@@ -97,7 +97,7 @@
         .section-subtitle {
             text-align: center;
             font-size: 1.1rem;
-            color: var(--gray-mid);
+            color: #FFFFFF;
             margin-bottom: 3rem;
             max-width: 660px;
             margin-left: auto;
@@ -183,22 +183,15 @@
             content: '';
             position: absolute; inset: 0;
             background-image: url('images/victor-hero.jpg');
-            background-size: cover; background-position: 65% top;
+            background-size: 50% auto; background-position: right center; background-repeat: no-repeat;
             opacity: 1; z-index: 1;
         }
 
         .hero::after {
             content: '';
             position: absolute; inset: 0;
-            background: linear-gradient(to right, rgba(10,10,10,0.75) 20%, rgba(10,10,10,0.30) 55%, rgba(10,10,10,0.0) 100%);
+            background: linear-gradient(to right, rgb(17,17,17) 0%, rgb(17,17,17) 44%, rgba(17,17,17,0) 65%);
             z-index: 1;
-        }
-
-        @media (min-width: 1600px) {
-            .hero::before {
-                background-size: 50% auto;
-                background-position: right 9%;
-            }
         }
 
         @media (max-width: 768px) {
@@ -208,12 +201,12 @@
                 max-height: none;
             }
             .hero::before {
-                background-position: 80% center;
+                background-size: cover;
+                background-position: center center;
                 opacity: 0.35;
+    
             }
-            .hero::after {
-                background: linear-gradient(to bottom, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.75) 60%, rgba(10,10,10,0.92) 100%);
-            }
+            .hero::after { background: none; }
         }
 
         .hero-container { max-width: 880px; width: 100%; position: relative; z-index: 2; }
@@ -241,12 +234,12 @@
         }
 
         .hero-question-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .hero-question-text { font-size: 1rem; color: rgba(255,255,255,0.82); line-height: 1.5; font-weight: 500; }
+        .hero-question-text { font-size: 1rem; color: rgba(255,255,255,1); line-height: 1.5; font-weight: 500; }
 
         .hero-headline {
             font-size: clamp(1.9rem, 4.5vw, 3rem);
             font-weight: 700;
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Cormorant Garamond', serif;
             color: var(--white);
             line-height: 1.28;
             margin-bottom: 1.5rem;
@@ -256,7 +249,7 @@
 
         .hero-subheadline {
             font-size: clamp(1.05rem, 2vw, 1.3rem);
-            color: rgba(255,255,255,0.68);
+            color: rgba(255,255,255,1);
             line-height: 1.6;
             margin-bottom: 2.5rem;
         }
@@ -269,7 +262,7 @@
             display: flex; align-items: flex-start; gap: 1rem;
             margin-bottom: 0.9rem;
             font-size: 1rem;
-            color: rgba(255,255,255,0.82);
+            color: rgba(255,255,255,1);
             line-height: 1.5; text-align: left;
         }
 
@@ -305,15 +298,15 @@
         .intro-hook {
             font-size: clamp(1.3rem, 2.5vw, 1.75rem);
             color: var(--black);
-            font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
             margin-bottom: 1.5rem; text-align: center;
         }
 
         .intro-hook strong { color: var(--orange); }
-        .intro-text { font-size: 1.08rem; color: var(--gray-dark); line-height: 1.8; margin-bottom: 1.1rem; }
+        .intro-text { font-size: 1.08rem; color: #FFFFFF; line-height: 1.8; margin-bottom: 1.1rem; }
         .intro-text strong { color: var(--black); font-weight: 700; }
-        .intro-cta-line { font-size: 1.5rem; font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 700; text-align: center; color: var(--orange); margin-top: 1.8rem; font-style: italic; }
+        .intro-cta-line { font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 700; text-align: center; color: var(--orange); margin-top: 1.8rem; font-style: italic; }
 
         /* PAIN */
         .pain-section { background: var(--white); }
@@ -342,7 +335,7 @@
 
         .pain-checkbox { display: none; }
 
-        .pain-text { font-size: 0.98rem; color: var(--charcoal); line-height: 1.5; }
+        .pain-text { font-size: 0.98rem; color: #FFFFFF; line-height: 1.5; }
 
         @media (max-width: 768px) {
             .pain-grid { grid-template-columns: 1fr; gap: 0.9rem; max-width: 480px; }
@@ -373,7 +366,7 @@
         .ba-col.before .ba-title { color: var(--danger); }
         .ba-col.after .ba-title { color: var(--success); }
 
-        .ba-item { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.9rem; font-size: 0.98rem; line-height: 1.5; color: var(--charcoal); }
+        .ba-item { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.9rem; font-size: 0.98rem; line-height: 1.5; color: #FFFFFF; }
         .ba-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
         .ba-icon.cross { color: var(--danger); }
         .ba-icon.check { color: var(--success); }
@@ -381,7 +374,7 @@
         /* SOLUTION */
         .solution-section { background: var(--black); }
         .solution-section .section-title { color: white; }
-        .solution-section .section-subtitle { color: rgba(255,255,255,0.58); }
+        .solution-section .section-subtitle { color: rgba(255,255,255,1); }
 
         .course-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); gap: 1.4rem; margin: 3rem 0; }
 
@@ -398,9 +391,9 @@
         .feature-card:hover { transform: translateY(-4px); border-color: rgba(232,93,4,0.35); box-shadow: 0 10px 30px rgba(232,93,4,0.15); }
 
         .feature-icon { font-size: 1.1rem; color: var(--success); font-weight: 900; flex-shrink: 0; margin-top: 0.1rem; }
-        .feature-title { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif; font-size: 1.05rem; margin-bottom: 0.5rem; color: white; font-weight: 700; }
+        .feature-title { font-family: 'DM Sans', sans-serif; font-size: 1.05rem; margin-bottom: 0.5rem; color: white; font-weight: 700; }
         .feature-header { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.6rem; }
-        .feature-description { color: rgba(255,255,255,0.58); font-size: 0.95rem; line-height: 1.6; padding-left: 1.7rem; }
+        .feature-description { color: rgba(255,255,255,1); font-size: 0.95rem; line-height: 1.6; padding-left: 1.7rem; }
 
         /* MODULES */
         .modules-section { background: var(--white); }
@@ -411,7 +404,7 @@
 
         .module-header { background: var(--black); padding: 1.4rem 2rem; display: flex; align-items: center; gap: 1.3rem; }
 
-        .module-num { background: var(--orange); color: white; font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1.5rem; font-weight: 900; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .module-num { background: var(--orange); color: white; font-family: 'DM Sans', sans-serif; font-size: 1.5rem; font-weight: 900; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
         .module-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.25rem; }
         .module-title { font-family: 'DM Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: white; }
@@ -420,11 +413,11 @@
 
         .lesson-list { list-style: none; display: grid; gap: 1.1rem; }
 
-        .lesson-item { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 1rem; color: var(--charcoal); line-height: 1.5; }
+        .lesson-item { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 1rem; color: #FFFFFF; line-height: 1.5; }
         .lesson-icon { color: var(--orange); font-size: 1rem; flex-shrink: 0; margin-top: 0.2rem; }
 
         .lesson-subitems { list-style: none; padding-left: 1.8rem; margin-top: 0.4rem; display: grid; gap: 0.3rem; }
-        .lesson-subitem { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.92rem; color: var(--gray-mid); line-height: 1.4; }
+        .lesson-subitem { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.92rem; color: #FFFFFF; line-height: 1.4; }
         .lesson-subitem::before { content: '·'; color: var(--orange); font-weight: 900; flex-shrink: 0; }
 
         /* HIGHLIGHTS */
@@ -442,7 +435,7 @@
 
         .highlights-title { font-family: 'DM Sans', sans-serif; font-size: 1.45rem; font-weight: 800; color: white; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.7rem; }
 
-        .highlights-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.3rem; font-size: 1.02rem; color: rgba(255,255,255,0.82); line-height: 1.6; }
+        .highlights-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.3rem; font-size: 1.02rem; color: rgba(255,255,255,1); line-height: 1.6; }
         .highlights-item-icon { color: var(--orange); font-size: 1.2rem; flex-shrink: 0; margin-top: 0.15rem; }
         .highlights-item strong { color: white; }
 
@@ -456,7 +449,7 @@
         .why-card { background: white; padding: 2.5rem; border-radius: 12px; border-left: 5px solid var(--orange); box-shadow: 0 4px 18px rgba(0,0,0,0.05); }
         .why-card-title { display: flex; align-items: center; gap: 0.8rem; font-family: 'DM Sans', sans-serif; font-size: 1.35rem; font-weight: 800; margin-bottom: 1.1rem; color: var(--black); }
         .why-card-icon { font-size: 1.7rem; }
-        .why-card-content { font-size: 1.03rem; line-height: 1.7; color: var(--gray-dark); }
+        .why-card-content { font-size: 1.03rem; line-height: 1.7; color: #FFFFFF; }
         .why-card-content strong { color: var(--black); }
         .why-list { list-style: none; margin-top: 0.9rem; display: grid; gap: 0.7rem; }
         .why-list-item { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.98rem; }
@@ -497,7 +490,7 @@
             margin-bottom: 1.2rem; margin-top: 0.4rem;
         }
         .comparison-card-title-green { color: var(--success); }
-        .comparison-card-title-gray { color: var(--gray-mid); }
+        .comparison-card-title-gray { color: #FFFFFF; }
         @media (max-width: 768px) {
             .comparison-cards-grid {
                 grid-template-columns: 1fr;
@@ -517,7 +510,7 @@
         .comparison-title.fake { color: var(--danger); }
         .comparison-title.real { color: var(--success); }
 
-        .comparison-item { display: flex; align-items: flex-start; margin-bottom: 1.1rem; font-size: 0.98rem; line-height: 1.5; color: var(--charcoal); }
+        .comparison-item { display: flex; align-items: flex-start; margin-bottom: 1.1rem; font-size: 0.98rem; line-height: 1.5; color: #FFFFFF; }
         .comparison-icon { margin-right: 0.9rem; font-size: 1.2rem; flex-shrink: 0; }
         .comparison-icon.cross { color: var(--danger); }
         .comparison-icon.check { color: var(--success); }
@@ -528,33 +521,33 @@
         .countdown-timer { display: flex; justify-content: center; gap: 1rem; }
         .countdown-item { background: rgba(255,255,255,0.15); padding: 0.85rem 1.3rem; border-radius: 8px; min-width: 72px; }
         .countdown-number { font-size: 2.3rem; font-weight: 800; color: white; line-height: 1; font-family: 'Courier New', monospace; }
-        .countdown-label { font-size: 0.68rem; color: rgba(255,255,255,0.85); text-transform: uppercase; margin-top: 0.25rem; font-weight: 600; }
+        .countdown-label { font-size: 0.68rem; color: #FFFFFF; text-transform: uppercase; margin-top: 0.25rem; font-weight: 600; }
 
         /* PRICE */
         .price-section { background: var(--off-white); text-align: center; }
         .price-questions { max-width: 660px; margin: 0 auto 3rem; }
-        .price-question { font-size: 1.15rem; margin-bottom: 0.7rem; color: var(--gray-mid); font-style: italic; }
-        .price-reality { font-size: 1.2rem; margin: 2rem 0; color: var(--charcoal); line-height: 1.7; }
+        .price-question { font-size: 1.15rem; margin-bottom: 0.7rem; color: #FFFFFF; font-style: italic; }
+        .price-reality { font-size: 1.2rem; margin: 2rem 0; color: #FFFFFF; line-height: 1.7; }
         .price-reality strong { color: var(--black); }
 
         .price-box { background: white; border: 3px solid var(--orange); border-radius: 20px; padding: 3rem; max-width: 560px; margin: 3rem auto; box-shadow: 0 18px 55px rgba(232,93,4,0.1); }
 
         .price-fire { font-size: 2.3rem; margin-bottom: 0.7rem; }
-        .price-value { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 3.5rem; color: var(--orange); font-weight: 900; margin-bottom: 0.4rem; line-height: 1; }
-        .price-period { font-size: 1.05rem; color: var(--gray-mid); margin-bottom: 1.4rem; }
-        .price-comparison { font-size: 1.02rem; color: var(--gray-dark); margin-bottom: 1.4rem; padding: 1.1rem; background: var(--off-white); border-radius: 10px; line-height: 1.7; }
+        .price-value { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: var(--orange); font-weight: 900; margin-bottom: 0.4rem; line-height: 1; }
+        .price-period { font-size: 1.05rem; color: #FFFFFF; margin-bottom: 1.4rem; }
+        .price-comparison { font-size: 1.02rem; color: #FFFFFF; margin-bottom: 1.4rem; padding: 1.1rem; background: var(--off-white); border-radius: 10px; line-height: 1.7; }
         .price-comparison strong { color: var(--black); }
         .price-savings { font-size: 1.2rem; color: var(--success); font-weight: 700; margin-bottom: 1.4rem; }
 
         .trust-badges { display: flex; justify-content: center; align-items: center; gap: 1.3rem; margin: 1.8rem 0; flex-wrap: wrap; }
         .trust-badge { display: flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.2rem; background: var(--off-white); border-radius: 8px; border: 1px solid var(--gray-light); }
         .trust-badge-icon { font-size: 1.9rem; }
-        .trust-badge-text { font-size: 0.82rem; color: var(--gray-mid); line-height: 1.4; }
+        .trust-badge-text { font-size: 0.82rem; color: #FFFFFF; line-height: 1.4; }
         .trust-badge-text strong { display: block; color: var(--black); font-weight: 700; }
 
         .guarantee { margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px solid var(--gray-light); }
         .guarantee-badge { display: inline-block; background: var(--success); color: white; padding: 0.65rem 1.5rem; border-radius: 5px; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.7rem; }
-        .guarantee-text { color: var(--gray-mid); font-size: 0.92rem; }
+        .guarantee-text { color: #FFFFFF; font-size: 0.92rem; }
 
         /* TESTIMONIALS */
         .testimonials-section { background: white; }
@@ -562,7 +555,7 @@
         .testimonial-card { border-radius: 12px; overflow: hidden; border: 2px solid var(--gray-light); transition: all 0.3s; }
         .testimonial-card:hover { border-color: var(--orange); box-shadow: 0 7px 28px rgba(232,93,4,0.1); transform: translateY(-3px); }
         .testimonial-image { width: 100%; height: auto; display: block; }
-        .testimonial-caption { padding: 0.85rem 1.2rem; background: white; text-align: center; font-size: 0.87rem; color: var(--gray-mid); font-weight: 600; }
+        .testimonial-caption { padding: 0.85rem 1.2rem; background: white; text-align: center; font-size: 0.87rem; color: #FFFFFF; font-weight: 600; }
         .t-verified { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--success); }
 
         /* FAQ */
@@ -573,42 +566,42 @@
         .faq-question { font-size: 1.08rem; font-weight: 700; padding: 1.25rem 1.7rem; cursor: pointer; position: relative; color: var(--black); }
         .faq-question::after { content: '+'; position: absolute; right: 1.7rem; font-size: 1.7rem; transition: transform 0.3s; color: var(--orange); }
         .faq-item.active .faq-question::after { transform: rotate(45deg); }
-        .faq-answer { padding: 0 1.7rem; max-height: 0; overflow: hidden; transition: all 0.3s; color: var(--gray-dark); font-size: 0.98rem; line-height: 1.7; }
+        .faq-answer { padding: 0 1.7rem; max-height: 0; overflow: hidden; transition: all 0.3s; color: #FFFFFF; font-size: 0.98rem; line-height: 1.7; }
         .faq-item.active .faq-answer { padding: 0.9rem 1.7rem 1.7rem; max-height: 500px; }
 
         /* ABOUT */
         .about-section { background: white; }
-        .about-container { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center; max-width: 960px; margin: 3rem auto 0; }
-        .about-image { width: 100%; max-width: 330px; border-radius: 14px; box-shadow: 0 18px 55px rgba(0,0,0,0.1); display: block; margin: 0 auto; }
-        .about-content { font-size: 1.08rem; line-height: 1.8; color: var(--gray-dark); }
+        .about-container { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1100px; margin: 3rem auto 0; }
+        .about-image { width: 100%; border-radius: 6px; display: block; object-fit: cover; aspect-ratio: 4/5; }
+        .about-content { font-size: 1.08rem; line-height: 1.8; color: #FFFFFF; }
         .about-content p { margin-bottom: 1.2rem; }
         .about-content strong { color: var(--black); font-weight: 700; }
-        .about-signature { font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1.15rem; color: var(--orange); font-style: italic; margin-top: 1.3rem; }
+        .about-signature { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--orange); font-style: italic; margin-top: 1.3rem; }
 
         /* FINAL CTA */
         .final-cta { background: var(--black); text-align: center; padding: 5rem 2rem; }
         .final-cta .section-title { color: white; margin-bottom: 1.4rem; }
-        .final-cta .section-subtitle { color: rgba(255,255,255,0.62); margin-bottom: 3rem; }
+        .final-cta .section-subtitle { color: rgba(255,255,255,1); margin-bottom: 3rem; }
 
         /* BADGES */
         .social-proof-badge { background: var(--off-white); border: 2px solid var(--black); border-radius: 12px; padding: 1.2rem 2rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
         .social-proof-icon { font-size: 2rem; }
         .social-proof-number { font-size: 1.75rem; font-weight: 800; color: var(--black); line-height: 1; margin-bottom: 0.2rem; }
-        .social-proof-text { font-size: 0.92rem; color: var(--gray-mid); }
+        .social-proof-text { font-size: 0.92rem; color: #FFFFFF; }
 
         .economy-badge { background: rgba(42,157,92,0.07); border: 2px solid var(--success); border-radius: 12px; padding: 1.2rem 2rem; text-align: center; margin-bottom: 1rem; }
-        .economy-badge-text { font-size: 1.15rem; color: var(--charcoal); font-weight: 600; }
+        .economy-badge-text { font-size: 1.15rem; color: #FFFFFF; font-weight: 600; }
         .economy-badge-text strong { color: var(--success); font-weight: 800; font-size: 1.25rem; }
 
         .economy-counter { background: rgba(42,157,92,0.07); border: 3px solid var(--success); border-radius: 14px; padding: 1.8rem; text-align: center; }
-        .economy-counter-title { font-size: 1.05rem; color: var(--gray-mid); margin-bottom: 0.7rem; font-weight: 600; }
+        .economy-counter-title { font-size: 1.05rem; color: #FFFFFF; margin-bottom: 0.7rem; font-weight: 600; }
         .economy-counter-amount { font-size: 2.7rem; font-weight: 900; color: var(--success); line-height: 1; margin-bottom: 0.4rem; font-family: 'Courier New', monospace; }
-        .economy-counter-subtitle { font-size: 0.92rem; color: var(--charcoal); font-weight: 600; }
+        .economy-counter-subtitle { font-size: 0.92rem; color: #FFFFFF; font-weight: 600; }
 
         .urgency-badge { background: rgba(232,93,4,0.07); border: 2px solid var(--orange); border-radius: 12px; padding: 0.95rem 1.4rem; text-align: center; margin: 2rem auto; max-width: 460px; animation: urgencyGlow 2s infinite; }
         @keyframes urgencyGlow { 0%,100% { box-shadow: 0 0 8px rgba(232,93,4,0.22); } 50% { box-shadow: 0 0 20px rgba(232,93,4,0.45); } }
         .urgency-badge-text { font-size: 1.02rem; font-weight: 700; color: var(--orange); margin-bottom: 0.18rem; }
-        .urgency-badge-subtext { font-size: 0.87rem; color: var(--gray-mid); }
+        .urgency-badge-subtext { font-size: 0.87rem; color: #FFFFFF; }
 
         /* FOOTER */
         /* TESTEMUNHOS */
@@ -621,15 +614,15 @@
         .testemunho-card { background: #1E1E1E; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
         .testemunho-card:hover { transform: translateY(-5px); border-color: rgba(232,93,4,0.4); }
         .testemunho-img { width: 100%; display: block; }
-        @media (max-width: 860px) { .testemunhos-grid { grid-template-columns: 1fr; max-width: 380px; } }
+        @media (max-width: 860px) { .testemunhos-grid { grid-template-columns: 1fr; max-width: 100%; padding: 0 1.25rem; } }
 
-        footer { background: var(--black); text-align: center; padding: 2.3rem 2rem; color: rgba(255,255,255,0.45); border-top: 1px solid rgba(255,255,255,0.05); }
+        footer { background: var(--black); text-align: center; padding: 2.3rem 2rem; color: #FFFFFF; border-top: 1px solid rgba(255,255,255,0.05); }
         footer p + p { margin-top: 0.7rem; font-size: 0.87rem; }
 
         /* BONUS BANNER */
         .bonus-banner {
             background: var(--black);
-            color: rgba(255,255,255,0.88);
+            color: rgba(255,255,255,1);
             padding: 0.85rem 2rem;
             display: flex; align-items: center; justify-content: center;
             gap: 1rem; flex-wrap: wrap;
@@ -668,7 +661,7 @@
             display: flex; justify-content: space-between;
             font-size: 0.88rem;
         }
-        .bonus-slots-taken { color: rgba(255,255,255,0.55); }
+        .bonus-slots-taken { color: #FFFFFF; }
         .bonus-slots-left { color: var(--orange-light); font-weight: 600; }
         .bonus-slots-left strong { font-size: 1.05rem; }
 
@@ -681,8 +674,8 @@
             border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
         }
         .bonus-value-item { text-align: center; }
-        .bonus-value-label { display: block; font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 1px; }
-        .bonus-value-price { font-size: 1.8rem; font-weight: 900; color: rgba(255,255,255,0.65); }
+        .bonus-value-label { display: block; font-size: 0.78rem; color: #FFFFFF; margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 1px; }
+        .bonus-value-price { font-size: 1.8rem; font-weight: 900; color: rgba(255,255,255,1); }
         .strikethrough { text-decoration: line-through; }
         .bonus-value-arrow { font-size: 1.5rem; color: var(--orange); font-weight: 800; }
         .bonus-value-free { font-size: 1.8rem; font-weight: 900; color: var(--success); font-family: 'DM Sans', sans-serif; }
@@ -697,8 +690,8 @@
             border-radius: 10px; padding: 1.2rem 1.5rem;
             margin: 1.2rem 0 1.4rem; text-align: left;
         }
-        .price-includes-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-mid); margin-bottom: 0.8rem; }
-        .price-includes-item { display: flex; align-items: center; gap: 0.7rem; font-size: 0.97rem; color: var(--charcoal); padding: 0.4rem 0; border-bottom: 1px solid var(--gray-light); }
+        .price-includes-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #FFFFFF; margin-bottom: 0.8rem; }
+        .price-includes-item { display: flex; align-items: center; gap: 0.7rem; font-size: 0.97rem; color: #FFFFFF; padding: 0.4rem 0; border-bottom: 1px solid var(--gray-light); }
         .price-includes-item:last-child { border-bottom: none; }
         .price-includes-item span:first-child { color: var(--success); font-weight: 700; flex-shrink: 0; }
         .bonus-highlight { background: rgba(232,93,4,0.07); border-radius: 8px; padding: 0.9rem 1rem !important; margin: 0.4rem 0; border: 1.5px solid rgba(232,93,4,0.3) !important; align-items: flex-start !important; }
@@ -780,7 +773,7 @@
 
         .bonus-description {
             font-size: 1.05rem;
-            color: rgba(255,255,255,0.75);
+            color: rgba(255,255,255,1);
             line-height: 1.7;
             margin-bottom: 1.3rem;
         }
@@ -798,7 +791,7 @@
             align-items: flex-start;
             gap: 0.7rem;
             font-size: 0.97rem;
-            color: rgba(255,255,255,0.82);
+            color: rgba(255,255,255,1);
             margin-bottom: 0.4rem;
         }
 
@@ -814,7 +807,7 @@
             border-radius: 50px;
             padding: 0.65rem 1.4rem;
             font-size: 0.92rem;
-            color: rgba(255,255,255,0.8);
+            color: #FFFFFF;
         }
 
         .bonus-urgency strong { color: var(--orange-light); }
@@ -855,7 +848,7 @@
         @media (max-width: 768px) {
             .pain-grid, .ba-grid, .comparison-grid, .about-container { grid-template-columns: 1fr; }
             section { padding: 3rem 0; }
-            .hero { min-height: 80vh; padding: 2rem 1.5rem; }
+            .hero { min-height: 80vh; padding: 4.5rem 1.5rem 2rem; }
             .about-image { max-width: 230px; margin: 0 auto; }
             .intro-box { padding: 2rem 1.5rem; }
             .intro-split { grid-template-columns: 1fr; gap: 2rem; }
@@ -864,21 +857,21 @@
         }
 
         /* ── TEMA ESCURO ─────────────────────────────────────── */
-        body { background: #0D0D0D; color: #CCCCCC; }
+        body { background: #0D0D0D; color: #FFFFFF; }
 
         .section-title { color: #FFFFFF; }
-        .section-subtitle { color: #888888; }
+        .section-subtitle { color: #FFFFFF; }
 
         /* Intro */
-        .intro-section { background: #141414; border-color: rgba(255,255,255,0.05); }
-        .intro-box { background: #1E1E1E; border-color: rgba(255,255,255,0.08); border-left-color: var(--orange); }
+        .intro-section { background: #141414; border-color: #FFFFFF; }
+        .intro-box { background: #1E1E1E; border-color: #FFFFFF; border-left-color: var(--orange); }
         .intro-hook { color: #FFFFFF; }
-        .intro-text { color: #CCCCCC; }
+        .intro-text { color: #FFFFFF; }
         .intro-text strong { color: #FFFFFF; }
 
         /* Pain */
         .pain-section { background: #0D0D0D; }
-        .pain-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .pain-card { background: #1E1E1E; border-color: #FFFFFF; }
         .pain-card:hover { border-color: var(--orange); }
         .pain-text { color: #000000; }
         .pain-verdict { color: #FFFFFF; background: rgba(232,93,4,0.1); }
@@ -887,71 +880,71 @@
         .before-after { background: #141414; }
         .ba-col.before { background: rgba(214,40,40,0.1); border-color: rgba(214,40,40,0.5); }
         .ba-col.after { background: rgba(42,157,92,0.1); border-color: rgba(42,157,92,0.5); }
-        .ba-item { color: #CCCCCC; }
+        .ba-item { color: #FFFFFF; }
 
         /* Modules */
         .modules-section { background: #0D0D0D; }
-        .module-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .module-card { background: #1E1E1E; border-color: #FFFFFF; }
         .module-card:hover { border-color: rgba(232,93,4,0.5); box-shadow: 0 8px 28px rgba(232,93,4,0.1); }
         .module-body { background: #1E1E1E; }
-        .lesson-item { color: #CCCCCC; }
-        .lesson-subitem { color: #888888; }
+        .lesson-item { color: #FFFFFF; }
+        .lesson-subitem { color: #FFFFFF; }
 
         /* Why */
         .why-section { background: #141414; }
         .why-card { background: #1E1E1E; box-shadow: none; border-left-color: var(--orange); }
         .why-card-title { color: #FFFFFF; }
-        .why-card-content { color: #CCCCCC; }
+        .why-card-content { color: #FFFFFF; }
         .why-card-content strong { color: #FFFFFF; }
 
         /* Comparison */
-        .comparison-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .comparison-card { background: #1E1E1E; border-color: #FFFFFF; }
         .comparison-card.real { border-color: var(--success); }
         .comparison-card.fake { border-color: rgba(214,40,40,0.5); }
-        .comparison-item { color: #CCCCCC; }
+        .comparison-item { color: #FFFFFF; }
         .comparison-cards-grid .comparison-card-item { background: #1E1E1E; }
         .comparison-card-recommended { border-color: var(--success); }
-        .comparison-card-alt { border-color: rgba(255,255,255,0.07); }
+        .comparison-card-alt { border-color: #FFFFFF; }
 
         /* Price */
         .price-section { background: #141414; }
         .price-box { background: #1E1E1E; }
-        .price-question { color: #888888; }
-        .price-reality { color: #CCCCCC; }
+        .price-question { color: #FFFFFF; }
+        .price-reality { color: #FFFFFF; }
         .price-reality strong { color: #FFFFFF; }
-        .price-comparison { background: rgba(255,255,255,0.04); color: #CCCCCC; }
+        .price-comparison { background: rgba(255,255,255,0.04); color: #FFFFFF; }
         .price-comparison strong { color: #FFFFFF; }
-        .trust-badge { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
-        .trust-badge-text { color: #888888; }
+        .trust-badge { background: rgba(255,255,255,0.04); border-color: #FFFFFF; }
+        .trust-badge-text { color: #FFFFFF; }
         .trust-badge-text strong { color: #FFFFFF; }
-        .guarantee-text { color: #888888; }
+        .guarantee-text { color: #FFFFFF; }
 
         /* FAQ */
         .faq-section { background: #141414; }
-        .faq-item { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
+        .faq-item { background: #1E1E1E; border-color: #FFFFFF; }
         .faq-item:hover { border-color: var(--orange); }
         .faq-question { color: #FFFFFF; }
-        .faq-answer { color: #CCCCCC; }
+        .faq-answer { color: #FFFFFF; }
 
         /* About */
         .about-section { background: #0D0D0D; }
-        .about-content { color: #CCCCCC; }
+        .about-content { color: #FFFFFF; }
         .about-content strong { color: #FFFFFF; }
 
         /* Social proof */
-        .social-proof-badge { background: #1E1E1E; border-color: rgba(255,255,255,0.1); }
+        .social-proof-badge { background: #1E1E1E; border-color: #FFFFFF; }
         .social-proof-number { color: #FFFFFF; }
-        .social-proof-text { color: #888888; }
+        .social-proof-text { color: #FFFFFF; }
         .economy-badge { background: rgba(42,157,92,0.08); }
-        .economy-badge-text { color: #CCCCCC; }
+        .economy-badge-text { color: #FFFFFF; }
         .economy-counter { background: rgba(42,157,92,0.08); }
-        .economy-counter-title { color: #888888; }
-        .economy-counter-subtitle { color: #CCCCCC; }
+        .economy-counter-title { color: #FFFFFF; }
+        .economy-counter-subtitle { color: #FFFFFF; }
 
         /* Testimonials section (old) */
         .testimonials-section { background: #0D0D0D; }
-        .testimonial-card { background: #1E1E1E; border-color: rgba(255,255,255,0.07); }
-        .testimonial-caption { background: #1E1E1E; color: #888888; }
+        .testimonial-card { background: #1E1E1E; border-color: #FFFFFF; }
+        .testimonial-caption { background: #1E1E1E; color: #FFFFFF; }
 
         /* Divider */
         .divider { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
@@ -983,7 +976,7 @@
             gap: 0.45rem;
             font-size: 0.88rem;
             font-weight: 600;
-            color: rgba(255,255,255,0.7);
+            color: #FFFFFF;
             text-decoration: none;
             letter-spacing: 0.3px;
             transition: color 0.2s;
@@ -1000,6 +993,94 @@
             transition: background 0.2s;
         }
         .curso-navbar-cta:hover { background: var(--orange-dark); }
+        /* === DARK THEME === */
+        body { background: #0A0909 !important; color: #F0F0F0 !important; }
+        .intro-section { background: #141414 !important; border-color: #2a2a2a !important; }
+        .intro-box { background: #1A1A1A !important; border-color: #333 !important; }
+        .intro-hook { color: #F0F0F0 !important; }
+        .intro-text { color: #FFFFFF !important; }
+        .intro-text strong { color: #F0F0F0 !important; }
+        .pain-section { background: #0A0909 !important; }
+        .pain-card { background: #1A1A1A !important; border-color: #333 !important; }
+        .pain-card:hover { border-color: var(--orange) !important; }
+        .pain-text { color: #E8E8E8 !important; }
+        .pain-verdict { background: var(--orange-muted) !important; color: #F0F0F0 !important; }
+        .ba-col.before { background: rgba(214,40,40,0.12) !important; }
+        .ba-col.after { background: rgba(42,157,92,0.12) !important; }
+        .ba-item { color: #E8E8E8 !important; }
+        .why-section { background: #141414 !important; }
+        .why-card { background: #1A1A1A !important; }
+        .why-card-title { color: #F0F0F0 !important; }
+        .why-card-content { color: #E8E8E8 !important; }
+        .why-card-content strong { color: #F0F0F0 !important; }
+        .why-list-item { color: #FFFFFF !important; }
+        .comparison-card { background: #1A1A1A !important; border-color: #333 !important; }
+        .comparison-item { color: #E8E8E8 !important; }
+        .comparison-card-item { background: #1A1A1A !important; }
+        .comparison-card-alt { border-color: #333 !important; }
+        .modules-section { background: #0A0909 !important; }
+        .module-card { background: #1A1A1A !important; border-color: #333 !important; }
+        .module-card:hover { border-color: var(--orange) !important; }
+        .module-body { background: #1A1A1A !important; }
+        .lesson-item { color: #FFFFFF !important; }
+        .lesson-subitem { color: #CCCCCC !important; }
+        .price-section { background: #141414 !important; }
+        .price-box { background: #1A1A1A !important; }
+        .price-comparison { background: #111 !important; color: #E0E0E0 !important; }
+        .price-comparison strong { color: #F0F0F0 !important; }
+        .price-reality { color: #FFFFFF !important; }
+        .price-reality strong { color: #F0F0F0 !important; }
+        .price-question { color: #CCCCCC !important; }
+        .price-includes { background: #111 !important; border-color: #222 !important; }
+        .price-includes-item { color: #CCCCCC !important; border-color: #222 !important; }
+        .price-includes-title { color: #AAAAAA !important; }
+        .trust-badge { background: #1A1A1A !important; border-color: #333 !important; }
+        .trust-badge-text { color: #FFFFFF !important; }
+        .trust-badge-text strong { color: #F0F0F0 !important; }
+        .guarantee { border-color: #2a2a2a !important; }
+        .guarantee-text { color: #CCCCCC !important; }
+        .testimonials-section { background: #0A0909 !important; }
+        .testimonial-card { background: #1A1A1A !important; border-color: #2a2a2a !important; }
+        .testimonial-caption { background: #1A1A1A !important; color: #CCCCCC !important; }
+        .faq-section { background: #141414 !important; }
+        .faq-item { background: #1A1A1A !important; border-color: #2a2a2a !important; }
+        .faq-question { color: #F0F0F0 !important; }
+        .faq-answer { color: #E8E8E8 !important; }
+        .about-section { background: #0A0909 !important; }
+        .about-content { color: #E8E8E8 !important; }
+        .about-content strong { color: #F0F0F0 !important; }
+        .about-signature { color: var(--orange) !important; }
+        .social-proof-badge { background: #1A1A1A !important; border-color: #333 !important; }
+        .social-proof-number { color: #F0F0F0 !important; }
+        .economy-badge-text { color: #FFFFFF !important; }
+        .economy-counter-subtitle { color: #FFFFFF !important; }
+        .section-title { color: #F0F0F0 !important; }
+        .section-subtitle { color: #CCCCCC !important; }
+        /* === HERO DESKTOP: ESQUERDA === */
+        @media (min-width: 769px) {
+            .hero { justify-content: flex-start; text-align: left; }
+            .hero-container { max-width: 52%; padding-left: 4rem; margin: 0; }
+            .hero-checklist { margin-left: 0; margin-right: 0; }
+            .hero-badge { justify-content: flex-start; }
+        }
+        /* === FONT SIZE: non-title +2 sizes === */
+        body p, .intro-text { font-size: 1.25rem !important; line-height: 1.85 !important; }
+        .about-content p { font-size: 1.05rem !important; line-height: 1.85 !important; }
+        .lesson-item { font-size: 1.2rem !important; }
+        .lesson-subitem { font-size: 1.1rem !important; }
+        .faq-answer { font-size: 1.2rem !important; }
+        .faq-question { font-size: 1.25rem !important; }
+        .highlights-item { font-size: 1.2rem !important; }
+        .comparison-item { font-size: 1.2rem !important; }
+        .ba-item { font-size: 1.2rem !important; }
+        .pain-text { font-size: 1.15rem !important; }
+        .why-card-content { font-size: 1.2rem !important; }
+        .price-reality, .price-question { font-size: 1.35rem !important; }
+        .price-comparison { font-size: 1.15rem !important; }
+        .feature-description { font-size: 1.1rem; color: #E8E8E8; }
+        .hero-subheadline { font-size: 1.25rem !important; }
+        .testimonial-caption { font-size: 1rem !important; }
+        .about-signature { font-size: 1.3rem !important; }
     </style>
 </head>
 <body>
@@ -1035,39 +1116,15 @@
                 Perfume não é só cheiro.<br><span class="highlight">É presença. É identidade. É ser lembrado.</span>
             </h1>
 
-            <p class="hero-subheadline">
-                Aprenda perfumaria de verdade e descubra como o perfume certo pode te destacar, te dar confiança e representar quem você é.
-            </p>
-
-            <ul class="hero-checklist">
-                <li class="hero-checklist-item">
-                    <span class="hci" style="color:#2A9D5C;">✅</span>
-                    <span>Quer parar de cheirar igual a todo mundo</span>
-                </li>
-                <li class="hero-checklist-item">
-                    <span class="hci" style="color:#2A9D5C;">✅</span>
-                    <span>Quer entrar em qualquer ambiente com confiança</span>
-                </li>
-                <li class="hero-checklist-item">
-                    <span class="hci" style="color:#2A9D5C;">✅</span>
-                    <span>Quer se destacar na multidão</span>
-                </li>
-                <li class="hero-checklist-item">
-                    <span class="hci" style="color:#2A9D5C;">✅</span>
-                    <span>Cansou de comprar perfume errado e jogar dinheiro fora</span>
-                </li>
-                <li class="hero-checklist-item">
-                    <span class="hci" style="color:#2A9D5C;">✅</span>
-                    <span><strong>Quer se sentir bem, onde for e com quem estiver</strong></span>
-                </li>
-            </ul>
+            
 
             <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'InitiateCheckout');">Quero dominar a perfumaria!</a>
 
-            <p style="margin-top: 1.4rem; color: rgba(255,255,255,0.45); font-size: 0.87rem;">
+            <p style="margin-top: 1.4rem; color: #FFFFFF; font-size: 0.87rem;">
                 Acesso imediato &nbsp;·&nbsp; Curso 100% online &nbsp;·&nbsp; Garantia de 7 dias
             </p>
         </div>
+
     </section>
 
     <div class="divider"></div>
@@ -1082,22 +1139,22 @@
     <section style="background: var(--black); padding: 4rem 2rem; text-align:center;">
         <div class="container" style="max-width:860px;">
             <span style="display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:1rem;">O que a perfumaria realmente faz por você</span>
-            <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(1.8rem,4vw,2.8rem); color:white; font-weight:700; line-height:1.3; margin-bottom:3rem;">Não quero só te ensinar sobre perfumes.<br><span style="color:var(--orange);">Quero mudar como você se sente e como te percebem.</span></h2>
+            <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,2.8rem); color:white; font-weight:700; line-height:1.3; margin-bottom:3rem;">Não quero só te ensinar sobre perfumes.<br><span style="color:var(--orange);">Quero mudar como você se sente e como te percebem.</span></h2>
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem; text-align:left;">
                 <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(232,93,4,0.2); border-radius:14px; padding:2rem;">
                     <div style="font-size:2rem; margin-bottom:1rem;">🔥</div>
-                    <h3 style="font-family:'Montserrat',sans-serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Destacar na multidão</h3>
-                    <p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.7;">O perfume certo é percebido antes de você falar. É o detalhe que separa quem passa despercebido de quem deixa uma marca.</p>
+                    <h3 style="font-family:'Cormorant Garamond',serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Destacar na multidão</h3>
+                    <p style="color:#E0E0E0; font-size:0.95rem; line-height:1.7;">O perfume certo é percebido antes de você falar. É o detalhe que separa quem passa despercebido de quem deixa uma marca.</p>
                 </div>
                 <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(232,93,4,0.2); border-radius:14px; padding:2rem;">
                     <div style="font-size:2rem; margin-bottom:1rem;">💎</div>
-                    <h3 style="font-family:'Montserrat',sans-serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Segurança sem esforço</h3>
-                    <p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.7;">Saber que você está cheirando bem muda sua postura, sua confiança e como você entra em qualquer ambiente.</p>
+                    <h3 style="font-family:'Cormorant Garamond',serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Segurança sem esforço</h3>
+                    <p style="color:#E0E0E0; font-size:0.95rem; line-height:1.7;">Saber que você está cheirando bem muda sua postura, sua confiança e como você entra em qualquer ambiente.</p>
                 </div>
                 <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(232,93,4,0.2); border-radius:14px; padding:2rem;">
                     <div style="font-size:2rem; margin-bottom:1rem;">✦</div>
-                    <h3 style="font-family:'Montserrat',sans-serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Ser lembrado</h3>
-                    <p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.7;">Cheiro é o sentido mais ligado à memória. Uma assinatura olfativa única faz as pessoas te associarem a algo especial — sem que você precise dizer uma palavra.</p>
+                    <h3 style="font-family:'Cormorant Garamond',serif; color:white; font-size:1.1rem; margin-bottom:0.7rem;">Ser lembrado</h3>
+                    <p style="color:#E0E0E0; font-size:0.95rem; line-height:1.7;">Cheiro é o sentido mais ligado à memória. Uma assinatura olfativa única faz as pessoas te associarem a algo especial — sem que você precise dizer uma palavra.</p>
                 </div>
             </div>
         </div>
@@ -1106,19 +1163,13 @@
     <!-- INTRO / PROBLEM -->
     <section class="intro-section">
         <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Você provavelmente <em>já passou por isso…</em></h2>
             <div class="intro-box">
-                <p class="intro-hook">Você provavelmente já passou por isso…</p>
-                <p class="intro-text">Entra na perfumaria decidido a comprar. Testa alguns perfumes. O vendedor fala de notas, projeção, fixação… Você escolhe <strong>"o que parece melhor".</strong></p>
-                <p class="intro-text">Alguns dias depois percebe:</p>
-                <ul style="list-style:none; margin: 0.8rem 0 1rem 0;">
-                    <li style="padding: 0.3rem 0; color: #ffffff;">❌ Não combina com você</li>
-                    <li style="padding: 0.3rem 0; color: #ffffff;">❌ Não dura quase nada</li>
-                    <li style="padding: 0.3rem 0; color: #ffffff;">❌ Você quase não usa</li>
-                    <li style="padding: 0.3rem 0; color: #ffffff;">❌ O dinheiro foi embora</li>
-                </ul>
-                <p class="intro-text"><strong>E o pior?</strong> Você continua sem saber exatamente por que errou.</p>
-                <p class="intro-text">Enquanto não entende o básico, cada compra vira aposta.</p>
-                <p class="intro-cta-line">E perfume não é barato para virar aposta.</p>
+                <p class="intro-text">Descobre a perfumaria e percebe a sua importância e quanto completa a sua imagem.</p>
+                <p class="intro-text">Você quer um perfume que te represente, que combine com você, que te faça se sentir bem aonde for, mas não tem idéia do que você gosta, do que quer ou até onde vai usar. E o vendedor muito menos.</p>
+                <p class="intro-text">E quando você chega em casa, aquele perfume é outro, porque perfumes mudam com o tempo, mas ele não te avisou e você está com um frasco encalhado.</p>
+                <p class="intro-text"><strong>E o pior?</strong> Você continua sem entender por que errou — e sem confiança pra fazer a próxima escolha.</p>
+                <p class="intro-cta-line">Enquanto não entende o básico, cada compra vira aposta. E perfume não é barato para virar aposta.</p>
                 <div style="text-align:center; margin-top:2rem;">
                     <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'AddToCart');">Quero melhorar minha imagem com a perfumaria!</a>
                 </div>
@@ -1133,19 +1184,19 @@
             <h2 class="section-title">Você <em>Não Precisa</em> de Nada Disso</h2>
 
             <div class="pain-grid">
-                <div class="pain-card" style="cursor:default; border-color:#fdd; background:#fff8f8;">
+                <div class="pain-card" style="cursor:default; border-color:#3a2020; background:#1a1212;">
                     <div class="pain-icon">❌</div>
                     <p class="pain-text">Ter 20 perfumes na coleção</p>
                 </div>
-                <div class="pain-card" style="cursor:default; border-color:#fdd; background:#fff8f8;">
+                <div class="pain-card" style="cursor:default; border-color:#3a2020; background:#1a1212;">
                     <div class="pain-icon">❌</div>
                     <p class="pain-text">Entender termos técnicos complicados</p>
                 </div>
-                <div class="pain-card" style="cursor:default; border-color:#fdd; background:#fff8f8;">
+                <div class="pain-card" style="cursor:default; border-color:#3a2020; background:#1a1212;">
                     <div class="pain-icon">❌</div>
                     <p class="pain-text">Gastar caro para cheirar bem</p>
                 </div>
-                <div class="pain-card" style="cursor:default; border-color:var(--orange); background:rgba(232,93,4,0.04); box-shadow: 0 6px 22px rgba(232,93,4,0.12);">
+                <div class="pain-card" style="cursor:default; border-color:#3a2020; background:#1a1212;">
                     <div class="pain-icon">✅</div>
                     <p class="pain-text"><strong>Você precisa saber o essencial</strong> — o que realmente importa antes de tirar o cartão do bolso.</p>
                 </div>
@@ -1165,84 +1216,57 @@
             <!-- MÉTODO DA PERFUMARIA INTELIGENTE -->
             <div style="background: var(--black-soft); border: 1px solid rgba(232,93,4,0.25); border-radius: 16px; padding: 2.5rem 2rem; margin-bottom: 3rem; text-align:center;">
                 <span style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:0.8rem;">A estrutura do curso</span>
-                <h3 style="font-family:'Montserrat',sans-serif; font-size:clamp(1.4rem,3vw,2rem); color:white; margin-bottom:0.6rem;">Três módulos. Uma progressão lógica.</h3>
-                <p style="color:rgba(255,255,255,0.5); font-size:0.97rem; max-width:520px; margin:0 auto 2.5rem;">Do vocabulário básico à coleção equilibrada — cada módulo aprofunda o anterior e constrói conhecimento real.</p>
+                <h3 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,3vw,2rem); color:white; margin-bottom:0.6rem;">Três módulos. Uma progressão lógica.</h3>
+                <p style="color:#FFFFFF; font-size:0.97rem; max-width:520px; margin:0 auto 2.5rem;">Do vocabulário básico à coleção equilibrada — cada módulo aprofunda o anterior e constrói conhecimento real.</p>
                 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; text-align:left;">
                     <div style="background:rgba(232,93,4,0.07); border:1px solid rgba(232,93,4,0.2); border-radius:12px; padding:1.5rem;">
                         <div style="font-size:1.8rem; margin-bottom:0.6rem;">🧠</div>
-                        <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 1 — Fundamentos</div>
+                        <div style="font-family:'Cormorant Garamond',serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 1 — Fundamentos</div>
                         <p style="color:white; font-weight:700; font-size:1rem; margin-bottom:0.4rem;">A linguagem da perfumaria</p>
-                        <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.6;">Concentrações, notas, acordes, famílias, pirâmide olfativa e aplicação — tudo que forma a base do conhecimento.</p>
+                        <p style="color:#FFFFFF; font-size:0.9rem; line-height:1.6;">Concentrações, notas, acordes, famílias, pirâmide olfativa e aplicação — tudo que forma a base do conhecimento.</p>
                     </div>
                     <div style="background:rgba(232,93,4,0.07); border:1px solid rgba(232,93,4,0.2); border-radius:12px; padding:1.5rem;">
                         <div style="font-size:1.8rem; margin-bottom:0.6rem;">🧭</div>
-                        <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 2 — Perfil Olfativo</div>
+                        <div style="font-family:'Cormorant Garamond',serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 2 — Perfil Olfativo</div>
                         <p style="color:white; font-weight:700; font-size:1rem; margin-bottom:0.4rem;">Seu gosto, suas escolhas</p>
-                        <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.6;">Descobrir preferências, entender ocasiões, navegar entre designer, nicho, contratipo e árabe com critério.</p>
+                        <p style="color:#FFFFFF; font-size:0.9rem; line-height:1.6;">Descobrir preferências, entender ocasiões, navegar entre designer, nicho, contratipo e árabe com critério.</p>
                     </div>
                     <div style="background:rgba(232,93,4,0.07); border:1px solid rgba(232,93,4,0.2); border-radius:12px; padding:1.5rem;">
                         <div style="font-size:1.8rem; margin-bottom:0.6rem;">🎯</div>
-                        <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 3 — Colecionador</div>
+                        <div style="font-family:'Cormorant Garamond',serif; font-weight:800; color:var(--orange); font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.4rem;">Módulo 3 — Colecionador</div>
                         <p style="color:white; font-weight:700; font-size:1rem; margin-bottom:0.4rem;">Nariz educado, coleção equilibrada</p>
-                        <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; line-height:1.6;">Análise comparativa, layering e como estruturar uma coleção com inteligência e identidade.</p>
+                        <p style="color:#FFFFFF; font-size:0.9rem; line-height:1.6;">Análise comparativa, layering e como estruturar uma coleção com inteligência e identidade.</p>
                     </div>
                 </div>
             </div>
-
-            <div class="course-features">
-                <div class="feature-card">
-                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Concentrações e composição</h3></div>
-                    <p class="feature-description">Entenda o que diferencia um EDP de um EDT e como a composição influencia a experiência olfativa.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Fixação e projeção</h3></div>
-                    <p class="feature-description">Aprenda a ler e interpretar o comportamento de um perfume no seu corpo ao longo do tempo.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Perfume por ocasião</h3></div>
-                    <p class="feature-description">Como contexto, clima e momento influenciam a escolha — e como usar isso a seu favor.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Universo de fragrâncias</h3></div>
-                    <p class="feature-description">Designer, nicho, contratipo, dupes e árabes — diferenças reais e como navegar com conhecimento.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Layering olfativo</h3></div>
-                    <p class="feature-description">A arte de combinar fragrâncias para criar algo único, pessoal e que representa quem você é.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-header"><div class="feature-icon">✔</div><h3 class="feature-title">Coleção com identidade</h3></div>
-                    <p class="feature-description">Como estruturar uma coleção equilibrada com rotação, respiro olfativo e sem redundâncias.</p>
-                </div>
-            </div>
-
             <div style="text-align:center; margin-top:2rem;">
                 <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'AddToCart');">Quero começar agora</a>
             </div>
         </div>
     </section>
-
     <!-- ABOUT -->
     <section class="about-section">
         <div class="container">
-            <h2 class="section-title">Quem Criou o <em>Curso Prático da Perfumaria?</em></h2>
-
+            <h2 class="section-title">Conheça <em>seu Professor</em>:</h2>
             <div class="about-container">
                 <div>
                     <img src="images/victor-guerise.jpg" alt="Victor Guerise" class="about-image">
                 </div>
                 <div class="about-content">
-                    <p>Depois de testar centenas de fragrâncias, estudar perfumaria masculina e analisar os erros mais comuns que homens cometem ao comprar, ficou claro um padrão:</p>
-                    <p><strong>A maioria não erra por falta de dinheiro. Erra por falta de base.</strong></p>
-                    <p>Ao longo dos anos, investi <strong>mais de R$ 100.000,00 em perfumes</strong> — testando, errando, aprendendo e refinando o que realmente funciona. Caí em conto de vendedor. Comprei clones ruins achando que eram originais. Levei anos acertando na tentativa e erro o que poderia ter aprendido em horas.</p>
-                    <p>O Curso Prático da Perfumaria foi criado para você não precisar fazer o mesmo caminho. Peguei tudo que aprendi nesse processo — os acertos, os erros e os atalhos — e coloquei em aulas diretas ao ponto. <strong>Você aprende em horas o que me custou anos e R$ 100 mil.</strong></p>
-                    <p class="about-signature">"Direto. Aplicável. Sem complicação."</p>
-                    <p style="margin-top:1.3rem; font-weight:700; color:var(--black);">— Victor Guerise</p>
+                    <p>Olá! Me chamo Victor Guerise, sou internacionalista de formação e trabalhei minha vida toda na área comercial. Foi lá, lidando com clientes exigentes que aprendi desde cedo que a sua imagem importa e você é avaliado antes de qualquer palavra.</p>
+                    <p>Me sentia ignorado, mesmo usando as melhores roupas que eu podia comprar.</p>
+                    <p>Até que, em 2022, ganhei um perfume de presente: Vibrant Leather, da Zara.</p>
+                    <p>Comecei usando por educação, sem prestar muita atenção, até que os elogios vieram — um, dois, três.</p>
+                    <p>Na semana seguinte, me perguntaram qual era e aquilo ficou na minha mente.</p>
+                    <p>Decidi entrar fundo na perfumaria: testei centenas de fragrâncias, errei caro, estudei o que ninguém ensina e no meio do caminho, percebi que a maioria dos homens não erra por falta de dinheiro — erra por falta de base.</p>
+                    <p>Investi mais de R$ 100 mil e anos aprendendo o que coloquei em horas de aula.</p>
+                    <p>O Curso Prático da Perfumaria existe para você não precisar fazer esse caminho. Você aprende em horas o que me custou anos.</p>
+                    <p class="about-signature">“O perfume certo muda não só o seu cheiro, mas a sua imagem.”</p>
+                    <p style="margin-top:1.3rem; font-weight:700; color:var(--white);">— Victor Guerise</p>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- BEFORE/AFTER -->
     <section class="before-after">
         <div class="container">
@@ -1351,7 +1375,7 @@
 
                 <div class="bonus-slots-counter" style="background:linear-gradient(135deg,#c62828,#8b0000); border-radius:14px; padding:1.8rem 1rem; margin:1.5rem 0; box-shadow:0 8px 28px rgba(198,40,40,0.35); overflow:hidden;">
                     <div style="text-align:center; margin-bottom: 1rem;">
-                        <span style="font-size:0.78rem; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:2px; font-weight:700;">⏰ Oferta expira em</span>
+                        <span style="font-size:0.78rem; color:#FFFFFF; text-transform:uppercase; letter-spacing:2px; font-weight:700;">⏰ Oferta expira em</span>
                     </div>
                     <div style="display:flex; justify-content:center; gap:0.5rem; margin-bottom:1rem; flex-wrap:nowrap;">
                         <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-days">00</div><div class="countdown-label">dias</div></div>
@@ -1360,7 +1384,7 @@
                         <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-seconds">00</div><div class="countdown-label">seg</div></div>
                     </div>
                     <div style="text-align:center;">
-                        <span style="font-size:0.82rem; color:rgba(255,255,255,0.6);">Domingo · 23h59 · Preço pode aumentar após essa data</span>
+                        <span style="font-size:0.82rem; color:#FFFFFF;">Domingo · 23h59 · Preço pode aumentar após essa data</span>
                     </div>
                 </div>
 
@@ -1420,7 +1444,7 @@
                         <span>📋</span>
                         <div class="bonus-highlight-content">
                             <strong>Bônus: Lista exclusiva de fornecedores</strong>
-                            <div style="font-size:0.85rem; color:var(--gray-mid); margin-top:0.2rem;">Onde comprar com segurança — originais, bom preço e sem enganação</div>
+                            <div style="font-size:0.85rem; color:#FFFFFF; margin-top:0.2rem;">Onde comprar com segurança — originais, bom preço e sem enganação</div>
                         </div>
                     </div>
                     <div class="price-includes-item bonus-highlight">
@@ -1428,7 +1452,7 @@
                         <div class="bonus-highlight-content">
                             <strong>Bônus: Perfumap: O App com I.A integrada para organizar sua Coleção! </strong>
                             <div class="bonus-highlight-meta">
-                                <span style="color:var(--gray-mid); text-decoration:line-through; font-size:0.85rem; white-space:nowrap;">R$ 97</span>
+                                <span style="color:#FFFFFF; text-decoration:line-through; font-size:0.85rem; white-space:nowrap;">R$ 97</span>
                                 <span class="price-includes-free">incluso no curso</span>
                             </div>
                         </div>
@@ -1472,37 +1496,6 @@
             <div class="testemunho-card"><img src="images/depoimento-4.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
             <div class="testemunho-card"><img src="images/depoimento-5.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
             <div class="testemunho-card"><img src="images/depoimento-6.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
-        </div>
-    </section>
-
-    <!-- COMPACT COMPARISON -->
-    <section style="background: white; padding: 3rem 0;">
-        <div class="container">
-            <span class="section-label">A escolha é sua</span>
-            <h2 class="section-title">Por que não aprender no <em>YouTube?</em></h2>
-            <p class="section-subtitle">Você pode. Mas conteúdo solto não constrói conhecimento de verdade.</p>
-
-            <div class="comparison-cards-grid">
-                <div class="comparison-card-item comparison-card-recommended">
-                    <div class="comparison-card-badge">⭐ RECOMENDADO</div>
-                    <div class="comparison-card-title comparison-card-title-green">Curso Prático da Perfumaria</div>
-                    <div style="display:flex; flex-direction:column; gap:0.85rem;">
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>3 módulos em progressão lógica, do zero ao avançado</div>
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>Conhecimento estruturado que você realmente absorve</div>
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>Você sai com uma visão completa do mundo da perfumaria</div>
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--charcoal);"><span style="color:var(--success); flex-shrink:0;">✓</span>Criado por quem tem +100 perfumes e já errou muito</div>
-                    </div>
-                </div>
-                <div class="comparison-card-item comparison-card-alt">
-                    <div class="comparison-card-title comparison-card-title-gray">YouTube e PDFs gratuitos</div>
-                    <div style="display:flex; flex-direction:column; gap:0.85rem;">
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Vídeos soltos, sem progressão lógica</div>
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Sem profundidade real — você assiste mas não aprende</div>
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Ninguém te ensina a construir uma visão completa</div>
-                        <div style="display:flex; gap:0.8rem; align-items:flex-start; font-size:0.95rem; color:var(--gray-dark);"><span style="color:var(--danger); flex-shrink:0;">✕</span>Ninguém te ensina a montar uma coleção</div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1551,7 +1544,7 @@
             <h2 class="section-title">Você Pode <em>Continuar Assim</em>...</h2>
             <p class="section-subtitle" style="margin-bottom:1.5rem;">Comprando no impulso. Cheirando igual a todo mundo. Sem identidade, sem presença, sem ser lembrado.</p>
             <p class="section-subtitle"><strong style="color:white;">Ou pode descobrir o que a perfumaria realmente pode fazer por você.</strong></p>
-            <p class="section-subtitle" style="margin-top:0.5rem; color:rgba(255,255,255,0.5);">A decisão é sua.</p>
+            <p class="section-subtitle" style="margin-top:0.5rem; color:#FFFFFF;">A decisão é sua.</p>
 
             <div class="urgency-badge">
                 <p class="urgency-badge-text">⚡ Vagas com desconto — por tempo limitado</p>
@@ -1560,7 +1553,7 @@
 
             <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" style="font-size:1.15rem; padding:1.3rem 4rem;" onclick="fbq('track', 'InitiateCheckout');">Quero construir minha identidade olfativa</a>
 
-            <p style="margin-top:2rem; color:rgba(255,255,255,0.45); font-size:0.9rem;">
+            <p style="margin-top:2rem; color:#FFFFFF; font-size:0.9rem;">
                 ✓ Acesso imediato após pagamento &nbsp;·&nbsp; ✓ Garantia de 7 dias &nbsp;·&nbsp; ✓ Suporte via WhatsApp
             </p>
         </div>
