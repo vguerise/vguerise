@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -226,7 +226,6 @@
             line-height: 1.6;
         }
 
-
         .hero-desc {
             font-size: 1.1rem;
             color: var(--gray-light);
@@ -292,7 +291,6 @@
             width: 100%;
         }
 
-
         .stat-item {}
 
         .stat-number {
@@ -318,7 +316,6 @@
             align-items: center;
             gap: 1.5rem;
         }
-
 
         .hero-photo-wrap {
             position: relative;
@@ -390,6 +387,48 @@
             color: var(--white);
         }
 
+        /* ── DOR ────────────────────────────────────────────── */
+        #dor {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 5rem 0;
+        }
+
+        .dor-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 760px;
+            margin: 0 auto 2rem;
+        }
+
+        .dor-item {
+            background: var(--charcoal);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            color: var(--gray-light);
+            line-height: 1.6;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .dor-item:hover {
+            background: rgba(232,93,4,0.07);
+            border-color: var(--orange-light);
+        }
+
+        .dor-fechamento {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--gray-light);
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .dor-fechamento strong { color: var(--white); }
+
         /* ── SOBRE ──────────────────────────────────────────── */
         #sobre {
             background: var(--black-soft);
@@ -403,9 +442,7 @@
             align-items: center;
         }
 
-        .sobre-img-wrap {
-            position: relative;
-        }
+        .sobre-img-wrap { position: relative; }
 
         .sobre-img {
             width: 100%;
@@ -469,10 +506,7 @@
 
         .pillar:hover { border-color: rgba(232,93,4,0.4); }
 
-        .pillar-icon {
-            font-size: 1.3rem;
-            margin-bottom: 0.6rem;
-        }
+        .pillar-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
 
         .pillar-title {
             font-family: 'Cormorant Garamond', serif;
@@ -484,110 +518,7 @@
             letter-spacing: 0.5px;
         }
 
-        .pillar-desc {
-            font-size: 0.82rem;
-            color: var(--gray-mid);
-            line-height: 1.5;
-        }
-
-        /* ── PRODUTOS ───────────────────────────────────────── */
-        #produtos {
-            background: var(--black);
-        }
-
-        .produtos-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .produtos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .produto-card {
-            background: var(--charcoal);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .produto-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--orange);
-        }
-
-        .produto-card-img {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-            display: block;
-        }
-
-        .produto-card-img-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, var(--gray-dark), var(--black-soft));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .produto-card-img-placeholder svg {
-            opacity: 0.2;
-        }
-
-        .produto-card-body {
-            padding: 1.75rem 2rem 2rem;
-        }
-
-        .produto-tag {
-            display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--orange);
-            background: var(--orange-glow);
-            padding: 0.3rem 0.75rem;
-            border-radius: 3px;
-            margin-bottom: 1rem;
-        }
-
-        .produto-title {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: var(--white);
-            margin-bottom: 0.75rem;
-            line-height: 1.2;
-        }
-
-        .produto-desc {
-            font-size: 0.95rem;
-            color: var(--gray-light);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .produto-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--orange);
-            transition: gap 0.2s;
-        }
-
-        .produto-card:hover .produto-cta { gap: 0.8rem; }
-
-        .produto-cta svg { transition: transform 0.2s; }
-        .produto-card:hover .produto-cta svg { transform: translateX(3px); }
+        .pillar-desc { font-size: 0.82rem; color: var(--gray-mid); line-height: 1.5; }
 
         /* ── CONSULTORIA ────────────────────────────────────── */
         #consultoria {
@@ -596,16 +527,9 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .consultoria-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
+        .consultoria-header { text-align: center; margin-bottom: 4rem; }
+        .consultoria-header .section-subtitle { margin: 0 auto; }
 
-        .consultoria-header .section-subtitle {
-            margin: 0 auto;
-        }
-
-        /* 4 passos */
         .passos {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -624,52 +548,35 @@
             background: linear-gradient(to right, var(--orange) 0%, rgba(232,93,4,0.15) 100%);
         }
 
-        .passo {
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
+        .passo { padding: 0 1.5rem; position: relative; z-index: 1; }
 
         .passo-num {
-            width: 4rem;
-            height: 4rem;
+            width: 4rem; height: 4rem;
             background: var(--black-soft);
             border: 2px solid var(--orange);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 900;
+            font-size: 1.1rem; font-weight: 900;
             color: var(--orange);
             margin-bottom: 1.5rem;
         }
 
         .passo-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--white);
-            margin-bottom: 0.6rem;
+            font-size: 0.85rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.8px;
+            color: var(--white); margin-bottom: 0.6rem;
         }
 
-        .passo-desc {
-            font-size: 0.88rem;
-            color: var(--gray-mid);
-            line-height: 1.65;
-        }
+        .passo-desc { font-size: 0.88rem; color: var(--gray-mid); line-height: 1.65; }
 
         /* Preços */
         .precos-titulo {
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 1rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px;
             color: var(--orange);
             margin-bottom: 2rem;
         }
@@ -685,15 +592,11 @@
             background: var(--charcoal);
             border: 1px solid rgba(255,255,255,0.07);
             border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
+            padding: 2rem; text-align: center;
             transition: border-color 0.25s, transform 0.25s;
         }
 
-        .preco-card:hover {
-            border-color: var(--orange-border);
-            transform: translateY(-4px);
-        }
+        .preco-card:hover { border-color: var(--orange); transform: translateY(-4px); }
 
         .preco-card.destaque {
             border-color: var(--orange);
@@ -702,189 +605,63 @@
 
         .preco-tag {
             display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--orange);
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--orange);
             background: var(--orange-glow);
-            padding: 0.25rem 0.75rem;
-            border-radius: 3px;
-            margin-bottom: 1rem;
+            padding: 0.25rem 0.75rem; border-radius: 3px; margin-bottom: 1rem;
         }
 
         .preco-modalidade {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 0.4rem;
+            font-size: 1.1rem; font-weight: 800;
+            color: var(--white); margin-bottom: 0.4rem;
         }
 
-        .preco-local {
-            font-size: 0.82rem;
-            color: var(--gray-mid);
-            margin-bottom: 1.25rem;
-        }
+        .preco-local { font-size: 0.82rem; color: var(--gray-mid); margin-bottom: 1.25rem; }
 
         .preco-valor {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--orange);
-            line-height: 1;
-            margin-bottom: 0.3rem;
+            font-size: 2.2rem; font-weight: 900;
+            color: var(--orange); line-height: 1; margin-bottom: 0.3rem;
         }
 
         .preco-valor sup {
-            font-size: 1rem;
-            vertical-align: top;
-            margin-top: 0.4rem;
-            display: inline-block;
+            font-size: 1rem; vertical-align: top;
+            margin-top: 0.4rem; display: inline-block;
         }
 
-        .preco-obs {
-            font-size: 0.78rem;
-            color: var(--gray-mid);
-            line-height: 1.5;
-        }
+        .preco-obs { font-size: 0.78rem; color: var(--gray-mid); line-height: 1.5; }
 
         .preco-ancora {
-            text-align: center;
-            font-size: 0.88rem;
-            color: var(--gray-mid);
-            max-width: 520px;
-            margin: -0.5rem auto 2.5rem;
-            line-height: 1.65;
+            text-align: center; font-size: 0.88rem;
+            color: var(--gray-mid); max-width: 520px;
+            margin: -0.5rem auto 2.5rem; line-height: 1.65;
         }
-        .preco-ancora strong {
-            color: var(--white);
-        }
+
+        .preco-ancora strong { color: var(--white); }
+
         .preco-lista {
-            list-style: none;
-            text-align: left;
+            list-style: none; text-align: left;
             margin: 1rem 0 0.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.45rem;
+            display: flex; flex-direction: column; gap: 0.45rem;
         }
+
         .preco-lista li {
-            font-size: 0.78rem;
-            color: var(--gray-mid);
-            line-height: 1.4;
-            padding-left: 1.2rem;
-            position: relative;
+            font-size: 0.78rem; color: var(--gray-mid);
+            line-height: 1.4; padding-left: 1.2rem; position: relative;
         }
+
         .preco-lista li::before {
-            content: '✶';
-            position: absolute;
-            left: 0;
-            color: var(--orange);
-            font-size: 0.55rem;
-            top: 0.2rem;
+            content: '✶'; position: absolute; left: 0;
+            color: var(--orange); font-size: 0.55rem; top: 0.2rem;
         }
 
-        /* Form consultoria */
-        .consultoria-form-outer {
-            max-width: 640px;
-            margin: 0 auto;
-        }
-
-        .consultoria-form-wrap {
-            background: var(--charcoal);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 10px;
-            padding: 2.5rem;
-        }
-
-        .form-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: var(--white);
-            text-align: center;
-        }
-
-        .form-subtitle {
-            font-size: 0.9rem;
-            color: var(--gray-mid);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--gray-light);
-            margin-bottom: 0.4rem;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 5px;
-            padding: 0.75rem 1rem;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            color: var(--white);
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-input::placeholder,
-        .form-textarea::placeholder { color: var(--gray-mid); }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            border-color: var(--orange);
-        }
-
-        .form-select option { background: var(--charcoal); }
-
-        .form-textarea { resize: vertical; min-height: 100px; }
-
-        .form-btn {
-            width: 100%;
-            background: var(--orange);
-            color: var(--white);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 0.9rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 0.5rem;
-        }
-
-        .form-btn:hover { background: var(--orange-dark); }
-
-        .form-note {
-            text-align: center;
-            font-size: 0.78rem;
-            color: var(--gray-mid);
-            margin-top: 0.75rem;
-        }
+        /* Testemunhos inline */
+        .testemunhos-inline { margin: 0 0 4rem; }
+        .testemunhos-inline-header { text-align: center; margin-bottom: 2.5rem; }
 
         /* ── TESTEMUNHOS ────────────────────────────────────── */
-        #testemunhos {
-            background: var(--black);
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .testemunhos-header {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
+        .testemunhos-header { text-align: center; margin-bottom: 3.5rem; }
 
         .testemunhos-grid {
             display: grid;
@@ -898,60 +675,113 @@
             border: 1px solid rgba(255,255,255,0.06);
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .testemunho-card:hover {
             transform: translateY(-5px);
-            border-color: var(--orange-border);
+            border-color: rgba(232,93,4,0.5);
+            box-shadow: 0 0 28px rgba(232,93,4,0.22), 0 8px 32px rgba(0,0,0,0.4);
         }
 
-        .testemunho-img {
-            width: 100%;
-            display: block;
-        }
+        .testemunho-img { width: 100%; display: block; }
 
         @media (max-width: 860px) {
             .testemunhos-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
         }
 
-        /* ── CONTATO ────────────────────────────────────────── */
-        #contato {
-            background: var(--black);
-        }
-
-        .contato-inner {
-            text-align: center;
-            max-width: 620px;
-            margin: 0 auto;
-        }
-
-        .contato-links {
+        /* Trust signals */
+        .form-trust {
             display: flex;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-trust-item { font-size: 0.88rem; color: var(--gray-light); }
+        .form-trust-item .check { color: var(--orange); font-weight: 700; margin-right: 0.3rem; }
+
+        /* Form consultoria */
+        .consultoria-form-outer { max-width: 640px; margin: 0 auto; }
+
+        .consultoria-form-wrap {
+            background: var(--charcoal);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 2.5rem;
+        }
+
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; font-weight: 800;
+            margin-bottom: 0.5rem; color: var(--white); text-align: center;
+        }
+
+        .form-subtitle {
+            font-size: 0.9rem; color: var(--gray-mid);
+            margin-bottom: 2rem; text-align: center;
+        }
+
+        .form-group { margin-bottom: 1rem; }
+
+        .form-label {
+            display: block; font-size: 0.8rem; font-weight: 700;
+            color: var(--gray-light); margin-bottom: 0.4rem;
+            letter-spacing: 0.3px; text-transform: uppercase;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 5px;
+            padding: 0.75rem 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; color: var(--white);
+            outline: none; transition: border-color 0.2s;
+        }
+
+        .form-input::placeholder, .form-textarea::placeholder { color: var(--gray-mid); }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--orange); }
+        .form-select option { background: var(--charcoal); }
+        .form-textarea { resize: vertical; min-height: 100px; }
+
+        .form-btn {
+            width: 100%; background: var(--orange); color: var(--white);
+            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem;
+            padding: 0.9rem; border: none; border-radius: 5px;
+            cursor: pointer; transition: background 0.2s; margin-top: 0.5rem;
+        }
+
+        .form-btn:hover { background: var(--orange-dark); }
+
+        .form-note {
+            text-align: center; font-size: 0.78rem;
+            color: var(--gray-mid); margin-top: 0.75rem;
+        }
+
+        /* ── CONTATO ────────────────────────────────────────── */
+        #contato { background: var(--black); }
+
+        .contato-inner { text-align: center; max-width: 620px; margin: 0 auto; }
+
+        .contato-links {
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem;
         }
 
         .contato-link {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
+            display: flex; align-items: center; gap: 0.6rem;
             padding: 0.75rem 1.5rem;
             border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 5px;
-            color: var(--gray-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
+            border-radius: 5px; color: var(--gray-light);
+            text-decoration: none; font-weight: 600; font-size: 0.9rem;
             transition: border-color 0.2s, color 0.2s;
         }
 
-        .contato-link:hover {
-            border-color: var(--orange);
-            color: var(--white);
-        }
+        .contato-link:hover { border-color: var(--orange); color: var(--white); }
 
         /* ── FOOTER ─────────────────────────────────────────── */
         footer {
@@ -961,26 +791,35 @@
         }
 
         .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
+            display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 1rem;
         }
 
         .footer-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 900;
-            font-size: 1.1rem;
-            color: var(--white);
-            text-decoration: none;
+            font-weight: 900; font-size: 1.1rem;
+            color: var(--white); text-decoration: none;
         }
 
         .footer-logo span { color: var(--orange); }
+        .footer-copy { font-size: 0.82rem; color: var(--gray-mid); }
 
-        .footer-copy {
-            font-size: 0.82rem;
-            color: var(--gray-mid);
+        /* ── STICKY CTA MOBILE ──────────────────────────────── */
+        .sticky-mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: var(--black-soft);
+            border-top: 1px solid rgba(232,93,4,0.3);
+            padding: 0.85rem 1.5rem;
+            z-index: 200;
+        }
+
+        .sticky-mobile-cta .btn-primary {
+            width: 100%;
+            justify-content: center;
+            font-size: 1rem;
+            padding: 1rem;
         }
 
         /* ── MOBILE ─────────────────────────────────────────── */
@@ -994,19 +833,14 @@
             .nav-links { display: none; }
 
             .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: fixed;
-                top: 0; left: 0; right: 0; bottom: 0;
+                display: flex; flex-direction: column;
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
                 background: rgba(13,13,13,0.98);
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                z-index: 99;
+                align-items: center; justify-content: center;
+                gap: 2rem; z-index: 99;
             }
 
             .nav-links.open a { font-size: 1.3rem; }
-
             .nav-toggle { display: flex; z-index: 200; }
 
             .hero-inner {
@@ -1020,23 +854,21 @@
             .hero-desc { margin: 0 auto 2.5rem; }
             .hero-actions { justify-content: center; }
             .hero-stats { justify-content: center; }
-
             .hero-photo-wrap { width: 260px; margin: 0 auto; }
             .hero-card { left: 0; right: 0; width: fit-content; margin: 0 auto; bottom: -1rem; }
-
             .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
             .passos { grid-template-columns: 1fr; }
             .precos-grid { max-width: 100%; }
-
             .sobre-img-wrap { max-width: 340px; margin: 0 auto; }
-
-            .produtos-grid { grid-template-columns: 1fr; }
+            .sticky-mobile-cta { display: block; }
+            body { padding-bottom: 72px; }
         }
 
         @media (max-width: 600px) {
             section { padding: 4rem 0; }
             .sobre-pillars { grid-template-columns: 1fr; }
             .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+            .form-trust { flex-direction: column; align-items: center; gap: 0.75rem; }
         }
     </style>
     <!-- Google Tag Manager -->
@@ -1072,7 +904,6 @@
 
 <!-- HERO -->
 <section id="hero">
-
     <div class="hero-glow"></div>
     <div class="container">
         <div class="hero-inner">
@@ -1081,10 +912,10 @@
                     <span>Perfumaria Masculina</span>
                 </div>
                 <h1 class="hero-title">
-                    O que você não vê<br>
-                    é o que te torna <em>inesquecível</em>
+                    Você até tem perfumes bons,<br>
+                    mas será que é o <em>perfume certo</em> para você?
                 </h1>
-                <p class="hero-subtitle">Consultoria Olfativa para homens que entendem o valor da sua imagem</p>
+                <p class="hero-subtitle">Consultoria olfativa personalizada — diagnóstico, curadoria e guia completo em uma sessão.</p>
                 <div class="hero-actions">
                     <a href="#consultoria" class="btn-primary">
                         Quero Consultoria
@@ -1100,22 +931,44 @@
                     <img src="images/victor-hero.jpg" alt="Victor Guerise" class="hero-photo"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="hero-photo-placeholder" style="display:none;">Sua foto aqui</div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">+16K</div>
-                        <div class="stat-label">Instagram</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">+6K</div>
-                        <div class="stat-label">TikTok</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">+2K</div>
-                        <div class="stat-label">Alunos</div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">+16K</div>
+                            <div class="stat-label">Instagram</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">+6K</div>
+                            <div class="stat-label">TikTok</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">+2K</div>
+                            <div class="stat-label">Alunos</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DOR -->
+<section id="dor">
+    <div class="container" style="max-width:800px;">
+        <span class="badge" style="display:block; text-align:center;">Você se identifica?</span>
+        <h2 class="section-title" style="text-align:center; margin-bottom:2.5rem;">
+            Perfume caro não é<br><em>perfume certo</em>
+        </h2>
+        <ul class="dor-list">
+            <li class="dor-item">Gastou R$400, R$600, R$800 num frasco — e usou poucas vezes porque "não era bem aquilo"</li>
+            <li class="dor-item">Na loja, o vendedor convenceu. Em casa, o perfume virou outro</li>
+            <li class="dor-item">Não sabe o que gosta — só sabe o que não funcionou</li>
+            <li class="dor-item">Usa o mesmo perfume no trabalho, no final de semana e em encontros — por falta de direção</li>
+        </ul>
+        <p class="dor-fechamento">
+            Isso não é falta de dinheiro. É falta de direção.<br>
+            <strong>A consultoria resolve isso em uma sessão.</strong>
+        </p>
+    </div>
 </section>
 
 <!-- SOBRE -->
@@ -1129,32 +982,18 @@
                 <div class="sobre-img-placeholder" style="display:none;">Sua foto aqui</div>
             </div>
             <div class="sobre-content">
-            <div class="sobre-content">
                 <span class="badge">Sobre mim</span>
                 <h2 class="section-title" style="text-align:left;">
                     Prazer, <em>Victor Guerise</em>
                 </h2>
-                <p class="sobre-text">
-                    Me chamo Victor, internacionalista de formação e trabalho com clientes high profile desde o início da carreira.
-                </p>
-                <p class="sobre-text">
-                    E com eles, aprendi desde cedo algo que nunca mais esqueci: a imagem comunica antes da primeira palavra.
-                </p>
-                <p class="sobre-text">
-                    Isso me levou a ter muito cuidado com a minha imagem, mas ainda sim, faltava algo que eu não sabia o que era. E foi por acidente, em 2022, que esbarrei na perfumaria. Ganhei um perfume de presente e passei a usá-lo, sem pretensão, por educação até.
-                </p>
-                <p class="sobre-text">
-                    E aí, o primeiro elogio veio. E o segundo. E na semana seguinte me perguntaram dele. O perfume? Vibrant Leather, da Zara.
-                </p>
-                <p class="sobre-text">
-                    Isso ficou na minha mente e depois daí, não tive como fugir e entrei no mundo da perfumaria e descobri o que todos deveriam saber: a fragrância certa muda a percepção que as pessoas têm de você antes mesmo de você abrir a boca.
-                </p>
-                <p class="sobre-text">
-                    Estudei a fundo, errei caro, e desde 2022 ajudo homens a usar perfume como instrumento de imagem — para transmitir autoridade, presença e intenção em qualquer ambiente.
-                </p>
-                <p class="sobre-text">
-                    Se você, assim como eu, entende o valor da sua imagem, quer uma coleção que representa quem você é e está pronto para usar a perfumaria a seu favor — veio ao lugar certo.
-                </p>
+                <p class="sobre-text">Me chamo Victor, internacionalista de formação e trabalho com clientes high profile desde o início da carreira.</p>
+                <p class="sobre-text">E com eles, aprendi desde cedo algo que nunca mais esqueci: a imagem comunica antes da primeira palavra.</p>
+                <p class="sobre-text">Isso me levou a ter muito cuidado com a minha imagem, mas ainda sim, faltava algo que eu não sabia o que era. E foi por acidente, em 2022, que esbarrei na perfumaria. Ganhei um perfume de presente e passei a usá-lo, sem pretensão, por educação até.</p>
+                <p class="sobre-text">E aí, o primeiro elogio veio. E o segundo. E na semana seguinte me perguntaram dele. O perfume? Vibrant Leather, da Zara.</p>
+                <p class="sobre-text">Isso ficou na minha mente e depois daí, não tive como fugir e entrei no mundo da perfumaria e descobri o que todos deveriam saber: a fragrância certa muda a percepção que as pessoas têm de você antes mesmo de você abrir a boca.</p>
+                <p class="sobre-text">Estudei a fundo, errei caro, e desde 2022 ajudo homens a usar perfume como instrumento de imagem — para transmitir autoridade, presença e intenção em qualquer ambiente.</p>
+                <p class="sobre-text">Se você, assim como eu, entende o valor da sua imagem, quer uma coleção que representa quem você é e está pronto para usar a perfumaria a seu favor — veio ao lugar certo.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -1194,22 +1033,41 @@
         </div>
 
         <!-- PREÇOS -->
-        <p class="precos-titulo">Investimento</p>
-        <p class="preco-ancora">Um frasco de perfume de nicho pode custar milhares de reais. A consultoria garante que o próximo que você comprar vai ser o certo.</p>
+        <p class="precos-titulo">
+            Investimento <span style="color:var(--orange); font-size:0.82em; font-family:'DM Sans',sans-serif; letter-spacing:1px;">(vagas limitadas!)</span>
+        </p>
+        <p class="preco-ancora">
+            Um frasco de nicho bom custa em torno de <strong>R$800</strong>.
+            A consultoria garante que o próximo que você comprar vai ser o certo —
+            e que você não vai mais desperdiçar dinheiro comprando errado.
+        </p>
         <div class="precos-grid">
             <div class="preco-card">
                 <span class="preco-tag">Online</span>
                 <div class="preco-modalidade">Mapeamento Olfativo Online</div>
                 <div class="preco-local">Via videochamada · qualquer lugar do Brasil</div>
-                <div class="preco-valor"><span style="font-size:0.45em; font-weight:700; display:block; letter-spacing:2px; color:var(--gray-mid); margin-bottom:0.2rem; text-transform:uppercase;">a partir de</span><sup>R$</sup>350</div>
-                <ul class="preco-lista"><li>Sessão individual via videochamada</li><li>Diagnóstico do seu perfil olfativo</li><li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li><li>Guia escrito com ocasião, onde comprar e como usar</li><li>Suporte para tirar dúvidas</li></ul>
+                <div class="preco-valor"><sup>R$</sup>3.000</div>
+                <ul class="preco-lista">
+                    <li>Sessão individual via videochamada</li>
+                    <li>Diagnóstico do seu perfil olfativo</li>
+                    <li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li>
+                    <li>Guia escrito com ocasião, onde comprar e como usar</li>
+                    <li>Suporte para tirar dúvidas</li>
+                </ul>
             </div>
             <div class="preco-card destaque">
                 <span class="preco-tag">Presencial</span>
                 <div class="preco-modalidade">Imersão Olfativa Presencial</div>
                 <div class="preco-local">Rio de Janeiro · RJ</div>
                 <div class="preco-valor" style="font-size:1.15rem; letter-spacing:0.5px;">Solicite valor</div>
-                <ul class="preco-lista"><li>Sessão presencial de até 90 min no RJ</li><li>Você descobre as notas que gosta em tempo real</li><li>Diagnóstico e curadoria ao vivo</li><li>Guia escrito entregue após a sessão</li><li>Suporte para tirar dúvidas</li><li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li></ul>
+                <ul class="preco-lista">
+                    <li>Sessão presencial de até 90 min no RJ</li>
+                    <li>Você descobre as notas que gosta em tempo real</li>
+                    <li>Diagnóstico e curadoria ao vivo</li>
+                    <li>Guia escrito entregue após a sessão</li>
+                    <li>Suporte para tirar dúvidas</li>
+                    <li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li>
+                </ul>
             </div>
             <div class="preco-card">
                 <span class="preco-tag">Presencial Fora do RJ</span>
@@ -1220,8 +1078,41 @@
             </div>
         </div>
 
-        <!-- FORMULÁRIO -->
+        <!-- TESTEMUNHOS -->
+        <div class="testemunhos-inline">
+            <div class="testemunhos-inline-header">
+                <span class="badge">Quem já passou por aqui</span>
+                <h2 class="section-title">Palavras de quem<br><em>já viveu na prática</em></h2>
+            </div>
+            <div class="testemunhos-grid">
+                <div class="testemunho-card">
+                    <img src="images/testemunho-1.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                </div>
+                <div class="testemunho-card">
+                    <img src="images/testemunho-2.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                </div>
+                <div class="testemunho-card">
+                    <img src="images/testemunho-3.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                </div>
+                <div class="testemunho-card">
+                    <img src="images/testemunho-4.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                </div>
+                <div class="testemunho-card">
+                    <img src="images/testemunho-5.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                </div>
+                <div class="testemunho-card">
+                    <img src="images/testemunho-6.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- TRUST SIGNALS + FORMULÁRIO -->
         <div class="consultoria-form-outer">
+            <div class="form-trust">
+                <span class="form-trust-item"><span class="check">✓</span> Resposta em até 24h no WhatsApp</span>
+                <span class="form-trust-item"><span class="check">✓</span> Sem compromisso nessa primeira conversa</span>
+                <span class="form-trust-item"><span class="check">✓</span> +2.000 homens já passaram por aqui</span>
+            </div>
             <div class="consultoria-form-wrap">
                 <div class="form-title">Solicite sua consultoria</div>
                 <div class="form-subtitle">Preencha e entrarei em contato em até 24h.</div>
@@ -1238,8 +1129,7 @@
                         <label class="form-label">Modalidade de interesse</label>
                         <select class="form-select form-input">
                             <option value="">Selecione</option>
-                            <option>Online — R$350 (Perfumaria Designer e Nicho Inicial)</option>
-                            <option>Online — R$600 (Nicho, Alta Perfumaria e Ultra Nicho)</option>
+                            <option>Online — R$3.000</option>
                             <option>Presencial — Rio de Janeiro (sob consulta)</option>
                             <option>Presencial — Fora do Rio (sob consulta)</option>
                         </select>
@@ -1254,36 +1144,6 @@
             </div>
         </div>
 
-    </div>
-</section>
-
-<!-- TESTEMUNHOS -->
-<section id="testemunhos">
-    <div class="container">
-        <div class="testemunhos-header">
-            <span class="badge">Quem já passou por aqui</span>
-            <h2 class="section-title">Palavras de quem<br><em>já viveu na prática</em></h2>
-        </div>
-        <div class="testemunhos-grid">
-            <div class="testemunho-card">
-                <img src="images/testemunho-1.jpg" alt="Depoimento de aluno" class="testemunho-img">
-            </div>
-            <div class="testemunho-card">
-                <img src="images/testemunho-2.jpg" alt="Depoimento de aluno" class="testemunho-img">
-            </div>
-            <div class="testemunho-card">
-                <img src="images/testemunho-3.jpg" alt="Depoimento de aluno" class="testemunho-img">
-            </div>
-            <div class="testemunho-card">
-                <img src="images/testemunho-4.jpg" alt="Depoimento de aluno" class="testemunho-img">
-            </div>
-            <div class="testemunho-card">
-                <img src="images/testemunho-5.jpg" alt="Depoimento de aluno" class="testemunho-img">
-            </div>
-            <div class="testemunho-card">
-                <img src="images/testemunho-6.jpg" alt="Depoimento de aluno" class="testemunho-img">
-            </div>
-        </div>
     </div>
 </section>
 
@@ -1332,24 +1192,29 @@
     </div>
 </footer>
 
+<!-- STICKY CTA MOBILE -->
+<div class="sticky-mobile-cta">
+    <a href="#consultoria" class="btn-primary">
+        Quero Consultoria
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+
 <script>
-    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
         navbar.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // Mobile menu
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => {
-        links.classList.toggle('open');
-    });
+    toggle.addEventListener('click', () => { links.classList.toggle('open'); });
     links.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => links.classList.remove('open'));
     });
 
-    // Formulário → WhatsApp
     function handleForm(e) {
         e.preventDefault();
         const form = e.target;
@@ -1357,16 +1222,13 @@
         const tel  = form.querySelector('input[type="tel"]').value;
         const coll = form.querySelector('select').value;
         const msg  = form.querySelector('textarea').value;
-
         const text = encodeURIComponent(
             `Olá Victor! Quero solicitar uma consultoria.\n\n` +
             `*Nome:* ${nome}\n` +
             `*WhatsApp:* ${tel}\n` +
-            `*Tenho perfumes?* ${coll}\n` +
+            `*Modalidade:* ${coll}\n` +
             `*O que busco:* ${msg}`
         );
-
-        // Substitua pelo seu número com DDI: 5511999999999
         window.open(`https://wa.me/5521976462812?text=${text}`, '_blank');
     }
 </script>
