@@ -1133,7 +1133,7 @@
     <!-- BONUS URGENCY BANNER -->
     <div class="bonus-banner">
         <div class="bonus-banner-dot"></div>
-        <span>⚡ <strong>Oferta especial</strong> expira em <strong id="banner-countdown">--:--:--</strong></span>
+        <span>✦ <strong>Vagas abertas</strong> — garanta o seu acesso agora</span>
     </div>
 
     <!-- IMPACTO / IDENTIDADE -->
@@ -1388,20 +1388,7 @@
                 <div class="bonus-tag">🎁 BÔNUS EXCLUSIVO — INCLUSO NO CURSO</div>
                 <h2 class="bonus-title">Bônus <em>Exclusivo</em> Incluso no Curso</h2>
 
-                <div class="bonus-slots-counter" style="background:linear-gradient(135deg,#c62828,#8b0000); border-radius:14px; padding:1.8rem 1rem; margin:1.5rem 0; box-shadow:0 8px 28px rgba(198,40,40,0.35); overflow:hidden;">
-                    <div style="text-align:center; margin-bottom: 1rem;">
-                        <span style="font-size:0.78rem; color:#FFFFFF; text-transform:uppercase; letter-spacing:2px; font-weight:700;">⏰ Oferta expira em</span>
-                    </div>
-                    <div style="display:flex; justify-content:center; gap:0.5rem; margin-bottom:1rem; flex-wrap:nowrap;">
-                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-days">00</div><div class="countdown-label">dias</div></div>
-                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-hours">00</div><div class="countdown-label">horas</div></div>
-                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-minutes">00</div><div class="countdown-label">min</div></div>
-                        <div class="countdown-item" style="min-width:56px; max-width:72px; flex:1;"><div class="countdown-number" id="bonus-seconds">00</div><div class="countdown-label">seg</div></div>
-                    </div>
-                    <div style="text-align:center;">
-                        <span style="font-size:0.82rem; color:#FFFFFF;">Domingo · 23h59 · Preço pode aumentar após essa data</span>
-                    </div>
-                </div>
+                <div style="text-align:center; margin:1.5rem 0;"><span style="display:inline-block; background:var(--orange); color:#fff; font-size:0.78rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:0.5rem 1.5rem; border-radius:100px;">Incluso gratuitamente</span></div>
 
                 <div class="bonus-card" style="flex-direction: column; align-items: center; text-align: center;">
                     <div class="bonus-media" style="width:100%; max-width:420px; margin:0 auto;">
@@ -1539,7 +1526,7 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">"Quanto tempo tenho de acesso?"</div>
-                    <div class="faq-answer">Acesso por 12 meses ao valor de R$ 147, pagamento único. As aulas ficam disponíveis 24/7 durante todo o período, no seu ritmo.</div>
+                    <div class="faq-answer">Acesso vitalício ao valor de R$ 147, pagamento único. As aulas ficam disponíveis 24/7 no seu ritmo.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">"Posso parcelar?"</div>
@@ -1634,55 +1621,7 @@
                 });
             });
 
-            // Countdown até domingo 23h59 (sempre o próximo domingo)
-            function getNextSunday2359() {
-                const now = new Date();
-                const brt = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
-                const day = brt.getDay(); // 0=dom, 1=seg...6=sab
-                const daysUntilSunday = day === 0 ? 7 : 7 - day; // se hoje é domingo, próximo domingo
-                const target = new Date(brt);
-                target.setDate(brt.getDate() + daysUntilSunday);
-                target.setHours(23, 59, 0, 0);
-                return target;
-            }
-
-            function updateBonusCountdown() {
-                const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
-                const target = getNextSunday2359();
-                const diff = target - now;
-
-                if (diff <= 0) {
-                    ['bonus-days','bonus-hours','bonus-minutes','bonus-seconds'].forEach(id => {
-                        const el = document.getElementById(id);
-                        if (el) el.textContent = '00';
-                    });
-                    const banner = document.getElementById('banner-countdown');
-                    if (banner) banner.textContent = '00:00:00';
-                    return;
-                }
-
-                const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                const pad = n => String(n).padStart(2, '0');
-
-                const dEl = document.getElementById('bonus-days');
-                const hEl = document.getElementById('bonus-hours');
-                const mEl = document.getElementById('bonus-minutes');
-                const sEl = document.getElementById('bonus-seconds');
-                if (dEl) dEl.textContent = pad(days);
-                if (hEl) hEl.textContent = pad(hours);
-                if (mEl) mEl.textContent = pad(minutes);
-                if (sEl) sEl.textContent = pad(seconds);
-
-                const banner = document.getElementById('banner-countdown');
-                if (banner) banner.textContent = `${pad(days)}d ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-            }
-
-            updateBonusCountdown();
-            setInterval(updateBonusCountdown, 1000);
+            
 
             // Live viewers removido
 
