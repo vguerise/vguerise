@@ -1086,16 +1086,16 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="curso-navbar" id="cursoNavbar">
-        <div class="curso-navbar-inner">
-            <a href="https://vguerise.com.br" class="curso-navbar-back">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"/>
-                </svg>
-                Voltar
-            </a>
-            <a href="/lista" style="color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.85rem; font-weight:600; letter-spacing:0.3px; margin-right:0.5rem;">Guia</a>
-            <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="curso-navbar-cta" onclick="fbq('track','InitiateCheckout');">Quero o curso</a>
+    <style>.snav-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.82rem;font-weight:600;}@media(max-width:640px){.snav-link{display:none;}}</style>
+    <nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,9,9,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);" id="cursoNavbar">
+        <div style="max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:58px;">
+            <a href="https://vguerise.com.br" style="color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.5px;">Victor Guerise</a>
+            <div style="display:flex;align-items:center;gap:1.5rem;">
+                <a href="/curso" class="snav-link">Curso</a>
+                <a href="/lista" class="snav-link">Guia</a>
+                <a href="https://vguerise.com.br#consultoria" class="snav-link">Consultoria</a>
+                <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" style="background:#E85D04;color:white;padding:0.48rem 1.1rem;border-radius:3px;text-decoration:none;font-size:0.8rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;" onclick="fbq('track','InitiateCheckout');">Quero o curso</a>
+            </div>
         </div>
     </nav>
 
