@@ -950,49 +950,22 @@
         .divider { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
 
         /* NAVBAR */
-        .curso-navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            padding: 0.85rem 2rem;
-            background: transparent;
-            transition: background 0.3s, backdrop-filter 0.3s;
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.2rem 0; transition:background 0.3s, backdrop-filter 0.3s; }
+        nav.scrolled { background:rgba(13,13,13,0.92); backdrop-filter:blur(12px); border-bottom:1px solid rgba(232,93,4,0.15); }
+        .nav-inner { max-width:1140px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:center; }
+        .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
+        .nav-links a { font-size:0.9rem; font-weight:600; color:#E8E8E8; text-decoration:none; transition:color 0.2s; letter-spacing:0.3px; }
+        .nav-links a:hover { color:#ffffff; }
+        .nav-cta { background:#E85D04; color:#ffffff !important; padding:0.55rem 1.3rem; border-radius:4px; transition:background 0.2s !important; }
+        .nav-cta:hover { background:#C14B00 !important; }
+        .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+        .nav-toggle span { display:block; width:24px; height:2px; background:#ffffff; border-radius:2px; transition:transform 0.3s; }
+        @media (max-width:900px) {
+            .nav-links { display:none; }
+            .nav-links.open { display:flex; flex-direction:column; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(13,13,13,0.98); align-items:center; justify-content:center; gap:2rem; z-index:99; }
+            .nav-links.open a { font-size:1.3rem; }
+            .nav-toggle { display:flex; z-index:200; }
         }
-        .curso-navbar.scrolled {
-            background: rgba(13,13,13,0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(232,93,4,0.15);
-        }
-        .curso-navbar-inner {
-            max-width: 1140px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .curso-navbar-back {
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #FFFFFF;
-            text-decoration: none;
-            letter-spacing: 0.3px;
-            transition: color 0.2s;
-        }
-        .curso-navbar-back:hover { color: #ffffff; }
-        .curso-navbar-cta {
-            background: var(--orange);
-            color: #ffffff !important;
-            font-size: 0.88rem;
-            font-weight: 700;
-            padding: 0.5rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-        .curso-navbar-cta:hover { background: var(--orange-dark); }
         /* === DARK THEME === */
         body { background: #0A0909 !important; color: #F0F0F0 !important; }
         .intro-section { background: #141414 !important; border-color: #2a2a2a !important; }
@@ -1086,16 +1059,20 @@
 <body>
 
     <!-- NAVBAR -->
-    <style>.snav-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.82rem;font-weight:600;}@media(max-width:640px){.snav-link{display:none;}}</style>
-    <nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,9,9,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);" id="cursoNavbar">
-        <div style="max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:58px;">
-            <a href="https://vguerise.com.br" style="color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.82rem;font-weight:700;letter-spacing:0.5px;">Victor Guerise</a>
-            <div style="display:flex;align-items:center;gap:1.5rem;">
-                <a href="/curso" class="snav-link">Curso</a>
-                <a href="/lista" class="snav-link">Guia</a>
-                <a href="https://vguerise.com.br#consultoria" class="snav-link">Consultoria</a>
-                <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" style="background:#E85D04;color:white;padding:0.48rem 1.1rem;border-radius:3px;text-decoration:none;font-size:0.8rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;" onclick="fbq('track','InitiateCheckout');">Quero o curso</a>
-            </div>
+    <nav id="navbar">
+        <div class="nav-inner">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="https://vguerise.com.br#sobre">Sobre</a></li>
+                <li><a href="/curso">Curso</a></li>
+                <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
+                <li><a href="/lista">Guia</a></li>
+                <li><a href="https://vguerise.com.br#consultoria">Consultoria</a></li>
+                <li><a href="https://wa.me/5521976462812" target="_blank">Contato</a></li>
+                <li><a href="https://vguerise.com.br#consultoria" class="nav-cta">Fale Comigo</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -1576,10 +1553,12 @@
 
     <script>
         // Navbar scroll effect
-        const cursoNavbar = document.getElementById('cursoNavbar');
-        window.addEventListener('scroll', () => {
-            cursoNavbar.classList.toggle('scrolled', window.scrollY > 40);
-        });
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+        const toggle = document.getElementById('navToggle');
+        const links = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => { links.classList.toggle('open'); });
+        links.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => links.classList.remove('open')); });
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(q => {
