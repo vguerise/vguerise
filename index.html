@@ -6,9 +6,11 @@
     <title>Victor Guerise — Perfumaria Masculina</title>
     <meta name="description" content="Victor Guerise — referência em perfumaria masculina no Brasil. Cursos, consultoria e ferramentas para quem quer entender e usar perfume de verdade.">
 
+    <link rel="preload" as="image" href="images/victor-hero.jpg" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"></noscript>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -928,8 +930,12 @@
 
             <div class="hero-visual">
                 <div class="hero-photo-wrap">
-                    <img src="images/victor-hero.jpg" alt="Victor Guerise" class="hero-photo"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <picture>
+                        <source srcset="images/victor-hero.webp" type="image/webp">
+                        <img src="images/victor-hero.jpg" alt="Victor Guerise" class="hero-photo"
+                             fetchpriority="high" loading="eager"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    </picture>
                     <div class="hero-photo-placeholder" style="display:none;">Sua foto aqui</div>
                     <div class="hero-stats">
                         <div class="stat-item">
@@ -977,8 +983,11 @@
         <div class="sobre-grid">
             <div class="sobre-img-wrap">
                 <div class="sobre-accent"></div>
-                <img src="images/victor-bio.jpg" alt="Victor Guerise" class="sobre-img"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <picture>
+                    <source srcset="images/victor-bio.webp" type="image/webp">
+                    <img src="images/victor-bio.jpg" alt="Victor Guerise" class="sobre-img" loading="lazy"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                </picture>
                 <div class="sobre-img-placeholder" style="display:none;">Sua foto aqui</div>
             </div>
             <div class="sobre-content">
@@ -1088,22 +1097,40 @@
             </div>
             <div class="testemunhos-grid">
                 <div class="testemunho-card">
-                    <img src="images/testemunho-1.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                    <picture>
+                        <source srcset="images/testemunho-1.webp" type="image/webp">
+                        <img src="images/testemunho-1.jpg" alt="Depoimento de aluno" class="testemunho-img" loading="lazy">
+                    </picture>
                 </div>
                 <div class="testemunho-card">
-                    <img src="images/testemunho-2.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                    <picture>
+                        <source srcset="images/testemunho-2.webp" type="image/webp">
+                        <img src="images/testemunho-2.jpg" alt="Depoimento de aluno" class="testemunho-img" loading="lazy">
+                    </picture>
                 </div>
                 <div class="testemunho-card">
-                    <img src="images/testemunho-3.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                    <picture>
+                        <source srcset="images/testemunho-3.webp" type="image/webp">
+                        <img src="images/testemunho-3.jpg" alt="Depoimento de aluno" class="testemunho-img" loading="lazy">
+                    </picture>
                 </div>
                 <div class="testemunho-card">
-                    <img src="images/testemunho-4.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                    <picture>
+                        <source srcset="images/testemunho-4.webp" type="image/webp">
+                        <img src="images/testemunho-4.jpg" alt="Depoimento de aluno" class="testemunho-img" loading="lazy">
+                    </picture>
                 </div>
                 <div class="testemunho-card">
-                    <img src="images/testemunho-5.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                    <picture>
+                        <source srcset="images/testemunho-5.webp" type="image/webp">
+                        <img src="images/testemunho-5.jpg" alt="Depoimento de aluno" class="testemunho-img" loading="lazy">
+                    </picture>
                 </div>
                 <div class="testemunho-card">
-                    <img src="images/testemunho-6.jpg" alt="Depoimento de aluno" class="testemunho-img">
+                    <picture>
+                        <source srcset="images/testemunho-6.webp" type="image/webp">
+                        <img src="images/testemunho-6.jpg" alt="Depoimento de aluno" class="testemunho-img" loading="lazy">
+                    </picture>
                 </div>
             </div>
         </div>
@@ -1196,9 +1223,13 @@
             `*WhatsApp:* ${tel}\n` +
             `*Modalidade:* ${coll}\n`
         );
-        fbq('track', 'InitiateCheckout');
+        if (typeof fbq === 'function') fbq('track', 'InitiateCheckout');
         window.open(`https://wa.me/5521976462812?text=${text}`, '_blank');
     }
+
+    window.addEventListener('load', function() {
+        if (typeof fbq === 'function') fbq('track', 'ViewContent');
+    });
 </script>
 </body>
 </html>
