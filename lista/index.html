@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -627,7 +627,14 @@
             .nav-links.open a { font-size:1.3rem; }
             .nav-toggle { display:flex; z-index:200; }
         }
-    </style>
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }    </style>
 </head>
 <body>
 
