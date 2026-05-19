@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -1038,7 +1038,14 @@
         .hero-subheadline { font-size: 1.25rem !important; }
         .testimonial-caption { font-size: 1rem !important; }
         .about-signature { font-size: 1.3rem !important; }
-    </style>
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }    </style>
 </head>
 <body>
 
