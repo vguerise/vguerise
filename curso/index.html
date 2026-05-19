@@ -584,6 +584,7 @@
 
         .urgency-badge { background: rgba(232,93,4,0.07); border: 2px solid var(--orange); border-radius: 12px; padding: 0.95rem 1.4rem; text-align: center; margin: 2rem auto; max-width: 460px; animation: urgencyGlow 2s infinite; }
         @keyframes urgencyGlow { 0%,100% { box-shadow: 0 0 8px rgba(232,93,4,0.22); } 50% { box-shadow: 0 0 20px rgba(232,93,4,0.45); } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
         .urgency-badge-text { font-size: 1.02rem; font-weight: 700; color: var(--orange); margin-bottom: 0.18rem; }
         .urgency-badge-subtext { font-size: 0.87rem; color: #FFFFFF; }
 
@@ -1373,7 +1374,7 @@
                     <div class="bonus-media" style="width:100%; max-width:420px; margin:0 auto;">
                         <picture>
                         <source srcset="images/app-mockup.webp" type="image/webp">
-                        <img src="images/app-mockup.png" alt="Mapa da Coleção Perfeita — App com I.A." class="bonus-mockup-img" loading="lazy">
+                        <img src="images/app-mockup.png" alt="Mapa da Coleção Perfeita — App com I.A." class="bonus-mockup-img" loading="lazy" width="1536" height="1024">
                     </picture>
                     </div>
                     <div class="bonus-content" style="width:100%;">
@@ -1476,12 +1477,12 @@
             <h2>Palavras de quem<br><em>já viveu na prática</em></h2>
         </div>
         <div class="testemunhos-grid">
-            <div class="testemunho-card"><picture><source srcset="images/depoimento-1.webp" type="image/webp"><img src="images/depoimento-1.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></picture></div>
-            <div class="testemunho-card"><picture><source srcset="images/depoimento-2.webp" type="image/webp"><img src="images/depoimento-2.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></picture></div>
-            <div class="testemunho-card"><picture><source srcset="images/depoimento-3.webp" type="image/webp"><img src="images/depoimento-3.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></picture></div>
-            <div class="testemunho-card"><picture><source srcset="images/depoimento-4.webp" type="image/webp"><img src="images/depoimento-4.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></picture></div>
-            <div class="testemunho-card"><picture><source srcset="images/depoimento-5.webp" type="image/webp"><img src="images/depoimento-5.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></picture></div>
-            <div class="testemunho-card"><picture><source srcset="images/depoimento-6.webp" type="image/webp"><img src="images/depoimento-6.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></picture></div>
+            <div class="testemunho-card"><picture><source srcset="images/depoimento-1.webp" type="image/webp"><img src="images/depoimento-1.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy" width="1080" height="1446"></picture></div>
+            <div class="testemunho-card"><picture><source srcset="images/depoimento-2.webp" type="image/webp"><img src="images/depoimento-2.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy" width="953" height="1600"></picture></div>
+            <div class="testemunho-card"><picture><source srcset="images/depoimento-3.webp" type="image/webp"><img src="images/depoimento-3.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy" width="1080" height="1560"></picture></div>
+            <div class="testemunho-card"><picture><source srcset="images/depoimento-4.webp" type="image/webp"><img src="images/depoimento-4.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy" width="1080" height="1642"></picture></div>
+            <div class="testemunho-card"><picture><source srcset="images/depoimento-5.webp" type="image/webp"><img src="images/depoimento-5.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy" width="1075" height="1518"></picture></div>
+            <div class="testemunho-card"><picture><source srcset="images/depoimento-6.webp" type="image/webp"><img src="images/depoimento-6.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy" width="836" height="1599"></picture></div>
         </div>
     </section>
 
@@ -1588,14 +1589,16 @@
         });
 
         // Hide floating CTA near footer
+        const fc = document.querySelector('.floating-cta');
+        const footer = document.querySelector('footer');
+        let footerTop = footer ? footer.offsetTop : Infinity;
+        window.addEventListener('resize', () => { footerTop = footer ? footer.offsetTop : Infinity; }, { passive: true });
         window.addEventListener('scroll', () => {
-            const fc = document.querySelector('.floating-cta');
-            const footer = document.querySelector('footer');
-            if (!footer) return;
-            const show = (window.scrollY + window.innerHeight) <= (footer.offsetTop - 100);
+            if (!footer || !fc) return;
+            const show = (window.scrollY + window.innerHeight) <= (footerTop - 100);
             fc.style.opacity = show ? '1' : '0';
             fc.style.pointerEvents = show ? 'auto' : 'none';
-        });
+        }, { passive: true });
 
         document.addEventListener('DOMContentLoaded', function() {
             // Pain cards
