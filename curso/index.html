@@ -6,33 +6,11 @@
     <title>Curso Prático da Perfumaria - Do Zero ao Colecionador Consciente</title>
     <meta name="description" content="O curso mais completo de perfumaria masculina do Brasil. 3 módulos, 11 aulas, do absoluto zero ao colecionador que sabe exatamente o que comprar.">
     
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '804720092315209');
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=804720092315209&ev=PageView&noscript=1"
-    /></noscript>
-
-    <!-- Google Analytics 4 -->
-    <!-- Google tag (gtag.js) -->
+    <!-- GA4 — async, non-blocking -->
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLFFRKHHFB"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TLFFRKHHFB');
-    </script>
+    <script>window.dataLayer = window.dataLayer || [];</script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1659,6 +1637,31 @@
             }
         });
     </script>
+
+    <!-- GA4 init — deferred to after render -->
+    <script>
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TLFFRKHHFB');
+    </script>
+
+    <!-- Meta Pixel — deferred to after render -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '804720092315209');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=804720092315209&ev=PageView&noscript=1"
+    /></noscript>
 
 </body>
 </html>
