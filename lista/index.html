@@ -36,7 +36,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="/curso/images/victor-guerise.jpg" fetchpriority="high">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"></noscript>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -661,7 +663,7 @@
                 </div>
                 <div class="hero-visual">
                     <div class="hero-photo-wrap">
-                        <img src="/curso/images/victor-guerise.jpg" alt="Victor Guerise" class="hero-photo">
+                        <img src="/curso/images/victor-guerise.jpg" alt="Victor Guerise" class="hero-photo" fetchpriority="high" loading="eager">
                         <div class="hero-stats">
                             <div class="stat-item"><div class="stat-number">+18K</div><div class="stat-label">Instagram</div></div>
                             <div class="stat-item"><div class="stat-number">+6K</div><div class="stat-label">TikTok</div></div>
@@ -865,11 +867,10 @@
         <div class="container">
             <div class="author-grid">
                 <div>
-                    <img
-                        src="https://raw.githubusercontent.com/vguerise/vguerise/main/images/victor-bio.jpg"
-                        alt="Victor Guerise"
-                        class="author-photo"
-                    >
+                    <picture>
+                        <source srcset="/images/victor-bio.webp" type="image/webp">
+                        <img src="/images/victor-bio.jpg" alt="Victor Guerise" class="author-photo" loading="lazy">
+                    </picture>
                 </div>
                 <div>
                     <p class="author-eyebrow">O autor</p>
