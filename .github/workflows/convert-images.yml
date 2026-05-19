@@ -18,10 +18,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install WebP tools
-        run: sudo apt-get install -y webp
+      - name: Install tools
+        run: sudo apt-get install -y webp imagemagick
 
-      - name: Convert images to WebP
+      - name: Resize and convert large hero photos (max 800px wide, force overwrite)
+        run: |
+          for img in \
+            curso/images/victor-terno.jpg \
+            curso/images/victor-guerise.jpg \
+            curso/images/victor-hero.jpg \
+            images/victor-hero.jpg \
+            images/victor-bio.jpg; do
+            [ -f "$img" ] || continue
+            base="${img%.*}"
+            # Resize to max 800px wide keeping aspect ratio, then convert to WebP
+            convert "$img" -resize "800>" -quality 85 /tmp/resized_tmp.jpg
+            cwebp -q 85 /tmp/resized_tmp.jpg -o "${base}.webp"
+            SIZE=$(wc -c < "${base}.webp")
+            echo "Resized+converted: $img -> ${SIZE} bytes"
+          done
+
+      - name: Convert remaining images (skip already converted)
         run: |
           for img in images/*.jpg images/*.png curso/images/*.jpg curso/images/*.png; do
             [ -f "$img" ] || continue
@@ -37,8 +54,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add images/*.webp curso/images/*.webp 2>/dev/null || true
           if git diff --staged --quiet; then
-            echo "No new WebP files."
+            echo "No changes."
           else
-            git commit -m "chore: add WebP versions of images [skip ci]"
+            git commit -m "chore: resize+convert hero images to WebP 800px max [skip ci]"
             git push
           fi
