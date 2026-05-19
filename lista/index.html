@@ -562,6 +562,15 @@
             margin-top: 0.5rem;
         }
 
+
+        /* ===== TESTEMUNHOS ===== */
+        .testemunhos-section { background: var(--black-soft); border-top: 1px solid rgba(255,255,255,0.06); }
+        .testemunhos-header { text-align: center; margin-bottom: 3.5rem; }
+        .testemunhos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: start; }
+        .testemunho-card { background: var(--charcoal); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+        .testemunho-card:hover { transform: translateY(-5px); border-color: rgba(232,93,4,0.3); }
+        .testemunho-img { width: 100%; height: auto; display: block; }
+        @media (max-width: 860px) { .testemunhos-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; } }
         /* ===== FOOTER ===== */
         .footer {
             background: var(--black);
@@ -809,7 +818,24 @@
         </div>
     </section>
 
-    <!-- PREÇO + CTA -->
+    <!-- DEPOIMENTOS -->
+    <section class="testemunhos-section">
+        <div class="container">
+            <div class="testemunhos-header">
+                <span class="section-label">O que dizem os leitores</span>
+                <h2 style="color: var(--white);">Quem ja <em style="color: var(--orange-light);">usou na pratica</em></h2>
+            </div>
+            <div class="testemunhos-grid">
+                <div class="testemunho-card"><img src="../images/testemunho-1.jpg" alt="Depoimento" class="testemunho-img" loading="lazy"></div>
+                <div class="testemunho-card"><img src="../images/testemunho-2.jpg" alt="Depoimento" class="testemunho-img" loading="lazy"></div>
+                <div class="testemunho-card"><img src="../images/testemunho-3.jpg" alt="Depoimento" class="testemunho-img" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PRECO + CTA -->
     <section class="price-section">
         <div class="container">
             <div class="section-header" style="margin-bottom: 2.5rem;">
@@ -942,5 +968,7 @@
 
 </body>
 </html>
+
+
 
 
