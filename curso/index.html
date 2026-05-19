@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -36,7 +36,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/victor-terno.jpg" fetchpriority="high">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"></noscript>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1080,7 +1082,7 @@
                 </div>
                 <div class="hero-visual">
                     <div class="hero-photo-wrap">
-                        <img src="images/victor-terno.jpg" alt="Victor Guerise" class="hero-photo">
+                        <img src="images/victor-terno.jpg" alt="Victor Guerise" class="hero-photo" fetchpriority="high" loading="eager">
                         <div class="hero-stats">
                             <div class="stat-item"><div class="stat-number">+18K</div><div class="stat-label">Instagram</div></div>
                             <div class="stat-item"><div class="stat-number">+6K</div><div class="stat-label">TikTok</div></div>
@@ -1215,7 +1217,7 @@
             <h2 class="section-title">Conheça <em>seu Professor</em>:</h2>
             <div class="about-container">
                 <div>
-                    <img src="images/victor-guerise.jpg" alt="Victor Guerise" class="about-image">
+                    <img src="images/victor-guerise.jpg" alt="Victor Guerise" class="about-image" loading="lazy">
                 </div>
                 <div class="about-content">
                     <p>Olá! Me chamo Victor Guerise, sou internacionalista de formação e trabalhei minha vida toda na área comercial. Foi lá, lidando com clientes exigentes que aprendi desde cedo que a sua imagem importa e você é avaliado antes de qualquer palavra.</p>
@@ -1356,7 +1358,7 @@
 
                 <div class="bonus-card" style="flex-direction: column; align-items: center; text-align: center;">
                     <div class="bonus-media" style="width:100%; max-width:420px; margin:0 auto;">
-                        <img src="images/app-mockup.png" alt="Mapa da Coleção Perfeita — App com I.A." class="bonus-mockup-img">
+                        <img src="images/app-mockup.png" alt="Mapa da Coleção Perfeita — App com I.A." class="bonus-mockup-img" loading="lazy">
                     </div>
                     <div class="bonus-content" style="width:100%;">
                         <h3 class="bonus-name"> Perfumap - Organizador de Coleções Exclusivo!</h3>
@@ -1458,12 +1460,12 @@
             <h2>Palavras de quem<br><em>já viveu na prática</em></h2>
         </div>
         <div class="testemunhos-grid">
-            <div class="testemunho-card"><img src="images/depoimento-1.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
-            <div class="testemunho-card"><img src="images/depoimento-2.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
-            <div class="testemunho-card"><img src="images/depoimento-3.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
-            <div class="testemunho-card"><img src="images/depoimento-4.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
-            <div class="testemunho-card"><img src="images/depoimento-5.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
-            <div class="testemunho-card"><img src="images/depoimento-6.jpg" alt="Depoimento aluno" class="testemunho-img"></div>
+            <div class="testemunho-card"><img src="images/depoimento-1.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></div>
+            <div class="testemunho-card"><img src="images/depoimento-2.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></div>
+            <div class="testemunho-card"><img src="images/depoimento-3.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></div>
+            <div class="testemunho-card"><img src="images/depoimento-4.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></div>
+            <div class="testemunho-card"><img src="images/depoimento-5.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></div>
+            <div class="testemunho-card"><img src="images/depoimento-6.jpg" alt="Depoimento aluno" class="testemunho-img" loading="lazy"></div>
         </div>
     </section>
 
