@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -7,10 +7,27 @@
     <meta name="description" content="Este guia mapeia 15 situações reais e indica os perfumes certos para cada uma — entre nicho e designer, com lógica de coleção no final. 7 capítulos, 15 situações, 300 indicações.">
 
     <!-- GA4 — async, non-blocking -->
-    <link rel="dns-prefetch" href="https://connect.facebook.net">
-    <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TLFFRKHHFB"></script>
     <script>window.dataLayer = window.dataLayer || [];</script>
+
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '804720092315209');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=804720092315209&ev=ViewContent&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -972,23 +989,6 @@
       gtag('config', 'G-TLFFRKHHFB');
     </script>
 
-    <!-- Meta Pixel — deferred to after render -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '804720092315209');
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=804720092315209&ev=PageView&noscript=1"
-    /></noscript>
 
 </body>
 </html>
