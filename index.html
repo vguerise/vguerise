@@ -1,10 +1,10 @@
-﻿﻿﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Guerise — Perfumaria Masculina</title>
-    <meta name="description" content="Victor Guerise — referência em perfumaria masculina no Brasil. Cursos, consultoria e ferramentas para quem quer entender e usar perfume de verdade.">
+    <title>Victor Guerise — Consultoria em Perfumaria Masculina</title>
+    <meta name="description" content="Consultoria olfativa personalizada com Victor Guerise. Diagnóstico, curadoria e guia completo para você usar perfume como instrumento de imagem.">
 
     <!-- Meta Pixel -->
     <script>
@@ -25,11 +25,19 @@
     /></noscript>
     <!-- End Meta Pixel -->
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W8W2QNJ6');</script>
+    <!-- End Google Tag Manager -->
+
     <link rel="preload" as="image" href="images/victor-hero.webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"></noscript>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,15 +46,16 @@
             --orange: #E85D04;
             --orange-light: #F48C06;
             --orange-dark: #C14B00;
-            --orange-glow: rgba(232, 93, 4, 0.15);
+            --orange-glow: rgba(232, 93, 4, 0.12);
             --black: #0A0909;
-            --black-soft: #141414;
-            --charcoal: #1E1E1E;
+            --black-soft: #111111;
+            --charcoal: #1A1A1A;
             --gray-dark: #2A2A2A;
             --gray-mid: #888888;
-            --gray-light: #CCCCCC;
+            --gray-light: #C8C8C8;
             --white: #FFFFFF;
-            --off-white: #F5F5F5;
+            --cream: #F0EBE3;
+            --brown-text: #5A3E2B;
         }
 
         html { scroll-behavior: smooth; }
@@ -59,18 +68,14 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Cormorant Garamond', serif;
-            line-height: 1.15;
-        }
-
-        .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
         section { padding: 6rem 0; }
 
         .badge {
             display: inline-block;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -79,71 +84,80 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 4.5vw, 3rem);
-            font-weight: 900;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
             margin-bottom: 1rem;
         }
+        .section-title em { font-style: italic; color: var(--orange); }
 
-        .section-title em { font-style: normal; color: var(--orange); }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--gray-light);
-            max-width: 580px;
+        /* ── URGÊNCIA TOPO ──────────────────────────────────── */
+        #urgencia-bar {
+            background: var(--orange);
+            padding: 0.65rem 1rem;
+            text-align: center;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 101;
         }
+        #urgencia-bar strong { font-weight: 900; }
+        #urgencia-bar a { color: var(--white); text-decoration: underline; text-underline-offset: 2px; }
 
         /* ── NAVBAR ─────────────────────────────────────────── */
         nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
+            position: sticky;
+            top: 0;
             z-index: 100;
-            padding: 1.2rem 0;
+            padding: 1rem 0;
             transition: background 0.3s, backdrop-filter 0.3s;
+            background: rgba(10,9,9,0.0);
         }
-
         nav.scrolled {
-            background: rgba(13, 13, 13, 0.92);
+            background: rgba(10,9,9,0.95);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(232, 93, 4, 0.15);
+            border-bottom: 1px solid rgba(232,93,4,0.15);
         }
-
         .nav-inner {
-            max-width: 1140px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
         }
-
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+        .nav-logo span { color: var(--orange); }
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.75rem;
             list-style: none;
         }
-
         .nav-links a {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
             color: var(--gray-light);
             text-decoration: none;
             transition: color 0.2s;
-            letter-spacing: 0.3px;
         }
-
-        .nav-links a:hover { color: var(--orange); text-shadow: 0 0 10px rgba(232,93,4,0.55); }
-
+        .nav-links a:hover { color: var(--white); }
         .nav-cta {
-            background: var(--orange);
+            background: var(--orange) !important;
             color: var(--white) !important;
-            padding: 0.55rem 1.3rem;
+            padding: 0.5rem 1.25rem;
             border-radius: 4px;
             transition: background 0.2s !important;
         }
-
-        .nav-cta:hover { background: var(--orange-dark) !important; box-shadow: 0 0 18px rgba(232,93,4,0.55); }
-
+        .nav-cta:hover { background: var(--orange-dark) !important; }
         .nav-toggle {
             display: none;
             flex-direction: column;
@@ -153,114 +167,92 @@
             border: none;
             padding: 4px;
         }
-
         .nav-toggle span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--white);
-            border-radius: 2px;
+            display: block; width: 24px; height: 2px;
+            background: var(--white); border-radius: 2px;
             transition: transform 0.3s;
         }
 
         /* ── HERO ───────────────────────────────────────────── */
         #hero {
-            min-height: 100vh;
+            min-height: calc(100vh - 90px);
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding: 0;
+            padding: 4rem 0;
             background: var(--black);
         }
-
-        .hero-bg-line {
-            position: absolute;
-            top: 0; bottom: 0;
-            right: 42%;
-            width: 1px;
-            background: linear-gradient(to bottom, transparent, rgba(232,93,4,0.3), transparent);
-        }
-
         .hero-glow {
             position: absolute;
-            top: 50%; left: 55%;
-            transform: translate(-50%, -50%);
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(232,93,4,0.1) 0%, transparent 70%);
+            top: 30%; right: 5%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(232,93,4,0.09) 0%, transparent 65%);
             pointer-events: none;
         }
-
         .hero-inner {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
             align-items: center;
             gap: 4rem;
-            min-height: 100vh;
-            padding: 7rem 0 4rem;
         }
-
         .hero-content { position: relative; z-index: 2; }
-
         .hero-eyebrow {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 1.5rem;
         }
-
         .hero-eyebrow::before {
             content: '';
             display: block;
-            width: 32px;
-            height: 2px;
+            width: 28px; height: 2px;
             background: var(--orange);
         }
-
         .hero-eyebrow span {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 3px; text-transform: uppercase;
             color: var(--orange);
         }
-
         .hero-title {
-            font-size: clamp(1.8rem, 3.2vw, 2.9rem);
-            font-weight: 900;
-            line-height: 1.12;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
             color: var(--white);
         }
-
         .hero-title em {
             font-style: italic;
             font-family: 'Playfair Display', serif;
             color: var(--orange);
         }
-
         .hero-subtitle {
             font-size: 1.05rem;
             color: var(--gray-light);
-            max-width: 480px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
+            max-width: 460px;
+            margin-bottom: 2rem;
+            line-height: 1.65;
         }
 
-        .hero-desc {
-            font-size: 1.1rem;
-            color: var(--gray-light);
-            max-width: 480px;
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-        }
-
-        .hero-actions {
+        /* Hero social proof inline */
+        .hero-proof {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
             align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 2.25rem;
+            flex-wrap: wrap;
         }
+        .hero-proof-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.83rem;
+            color: var(--gray-light);
+        }
+        .hero-proof-item strong { color: var(--white); font-weight: 700; }
+        .hero-proof-sep { width: 1px; height: 16px; background: rgba(255,255,255,0.15); }
+
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 2rem; }
 
         .btn-primary {
             display: inline-flex;
@@ -270,287 +262,271 @@
             color: var(--white);
             font-family: 'DM Sans', sans-serif;
             font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.9rem 2rem;
-            border-radius: 4px;
+            font-size: 1rem;
+            padding: 1rem 2.25rem;
+            border-radius: 5px;
             text-decoration: none;
-            transition: background 0.2s, transform 0.2s;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
             letter-spacing: 0.2px;
         }
-
         .btn-primary:hover {
             background: var(--orange-dark);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232,93,4,0.4);
         }
 
-        .btn-ghost {
+        .hero-guarantee {
+            font-size: 0.8rem;
+            color: var(--gray-mid);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Urgency chip no hero */
+        .urgency-chip {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: transparent;
-            color: var(--white);
-            font-family: 'DM Sans', sans-serif;
+            background: rgba(232,93,4,0.1);
+            border: 1px solid rgba(232,93,4,0.35);
+            border-radius: 100px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            color: var(--orange-light);
             font-weight: 600;
-            font-size: 0.95rem;
-            padding: 0.9rem 1.5rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 4px;
-            text-decoration: none;
-            transition: border-color 0.2s, background 0.2s;
+            margin-bottom: 1.5rem;
+        }
+        .urgency-dot {
+            width: 7px; height: 7px;
+            background: var(--orange);
+            border-radius: 50%;
+            animation: pulse 1.8s infinite;
         }
 
-        .btn-ghost:hover {
-            border-color: var(--orange);
-            background: var(--orange-glow);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            padding-top: 1.25rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
+        /* Hero visual */
+        .hero-visual { display: flex; align-items: center; justify-content: center; }
+        .hero-photo-wrap {
+            position: relative;
             width: 100%;
+            max-width: 420px;
+        }
+        .hero-photo-frame {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .hero-photo-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(10,9,9,0.7) 100%);
+        }
+        .hero-photo {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 3/4;
+            border-radius: 10px;
+        }
+        .hero-photo-placeholder {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: var(--charcoal);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-mid);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .stat-item {}
-
+        /* Stats flutuantes */
+        .hero-stats-overlay {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 0; right: 0;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 0.75rem 1.5rem;
+            background: rgba(10,9,9,0.88);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(232,93,4,0.2);
+        }
+        .stat-item:first-child { border-radius: 8px 0 0 8px; }
+        .stat-item:last-child { border-radius: 0 8px 8px 0; }
+        .stat-item + .stat-item { border-left: none; }
         .stat-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 900;
+            font-size: 1.6rem;
+            font-weight: 700;
             color: var(--orange);
             line-height: 1;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
-
         .stat-label {
-            font-size: 0.78rem;
+            font-size: 0.7rem;
             color: var(--gray-mid);
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
         }
 
-        .hero-visual {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .hero-photo-wrap {
-            position: relative;
-            width: 380px;
-            max-width: 100%;
-        }
-
-        .hero-photo-wrap::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, var(--orange) 0%, transparent 50%);
-            border-radius: 8px;
-            z-index: 0;
-        }
-
-        .hero-photo {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            border-radius: 6px;
-            display: block;
-            object-fit: cover;
-            aspect-ratio: 3/4;
-        }
-
-        .hero-photo-placeholder {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            aspect-ratio: 3/4;
+        /* ── PROVA SOCIAL RÁPIDA ────────────────────────────── */
+        #prova-rapida {
             background: var(--charcoal);
-            border-radius: 6px;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .prova-rapida-inner {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gray-mid);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            gap: 3rem;
+            flex-wrap: wrap;
         }
-
-        .hero-card {
-            position: absolute;
-            bottom: 2rem;
-            left: -2rem;
-            background: rgba(30,30,30,0.95);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(232,93,4,0.3);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            z-index: 2;
-        }
-
-        .hero-card-label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--orange);
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .hero-card-value {
+        .prova-num { text-align: center; }
+        .prova-num-valor {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--orange);
+            line-height: 1;
         }
+        .prova-num-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gray-mid);
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+        .prova-sep { width: 1px; height: 36px; background: rgba(255,255,255,0.08); }
 
         /* ── DOR ────────────────────────────────────────────── */
         #dor {
             background: var(--black);
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.04);
             padding: 5rem 0;
         }
-
         .dor-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            max-width: 760px;
-            margin: 0 auto 2rem;
+            gap: 0.75rem;
+            max-width: 720px;
+            margin: 0 auto 2.5rem;
         }
-
         .dor-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
             background: var(--charcoal);
             border-left: 3px solid var(--orange);
             border-radius: 0 8px 8px 0;
             padding: 1rem 1.5rem;
             font-size: 1rem;
             color: var(--gray-light);
-            line-height: 1.6;
-            transition: background 0.2s, border-color 0.2s;
+            line-height: 1.55;
+            transition: background 0.2s;
         }
-
-        .dor-item:hover {
-            background: rgba(232,93,4,0.07);
-            border-color: var(--orange-light);
-        }
-
+        .dor-item:hover { background: rgba(232,93,4,0.07); }
         .dor-fechamento {
             text-align: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--gray-light);
-            max-width: 760px;
+            max-width: 620px;
             margin: 0 auto;
+            line-height: 1.7;
         }
-
         .dor-fechamento strong { color: var(--white); }
 
         /* ── SOBRE ──────────────────────────────────────────── */
         #sobre {
-            background: var(--black-soft);
-            border-top: 1px solid rgba(255,255,255,0.05);
+            background: var(--cream);
+            border-top: 1px solid rgba(0,0,0,0.06);
         }
-
         .sobre-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.1fr;
             gap: 5rem;
             align-items: center;
         }
-
         .sobre-img-wrap { position: relative; }
-
-        .sobre-img {
-            width: 100%;
-            border-radius: 6px;
-            display: block;
-            object-fit: cover;
-            aspect-ratio: 4/5;
-        }
-
-        .sobre-img-placeholder {
-            width: 100%;
-            aspect-ratio: 4/5;
-            background: var(--charcoal);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-mid);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
         .sobre-accent {
             position: absolute;
-            top: -1.5rem;
-            left: -1.5rem;
-            width: 100px;
-            height: 100px;
+            top: -1.5rem; left: -1.5rem;
+            width: 80px; height: 80px;
             border-top: 3px solid var(--orange);
             border-left: 3px solid var(--orange);
             border-radius: 2px;
         }
-
-        .sobre-content {}
-
+        .sobre-img {
+            width: 100%; border-radius: 18px;
+            display: block; object-fit: cover; aspect-ratio: 4/5;
+            border: 3px solid var(--orange);
+            box-shadow: 0 8px 40px rgba(232,93,4,0.2);
+        }
+        .sobre-img-placeholder {
+            width: 100%; aspect-ratio: 4/5;
+            background: rgba(255,255,255,0.5);
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--brown-text); font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+        .sobre-badge { color: var(--orange); }
+        .sobre-title { color: #1A1A1A !important; }
+        .sobre-title em { color: #8B3A00 !important; }
         .sobre-text {
-            font-size: 1.05rem;
-            color: var(--gray-light);
-            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            color: var(--brown-text);
+            margin-bottom: 1.1rem;
             line-height: 1.85;
         }
-
-        .sobre-text strong { color: var(--white); font-weight: 600; }
-
+        .sobre-text strong { color: #1A1A1A; font-weight: 600; }
         .sobre-pillars {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 0.75rem;
             margin-top: 2rem;
         }
-
         .pillar {
-            background: var(--charcoal);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 6px;
-            padding: 1.25rem;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 8px;
+            padding: 1.1rem 1.25rem;
             transition: border-color 0.2s;
         }
-
         .pillar:hover { border-color: rgba(232,93,4,0.4); }
-
-        .pillar-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
-
         .pillar-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 0.3rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 0.82rem; font-weight: 800;
+            color: #1A1A1A; text-transform: uppercase;
+            letter-spacing: 0.5px; margin-bottom: 0.25rem;
         }
-
-        .pillar-desc { font-size: 0.82rem; color: var(--gray-mid); line-height: 1.5; }
+        .pillar-desc { font-size: 0.8rem; color: var(--brown-text); line-height: 1.5; }
 
         /* ── CONSULTORIA ────────────────────────────────────── */
         #consultoria {
-            background: var(--black-soft);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: #FAF7F3;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
-
         .consultoria-header { text-align: center; margin-bottom: 4rem; }
-        .consultoria-header .section-subtitle { margin: 0 auto; }
+        .consultoria-header .section-title { color: #1A1A1A; }
+        .consultoria-header .section-title em { color: #8B3A00; }
+        .consultoria-header .section-subtitle { color: var(--brown-text); margin: 0 auto; }
 
+        /* Passos */
         .passos {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -558,7 +534,6 @@
             margin-bottom: 5rem;
             position: relative;
         }
-
         .passos::before {
             content: '';
             position: absolute;
@@ -568,274 +543,302 @@
             height: 1px;
             background: linear-gradient(to right, var(--orange) 0%, rgba(232,93,4,0.15) 100%);
         }
-
         .passo { padding: 0 1.5rem; position: relative; z-index: 1; }
-
         .passo-num {
             width: 4rem; height: 4rem;
-            background: var(--black-soft);
+            background: #1A1A1A;
             border: 2px solid var(--orange);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem; font-weight: 900;
+            font-size: 1.1rem; font-weight: 700;
             color: var(--orange);
             margin-bottom: 1.5rem;
         }
-
         .passo-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem; font-weight: 800;
+            font-size: 0.88rem; font-weight: 800;
             text-transform: uppercase; letter-spacing: 0.8px;
-            color: var(--white); margin-bottom: 0.6rem;
+            color: #1A1A1A; margin-bottom: 0.5rem;
         }
-
-        .passo-desc { font-size: 0.88rem; color: var(--gray-mid); line-height: 1.65; }
+        .passo-desc { font-size: 0.87rem; color: var(--brown-text); line-height: 1.65; }
 
         /* Preços */
-        .precos-titulo {
-            text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 2px;
-            color: var(--orange);
-            margin-bottom: 2rem;
+        .precos-header { text-align: center; margin-bottom: 2rem; }
+        .precos-header .section-title { color: #1A1A1A; }
+        .precos-header .section-title em { color: #8B3A00; }
+
+        .urgency-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(232,93,4,0.1);
+            border: 1px solid rgba(232,93,4,0.35);
+            border-radius: 100px;
+            padding: 0.45rem 1.2rem;
+            font-size: 0.82rem;
+            color: #8B3A00;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
+
+        .preco-ancora {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--brown-text);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            line-height: 1.65;
+        }
+        .preco-ancora strong { color: #1A1A1A; }
 
         .precos-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 4rem;
+            gap: 1.25rem;
+            margin-bottom: 3rem;
         }
 
+        /* destaque = card recomendado (permanente) */
         .preco-card {
-            background: var(--charcoal);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 10px;
-            padding: 2rem; text-align: center;
-            transition: border-color 0.25s, transform 0.25s;
+            background: var(--white);
+            border: 2px solid rgba(0,0,0,0.07);
+            border-radius: 12px;
+            padding: 1.75rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+            position: relative;
         }
-
-        .preco-card:hover { border-color: var(--orange); transform: translateY(-4px); }
-
+        .preco-card:hover {
+            border-color: rgba(232,93,4,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(232,93,4,0.1);
+        }
         .preco-card.destaque {
             border-color: var(--orange);
-            background: linear-gradient(160deg, rgba(232,93,4,0.1) 0%, var(--charcoal) 60%);
+            background: linear-gradient(160deg, rgba(232,93,4,0.06) 0%, var(--white) 60%);
+            box-shadow: 0 8px 32px rgba(232,93,4,0.15);
         }
-
+        /* selected = escolha do utilizador (separado do recomendado) */
+        .preco-card.selected:not(.destaque) {
+            border-color: var(--orange);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(232,93,4,0.15);
+        }
+        .preco-card-badge-top {
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--orange);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.25rem 0.85rem;
+            border-radius: 0 0 6px 6px;
+        }
         .preco-tag {
             display: inline-block;
-            font-size: 0.65rem; font-weight: 700; letter-spacing: 2px;
+            font-size: 0.62rem; font-weight: 700; letter-spacing: 2px;
             text-transform: uppercase; color: var(--orange);
             background: var(--orange-glow);
-            padding: 0.25rem 0.75rem; border-radius: 3px; margin-bottom: 1rem;
+            padding: 0.2rem 0.65rem; border-radius: 3px; margin-bottom: 0.75rem;
         }
-
         .preco-modalidade {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem; font-weight: 800;
-            color: var(--white); margin-bottom: 0.4rem;
+            font-size: 1.15rem; font-weight: 700;
+            color: #1A1A1A; margin-bottom: 0.3rem;
         }
-
-        .preco-local { font-size: 0.82rem; color: var(--gray-mid); margin-bottom: 1.25rem; }
-
+        .preco-local { font-size: 0.78rem; color: #888; margin-bottom: 1rem; }
         .preco-valor {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem; font-weight: 900;
-            color: var(--orange); line-height: 1; margin-bottom: 0.3rem;
+            font-size: 2.4rem; font-weight: 700;
+            color: var(--orange); line-height: 1; margin-bottom: 0.25rem;
         }
-
-        .preco-valor sup {
-            font-size: 1rem; vertical-align: top;
-            margin-top: 0.4rem; display: inline-block;
+        .preco-valor sup { font-size: 1rem; vertical-align: top; margin-top: 0.4rem; display: inline-block; }
+        .preco-lancamento {
+            font-size: 0.68rem; font-weight: 700; color: var(--orange-light);
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.75rem;
         }
-
-        .preco-obs { font-size: 0.78rem; color: var(--gray-mid); line-height: 1.5; }
-
-        .preco-ancora {
-            text-align: center; font-size: 0.88rem;
-            color: var(--gray-mid); max-width: 520px;
-            margin: -0.5rem auto 2.5rem; line-height: 1.65;
-        }
-
-        .preco-ancora strong { color: var(--white); }
-
         .preco-lista {
             list-style: none; text-align: left;
-            margin: 1rem 0 0.25rem;
-            display: flex; flex-direction: column; gap: 0.45rem;
+            margin: 0.5rem 0 0; display: flex; flex-direction: column; gap: 0.4rem;
         }
-
         .preco-lista li {
-            font-size: 0.78rem; color: var(--gray-mid);
-            line-height: 1.4; padding-left: 1.2rem; position: relative;
+            font-size: 0.78rem; color: #666;
+            line-height: 1.4; padding-left: 1.1rem; position: relative;
         }
-
         .preco-lista li::before {
-            content: '✶'; position: absolute; left: 0;
-            color: var(--orange); font-size: 0.55rem; top: 0.2rem;
+            content: '✓'; position: absolute; left: 0;
+            color: var(--orange); font-size: 0.7rem; font-weight: 700;
         }
-
-        /* Testemunhos inline */
-        .testemunhos-inline { margin: 0 0 4rem; }
-        .testemunhos-inline-header { text-align: center; margin-bottom: 2.5rem; }
+        .preco-obs { font-size: 0.78rem; color: #888; line-height: 1.5; margin-top: 0.5rem; }
+        .recomendacao {
+            text-align: center; font-size: 0.88rem; color: var(--brown-text);
+            margin: -1rem auto 2rem; max-width: 440px; line-height: 1.6;
+        }
+        .recomendacao strong { color: #1A1A1A; }
 
         /* ── TESTEMUNHOS ────────────────────────────────────── */
-        .testemunhos-header { text-align: center; margin-bottom: 3.5rem; }
-
+        .testemunhos-wrap { margin: 0 0 3.5rem; }
+        .testemunhos-header { text-align: center; margin-bottom: 2.5rem; }
+        .testemunhos-header .section-title { color: #1A1A1A; }
+        .testemunhos-header .section-title em { color: #8B3A00; }
         .testemunhos-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 1.25rem;
             align-items: start;
         }
-
         .testemunho-card {
-            background: var(--charcoal);
-            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-
         .testemunho-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(232,93,4,0.5);
-            box-shadow: 0 0 28px rgba(232,93,4,0.22), 0 8px 32px rgba(0,0,0,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(232,93,4,0.2);
         }
+        .testemunho-img { width: 100%; display: block; border-radius: 12px; }
 
-        .testemunho-img { width: 100%; display: block; }
-
-        @media (max-width: 860px) {
-            .testemunhos-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
-        }
-
-        /* Trust signals */
+        /* ── FORMULÁRIO ─────────────────────────────────────── */
+        .form-section { max-width: 600px; margin: 0 auto; }
         .form-trust {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 1.5rem;
             text-align: center;
         }
-
-        .form-trust-item { font-size: 0.88rem; color: var(--gray-light); }
+        .form-trust-item { font-size: 0.83rem; color: var(--brown-text); }
         .form-trust-item .check { color: var(--orange); font-weight: 700; margin-right: 0.3rem; }
 
-        /* Form consultoria */
-        .consultoria-form-outer { max-width: 640px; margin: 0 auto; }
-
         .consultoria-form-wrap {
-            background: var(--charcoal);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 10px;
+            background: var(--white);
+            border: 2px solid rgba(232,93,4,0.2);
+            border-radius: 14px;
             padding: 2.5rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
         }
-
         .form-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem; font-weight: 800;
-            margin-bottom: 0.5rem; color: var(--white); text-align: center;
+            font-size: 1.5rem; font-weight: 700;
+            margin-bottom: 0.4rem; color: #1A1A1A; text-align: center;
         }
-
         .form-subtitle {
-            font-size: 0.9rem; color: var(--gray-mid);
-            margin-bottom: 2rem; text-align: center;
+            font-size: 0.88rem; color: #888;
+            margin-bottom: 1.75rem; text-align: center;
         }
-
         .form-group { margin-bottom: 1rem; }
-
         .form-label {
-            display: block; font-size: 0.8rem; font-weight: 700;
-            color: var(--gray-light); margin-bottom: 0.4rem;
+            display: block; font-size: 0.78rem; font-weight: 700;
+            color: #555; margin-bottom: 0.35rem;
             letter-spacing: 0.3px; text-transform: uppercase;
         }
-
-        .form-input, .form-select, .form-textarea {
+        .form-input, .form-select {
             width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 5px;
-            padding: 0.75rem 1rem;
+            background: #F7F7F7;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem; color: var(--white);
-            outline: none; transition: border-color 0.2s;
+            font-size: 0.95rem; color: #1A1A1A;
+            outline: none; transition: border-color 0.2s, box-shadow 0.2s;
         }
-
-        .form-input::placeholder, .form-textarea::placeholder { color: var(--gray-mid); }
-        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--orange); }
-        .form-select option { background: var(--charcoal); }
-        .form-textarea { resize: vertical; min-height: 100px; }
+        .form-input::placeholder { color: #AAA; }
+        .form-input:focus, .form-select:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(232,93,4,0.1);
+        }
+        .form-select option { background: #fff; color: #1A1A1A; }
 
         .form-btn {
-            width: 100%; background: var(--orange); color: var(--white);
-            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem;
-            padding: 0.9rem; border: none; border-radius: 5px;
-            cursor: pointer; transition: background 0.2s; margin-top: 0.5rem;
+            width: 100%;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700; font-size: 1.05rem;
+            padding: 1rem; border: none; border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            margin-top: 0.75rem;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
-
-        .form-btn:hover { background: var(--orange-dark); }
-
+        .form-btn:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232,93,4,0.4);
+        }
         .form-note {
-            text-align: center; font-size: 0.78rem;
-            color: var(--gray-mid); margin-top: 0.75rem;
+            text-align: center; font-size: 0.76rem;
+            color: #999; margin-top: 0.75rem;
+            display: flex; align-items: center; justify-content: center; gap: 0.35rem;
         }
 
-        /* ── CONTATO ────────────────────────────────────────── */
-        #contato { background: var(--black); }
-
-        .contato-inner { text-align: center; max-width: 620px; margin: 0 auto; }
-
-        .contato-links {
-            display: flex; justify-content: center;
-            flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem;
+        /* ── CROSS-SELL ─────────────────────────────────────── */
+        #crosssell {
+            background: rgba(232,93,4,0.05);
+            border-top: 1px solid rgba(232,93,4,0.15);
+            padding: 2.5rem 0;
         }
-
-        .contato-link {
-            display: flex; align-items: center; gap: 0.6rem;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 5px; color: var(--gray-light);
-            text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            transition: border-color 0.2s, color 0.2s;
+        .crosssell-inner { text-align: center; max-width: 560px; margin: 0 auto; }
+        .crosssell-label {
+            font-size: 0.72rem; letter-spacing: 2.5px;
+            text-transform: uppercase; color: rgba(255,255,255,0.6);
+            margin-bottom: 0.5rem;
         }
-
-        .contato-link:hover { border-color: var(--orange); color: var(--white); }
+        .crosssell-desc {
+            font-size: 0.92rem; color: rgba(255,255,255,0.75);
+            margin-bottom: 1.25rem; line-height: 1.6;
+        }
+        .crosssell-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+        .crosssell-link {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.5px; text-transform: uppercase;
+            transition: 0.2s;
+        }
+        .crosssell-link.filled { background: var(--orange); color: #fff; }
+        .crosssell-link.filled:hover { background: var(--orange-dark); }
+        .crosssell-link.outline { border: 1px solid rgba(232,93,4,0.4); color: var(--orange); }
+        .crosssell-link.outline:hover { border-color: var(--orange); background: var(--orange-glow); }
 
         /* ── FOOTER ─────────────────────────────────────────── */
         footer {
             background: var(--black-soft);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding: 2rem 0;
         }
-
         .footer-inner {
             display: flex; align-items: center;
             justify-content: space-between; flex-wrap: wrap; gap: 1rem;
         }
-
         .footer-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 900; font-size: 1.1rem;
+            font-weight: 700; font-size: 1.1rem;
             color: var(--white); text-decoration: none;
         }
-
         .footer-logo span { color: var(--orange); }
-        .footer-copy { font-size: 0.82rem; color: var(--gray-mid); }
+        .footer-copy { font-size: 0.8rem; color: var(--gray-mid); }
 
         /* ── STICKY CTA MOBILE ──────────────────────────────── */
         .sticky-mobile-cta {
             display: none;
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            background: var(--black-soft);
+            background: rgba(10,9,9,0.97);
             border-top: 1px solid rgba(232,93,4,0.3);
-            padding: 0.85rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             z-index: 200;
         }
-
         .sticky-mobile-cta .btn-primary {
             width: 100%;
             justify-content: center;
@@ -843,53 +846,65 @@
             padding: 1rem;
         }
 
-        /* ── MOBILE ─────────────────────────────────────────── */
+        /* ── ANIMAÇÕES ──────────────────────────────────────── */
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.35)} }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up {
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .fade-up.delay-1 { animation-delay: 0.15s; }
+        .fade-up.delay-2 { animation-delay: 0.3s; }
+        .fade-up.delay-3 { animation-delay: 0.45s; }
+
+        /* ── RESPONSIVE ─────────────────────────────────────── */
         @media (max-width: 1000px) {
             .passos { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
             .passos::before { display: none; }
-            .precos-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+            .precos-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
         }
 
-        @media (max-width: 900px) {
-            .nav-links { display: none; }
+        @media (max-width: 860px) {
+            .testemunhos-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+        }
 
+        @media (max-width: 800px) {
+            .nav-links { display: none; }
             .nav-links.open {
                 display: flex; flex-direction: column;
                 position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(13,13,13,0.98);
+                background: rgba(10,9,9,0.98);
                 align-items: center; justify-content: center;
                 gap: 2rem; z-index: 99;
             }
-
             .nav-links.open a { font-size: 1.3rem; }
             .nav-toggle { display: flex; z-index: 200; }
 
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 8rem 0 4rem;
-                gap: 3rem;
-            }
-
+            .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 3rem 0 2rem; gap: 2.5rem; }
             .hero-eyebrow { justify-content: center; }
-            .hero-desc { margin: 0 auto 2.5rem; }
+            .hero-subtitle { margin: 0 auto 1.75rem; }
             .hero-actions { justify-content: center; }
-            .hero-stats { justify-content: center; }
-            .hero-photo-wrap { width: 260px; margin: 0 auto; }
-            .hero-card { left: 0; right: 0; width: fit-content; margin: 0 auto; bottom: -1rem; }
+            .hero-proof { justify-content: center; }
+            .hero-photo-wrap { max-width: 280px; margin: 0 auto; }
             .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .passos { grid-template-columns: 1fr; }
-            .precos-grid { max-width: 100%; }
-            .sobre-img-wrap { max-width: 340px; margin: 0 auto; }
+            .sobre-img-wrap { max-width: 320px; margin: 0 auto; }
             .sticky-mobile-cta { display: block; }
             body { padding-bottom: 72px; }
+            .prova-rapida-inner { gap: 1.5rem; }
+            .prova-sep { display: none; }
         }
 
         @media (max-width: 600px) {
             section { padding: 4rem 0; }
             .sobre-pillars { grid-template-columns: 1fr; }
-            .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
-            .form-trust { flex-direction: column; align-items: center; gap: 0.75rem; }
+            .passos { grid-template-columns: 1fr; }
+            .hero-stats-overlay { position: relative; bottom: auto; margin-top: 1rem; }
+            .form-trust { flex-direction: column; align-items: center; gap: 0.6rem; }
+            .consultoria-form-wrap { padding: 1.75rem 1.25rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -899,405 +914,469 @@
                 transition-duration: 0.01ms !important;
             }
         }
-
-        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-
-        /* ── LIGHT BREAKS ──────────────────────────────────────── */
-        #sobre { background: #F0EBE3 !important; border-top-color: rgba(0,0,0,0.05) !important; }
-        #sobre .section-title { color: #1A1A1A !important; }
-        #sobre .section-title em { color: #8B3A00 !important; }
-        #sobre .section-subtitle { color: #5A3E2B !important; }
-        .sobre-text { color: #5A3E2B !important; }
-        .sobre-text strong { color: #1A1A1A !important; }
-        .sobre-img { border-radius: 18px !important; border: 3px solid #E85D04 !important; box-shadow: 0 8px 40px rgba(232,93,4,0.25) !important; }
-        .sobre-img-placeholder { background: rgba(255,255,255,0.7) !important; color: #5A3E2B !important; }
-        .pillar { background: rgba(255,255,255,0.8) !important; border-color: rgba(0,0,0,0.08) !important; }
-        .pillar-title { color: #1A1A1A !important; }
-        .pillar-desc { color: #5A3E2B !important; }
-
-        #consultoria { background: #FAF7F3 !important; border-color: rgba(0,0,0,0.05) !important; }
-        #consultoria .section-title { color: #1A1A1A !important; }
-        #consultoria .section-title em { color: #8B3A00 !important; }
-        #consultoria .section-subtitle { color: #5A3E2B !important; }
-        .passo-num { background: #1A1A1A !important; }
-        .passo-title { color: #1A1A1A !important; }
-        .passo-desc { color: #5A3E2B !important; }
-        .precos-titulo { color: #8B3A00 !important; }
-        .preco-ancora { color: #5A3E2B !important; }
-        .preco-ancora strong { color: #1A1A1A !important; }
-        </style>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W8W2QNJ6');</script>
-    <!-- End Google Tag Manager -->
+    </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8W2QNJ6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
-<!-- NAVBAR -->
-<nav id="navbar">
-    <div class="nav-inner">
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="/curso">Curso</a></li>
-            <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
-            <li><a href="/lista">Lista de Perfumes</a></li>
-            <li><a href="#consultoria">Consultoria</a></li>
-            <li><a href="https://wa.me/5521976462812" target="_blank" class="nav-cta">Fale Comigo</a></li>
-        </ul>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
+    <!-- BARRA DE URGÊNCIA -->
+    <div id="urgencia-bar">
+        <strong>Apenas <span class="vagas-count">7</span> vagas restantes neste mês</strong> — agenda fechando. <a href="#consultoria">Garantir minha vaga &rarr;</a>
     </div>
-</nav>
 
-<!-- HERO -->
-<section id="hero">
-    <div class="hero-glow"></div>
-    <div class="container">
-        <div class="hero-inner">
-            <div class="hero-content">
-                <div class="hero-eyebrow">
-                    <span>Perfumaria Masculina</span>
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Victor<span>.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="/curso">Curso</a></li>
+                <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
+                <li><a href="/lista">Guia R$37</a></li>
+                <li><a href="#consultoria" class="nav-cta">Quero Consultoria</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="hero-eyebrow fade-up">
+                        <span>Consultoria em Perfumaria Masculina</span>
+                    </div>
+
+                    <div class="urgency-chip fade-up delay-1">
+                        <span class="urgency-dot"></span>
+                        <span class="vagas-count">7</span> vagas restantes neste mês
+                    </div>
+
+                    <h1 class="hero-title fade-up delay-1">
+                        O perfume certo muda<br>como te percebem.<br>
+                        Você só não encontrou o seu. <em>Ainda</em>.
+                    </h1>
+                    <p class="hero-subtitle fade-up delay-2">
+                        Consultoria olfativa individual — diagnóstico do seu perfil, curadoria personalizada e guia completo entregue em uma sessão.
+                    </p>
+
+                    <div class="hero-proof fade-up delay-2">
+                        <div class="hero-proof-item"><strong>+2.000</strong> homens atendidos</div>
+                        <div class="hero-proof-sep"></div>
+                        <div class="hero-proof-item"><strong>+18K</strong> no Instagram</div>
+                    </div>
+
+                    <div class="hero-actions fade-up delay-3">
+                        <a href="#consultoria" class="btn-primary">
+                            Quero minha consultoria
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="hero-guarantee fade-up delay-3">Sem compromisso. Resposta em até 24h pelo WhatsApp.</p>
                 </div>
-                <h1 class="hero-title">
-                    O perfume certo muda como te percebem. Você só não descobriu o seu. <em>Ainda</em>.
-                </h1>
-                <p class="hero-subtitle">Consultoria olfativa personalizada — diagnóstico, curadoria e guia completo em uma sessão.</p>
-                <div class="hero-actions">
-                    <a href="#consultoria" class="btn-primary">
-                        Quero Consultoria
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
+
+                <div class="hero-visual fade-up delay-2">
+                    <div class="hero-photo-wrap">
+                        <div class="hero-photo-frame">
+                            <picture>
+                                <source srcset="images/victor-hero.webp" type="image/webp">
+                                <img src="images/victor-hero.jpg" alt="Victor Guerise — Consultor de Perfumaria" class="hero-photo"
+                                     width="420" height="560" fetchpriority="high" loading="eager"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            </picture>
+                            <div class="hero-photo-placeholder" style="display:none;">Foto Victor</div>
+                        </div>
+                        <div class="hero-stats-overlay">
+                            <div class="stat-item">
+                                <div class="stat-number">+2K</div>
+                                <div class="stat-label">Clientes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">+18K</div>
+                                <div class="stat-label">Instagram</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3 anos</div>
+                                <div class="stat-label">Experiência</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="hero-visual">
-                <div class="hero-photo-wrap">
+    <!-- PROVA RÁPIDA -->
+    <div id="prova-rapida">
+        <div class="container">
+            <div class="prova-rapida-inner">
+                <div class="prova-num">
+                    <div class="prova-num-valor">+2.000</div>
+                    <div class="prova-num-label">homens atendidos</div>
+                </div>
+                <div class="prova-sep"></div>
+                <div class="prova-num">
+                    <div class="prova-num-valor">+18K</div>
+                    <div class="prova-num-label">seguidores Instagram</div>
+                </div>
+                <div class="prova-sep"></div>
+                <div class="prova-num">
+                    <div class="prova-num-valor">+6K</div>
+                    <div class="prova-num-label">seguidores TikTok</div>
+                </div>
+                <div class="prova-sep"></div>
+                <div class="prova-num">
+                    <div class="prova-num-valor">1 sessão</div>
+                    <div class="prova-num-label">resultado concreto</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOR -->
+    <section id="dor">
+        <div class="container" style="max-width:760px;">
+            <span class="badge" style="display:block; text-align:center;">Você se identifica?</span>
+            <h2 class="section-title" style="text-align:center; margin-bottom:2.5rem;">
+                Perfume caro não é<br><em>perfume certo</em>
+            </h2>
+            <ul class="dor-list">
+                <li class="dor-item">Gastou R$400, R$600, R$800 num frasco — e usou poucas vezes porque "não era bem aquilo"</li>
+                <li class="dor-item">Na loja, o vendedor convenceu. Em casa, o perfume virou outro</li>
+                <li class="dor-item">Não sabe o que gosta — só sabe o que não funcionou</li>
+                <li class="dor-item">Usa o mesmo perfume no trabalho, no fim de semana e em encontros — por falta de direção</li>
+            </ul>
+            <p class="dor-fechamento">
+                Isso não é falta de dinheiro. É falta de direção.<br>
+                <strong>A consultoria resolve isso em uma sessão.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre">
+        <div class="container">
+            <div class="sobre-grid">
+                <div class="sobre-img-wrap">
+                    <div class="sobre-accent"></div>
                     <picture>
-                        <source srcset="images/victor-hero.webp" type="image/webp">
-                        <img src="images/victor-hero.jpg" alt="Victor Guerise" class="hero-photo" width="380" height="507"
-                             fetchpriority="high" loading="eager"
+                        <source srcset="images/victor-bio.webp" type="image/webp">
+                        <img src="images/victor-bio.jpg" alt="Victor Guerise" class="sobre-img" width="460" height="575" loading="lazy"
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     </picture>
-                    <div class="hero-photo-placeholder" style="display:none;">Sua foto aqui</div>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">+18K</div>
-                            <div class="stat-label">Instagram</div>
+                    <div class="sobre-img-placeholder" style="display:none;">Sua foto aqui</div>
+                </div>
+                <div class="sobre-content">
+                    <span class="badge sobre-badge">Sobre mim</span>
+                    <h2 class="section-title sobre-title">Prazer, <em>Victor Guerise</em></h2>
+                    <p class="sobre-text">Internacionalista de formação, trabalho com clientes high profile desde o início da carreira — e aprendi cedo que <strong>a imagem comunica antes da primeira palavra</strong>.</p>
+                    <p class="sobre-text">Em 2022, recebi um perfume de presente. Comecei a usar sem pretensão. O primeiro elogio veio. Depois o segundo. Na semana seguinte me perguntavam qual era. <strong>Era um Vibrant Leather da Zara.</strong></p>
+                    <p class="sobre-text">Ali entendi o que poucos falam: a fragrância certa muda a percepção que as pessoas têm de você antes de você abrir a boca. Estudei a fundo, errei caro — e desde então ajudo homens a usar perfume como instrumento de imagem.</p>
+                    <div class="sobre-pillars">
+                        <div class="pillar">
+                            <div class="pillar-title">Diagnóstico real</div>
+                            <div class="pillar-desc">Mapeio seu perfil olfativo com precisão — não achismo</div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">+6K</div>
-                            <div class="stat-label">TikTok</div>
+                        <div class="pillar">
+                            <div class="pillar-title">Guia escrito</div>
+                            <div class="pillar-desc">Você recebe tudo documentado — ocasião, onde comprar, como usar</div>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">+2K</div>
-                            <div class="stat-label">Alunos</div>
+                        <div class="pillar">
+                            <div class="pillar-title">Alta perfumaria</div>
+                            <div class="pillar-desc">Designer, nicho e ultra nicho — conheço o mercado de verdade</div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-title">Suporte incluso</div>
+                            <div class="pillar-desc">Pode tirar dúvidas nos dias seguintes à sessão</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- CONSULTORIA -->
+    <section id="consultoria">
+        <div class="container">
+
+            <div class="consultoria-header">
+                <span class="badge">Consultoria Pessoal</span>
+                <h2 class="section-title">Como funciona a <em>consultoria</em></h2>
+                <p class="section-subtitle" style="margin:0 auto;">Uma sessão individual, do diagnóstico à entrega — resultado concreto para a sua coleção.</p>
+            </div>
+
+            <!-- 4 PASSOS -->
+            <div class="passos">
+                <div class="passo">
+                    <div class="passo-num">01</div>
+                    <div class="passo-title">Questionário de Perfil</div>
+                    <p class="passo-desc">Você responde um questionário sobre estilo de vida, rotina, personalidade e os momentos em que usa perfume.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">02</div>
+                    <div class="passo-title">Diagnóstico Olfativo</div>
+                    <p class="passo-desc">Analiso suas respostas para mapear seu perfil olfativo dominante e os gaps da sua coleção atual.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">03</div>
+                    <div class="passo-title">Curadoria Personalizada</div>
+                    <p class="passo-desc">Monto uma seleção exclusiva com indicação de ocasião, como usar e onde comprar.</p>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">04</div>
+                    <div class="passo-title">Entrega & Acompanhamento</div>
+                    <p class="passo-desc">Você recebe um documento completo e fica disponível para tirar dúvidas nos dias seguintes.</p>
+                </div>
+            </div>
+
+            <!-- PREÇOS -->
+            <div class="precos-header">
+                <span class="badge">Investimento</span>
+                <h2 class="section-title">Escolha sua <em>modalidade</em></h2>
+                <div class="urgency-pill">
+                    <span class="urgency-dot"></span>
+                    <strong class="vagas-count">7</strong>&nbsp;vagas restantes neste mês — agenda quase fechada
+                </div>
+            </div>
+
+            <p class="preco-ancora">
+                Um frasco de nicho bom custa em torno de <strong>R$2.000</strong>.
+                A consultoria garante que o próximo que você comprar vai ser exatamente o certo para você.
+            </p>
+
+            <p class="recomendacao"><strong>Não sabe qual escolher?</strong> A Consultoria Nicho cobre tudo — incluindo designer a pedido.</p>
+
+            <div class="precos-grid">
+                <div class="preco-card" data-plan="Consultoria Designer — R$350 (Online)" onclick="selectPlan(this)">
+                    <span class="preco-tag">Online</span>
+                    <div class="preco-modalidade">Consultoria Designer</div>
+                    <div class="preco-local">Via videochamada · Perfumaria designer</div>
+                    <div class="preco-valor"><sup>R$</sup>350</div>
+                    <div class="preco-lancamento">valor de lançamento</div>
+                    <ul class="preco-lista">
+                        <li>Sessão individual via videochamada</li>
+                        <li>Diagnóstico do perfil olfativo</li>
+                        <li>Curadoria personalizada</li>
+                        <li>Guia escrito completo</li>
+                        <li>Suporte pós-sessão</li>
+                    </ul>
+                </div>
+                <div class="preco-card destaque selected" data-plan="Consultoria Nicho — R$600 (Online)" onclick="selectPlan(this)">
+                    <div class="preco-card-badge-top">Mais escolhido</div>
+                    <span class="preco-tag">Online</span>
+                    <div class="preco-modalidade">Consultoria Nicho</div>
+                    <div class="preco-local">Alta perfumaria, nicho e ultra nicho</div>
+                    <div class="preco-valor"><sup>R$</sup>600</div>
+                    <div class="preco-lancamento">valor de lançamento</div>
+                    <ul class="preco-lista">
+                        <li>Alta perfumaria, nicho e ultra nicho</li>
+                        <li>Designer incluso a pedido</li>
+                        <li>Sessão individual via videochamada</li>
+                        <li>Diagnóstico do perfil olfativo</li>
+                        <li>Curadoria personalizada</li>
+                        <li>Guia escrito completo</li>
+                        <li>Suporte pós-sessão</li>
+                    </ul>
+                </div>
+                <div class="preco-card" data-plan="Consultoria Presencial — Consultar Valores" onclick="selectPlan(this)">
+                    <span class="preco-tag">Presencial</span>
+                    <div class="preco-modalidade">Consultoria Presencial</div>
+                    <div class="preco-local">Outras cidades · sob orçamento</div>
+                    <div class="preco-valor" style="font-size:1.5rem; padding-top:0.4rem;">Consultar Valores</div>
+                    <p class="preco-obs" style="margin-top:0.75rem;">Custos de deslocamento e hospedagem incluídos. Solicite orçamento pelo formulário.</p>
+                </div>
+            </div>
+
+            <!-- TESTEMUNHOS -->
+            <div class="testemunhos-wrap">
+                <div class="testemunhos-header">
+                    <span class="badge">Quem já passou por aqui</span>
+                    <h2 class="section-title">Palavras de quem<br><em>já viveu na prática</em></h2>
+                </div>
+                <div class="testemunhos-grid">
+                    <figure class="testemunho-card">
+                        <picture>
+                            <source srcset="images/testemunho-1.webp" type="image/webp">
+                            <img src="images/testemunho-1.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
+                        </picture>
+                    </figure>
+                    <figure class="testemunho-card">
+                        <picture>
+                            <source srcset="images/testemunho-2.webp" type="image/webp">
+                            <img src="images/testemunho-2.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
+                        </picture>
+                    </figure>
+                    <figure class="testemunho-card">
+                        <picture>
+                            <source srcset="images/testemunho-3.webp" type="image/webp">
+                            <img src="images/testemunho-3.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
+                        </picture>
+                    </figure>
+                    <figure class="testemunho-card">
+                        <picture>
+                            <source srcset="images/testemunho-4.webp" type="image/webp">
+                            <img src="images/testemunho-4.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
+                        </picture>
+                    </figure>
+                    <figure class="testemunho-card">
+                        <picture>
+                            <source srcset="images/testemunho-5.webp" type="image/webp">
+                            <img src="images/testemunho-5.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
+                        </picture>
+                    </figure>
+                    <figure class="testemunho-card">
+                        <picture>
+                            <source srcset="images/testemunho-6.webp" type="image/webp">
+                            <img src="images/testemunho-6.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
+                        </picture>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO -->
+            <div class="form-section">
+                <div class="form-trust">
+                    <span class="form-trust-item"><span class="check">&#10003;</span> Resposta em até 24h no WhatsApp</span>
+                    <span class="form-trust-item"><span class="check">&#10003;</span> Sem compromisso nessa primeira conversa</span>
+                    <span class="form-trust-item"><span class="check">&#10003;</span> +2.000 homens já passaram por aqui</span>
+                </div>
+                <div class="consultoria-form-wrap">
+                    <div class="form-title">Solicitar consultoria</div>
+                    <div class="form-subtitle">Preencha e entrarei em contato em até 24h pelo WhatsApp.</div>
+                    <form id="consultoriaForm" onsubmit="handleForm(event)">
+                        <div class="form-group">
+                            <label class="form-label">Nome completo</label>
+                            <input type="text" class="form-input" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">WhatsApp</label>
+                            <input type="tel" class="form-input" placeholder="(21) 99999-9999" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Modalidade de interesse</label>
+                            <select id="planSelect" class="form-select">
+                                <option value="">Ainda não sei — quero conversar primeiro</option>
+                                <option value="Consultoria Designer — R$350 (Online)">Consultoria Designer — R$350 (Online)</option>
+                                <option value="Consultoria Nicho — R$600 (Online)" selected>Consultoria Nicho — R$600 (Online)</option>
+                                <option value="Consultoria Presencial — Consultar Valores">Consultoria Presencial — Consultar Valores</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="form-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+                            </svg>
+                            Enviar pelo WhatsApp
+                        </button>
+                        <p class="form-note">Sem spam. Resposta rápida e direta.</p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CROSS-SELL -->
+    <section id="crosssell">
+        <div class="container">
+            <div class="crosssell-inner">
+                <p class="crosssell-label">Prefere começar por aqui?</p>
+                <p class="crosssell-desc">Dois produtos para quem quer aprender antes de investir na consultoria.</p>
+                <div class="crosssell-links">
+                    <a href="/curso" class="crosssell-link filled">Curso Prático — R$147</a>
+                    <a href="/lista" class="crosssell-link outline">Guia por Ocasião — R$37</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <a href="#" class="footer-logo">Victor<span>.</span></a>
+                <p class="footer-copy">&#169; 2026 Victor Guerise. Todos os direitos reservados.</p>
+                <p class="footer-copy"><a href="https://vguerise.com.br" style="color:inherit; text-decoration:none;">vguerise.com.br</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STICKY CTA MOBILE -->
+    <div class="sticky-mobile-cta">
+        <a href="#consultoria" class="btn-primary">
+            Garantir minha vaga
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
     </div>
-</section>
 
-<!-- DOR -->
-<section id="dor">
-    <div class="container" style="max-width:800px;">
-        <span class="badge" style="display:block; text-align:center;">Você se identifica?</span>
-        <h2 class="section-title" style="text-align:center; margin-bottom:2.5rem;">
-            Perfume caro não é<br><em>perfume certo</em>
-        </h2>
-        <ul class="dor-list">
-            <li class="dor-item">Gastou R$400, R$600, R$800 num frasco — e usou poucas vezes porque "não era bem aquilo"</li>
-            <li class="dor-item">Na loja, o vendedor convenceu. Em casa, o perfume virou outro</li>
-            <li class="dor-item">Não sabe o que gosta — só sabe o que não funcionou</li>
-            <li class="dor-item">Usa o mesmo perfume no trabalho, no final de semana e em encontros — por falta de direção</li>
-        </ul>
-        <p class="dor-fechamento">
-            Isso não é falta de dinheiro. É falta de direção.<br>
-            <strong>A consultoria resolve isso em uma sessão.</strong>
-        </p>
-    </div>
-</section>
+    <script>
+        // Vagas: número aleatório entre 5 e 10, gerado uma vez por sessão
+        (function() {
+            var stored = sessionStorage.getItem('vagasCount');
+            var count = stored ? parseInt(stored) : Math.floor(Math.random() * 6) + 5;
+            sessionStorage.setItem('vagasCount', count);
+            document.querySelectorAll('.vagas-count').forEach(function(el) {
+                el.textContent = count;
+            });
+        })();
 
-<!-- SOBRE -->
-<section id="sobre">
-    <div class="container">
-        <div class="sobre-grid">
-            <div class="sobre-img-wrap">
-                <div class="sobre-accent"></div>
-                <picture>
-                    <source srcset="images/victor-bio.webp" type="image/webp">
-                    <img src="images/victor-bio.jpg" alt="Victor Guerise" class="sobre-img" width="460" height="575" loading="lazy"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                </picture>
-                <div class="sobre-img-placeholder" style="display:none;">Sua foto aqui</div>
-            </div>
-            <div class="sobre-content">
-                <span class="badge">Sobre mim</span>
-                <h2 class="section-title" style="text-align:left;">
-                    Prazer, <em>Victor Guerise</em>
-                </h2>
-                <p class="sobre-text">Me chamo Victor, internacionalista de formação e trabalho com clientes high profile desde o início da carreira.</p>
-                <p class="sobre-text">E com eles, aprendi desde cedo algo que nunca mais esqueci: a imagem comunica antes da primeira palavra.</p>
-                <p class="sobre-text">Isso me levou a ter muito cuidado com a minha imagem, mas ainda sim, faltava algo que eu não sabia o que era. E foi por acidente, em 2022, que esbarrei na perfumaria. Ganhei um perfume de presente e passei a usá-lo, sem pretensão, por educação até.</p>
-                <p class="sobre-text">E aí, o primeiro elogio veio. E o segundo. E na semana seguinte me perguntaram dele. O perfume? Vibrant Leather, da Zara.</p>
-                <p class="sobre-text">Isso ficou na minha mente e depois daí, não tive como fugir. Entrei no mundo da perfumaria e descobri o que todos deveriam saber: a fragrância certa muda a percepção que as pessoas têm de você antes mesmo de você abrir a boca.</p>
-                <p class="sobre-text">Estudei a fundo, errei caro, e desde 2022 ajudo homens a usar perfume como instrumento de imagem — para transmitir autoridade, presença e intenção em qualquer ambiente.</p>
-                <p class="sobre-text">Se você, assim como eu, entende o valor da sua imagem, quer uma coleção que representa quem você é e está pronto para usar a perfumaria a seu favor — veio ao lugar certo.</p>
-            </div>
-        </div>
-    </div>
-</section>
+        // Navbar scroll
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
 
-<!-- CONSULTORIA -->
-<section id="consultoria">
-    <div class="container">
+        // Mobile menu
+        var toggle = document.getElementById('navToggle');
+        var links  = document.getElementById('navLinks');
+        toggle.addEventListener('click', function() { links.classList.toggle('open'); });
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() { links.classList.remove('open'); });
+        });
 
-        <div class="consultoria-header">
-            <span class="badge">Consultoria Pessoal</span>
-            <h2 class="section-title">Como funciona a<br><em>consultoria</em></h2>
-            <p class="section-subtitle">Uma sessão individual, do diagnóstico à entrega — sem enrolação e com resultado concreto para a sua coleção.</p>
-        </div>
+        // Selecionar plano — destaque permanece no card recomendado, selected rastreia a escolha
+        function selectPlan(card) {
+            document.querySelectorAll('.preco-card').forEach(function(c) {
+                c.classList.remove('selected');
+            });
+            card.classList.add('selected');
+            document.getElementById('planSelect').value = card.dataset.plan;
+            setTimeout(function() {
+                document.getElementById('consultoriaForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 150);
+        }
 
-        <!-- 4 PASSOS -->
-        <div class="passos">
-            <div class="passo">
-                <div class="passo-num">01</div>
-                <div class="passo-title">Questionário de Perfil</div>
-                <p class="passo-desc">Após a contratação, você recebe um questionário sobre estilo de vida, rotina, personalidade e os momentos em que usa perfume.</p>
-            </div>
-            <div class="passo">
-                <div class="passo-num">02</div>
-                <div class="passo-title">Diagnóstico Olfativo</div>
-                <p class="passo-desc">Analiso suas respostas para mapear seu perfil olfativo dominante, suas preferências reais e os gaps da sua coleção atual.</p>
-            </div>
-            <div class="passo">
-                <div class="passo-num">03</div>
-                <div class="passo-title">Curadoria Personalizada</div>
-                <p class="passo-desc">Monto uma seleção exclusiva de perfumes para o seu perfil — com indicação de ocasião, como e quando usar, e onde comprar.</p>
-            </div>
-            <div class="passo">
-                <div class="passo-num">04</div>
-                <div class="passo-title">Entrega & Acompanhamento</div>
-                <p class="passo-desc">Você recebe um documento completo com tudo documentado e fica disponível para tirar dúvidas nos dias seguintes.</p>
-            </div>
-        </div>
+        // Submit — abre WhatsApp com dados preenchidos
+        function handleForm(e) {
+            e.preventDefault();
+            var form = e.target;
+            var nome = form.querySelector('input[type="text"]').value.trim();
+            var tel  = form.querySelector('input[type="tel"]').value.trim();
+            var plan = document.getElementById('planSelect').value;
+            var modalidade = plan || 'Ainda não decidido — quero conversar';
+            var text = encodeURIComponent(
+                'Olá Victor! Quero solicitar uma consultoria.\n\n' +
+                '*Nome:* ' + nome + '\n' +
+                '*WhatsApp:* ' + tel + '\n' +
+                '*Modalidade:* ' + modalidade
+            );
+            if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
+            window.open('https://wa.me/5521976462812?text=' + text, '_blank');
+        }
 
-        <!-- PREÇOS -->
-        <div style="text-align:center; margin-bottom:2rem;">
-            <span class="badge">Investimento</span>
-            <h2 class="section-title">Escolha sua<br><em>modalidade</em></h2>
-            <p class="section-subtitle" style="margin:0 auto;">Cada sessão é individual e exclusiva.</p>
-        </div>
-        <div style="text-align:center; margin-bottom:2rem;">
-            <span style="display:inline-flex; align-items:center; gap:0.5rem; background:#FFF3ED; border:1px solid rgba(232,93,4,0.3); border-radius:100px; padding:0.5rem 1.25rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; color:#1A1A1A;">
-                <span style="width:8px; height:8px; background:#E85D04; border-radius:50%; display:inline-block; animation:pulse 2s infinite;"></span>
-                <strong style="color:#E85D04;">3 vagas</strong>&nbsp;disponíveis em maio
-            </span>
-        </div>
-        <p class="preco-ancora">
-            Um frasco de nicho bom custa em torno de <strong>R$2.000</strong>.
-            A consultoria garante que o próximo que você comprar vai ser o certo para você.
-        </p>
-        <p class="recomendacao"><strong>Não sabe qual escolher?</strong> A Consultoria Nicho cobre tudo — incluindo designer a pedido do cliente.</p>
-        <div class="precos-grid">
-            <div class="preco-card" style="cursor:pointer" data-plan="Consultoria Designer — R$350 (Online)" onclick="selectPlan(this)">
-                <span class="preco-tag">Online</span>
-                <div class="preco-modalidade">Consultoria Designer</div>
-                <div class="preco-local">Via videochamada · Apenas perfumaria designer</div>
-                <div class="preco-valor" style="text-align:center;"><sup>R$</sup>350 <span style="font-size:0.35em; font-weight:600; color:var(--orange-light); display:block; margin-top:0.3rem; letter-spacing:1px; text-transform:uppercase;">(valor de lançamento)</span></div>
-                <ul class="preco-lista">
-                    <li>Sessão individual via videochamada</li>
-                    <li>Diagnóstico do seu perfil olfativo</li>
-                    <li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li>
-                    <li>Guia escrito com ocasião, onde comprar e como usar</li>
-                    <li>Suporte para tirar dúvidas</li>
-                </ul>
-            </div>
-            <div class="preco-card destaque" style="cursor:pointer" data-plan="Consultoria Nicho — R$600 (Online)" onclick="selectPlan(this)">
-                <span class="preco-tag">Online</span>
-                <div class="preco-modalidade">Consultoria Nicho</div>
-                <div class="preco-local">Via videochamada · Alta perfumaria, nicho e ultra nicho</div>
-                <div class="preco-valor" style="text-align:center;"><sup>R$</sup>600 <span style="font-size:0.35em; font-weight:600; color:var(--orange-light); display:block; margin-top:0.3rem; letter-spacing:1px; text-transform:uppercase;">(valor de lançamento)</span></div>
-                <ul class="preco-lista">
-                    <li>Alta perfumaria, nicho e ultra nicho</li>
-                    <li>Designer incluso a pedido do cliente</li>
-                    <li>Sessão individual via videochamada</li>
-                    <li>Diagnóstico do seu perfil olfativo</li>
-                    <li>Curadoria personalizada para o seu estilo, de acordo com a sua necessidade</li>
-                    <li>Guia escrito com ocasião, onde comprar e como usar</li>
-                    <li>Suporte para tirar dúvidas</li>
-                </ul>
-            </div>
-            <div class="preco-card" style="cursor:pointer" data-plan="Consultoria Presencial — Consultar Valores" onclick="selectPlan(this)">
-                <span class="preco-tag">Presencial</span>
-                <div class="preco-modalidade">Consultoria Presencial</div>
-                <div class="preco-local">Outras cidades · sob orçamento</div>
-                <div class="preco-valor" style="font-size:1.4rem; padding-top:0.3rem;">Consultar Valores</div>
-                <p class="preco-obs">Custos de deslocamento e hospedagem incluídos. Solicite orçamento.</p>
-            </div>
-        </div>
-
-        <!-- TESTEMUNHOS -->
-        <div class="testemunhos-inline">
-            <div class="testemunhos-inline-header">
-                <span class="badge">Quem já passou por aqui</span>
-                <h2 class="section-title">Palavras de quem<br><em>já viveu na prática</em></h2>
-            </div>
-            <div class="testemunhos-grid">
-                <figure class="testemunho-card">
-                    <picture>
-                        <source srcset="images/testemunho-1.webp" type="image/webp">
-                        <img src="images/testemunho-1.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
-                    </picture>
-                    
-                </figure>
-                <figure class="testemunho-card">
-                    <picture>
-                        <source srcset="images/testemunho-2.webp" type="image/webp">
-                        <img src="images/testemunho-2.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
-                    </picture>
-                    
-                </figure>
-                <figure class="testemunho-card">
-                    <picture>
-                        <source srcset="images/testemunho-3.webp" type="image/webp">
-                        <img src="images/testemunho-3.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
-                    </picture>
-                    
-                </figure>
-                <figure class="testemunho-card">
-                    <picture>
-                        <source srcset="images/testemunho-4.webp" type="image/webp">
-                        <img src="images/testemunho-4.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
-                    </picture>
-                    
-                </figure>
-                <figure class="testemunho-card">
-                    <picture>
-                        <source srcset="images/testemunho-5.webp" type="image/webp">
-                        <img src="images/testemunho-5.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
-                    </picture>
-                    
-                </figure>
-                <figure class="testemunho-card">
-                    <picture>
-                        <source srcset="images/testemunho-6.webp" type="image/webp">
-                        <img src="images/testemunho-6.jpg" alt="Depoimento de cliente" class="testemunho-img" loading="lazy">
-                    </picture>
-                    
-                </figure>
-            </div>
-        </div>
-
-        <!-- TRUST SIGNALS + FORMULÁRIO -->
-        <div class="consultoria-form-outer">
-            <div class="form-trust">
-                <span class="form-trust-item"><span class="check">✓</span> Resposta em até 24h no WhatsApp</span>
-                <span class="form-trust-item"><span class="check">✓</span> Sem compromisso nessa primeira conversa</span>
-                <span class="form-trust-item"><span class="check">✓</span> +2.000 homens já passaram por aqui</span>
-            </div>
-            <div class="consultoria-form-wrap">
-                <div class="form-title">Solicite sua consultoria</div>
-                <div class="form-subtitle">Preencha e entrarei em contato em até 24h.</div>
-                <form id="consultoriaForm" onsubmit="handleForm(event)">
-                    <div class="form-group">
-                        <label class="form-label">Nome completo</label>
-                        <input type="text" class="form-input" placeholder="Seu nome" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">WhatsApp</label>
-                        <input type="tel" class="form-input" placeholder="(21) 99999-9999" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Modalidade de interesse</label>
-                        <select id="planSelect" class="form-select form-input">
-                            <option value="">Ainda não sei — quero conversar primeiro</option>
-                            <option value="Consultoria Designer — R$350 (Online)">Consultoria Designer — R$350 (Online)</option>
-                            <option value="Consultoria Nicho — R$600 (Online)" selected>Consultoria Nicho — R$600 (Online)</option>
-                            <option value="Consultoria Presencial — Consultar Valores">Consultoria Presencial — Consultar Valores</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" class="form-btn">Enviar pelo WhatsApp</button>
-                    <p class="form-note">Sem spam. Resposta rápida e direta.</p>
-                </form>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-
-<section style="background:rgba(232,93,4,0.06); border-top:1px solid rgba(232,93,4,0.2); padding:3rem 2rem; text-align:center;"><div class="container" style="max-width:660px; margin:0 auto;"><p style="font-family:'Cormorant Garamond',serif; font-size:1rem; color:rgba(255,255,255,0.45); letter-spacing:2px; text-transform:uppercase; margin-bottom:0.75rem;">Prefere começar por aqui?</p><p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.7; margin-bottom:1.5rem;">Dois produtos para quem quer aprender antes de investir na consultoria.</p><div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;"><a href="/curso" style="display:inline-block; background:var(--orange); color:#fff; padding:0.75rem 2rem; border-radius:100px; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Curso Prático — R$147</a><a href="/lista" style="display:inline-block; border:1px solid var(--orange); color:var(--orange); padding:0.75rem 2rem; border-radius:100px; text-decoration:none; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:500; letter-spacing:1px; text-transform:uppercase;">Guia por Ocasião — R$37</a></div></div></section>
-
-<!-- FOOTER -->
-<footer>
-    <div class="container">
-        <div class="footer-inner">
-            <a href="#" class="footer-logo">Victor<span>.</span></a>
-            <p class="footer-copy">© 2026 Victor Guerise. Todos os direitos reservados.</p>
-            <p class="footer-copy"><a href="https://vguerise.com.br" style="color:inherit; text-decoration:none;">vguerise.com.br</a></p>
-        </div>
-    </div>
-</footer>
-
-<!-- STICKY CTA MOBILE -->
-<div class="sticky-mobile-cta">
-    <a href="#consultoria" class="btn-primary">
-        Quero Consultoria
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </a>
-</div>
-
-<script>
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
-    const toggle = document.getElementById('navToggle');
-    const links = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => { links.classList.toggle('open'); });
-    links.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => links.classList.remove('open'));
-    });
-
-    function selectPlan(card) {
-        document.querySelectorAll('.preco-card').forEach(c => c.classList.remove('destaque'));
-        card.classList.add('destaque');
-        document.getElementById('planSelect').value = card.dataset.plan;
-        document.getElementById('consultoriaForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    function handleForm(e) {
-        e.preventDefault();
-        const form = e.target;
-        const nome = form.querySelector('input[type="text"]').value;
-        const tel  = form.querySelector('input[type="tel"]').value;
-        const coll = document.getElementById('planSelect').value;
-        const text = encodeURIComponent(
-            `Olá Victor! Quero solicitar uma consultoria.\n\n` +
-            `*Nome:* ${nome}\n` +
-            `*WhatsApp:* ${tel}\n` +
-            `*Modalidade:* ${coll}\n`
-        );
-        fbq('track', 'InitiateCheckout');
-        window.open(`https://wa.me/5521976462812?text=${text}`, '_blank');
-    }
-</script>
+        // Animações fade-up no hero disparam imediatamente
+        document.querySelectorAll('.hero-content .fade-up, .hero-visual .fade-up').forEach(function(el) {
+            el.style.animationPlayState = 'running';
+        });
+    </script>
 </body>
 </html>
