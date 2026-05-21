@@ -100,7 +100,7 @@
             padding: 0 2rem;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
         }
 
         .nav-logo {
@@ -145,6 +145,19 @@
         }
 
         .nav-cta-pill:hover { background: var(--orange-dark); }
+        .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
+        .nav-links a { font-size:0.9rem; font-weight:600; color:#E8E8E8; text-decoration:none; transition:color 0.2s; letter-spacing:0.3px; }
+        .nav-links a:hover { color:#E85D04; text-shadow: 0 0 10px rgba(232,93,4,0.55); }
+        .nav-cta { background:#E85D04; color:#ffffff !important; padding:0.55rem 1.3rem; border-radius:4px; transition:background 0.2s !important; }
+        .nav-cta:hover { background:#C14B00 !important; box-shadow: 0 0 18px rgba(232,93,4,0.55); }
+        .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+        .nav-toggle span { display:block; width:24px; height:2px; background:#ffffff; border-radius:2px; transition:transform 0.3s; }
+        @media (max-width: 768px) {
+            .nav-links { display:none; }
+            .nav-links.open { display:flex; flex-direction:column; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(13,13,13,0.98); align-items:center; justify-content:center; gap:2rem; z-index:99; }
+            .nav-links.open a { font-size:1.3rem; }
+            .nav-toggle { display:flex; z-index:200; }
+        }
 
         /* ── HERO ────────────────────────────────────────── */
         #hero {
@@ -713,16 +726,16 @@
 <!-- NAVBAR -->
 <nav id="navbar">
     <div class="nav-inner">
-        <a href="/perfumap" class="nav-logo">Perfu<span>map</span></a>
-        <div class="nav-right">
-            <a href="/" class="nav-back">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                vguerise.com.br
-            </a>
-            <a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank" class="nav-cta-pill">Usar agora</a>
-        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="https://vguerise.com.br">Consultoria</a></li>
+            <li><a href="/curso">Curso</a></li>
+            <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
+            <li><a href="/lista">Guia R$37</a></li>
+            <li><a href="https://wa.me/5521976462812" target="_blank" class="nav-cta">Fale Comigo</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
     </div>
 </nav>
 
@@ -987,9 +1000,11 @@
 
 <script>
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-    });
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => { links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => links.classList.remove('open')); });
 </script>
 </body>
 </html>
