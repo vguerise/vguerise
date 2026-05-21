@@ -1117,7 +1117,7 @@
         </p>
         <p class="recomendacao"><strong>Não sabe qual escolher?</strong> A Consultoria Nicho cobre tudo — incluindo designer a pedido do cliente.</p>
         <div class="precos-grid">
-            <div class="preco-card">
+            <div class="preco-card" style="cursor:pointer" data-plan="Consultoria Designer — R$350 (Online)" onclick="selectPlan(this)">
                 <span class="preco-tag">Online</span>
                 <div class="preco-modalidade">Consultoria Designer</div>
                 <div class="preco-local">Via videochamada · Apenas perfumaria designer</div>
@@ -1130,7 +1130,7 @@
                     <li>Suporte para tirar dúvidas</li>
                 </ul>
             </div>
-            <div class="preco-card destaque">
+            <div class="preco-card destaque" style="cursor:pointer" data-plan="Consultoria Nicho — R$600 (Online)" onclick="selectPlan(this)">
                 <span class="preco-tag">Online</span>
                 <div class="preco-modalidade">Consultoria Nicho</div>
                 <div class="preco-local">Via videochamada · Alta perfumaria, nicho e ultra nicho</div>
@@ -1145,7 +1145,7 @@
                     <li>Suporte para tirar dúvidas</li>
                 </ul>
             </div>
-            <div class="preco-card">
+            <div class="preco-card" style="cursor:pointer" data-plan="Consultoria Presencial — Consultar Valores" onclick="selectPlan(this)">
                 <span class="preco-tag">Presencial</span>
                 <div class="preco-modalidade">Consultoria Presencial</div>
                 <div class="preco-local">Outras cidades · sob orçamento</div>
@@ -1227,11 +1227,11 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Modalidade de interesse</label>
-                        <select class="form-select form-input">
+                        <select id="planSelect" class="form-select form-input">
                             <option value="">Ainda não sei — quero conversar primeiro</option>
-                            <option>Consultoria Designer — R$350 (Online)</option>
-                            <option>Consultoria Nicho — R$600 (Online)</option>
-                            <option>Consultoria Presencial — Consultar Valores</option>
+                            <option value="Consultoria Designer — R$350 (Online)">Consultoria Designer — R$350 (Online)</option>
+                            <option value="Consultoria Nicho — R$600 (Online)" selected>Consultoria Nicho — R$600 (Online)</option>
+                            <option value="Consultoria Presencial — Consultar Valores">Consultoria Presencial — Consultar Valores</option>
                         </select>
                     </div>
                     
@@ -1282,12 +1282,19 @@
         a.addEventListener('click', () => links.classList.remove('open'));
     });
 
+    function selectPlan(card) {
+        document.querySelectorAll('.preco-card').forEach(c => c.classList.remove('destaque'));
+        card.classList.add('destaque');
+        document.getElementById('planSelect').value = card.dataset.plan;
+        document.getElementById('consultoriaForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     function handleForm(e) {
         e.preventDefault();
         const form = e.target;
         const nome = form.querySelector('input[type="text"]').value;
         const tel  = form.querySelector('input[type="tel"]').value;
-        const coll = form.querySelector('select').value;
+        const coll = document.getElementById('planSelect').value;
         const text = encodeURIComponent(
             `Olá Victor! Quero solicitar uma consultoria.\n\n` +
             `*Nome:* ${nome}\n` +
