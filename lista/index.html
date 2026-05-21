@@ -190,12 +190,12 @@
         }
         .hero-photo-wrap { position: relative; width: 380px; max-width: 100%; }
         .hero-photo-wrap::before {
-            content: ''; position: absolute; inset: -2px;
-            background: linear-gradient(135deg, var(--orange) 0%, transparent 50%);
-            border-radius: 8px; z-index: 0;
+            content: ''; position: absolute; inset: -3px;
+            background: var(--orange);
+            border-radius: 20px; z-index: 0;
         }
         .hero-photo {
-            position: relative; z-index: 1; width: 100%; border-radius: 6px;
+            position: relative; z-index: 1; width: 100%; border-radius: 18px;
             display: block; object-fit: cover; aspect-ratio: 3/4;
         }
         .hero-stats {
@@ -433,7 +433,9 @@
             aspect-ratio: 3/4;
             object-fit: cover;
             object-position: top center;
-            border-radius: 2px;
+            border-radius: 18px;
+            border: 3px solid var(--orange);
+            box-shadow: 0 8px 40px rgba(232,93,4,0.25);
             filter: grayscale(20%);
         }
 
