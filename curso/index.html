@@ -199,7 +199,7 @@
             font-style: italic; font-family: 'Playfair Display', serif; color: var(--orange);
         }
         .hero-subtitle {
-            font-size: 1.05rem; color: var(--gray-light);
+            font-size: 1.05rem; color: #ffffff;
             max-width: 480px; margin-bottom: 2.5rem; line-height: 1.6;
         }
         .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
@@ -224,11 +224,13 @@
             position: relative; z-index: 1; width: 100%; border-radius: 18px;
             display: block; object-fit: cover; aspect-ratio: 3/4;
         }
-        .hero-stats {
-            display: flex; gap: 2rem; padding-top: 1.25rem;
-            border-top: 1px solid rgba(255,255,255,0.08); width: 100%;
-        }
-        .stat-item { display: flex; flex-direction: column; }
+        .hero-stats-overlay { position: absolute; bottom: 1.5rem; left: 0; right: 0; z-index: 3; display: flex; justify-content: center; gap: 0; }
+        .hero-photo-frame { position: relative; border-radius: 10px; overflow: hidden; }
+        .hero-photo-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(10,9,9,0.7) 100%); }
+        .stat-item { text-align: center; padding: 0.75rem 1.5rem; background: rgba(10,9,9,0.88); backdrop-filter: blur(8px); border: 1px solid rgba(232,93,4,0.2); }
+        .stat-item:first-child { border-radius: 8px 0 0 8px; }
+        .stat-item:last-child { border-radius: 0 8px 8px 0; }
+        .stat-item + .stat-item { border-left: none; }
         .stat-number {
             font-family: 'Cormorant Garamond', serif; font-size: 1.8rem;
             font-weight: 900; color: var(--orange); line-height: 1; margin-bottom: 0.2rem;
@@ -243,7 +245,7 @@
             }
             #hero .hero-eyebrow { justify-content: center; }
             #hero .hero-actions { justify-content: center; }
-            #hero .hero-stats { justify-content: center; }
+            #hero .hero-stats-overlay { position: relative; bottom: auto; margin-top: 1rem; justify-content: center; }
             #hero .hero-photo-wrap { width: 260px; margin: 0 auto; }
         }
 
@@ -992,13 +994,15 @@
                 </div>
                 <div class="hero-visual">
                     <div class="hero-photo-wrap">
-                        <picture>
-                        <source srcset="images/victor-terno.webp" type="image/webp">
-                        <img src="images/victor-terno.jpg" alt="Victor Guerise" class="hero-photo" width="380" height="507" fetchpriority="high" loading="eager">
-                    </picture>
-                        <div class="hero-stats">
+                        <div class="hero-photo-frame">
+                            <picture>
+                                <source srcset="images/victor-terno.webp" type="image/webp">
+                                <img src="images/victor-terno.jpg" alt="Victor Guerise" class="hero-photo" width="380" height="507" fetchpriority="high" loading="eager">
+                            </picture>
+                        </div>
+                        <div class="hero-stats-overlay">
+                            <div class="stat-item"><div class="stat-number">+200</div><div class="stat-label">Atendimentos</div></div>
                             <div class="stat-item"><div class="stat-number">+18K</div><div class="stat-label">Instagram</div></div>
-                            <div class="stat-item"><div class="stat-number">+6K</div><div class="stat-label">TikTok</div></div>
                             <div class="stat-item"><div class="stat-number">+2000</div><div class="stat-label">Alunos</div></div>
                         </div>
                     </div>
