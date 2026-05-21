@@ -617,10 +617,16 @@
             .price-card { padding: 2rem 1.5rem; }
         }
 
+        /* URGÊNCIA BAR */
+        #urgencia-bar { background:var(--orange); padding:0.65rem 1rem; text-align:center; font-size:0.82rem; font-weight:700; color:#fff; letter-spacing:0.3px; position:relative; z-index:101; }
+        #urgencia-bar strong { font-weight:900; }
+
         /* NAVBAR */
-        nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.2rem 0; transition:background 0.3s, backdrop-filter 0.3s; }
+        nav { position:sticky; top:0; z-index:100; padding:1rem 0; background:rgba(10,9,9,0.97); transition:background 0.3s, backdrop-filter 0.3s; }
         nav.scrolled { background:rgba(13,13,13,0.92); backdrop-filter:blur(12px); border-bottom:1px solid rgba(232,93,4,0.15); }
-        .nav-inner { max-width:1140px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:center; }
+        .nav-inner { max-width:1140px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; }
+        .nav-logo { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.1rem; color:#FFFFFF; text-decoration:none; letter-spacing:0.5px; }
+        .nav-logo span { color:var(--orange); }
         .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
         .nav-links a { font-size:0.9rem; font-weight:600; color:#E8E8E8; text-decoration:none; transition:color 0.2s; letter-spacing:0.3px; }
         .nav-links a:hover { color:#E85D04; text-shadow: 0 0 10px rgba(232,93,4,0.55); }
@@ -664,19 +670,27 @@
         .author-bio { color: #5A3E2B !important; }
         .author-stat-value { color: #8B3A00 !important; }
         .author-stat-label { color: #5A3E2B !important; }
+        /* contraste: ✓ check e texto em seção de preço clara */
+        .price-section .price-includes li::before { color: #C14B00 !important; }
+        .price-card p[style] { color: rgba(0,0,0,0.65) !important; }
+        .price-from { color: rgba(0,0,0,0.5) !important; }
 
         </style>
 </head>
 <body>
 
+<!-- URGÊNCIA BAR -->
+<div id="urgencia-bar">Guia em PDF &middot; Acesso imediato após o pagamento &middot; <strong>7 dias de garantia</strong></div>
+
 <!-- NAVBAR -->
 <nav id="navbar">
     <div class="nav-inner">
+        <a href="https://vguerise.com.br" class="nav-logo">Consultoria<span>.</span></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="https://vguerise.com.br#sobre">Sobre</a></li>
             <li><a href="/curso">Curso</a></li>
             <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
-            <li><a href="/lista">Lista de Perfumes</a></li>
+            <li><a href="/lista">Guia R$37</a></li>
             <li><a href="https://vguerise.com.br#consultoria">Consultoria</a></li>
             <li><a href="https://wa.me/5521976462812" target="_blank" class="nav-cta">Fale Comigo</a></li>
         </ul>
