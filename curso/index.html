@@ -904,6 +904,24 @@
         .highlight-stat { color: #FFFFFF !important; }
         section[style*="F4F1EB"] > div > p[style] { color: rgba(255,255,255,0.6) !important; }
 
+        /* ── CONTRASTE: seções escuras com --black/#0A0909 como cor de texto ── */
+        /* section-title usa color:var(--black)=#0A0909 em fundos igualmente escuros */
+        .section-title { color: #E8E8E8 !important; }
+        .section-title em { color: var(--orange) !important; }
+        /* intro-hook e strong dentro do intro-box (bg=#0A0909) */
+        .intro-hook { color: #E8E8E8 !important; }
+        .intro-hook strong { color: var(--orange) !important; }
+        .intro-text strong { color: var(--orange-light) !important; }
+        /* pain-verdict: texto escuro no fundo escuro */
+        .pain-verdict { color: #E8E8E8 !important; }
+        /* faq-question: #0A0909 em faq-item bg=#1A1A1A */
+        .faq-question { color: #E8E8E8 !important; }
+        /* ba-col after: fundo claro (#f0faf5) com text white */
+        .ba-col.after .ba-item { color: #1A3A22 !important; }
+        /* about inline "— Victor Guerise" usa var(--white)=#0A0909 — no fundo creme fica ok,
+           mas o about-signature e about-content strong precisam de dark */
+        .about-section p[style*="color:var(--white)"] { color: #1A1A1A !important; }
+
         /* ── LIGHT BREAKS ──────────────────────────────────────── */
         .about-section { background: #F0EBE3 !important; }
         .about-section .section-title { color: #1A1A1A !important; }
