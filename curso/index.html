@@ -843,9 +843,7 @@
         /* NAVBAR */
         nav { position:sticky; top:0; z-index:100; padding:1rem 0; background:rgba(10,9,9,0.97); transition:background 0.3s, backdrop-filter 0.3s; }
         nav.scrolled { background:rgba(10,9,9,0.98); backdrop-filter:blur(12px); border-bottom:1px solid rgba(232,93,4,0.15); }
-        .nav-inner { max-width:1140px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; }
-        .nav-logo { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.1rem; color:#FFFFFF; text-decoration:none; letter-spacing:0.5px; }
-        .nav-logo span { color:var(--orange); }
+        .nav-inner { max-width:1140px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:center; }
         .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
         .nav-links a { font-size:0.9rem; font-weight:600; color:#E8E8E8; text-decoration:none; transition:color 0.2s; letter-spacing:0.3px; }
         .nav-links a:hover { color:#E85D04; text-shadow: 0 0 10px rgba(232,93,4,0.55); }
@@ -905,6 +903,9 @@
         section[style*="F4F1EB"] > div > p[style] { color: rgba(255,255,255,0.6) !important; }
 
         /* ── CONTRASTE: seções escuras com --black/#0A0909 como cor de texto ── */
+        /* hero-title usa color:var(--white)=#0A0909 sobre fundo hero igualmente escuro */
+        .hero-title { color: #FFFFFF !important; }
+        .hero-title em { color: var(--orange) !important; }
         /* section-title usa color:var(--black)=#0A0909 em fundos igualmente escuros */
         .section-title { color: #E8E8E8 !important; }
         .section-title em { color: var(--orange) !important; }
@@ -927,7 +928,9 @@
         .about-section .section-title { color: #1A1A1A !important; }
         .about-section .section-title em { color: #8B3A00 !important; }
         .about-section .section-label { color: #8B3A00 !important; }
+        .about-section { color: #5A3E2B !important; }
         .about-content { color: #5A3E2B !important; }
+        .about-content p { color: #5A3E2B !important; }
         .about-content strong { color: #1A1A1A !important; }
         .about-signature { color: #8B3A00 !important; }
         .about-section [style*="rgba(255,255,255,0.45)"] { color: #5A3E2B !important; }
@@ -952,9 +955,8 @@
     <!-- NAVBAR -->
     <nav id="navbar">
         <div class="nav-inner">
-            <a href="https://vguerise.com.br" class="nav-logo">Consultoria<span>.</span></a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="https://vguerise.com.br#sobre">Sobre</a></li>
+                <li><a href="https://vguerise.com.br">Consultoria</a></li>
                 <li><a href="/curso">Curso</a></li>
                 <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
                 <li><a href="/lista">Guia R$37</a></li>
