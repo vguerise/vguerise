@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,12 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '804720092315209');
     fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
+    fbq('track', 'ViewContent', {
+      content_name: 'Curso Prático da Perfumaria',
+      content_category: 'Curso',
+      value: 147,
+      currency: 'BRL'
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=804720092315209&ev=ViewContent&noscript=1"
