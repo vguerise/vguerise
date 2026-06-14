@@ -143,6 +143,17 @@ textarea::placeholder{color:#b5a99a;}
 .btn-pdf:disabled{opacity:.5;cursor:wait;}
 .btn-reset{background:none;border:1px solid var(--border);padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);cursor:pointer;border-radius:2px;transition:all .2s;}
 .btn-reset:hover{border-color:var(--ink);color:var(--ink);}
+.btn-fix{background:none;border:1px solid var(--gold-light);padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);cursor:pointer;border-radius:2px;transition:all .2s;}
+.btn-fix:hover{background:var(--gold);color:white;}
+.btn-fix.active{background:var(--gold);color:white;}
+.btn-apply-fix{display:none;background:var(--ink);border:none;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--parchment);cursor:pointer;border-radius:2px;transition:background .2s;}
+.btn-apply-fix:hover{background:var(--deep);}
+.btn-apply-fix:disabled{opacity:.5;cursor:wait;}
+.perfume-card.fix-selectable{cursor:pointer;}
+.perfume-card.fix-selectable:hover{border-color:var(--gold);transform:translateY(-1px);}
+.perfume-card.fix-selected{border-color:var(--gold)!important;background:#faf6ec;}
+.fix-checkbox{position:absolute;top:8px;right:8px;width:18px;height:18px;border:1.5px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:11px;background:white;}
+.fix-selected .fix-checkbox{background:var(--gold);border-color:var(--gold);color:white;}
 .error-msg{display:none;background:#fdf0ef;border:1px solid #e8c4c0;border-radius:2px;padding:13px 17px;font-size:13px;color:#8b2e26;margin-top:14px;}
 .error-msg.active{display:block;}
 @media(max-width:600px){
@@ -330,6 +341,8 @@ Byredo Bal d'Afrique (Floral Amadeirado)
     </div>
     <div class="action-buttons">
       <button class="btn-pdf" id="btn-pdf" onclick="exportPDF()">↓ Exportar PDF</button>
+      <button class="btn-fix" id="btn-fix" onclick="toggleCorrectionMode()">↺ Corrigir Sugestões</button>
+      <button class="btn-apply-fix" id="btn-apply-fix" onclick="applyCorrections()">Substituir <span id="fix-count">0</span> perfumes</button>
       <button class="btn-reset" onclick="reset()">← Nova análise</button>
     </div>
   </div>
@@ -611,6 +624,7 @@ const RADAR_AXES = [
 ];
 
 let allPerfumes = [], radarChart = null, selectedGender = 'masculino';
+let correctionMode = false, selectedForCorrection = new Set(), currentAnalysisData = null;
 
 function buildRefGrid() {
   document.getElementById('ref-grid').innerHTML = ARCHETYPES.map(a => `
@@ -712,6 +726,8 @@ TAREFA — execute tudo e responda apenas JSON:
 
 4. Classifique o arquétipo entre os 9 abaixo com justificativa profunda.
 
+INSTRUÇÃO DE LINGUAGEM: Todo texto narrativo (olfactory_profile, justification, consultation_recommendation, collection_gaps, secondary_reason) deve ser escrito em 2ª pessoa, dirigindo-se diretamente ao cliente com "você", "sua", "seu". Ex: "Sua coleção revela..." / "Você valoriza..." / "Seu estilo..."
+
 OS 9 ARQUÉTIPOS:
 ${archetypeList}
 
@@ -727,22 +743,23 @@ ${questionnaire||'Não informado'}
 Responda APENAS JSON válido, sem markdown, sem texto extra:
 {
   "collection_families": ["família do perfume 1","família do perfume 2"],
-  "likes": ["gosta de X","prefere Y","aprecia Z"],
-  "dislikes": ["evita atalcado","detesta floral doce","não quer X"],
+  "likes": ["você gosta de X","você prefere Y","você aprecia Z"],
+  "dislikes": ["você evita atalcado","você detesta floral doce","você não quer X"],
   "archetype": "nome exato do arquétipo",
   "confidence": número inteiro 60-98,
-  "olfactory_profile": "2-3 parágrafos",
+  "olfactory_profile": "2-3 parágrafos em 2ª pessoa",
   "dominant_families": ["família1","família2","família3"],
-  "justification": "2-3 parágrafos",
+  "justification": "2-3 parágrafos em 2ª pessoa",
   "identity_traits": ["traço1","traço2","traço3","traço4"],
   "secondary_archetype": "nome do arquétipo secundário",
-  "secondary_reason": "1 frase",
-  "consultation_recommendation": "1-2 parágrafos",
-  "collection_gaps": "1-2 parágrafos"
+  "secondary_reason": "1 frase em 2ª pessoa",
+  "consultation_recommendation": "1-2 parágrafos em 2ª pessoa",
+  "collection_gaps": "1-2 parágrafos em 2ª pessoa"
 }`;
 
   try {
     const profile = await callClaude({ model:"claude-sonnet-4-6", max_tokens:8192, messages:[{role:"user",content:prompt1}] });
+    currentAnalysisData = { profile, collection, lifestyle, questionnaire };
 
     renderProfile(profile);
     showArchetypeImg(profile.archetype);
@@ -765,8 +782,8 @@ CONTEXTO DO CLIENTE:
 - Arquétipo: ${profile.archetype} (secundário: ${profile.secondary_archetype})
 - Famílias dominantes: ${(profile.dominant_families||[]).join(', ')}
 - Traços: ${(profile.identity_traits||[]).join(', ')}
-- O QUE ELE GOSTA: ${(profile.likes||[]).join('; ')||'não especificado'}
-- O QUE ELE EVITA / DETESTA: ${(profile.dislikes||[]).join('; ')||'não especificado'}
+- O QUE VOCÊ GOSTA: ${(profile.likes||[]).join('; ')||'não especificado'}
+- O QUE VOCÊ EVITA / DETESTA: ${(profile.dislikes||[]).join('; ')||'não especificado'}
 - Coleção atual: ${collection}
 - Estilo de vida: ${lifestyle||'não informado'}
 - Questionário: ${questionnaire||'não informado'}
@@ -776,11 +793,13 @@ ${genderInstruction}
 
 TAREFA: Gere uma curadoria de EXATAMENTE 38 perfumes.
 
+INSTRUÇÃO DE LINGUAGEM: O campo "razao" de cada perfume deve ser escrito em 2ª pessoa, dirigindo-se diretamente ao cliente. Ex: "Sua afinidade por madeiras secas encontra aqui..." / "Você vai reconhecer sua assinatura aromática em..."
+
 REGRAS ABSOLUTAS:
 1. CADA PERFUME deve fazer sentido real no gosto deste cliente. A justificativa deve ser específica — o que este perfume tem que conecta com o perfil dele.
 2. NUNCA sugerir perfume com notas ou características que o cliente declarou evitar.
 3. Máximo 10% de "alta_perfumaria" (≤4 de 38). Restante: "nicho".
-   - "nicho": Le Labo, Byredo, Serge Lutens, Nasomatto, Frederic Malle, Diptyque, Initio, Xerjoff, Nishane, Memo Paris, Tiziana Terenzi, Orto Parisi, Parfums de Marly, Roja Parfums, BDK, MFK, Matiere Premiere, Vilhelm, D.S.&Durga, Zoologist, Liquides Imaginaires, 19-69, Fueguia 1833, Juliette Has a Gun, Akro, The Harmonist, Bogue Profumo, etc.
+   - "nicho": Priorize marcas disponíveis no Brasil — Le Labo, Byredo, Diptyque, Serge Lutens, Frederic Malle, Nasomatto, Initio, Xerjoff, Nishane, Memo Paris, Tiziana Terenzi, Parfums de Marly, Orto Parisi, BDK, MFK, Matiere Premiere, Jo Malone London, Maison Margiela Replica, Narciso Rodriguez For Her/Him, Jeroboam, Mémoire d'une Odeur, Valentino Uomo Intense, Bottega Veneta, Yves Saint Laurent La Nuit de l'Homme, Carolina Herrera 212, Carolina Herrera Good Girl, Paco Rabanne Invictus, Paco Rabanne 1 Million, Viktor & Rolf Spicebomb, Mont Blanc Explorer, Giorgio Armani Acqua di Giò Profumo, Dolce & Gabbana The One, Juliette Has a Gun, etc. Evite marcas de difícil acesso no Brasil.
    - "alta_perfumaria": APENAS linhas privées (Chanel Les Exclusifs, Dior La Collection Privée, Hermès Hermessence, Tom Ford Private Blend, Louis Vuitton Parfums, Guerlain L'Art et la Matière, Armani Privé, Prada Olfactories) — NUNCA linhas regulares
 4. Lançados 2010–2025, nunca descontinuados
 5. Disponíveis no Brasil
@@ -851,7 +870,11 @@ function renderCards(list) {
   const gL = {masculino:'Masc', feminino:'Fem', unissex:'Unissex'};
   document.getElementById('perfume-grid').innerHTML = list.map(p => {
     const tipo = p.tipo||'nicho', gen = p.genero||'unissex';
-    return `<div class="perfume-card" data-categoria="${p.categoria}" data-tipo="${tipo}">
+    const sel = selectedForCorrection.has(p.numero);
+    const fixCls = correctionMode ? (' fix-selectable' + (sel ? ' fix-selected' : '')) : '';
+    const clickAttr = correctionMode ? ` onclick="toggleFixSelect(${p.numero})"` : '';
+    return `<div class="perfume-card${fixCls}" data-num="${p.numero}" data-categoria="${p.categoria}" data-tipo="${tipo}" style="position:relative"${clickAttr}>
+      ${correctionMode ? `<div class="fix-checkbox">${sel ? '✓' : ''}</div>` : ''}
       ${p.categoria==='essencial'?'<div class="perfume-priority">Essencial</div>':''}
       <div class="perfume-card-top">
         <div class="perfume-number">${String(p.numero).padStart(2,'0')}</div>
@@ -880,29 +903,258 @@ function filterCards(filtro, btn) {
   renderCards(f);
 }
 
+function toggleCorrectionMode() {
+  correctionMode = !correctionMode;
+  selectedForCorrection.clear();
+  const btn = document.getElementById('btn-fix');
+  const applyBtn = document.getElementById('btn-apply-fix');
+  btn.classList.toggle('active', correctionMode);
+  btn.textContent = correctionMode ? '✕ Cancelar Correção' : '↺ Corrigir Sugestões';
+  document.getElementById('fix-count').textContent = '0';
+  applyBtn.style.display = 'none';
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.filter-tab')?.classList.add('active');
+  renderCards(allPerfumes);
+}
+
+function toggleFixSelect(num) {
+  if (!correctionMode) return;
+  if (selectedForCorrection.has(num)) selectedForCorrection.delete(num);
+  else selectedForCorrection.add(num);
+  const count = selectedForCorrection.size;
+  document.getElementById('fix-count').textContent = count;
+  const applyBtn = document.getElementById('btn-apply-fix');
+  applyBtn.style.display = count > 0 ? 'inline-block' : 'none';
+  renderCards(allPerfumes);
+}
+
+async function applyCorrections() {
+  if (selectedForCorrection.size === 0 || !currentAnalysisData) return;
+  const btn = document.getElementById('btn-apply-fix');
+  btn.disabled = true; btn.textContent = 'Gerando substitutos...';
+  try {
+    const { profile, collection, lifestyle, questionnaire } = currentAnalysisData;
+    const toReplace = allPerfumes.filter(p => selectedForCorrection.has(p.numero));
+    const existingNames = allPerfumes.map(p => `${p.marca} ${p.nome}`).join(', ');
+    const genderLabel = {masculino:'masculinos e/ou unissex',feminino:'femininos e/ou unissex',ambos:'masculinos, femininos e unissex sem restrição'}[selectedGender];
+    const genderInstr = {masculino:'Priorize posicionamento masculino. NUNCA fragrâncias claramente femininas.',feminino:'Priorize posicionamento feminino. NUNCA fragrâncias claramente masculinas.',ambos:'Inclua masculinos, femininos e unissex livremente.'}[selectedGender];
+
+    const prompt = `Você é especialista em perfumaria. Substitua EXATAMENTE ${toReplace.length} perfume(s) por alternativas melhores.
+
+PERFIL DO CLIENTE:
+- Arquétipo: ${profile.archetype}
+- Famílias dominantes: ${(profile.dominant_families||[]).join(', ')}
+- Traços: ${(profile.identity_traits||[]).join(', ')}
+- O QUE VOCÊ GOSTA: ${(profile.likes||[]).join('; ')}
+- O QUE VOCÊ EVITA: ${(profile.dislikes||[]).join('; ')}
+- Coleção: ${collection}
+
+PERFUMES A SUBSTITUIR:
+${toReplace.map(p=>`- #${p.numero} ${p.marca} ${p.nome} (${p.categoria})`).join('\n')}
+
+NÃO REPITA NENHUM DESTES:
+${existingNames}
+
+ORIENTAÇÃO DE GÊNERO: ${genderLabel}
+${genderInstr}
+
+INSTRUÇÃO DE LINGUAGEM: Campo "razao" em 2ª pessoa (você/sua/seu).
+
+Mantenha a mesma "categoria" de cada perfume substituído. Disponíveis no Brasil, lançados 2010-2025.
+
+Responda APENAS JSON:
+{"perfumes":[{"numero":0,"marca":"","nome":"","ano":2020,"familia":"","tipo":"nicho","genero":"unissex","categoria":"essencial","razao":""}]}`;
+
+    const result = await callClaude({ model:'claude-sonnet-4-6', max_tokens:4000, messages:[{role:'user',content:prompt}] });
+    (result.perfumes||[]).forEach(r => {
+      const idx = allPerfumes.findIndex(p => p.numero === r.numero);
+      if (idx !== -1) allPerfumes[idx] = r;
+    });
+    correctionMode = false;
+    selectedForCorrection.clear();
+    document.getElementById('btn-fix').classList.remove('active');
+    document.getElementById('btn-fix').textContent = '↺ Corrigir Sugestões';
+    document.getElementById('fix-count').textContent = '0';
+    btn.style.display = 'none';
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('.filter-tab')?.classList.add('active');
+    renderCards(allPerfumes);
+  } catch(e) { alert('Erro ao substituir: ' + e.message); }
+  btn.disabled = false;
+  btn.innerHTML = 'Substituir <span id="fix-count">0</span> perfumes';
+}
+
 async function exportPDF() {
+  if (!currentAnalysisData || allPerfumes.length === 0) { alert('Gere uma análise primeiro.'); return; }
   const btn = document.getElementById('btn-pdf');
   btn.disabled = true; btn.textContent = 'Gerando PDF...';
-  renderCards(allPerfumes);
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector('.filter-tab').classList.add('active');
   try {
-    const {jsPDF} = window.jspdf;
-    const canvas = await html2canvas(document.getElementById('result-panel'), {scale:1.4, useCORS:true, backgroundColor:'#f5f0e8', logging:false});
-    const pdf = new jsPDF({orientation:'portrait', unit:'mm', format:'a4'});
-    const pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight(), m = 10;
-    const uw = pw - m*2, ih = (canvas.height * uw) / canvas.width;
-    let yPos = 0;
-    while (yPos < ih) {
-      if (yPos > 0) pdf.addPage();
-      const sliceH = Math.min(ph - m*2, ih - yPos);
-      const srcY = (yPos / ih) * canvas.height, srcH = (sliceH / ih) * canvas.height;
-      const sl = document.createElement('canvas'); sl.width = canvas.width; sl.height = srcH;
-      sl.getContext('2d').drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
-      pdf.addImage(sl.toDataURL('image/jpeg', .9), 'JPEG', m, m, uw, sliceH);
-      yPos += sliceH;
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+    const { profile } = currentAnalysisData;
+    const PW=210, PH=297, ML=20, MT=20, MB=18, CW=170;
+    let y = MT;
+
+    const INK=[26,24,20], GOLD=[184,149,90], PARCH=[245,240,232];
+    const MUTED=[107,101,96], BORDER=[232,224,208], MID=[45,42,36];
+
+    const rgb = a => pdf.setTextColor(...a);
+    const fill = a => pdf.setFillColor(...a);
+    const draw = a => pdf.setDrawColor(...a);
+    const B = s => { pdf.setFont('helvetica','bold'); pdf.setFontSize(s); };
+    const N = s => { pdf.setFont('helvetica','normal'); pdf.setFontSize(s); };
+    const I = s => { pdf.setFont('helvetica','italic'); pdf.setFontSize(s); };
+
+    function newPage() { pdf.addPage(); y = MT; }
+    function guard(n) { if (y + n > PH - MB) newPage(); }
+
+    function topBar() {
+      fill(INK); pdf.rect(0,0,PW,14,'F');
+      B(9); rgb(GOLD); pdf.text('VICTOR GUERISE', ML, 9);
+      N(8.5); pdf.setTextColor(180,170,150); pdf.text('· Imersão Olfativa', ML+37, 9);
+      N(7.5); pdf.setTextColor(130,120,100);
+      const d = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+      pdf.text(d, PW-ML, 9, {align:'right'});
     }
-    pdf.save('victor-guerise-perfil-olfativo.pdf');
+
+    function secTitle(label) {
+      guard(14); B(7); rgb(GOLD); pdf.text(label, ML, y); y += 3.5;
+      draw(BORDER); pdf.setLineWidth(0.3); pdf.line(ML, y, PW-ML, y); y += 5;
+    }
+
+    function paraText(text, size, color) {
+      if (!text) return;
+      N(size); rgb(color);
+      String(text).split('\n').filter(Boolean).forEach(para => {
+        pdf.splitTextToSize(para, CW).forEach(line => {
+          guard(5); pdf.text(line, ML, y); y += size * 0.42;
+        });
+        y += 2;
+      });
+    }
+
+    function listItems(items, size, color, prefix) {
+      if (!Array.isArray(items)) return;
+      items.forEach(item => {
+        N(size); rgb(color);
+        const lines = pdf.splitTextToSize(prefix + item, CW-5);
+        lines.forEach((line, li) => {
+          guard(5); pdf.text(li===0 ? line : '   '+line, ML+3, y); y += size*0.42;
+        });
+        y += 1;
+      });
+    }
+
+    // ── PÁGINA 1: PERFIL ──────────────────────────────────────────────
+    topBar(); y = 22;
+
+    B(24); rgb(INK); pdf.text(profile.archetype||'—', ML, y); y += 10;
+
+    N(8); rgb(MUTED); pdf.text('Confiança do arquétipo', ML, y); y += 4;
+    const pct = Math.min(Math.max(profile.confidence||0,0),100)/100;
+    fill(BORDER); pdf.rect(ML,y,CW,3,'F');
+    fill(GOLD); pdf.rect(ML,y,CW*pct,3,'F');
+    B(8); rgb(GOLD); pdf.text(`${Math.round(pct*100)}%`, ML+CW*pct+2, y+2.5);
+    y += 11;
+
+    secTitle('FAMÍLIAS DOMINANTES');
+    let xT = ML;
+    (profile.dominant_families||[]).forEach(f => {
+      const tw = pdf.getTextWidth(f)+8;
+      if (xT+tw > PW-ML) { xT=ML; y+=7; }
+      draw(GOLD); pdf.setLineWidth(0.5); pdf.rect(xT, y-4, tw, 6, 'S');
+      N(8.5); rgb(INK); pdf.text(f, xT+4, y); xT += tw+4;
+    });
+    y += 9;
+
+    secTitle('PERFIL OLFATIVO');
+    paraText(profile.olfactory_profile, 10, MID);
+
+    secTitle('TRAÇOS DE IDENTIDADE');
+    let xTr = ML;
+    (profile.identity_traits||[]).forEach(t => {
+      const tw = pdf.getTextWidth(t)+8;
+      if (xTr+tw > PW-ML) { xTr=ML; y+=7; }
+      fill(PARCH); pdf.rect(xTr, y-4, tw, 6, 'F');
+      N(8.5); rgb(MID); pdf.text(t, xTr+4, y); xTr += tw+4;
+    });
+    y += 9;
+
+    secTitle('JUSTIFICATIVA DO ARQUÉTIPO');
+    paraText(profile.justification, 10, MID);
+
+    secTitle('O QUE VOCÊ GOSTA');
+    listItems(profile.likes, 9.5, MID, '✓ ');
+
+    secTitle('O QUE VOCÊ EVITA');
+    listItems(profile.dislikes, 9.5, MID, '✗ ');
+
+    secTitle('ARQUÉTIPO SECUNDÁRIO');
+    B(11); rgb(INK); guard(10); pdf.text(profile.secondary_archetype||'—', ML, y); y += 6;
+    I(9.5); rgb(MUTED);
+    pdf.splitTextToSize(profile.secondary_reason||'—', CW).forEach(l => { guard(5); pdf.text(l,ML,y); y+=5; });
+    y += 4;
+
+    secTitle('RECOMENDAÇÃO DE CONSULTORIA');
+    paraText(profile.consultation_recommendation, 10, MID);
+
+    secTitle('LACUNAS DA COLEÇÃO');
+    paraText(profile.collection_gaps, 10, MID);
+
+    // ── CURADORIA ────────────────────────────────────────────────────
+    newPage(); topBar(); y = 22;
+
+    fill(INK); pdf.rect(ML, y, CW, 20, 'F');
+    B(7); rgb(GOLD); pdf.text('CURADORIA OLFATIVA', ML+5, y+7);
+    B(14); rgb(PARCH); pdf.text(`${allPerfumes.length} Perfumes Selecionados Para Seu Perfil`, ML+5, y+15);
+    y += 26;
+
+    N(8); rgb(MUTED);
+    pdf.text('Essencial: prioritário   ·   Expansão: complementa   ·   Descoberta: novos territórios', ML, y);
+    y += 10;
+
+    const catL = {essencial:'ESSENCIAL', expansao:'EXPANSÃO', descoberta:'DESCOBERTA'};
+    const catC = {essencial:[184,149,90], expansao:[74,85,104], descoberta:[60,120,90]};
+    const CARD = 32;
+
+    allPerfumes.forEach(p => {
+      guard(CARD+4);
+      fill([250,248,244]); draw(BORDER); pdf.setLineWidth(0.3);
+      pdf.rect(ML, y, CW, CARD, 'FD');
+
+      const cc = catC[p.categoria]||MUTED;
+      fill(cc); pdf.rect(ML, y, 32, 5.5, 'F');
+      B(6.5); pdf.setTextColor(255,255,255);
+      pdf.text(catL[p.categoria]||p.categoria.toUpperCase(), ML+2, y+4);
+
+      B(18); rgb(BORDER); pdf.text(String(p.numero).padStart(2,'0'), PW-ML-3, y+13, {align:'right'});
+      B(7.5); rgb(GOLD); pdf.text((p.marca||'').toUpperCase(), ML+4, y+12);
+      B(12); rgb(INK); pdf.text(p.nome||'', ML+4, y+18);
+
+      N(8); rgb(MUTED);
+      const tipo = p.tipo==='alta_perfumaria'?'Alta Perfumaria':'Nicho';
+      pdf.text(`${p.ano} · ${p.familia} · ${tipo}`, ML+4, y+23);
+
+      I(8.5); rgb(MID);
+      const rLines = pdf.splitTextToSize(p.razao||'', CW-8);
+      rLines.slice(0,2).forEach((l,li) => pdf.text(l, ML+4, y+28+li*4.2));
+
+      y += CARD+4;
+    });
+
+    // ── RODAPÉS ──────────────────────────────────────────────────────
+    const total = pdf.internal.getNumberOfPages();
+    for (let i=1; i<=total; i++) {
+      pdf.setPage(i);
+      fill(INK); pdf.rect(0, PH-10, PW, 10, 'F');
+      B(7.5); rgb(GOLD); pdf.text('vguerise.com.br', ML, PH-4);
+      N(7.5); pdf.setTextColor(130,120,100);
+      pdf.text('Imersão Olfativa · Victor Guerise', PW/2, PH-4, {align:'center'});
+      pdf.text(`${i} / ${total}`, PW-ML, PH-4, {align:'right'});
+    }
+
+    const archName = (profile.archetype||'perfil').replace(/\s+/g,'-').toLowerCase();
+    pdf.save(`analise-${archName}.pdf`);
   } catch(e) { alert('Erro ao gerar PDF: ' + e.message); }
   btn.disabled = false; btn.textContent = '↓ Exportar PDF';
 }
@@ -930,6 +1182,13 @@ function reset() {
   document.getElementById('archetype-result-img').innerHTML = '';
   if (radarChart) { radarChart.destroy(); radarChart = null; }
   allPerfumes = [];
+  correctionMode = false;
+  selectedForCorrection.clear();
+  currentAnalysisData = null;
+  document.getElementById('btn-fix').classList.remove('active');
+  document.getElementById('btn-fix').textContent = '↺ Corrigir Sugestões';
+  document.getElementById('btn-apply-fix').style.display = 'none';
+  document.getElementById('fix-count').textContent = '0';
 }
 </script>
 </body>
