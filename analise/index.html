@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Guerise · Classificador de Arquétipos</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js">
+// ─── LOGIN ───────────────────────────────────────────────────────
+const _AU = 'vguerise@gmail.com';
+const _AP = 'Auri24680!';
+
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  const err   = document.getElementById('login-error');
+  if (email === _AU && pass === _AP) {
+    document.getElementById('login-screen').classList.add('hidden');
+    err.textContent = '';
+  } else {
+    err.textContent = 'E-mail ou senha incorretos.';
+    document.getElementById('login-pass').value = '';
+  }
+}
+
+// Allow Enter key to submit login
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !document.getElementById('login-screen').classList.contains('hidden')) {
+    doLogin();
+  }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+:root {
+  --ink:#1a1612;--parchment:#f5f0e8;--gold:#b8975a;
+  --gold-light:#d4b57a;--smoke:#7a7065;--surface:#faf7f2;
+  --border:#e8e0d0;--deep:#2c1f0e;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--parchment);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;}
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;align-items:center;justify-content:center;}
+#login-screen.hidden{display:none;}
+.login-box{width:100%;max-width:360px;padding:0 24px;}
+.login-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:.25em;text-transform:uppercase;color:var(--parchment);text-align:center;margin-bottom:4px;}
+.login-logo span{color:var(--gold);}
+.login-sub{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);text-align:center;margin-bottom:16px;}
+.login-divider{width:40px;height:1px;background:var(--gold);margin:0 auto 40px;opacity:.5;}
+.login-field{margin-bottom:16px;}
+.login-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);display:block;margin-bottom:7px;}
+.login-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:2px;padding:13px 15px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--parchment);outline:none;transition:border-color .2s;}
+.login-input:focus{border-color:var(--gold);}
+.login-input::placeholder{color:rgba(255,255,255,.2);}
+.login-btn{width:100%;margin-top:24px;padding:15px;background:var(--gold);border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:white;cursor:pointer;transition:background .2s;}
+.login-btn:hover{background:var(--gold-light);}
+.login-error{font-size:12px;color:#e07070;text-align:center;margin-top:14px;min-height:18px;letter-spacing:.02em;}
+header{border-bottom:1px solid var(--border);padding:24px 48px;display:flex;align-items:baseline;gap:16px;background:var(--surface);position:sticky;top:0;z-index:10;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;}
+.logo span{color:var(--gold);}
+.tool-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);border-left:1px solid var(--border);padding-left:16px;}
+main{max-width:960px;margin:0 auto;padding:52px 24px 100px;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1.15;margin-bottom:8px;}
+.page-title em{font-style:italic;color:var(--gold);}
+.page-subtitle{font-size:14px;color:var(--smoke);margin-bottom:44px;line-height:1.6;}
+.section{margin-bottom:32px;}
+.section-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:5px;}
+.section-hint{font-size:12px;color:var(--smoke);margin-bottom:12px;line-height:1.5;}
+textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--ink);line-height:1.7;resize:vertical;outline:none;transition:border-color .2s;}
+textarea:focus{border-color:var(--gold);}
+textarea::placeholder{color:#b5a99a;}
+.gender-selector{display:flex;gap:10px;margin-top:2px;}
+.gender-btn{flex:1;padding:14px 10px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:.05em;color:var(--smoke);cursor:pointer;transition:all .15s;text-align:center;}
+.gender-btn:hover{border-color:var(--gold-light);color:var(--ink);}
+.gender-btn.active{background:var(--ink);border-color:var(--ink);color:var(--parchment);}
+.gender-btn .gender-icon{font-size:18px;display:block;margin-bottom:4px;}
+.gender-btn .gender-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;}
+
+/* ARCHETYPE CHIPS with SVG */
+.archetypes-ref{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:18px 22px;margin-bottom:32px;}
+.archetypes-ref-title{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:14px;}
+.archetypes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.archetype-chip{background:var(--parchment);border:1px solid var(--border);border-radius:2px;padding:0;overflow:hidden;display:flex;flex-direction:column;}
+.archetype-chip-img{width:100%;height:80px;display:block;overflow:hidden;}
+.archetype-chip-img svg{width:100%;height:100%;}
+.archetype-chip-body{padding:9px 11px;}
+.archetype-chip .name{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;}
+.archetype-chip .desc{font-size:10px;color:var(--smoke);margin-top:2px;line-height:1.4;}
+
+/* RESULT archetype image */
+.archetype-result-img{width:100%;height:200px;border-radius:2px;overflow:hidden;margin-bottom:20px;display:none;}
+.archetype-result-img svg{width:100%;height:100%;}
+.archetype-result-img.visible{display:block;}
+
+.btn-classify{width:100%;padding:17px 32px;background:var(--ink);color:var(--parchment);border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:8px;}
+.btn-classify:hover{background:var(--deep);}
+.loading-state{display:none;text-align:center;padding:64px 0;}
+.loading-state.active{display:block;}
+.loading-dots{display:inline-flex;gap:6px;margin-bottom:14px;}
+.loading-dots span{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.2s ease-in-out infinite;}
+.loading-dots span:nth-child(2){animation-delay:.2s;}
+.loading-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes pulse{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.loading-text{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--smoke);}
+.loading-step{font-size:11px;color:var(--gold);margin-top:5px;letter-spacing:.08em;}
+.result-panel{display:none;margin-top:48px;border-top:1px solid var(--border);padding-top:48px;}
+.result-panel.active{display:block;}
+.result-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;gap:24px;flex-wrap:wrap;}
+.archetype-badge{background:var(--ink);color:var(--parchment);padding:5px 14px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-radius:1px;display:inline-block;margin-bottom:9px;}
+.archetype-name-result{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;line-height:1;}
+.archetype-name-result span{color:var(--gold);}
+.confidence-bar-wrap{min-width:150px;text-align:right;}
+.confidence-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--smoke);margin-bottom:5px;}
+.confidence-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:4px;}
+.confidence-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 1s ease;}
+.confidence-pct{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);}
+.result-block{margin-bottom:34px;}
+.result-block-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:11px;border-bottom:1px solid var(--border);padding-bottom:7px;}
+.result-text{font-size:15px;line-height:1.8;}
+.result-text p{margin-bottom:12px;}
+.result-text p:last-child{margin-bottom:0;}
+.tags-row{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:var(--surface);border:1px solid var(--border);padding:4px 11px;font-size:12px;color:var(--smoke);border-radius:1px;}
+.tag.highlight{border-color:var(--gold-light);color:var(--ink);background:#faf6ec;}
+.secondary-archetype{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:15px 18px;}
+.secondary-archetype .name{font-family:'Cormorant Garamond',serif;font-size:17px;}
+.secondary-archetype .reason{font-size:13px;color:var(--smoke);margin-top:3px;line-height:1.5;}
+
+/* RADAR */
+.radar-wrap{display:flex;justify-content:center;padding:8px 0;}
+.radar-wrap canvas{max-width:420px;width:100%!important;height:auto!important;}
+
+/* PREFS */
+.pref-summary{background:#faf6ec;border:1px solid var(--gold-light);border-radius:2px;padding:14px 18px;margin-bottom:4px;}
+.pref-summary-title{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.pref-rows{display:flex;flex-wrap:wrap;gap:7px;}
+.pref-chip{font-size:11px;padding:3px 10px;border-radius:1px;}
+.pref-chip.like{background:#eef4f0;color:#3a6b4a;border:1px solid #c2daca;}
+.pref-chip.dislike{background:#fdf0ef;color:#8b2e26;border:1px solid #e8c4c0;}
+.gender-result-badge{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);padding:4px 12px;border-radius:1px;font-size:11px;color:var(--smoke);margin-bottom:16px;}
+.section-divider{height:1px;background:var(--border);margin:44px 0;}
+.curadoria-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px;}
+.curadoria-title-block .result-block-label{border:none;padding:0;margin-bottom:3px;}
+.curadoria-count{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--smoke);}
+.curadoria-loading{display:none;text-align:center;padding:36px 0;}
+.curadoria-loading.active{display:block;}
+.filter-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
+.filter-tab{padding:5px 13px;border:1px solid var(--border);background:var(--surface);border-radius:1px;font-size:11px;letter-spacing:.04em;color:var(--smoke);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.filter-tab:hover{border-color:var(--gold-light);color:var(--ink);}
+.filter-tab.active{background:var(--ink);border-color:var(--ink);color:var(--parchment);}
+.perfume-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:13px;}
+.perfume-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:17px 17px 15px;transition:border-color .2s,transform .15s;position:relative;}
+.perfume-card:hover{border-color:var(--gold-light);transform:translateY(-1px);}
+.perfume-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:9px;}
+.perfume-number{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gold);min-width:22px;padding-top:1px;}
+.perfume-meta{display:flex;gap:5px;align-items:center;}
+.perfume-year{font-size:10px;letter-spacing:.08em;color:var(--smoke);background:var(--parchment);border:1px solid var(--border);padding:2px 7px;border-radius:1px;}
+.perfume-gender-tag{font-size:9px;letter-spacing:.08em;padding:2px 6px;border-radius:1px;}
+.perfume-gender-tag.masc{background:#eef2f8;color:#2a4a7a;border:1px solid #b8cce8;}
+.perfume-gender-tag.fem{background:#f8eef4;color:#7a2a5a;border:1px solid #e8b8d4;}
+.perfume-gender-tag.unissex{background:#f0f0f0;color:#555;border:1px solid #ccc;}
+.perfume-brand{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);margin-bottom:3px;}
+.perfume-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;line-height:1.2;margin-bottom:7px;}
+.perfume-tags-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px;}
+.perfume-family{font-size:10px;letter-spacing:.07em;color:var(--gold);border:1px solid var(--gold-light);background:#faf6ec;padding:2px 7px;border-radius:1px;}
+.perfume-tipo{font-size:9px;letter-spacing:.09em;text-transform:uppercase;padding:2px 6px;border-radius:1px;font-weight:500;}
+.perfume-tipo.nicho{background:#eef4f0;color:#3a6b4a;border:1px solid #c2daca;}
+.perfume-tipo.alta_perfumaria{background:#f4f0f8;color:#5a3a7a;border:1px solid #d4c2e8;}
+.perfume-reason{font-size:12px;color:var(--smoke);line-height:1.55;border-top:1px solid var(--border);padding-top:9px;}
+.perfume-priority{position:absolute;top:-1px;left:-1px;background:var(--gold);color:white;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px 0 2px 0;}
+.action-buttons{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap;}
+.btn-pdf{background:var(--gold);border:none;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:white;cursor:pointer;border-radius:2px;transition:background .2s;}
+.btn-pdf:hover{background:#a07840;}
+.btn-pdf:disabled{opacity:.5;cursor:wait;}
+.btn-reset{background:none;border:1px solid var(--border);padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);cursor:pointer;border-radius:2px;transition:all .2s;}
+.btn-reset:hover{border-color:var(--ink);color:var(--ink);}
+.error-msg{display:none;background:#fdf0ef;border:1px solid #e8c4c0;border-radius:2px;padding:13px 17px;font-size:13px;color:#8b2e26;margin-top:14px;}
+.error-msg.active{display:block;}
+@media(max-width:600px){
+  header{padding:18px 16px;flex-wrap:wrap;}
+  main{padding:32px 14px 60px;}
+  .archetypes-grid{grid-template-columns:repeat(2,1fr);}
+  .archetype-name-result{font-size:34px;}
+  .result-header{flex-direction:column;}
+  .confidence-bar-wrap{text-align:left;}
+  .perfume-grid{grid-template-columns:1fr;}
+  .gender-selector{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Victor <span>Guerise</span></div>
+    <div class="login-sub">Classificador de Arquétipos</div>
+    <div class="login-divider"></div>
+    <div class="login-field">
+      <label class="login-label" for="login-email">E-mail</label>
+      <input class="login-input" id="login-email" type="email" placeholder="seu@email.com" autocomplete="off" spellcheck="false"/>
+    </div>
+    <div class="login-field">
+      <label class="login-label" for="login-pass">Senha</label>
+      <input class="login-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="off"/>
+    </div>
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+<header>
+  <div class="logo">Victor <span>Guerise</span></div>
+  <span class="tool-label">Classificador de Arquétipos Olfativos</span>
+</header>
+
+<main>
+  <h1 class="page-title">Perfil <em>Olfativo</em><br>do Cliente</h1>
+  <p class="page-subtitle">Insira a coleção e os dados do cliente. O agente classifica o arquétipo, gera o radar olfativo e uma curadoria personalizada respeitando gostos e aversões.</p>
+
+  <div class="archetypes-ref">
+    <div class="archetypes-ref-title">Os 9 Arquétipos · Referência</div>
+    <div class="archetypes-grid" id="ref-grid"></div>
+  </div>
+
+  <div id="form-area">
+    <div class="section">
+      <span class="section-label">Orientação de Gênero · Curadoria</span>
+      <h2 class="section-title">Perfil da Curadoria</h2>
+      <p class="section-hint">Define quais perfumes serão sugeridos. Selecione conforme o estilo e preferências do cliente.</p>
+      <div class="gender-selector">
+        <button class="gender-btn active" data-gender="masculino" onclick="selectGender(this)">
+          <span class="gender-icon">♂</span><span class="gender-label">Masculino</span>
+        </button>
+        <button class="gender-btn" data-gender="feminino" onclick="selectGender(this)">
+          <span class="gender-icon">♀</span><span class="gender-label">Feminino</span>
+        </button>
+        <button class="gender-btn" data-gender="ambos" onclick="selectGender(this)">
+          <span class="gender-icon">⚭</span><span class="gender-label">Ambos / Unissex</span>
+        </button>
+      </div>
+    </div>
+    <div class="section">
+      <span class="section-label">Etapa 1 · Coleção</span>
+      <h2 class="section-title">Coleção de Perfumes</h2>
+      <p class="section-hint">Liste os perfumes do cliente, um por linha. Inclua marca e nome. Se souber a família olfativa, adicione entre parênteses.</p>
+      <textarea id="input-collection" rows="8" placeholder="Ex:
+Tom Ford Black Orchid (Oriental Floral)
+Dior Sauvage (Aromático Fougère)
+Maison Margiela Replica Jazz Club (Oriental Amadeirado)
+Creed Aventus (Chypre Frutal)
+Byredo Bal d'Afrique (Floral Amadeirado)
+..."></textarea>
+    </div>
+    <div class="section">
+      <span class="section-label">Etapa 2 · Dados do Cliente</span>
+      <h2 class="section-title">Estilo de Vida & Personalidade</h2>
+      <p class="section-hint">Descreva o cliente — profissão, rotina, como se apresenta, ambições, referências culturais, como ele quer ser percebido.</p>
+      <textarea id="input-lifestyle" rows="5" placeholder="Ex: Executivo financeiro, 38 anos. Clientes de alto padrão. Prefere ambientes controlados. Referências: Tom Ford, arquitetura brutalista, jazz tardio. Quer transmitir autoridade sem esforço aparente."></textarea>
+    </div>
+    <div class="section">
+      <span class="section-label">Etapa 3 · Questionário</span>
+      <h2 class="section-title">Respostas do Questionário</h2>
+      <p class="section-hint">Quanto mais específico sobre gostos e aversões, mais precisa será a curadoria.</p>
+      <textarea id="input-questionnaire" rows="8" placeholder="Ex:
+- O que um perfume precisa fazer por você? → Me preparar para entrar em qualquer sala
+- Você prefere ser notado ou deixar uma memória depois? → Deixar memória
+- Maior aversão olfativa? → Atalcado, florais doces, qualquer coisa que lembre sabonete
+- O que você NÃO quer transmitir? → Fragilidade, nada que seja óbvio demais
+..."></textarea>
+    </div>
+    <button class="btn-classify" onclick="runAnalysis()">Classificar Arquétipo & Gerar Curadoria</button>
+    <div class="error-msg" id="error-msg"></div>
+  </div>
+
+  <div class="loading-state" id="loading">
+    <div class="loading-dots"><span></span><span></span><span></span></div>
+    <div class="loading-text" id="loading-text">Traçando o perfil olfativo...</div>
+    <div class="loading-step" id="loading-step">Etapa 1 de 3</div>
+  </div>
+
+  <div class="result-panel" id="result-panel">
+    <div class="result-header">
+      <div>
+        <div class="archetype-badge">Arquétipo Principal</div>
+        <div class="archetype-name-result" id="result-archetype-name">—</div>
+      </div>
+      <div class="confidence-bar-wrap">
+        <div class="confidence-label">Aderência</div>
+        <div class="confidence-bar"><div class="confidence-fill" id="confidence-fill" style="width:0%"></div></div>
+        <div class="confidence-pct" id="confidence-pct">—</div>
+      </div>
+    </div>
+
+    <!-- ARCHETYPE IMAGE -->
+    <div class="archetype-result-img" id="archetype-result-img"></div>
+
+    <div class="result-block">
+      <div class="result-block-label">Perfil Olfativo</div>
+      <div class="result-text" id="result-olfactory-profile">—</div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Radar de Famílias · Coleção Atual</div>
+      <div class="radar-wrap"><canvas id="radar-chart"></canvas></div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Famílias Dominantes</div>
+      <div class="tags-row" id="result-families"></div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Preferências Identificadas</div>
+      <div class="pref-summary">
+        <div class="pref-summary-title">Gostos & Aversões extraídos da análise</div>
+        <div class="pref-rows" id="pref-likes"></div>
+        <div style="height:8px"></div>
+        <div class="pref-rows" id="pref-dislikes"></div>
+      </div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Por que este arquétipo</div>
+      <div class="result-text" id="result-justification">—</div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Traços de Identidade Olfativa</div>
+      <div class="tags-row" id="result-traits"></div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Arquétipo Secundário</div>
+      <div class="secondary-archetype">
+        <div class="name" id="secondary-name">—</div>
+        <div class="reason" id="secondary-reason">—</div>
+      </div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Recomendação de Consultoria</div>
+      <div class="result-text" id="result-recommendation">—</div>
+    </div>
+
+    <div class="result-block">
+      <div class="result-block-label">Gaps & Oportunidades na Coleção</div>
+      <div class="result-text" id="result-gaps">—</div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div id="curadoria-section">
+      <div class="curadoria-header">
+        <div class="curadoria-title-block">
+          <div class="result-block-label">Curadoria Personalizada</div>
+          <div class="curadoria-count" id="curadoria-count">—</div>
+        </div>
+        <div id="gender-result-badge" class="gender-result-badge">—</div>
+      </div>
+      <div class="curadoria-loading" id="curadoria-loading">
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+        <div class="loading-text">Selecionando perfumes para o perfil...</div>
+        <div class="loading-step">Analisando gostos e aversões · Etapa 3 de 3</div>
+      </div>
+      <div class="filter-tabs" id="filter-tabs" style="display:none">
+        <button class="filter-tab active" onclick="filterCards('todos',this)">Todos</button>
+        <button class="filter-tab" onclick="filterCards('essencial',this)">Essenciais</button>
+        <button class="filter-tab" onclick="filterCards('expansao',this)">Expansão</button>
+        <button class="filter-tab" onclick="filterCards('descoberta',this)">Descoberta</button>
+        <button class="filter-tab" onclick="filterCards('nicho',this)">Nicho</button>
+        <button class="filter-tab" onclick="filterCards('alta_perfumaria',this)">Alta Perfumaria</button>
+      </div>
+      <div class="perfume-grid" id="perfume-grid"></div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-pdf" id="btn-pdf" onclick="exportPDF()">↓ Exportar PDF</button>
+      <button class="btn-reset" onclick="reset()">← Nova análise</button>
+    </div>
+  </div>
+</main>
+
+<script>
+// ─── ARCHETYPE SVGs ───────────────────────────────────────────────
+const ARCHETYPE_SVGS = {
+  "O Soberano": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0d00"/><stop offset="100%" stop-color="#3d1f05"/></linearGradient>
+      <radialGradient id="sg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#b8975a" stop-opacity="0.35"/><stop offset="100%" stop-color="#b8975a" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#sg)"/>
+    <circle cx="160" cy="40" r="55" fill="url(#sg2)"/>
+    <!-- Crown -->
+    <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width="1.2">
+      <polygon points="0,-22 -18,8 18,8" stroke-linejoin="round"/>
+      <line x1="-18" y1="8" x2="18" y2="8"/>
+      <circle cx="0" cy="-22" r="2.5" fill="#b8975a" stroke="none"/>
+      <circle cx="-18" cy="8" r="2" fill="#b8975a" stroke="none"/>
+      <circle cx="18" cy="8" r="2" fill="#b8975a" stroke="none"/>
+      <line x1="-8" y1="-6" x2="-8" y2="8" stroke-width=".8"/>
+      <line x1="8" y1="-6" x2="8" y2="8" stroke-width=".8"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">SOBERANO</text>
+  </svg>`,
+
+  "O Arquiteto": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d1520"/><stop offset="100%" stop-color="#1a2535"/></linearGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#ag)"/>
+    <!-- Grid lines -->
+    <g stroke="#b8975a" stroke-width=".4" opacity=".25">
+      <line x1="80" y1="0" x2="80" y2="80"/><line x1="160" y1="0" x2="160" y2="80"/><line x1="240" y1="0" x2="240" y2="80"/>
+      <line x1="0" y1="26" x2="320" y2="26"/><line x1="0" y1="53" x2="320" y2="53"/>
+    </g>
+    <!-- Blueprint structure -->
+    <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width="1.1">
+      <rect x="-20" y="-20" width="40" height="40" stroke-dasharray="3,2"/>
+      <line x1="-20" y1="-20" x2="20" y2="20" stroke-width=".6"/>
+      <line x1="20" y1="-20" x2="-20" y2="20" stroke-width=".6"/>
+      <circle cx="0" cy="0" r="6" fill="none"/>
+      <line x1="0" y1="-32" x2="0" y2="-22"/><line x1="0" y1="22" x2="0" y2="32"/>
+      <line x1="-32" y1="0" x2="-22" y2="0"/><line x1="22" y1="0" x2="32" y2="0"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">ARQUITETO</text>
+  </svg>`,
+
+  "O Nômade": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a1a0d"/><stop offset="100%" stop-color="#142b18"/></linearGradient>
+      <radialGradient id="ng2" cx="50%" cy="30%" r="60%"><stop offset="0%" stop-color="#7ab87a" stop-opacity="0.2"/><stop offset="100%" stop-color="#7ab87a" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#ng)"/>
+    <ellipse cx="160" cy="25" rx="100" ry="30" fill="url(#ng2)"/>
+    <!-- Compass rose -->
+    <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1">
+      <circle cx="0" cy="0" r="22" stroke-width=".5" stroke-dasharray="2,3"/>
+      <polygon points="0,-20 -5,-5 0,-8 5,-5" fill="#b8975a" stroke="none"/>
+      <polygon points="0,20 -5,5 0,8 5,5" fill="#b8975a" stroke="none" opacity=".4"/>
+      <line x1="-20" y1="0" x2="20" y2="0" stroke-width=".7"/>
+      <circle cx="0" cy="0" r="2.5" fill="#b8975a" stroke="none"/>
+    </g>
+    <!-- Wind lines -->
+    <g stroke="#b8975a" stroke-width=".5" opacity=".3">
+      <path d="M40,25 Q80,20 100,30" fill="none"/><path d="M220,30 Q250,22 280,28" fill="none"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">NÔMADE</text>
+  </svg>`,
+
+  "O Sedutor": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sedg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0d12"/><stop offset="100%" stop-color="#2e1520"/></linearGradient>
+      <radialGradient id="sedg2" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="#c87090" stop-opacity="0.3"/><stop offset="100%" stop-color="#c87090" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#sedg)"/>
+    <ellipse cx="160" cy="40" rx="90" ry="40" fill="url(#sedg2)"/>
+    <!-- Intertwined curves / infinity-like -->
+    <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width="1.2">
+      <path d="M-25,-8 C-15,-22 15,-22 25,-8 C35,6 15,18 0,10 C-15,18 -35,6 -25,-8Z" opacity=".8"/>
+      <circle cx="0" cy="0" r="3.5" fill="#c87090" stroke="#b8975a" stroke-width="1"/>
+    </g>
+    <!-- Petals scattered -->
+    <g fill="#b8975a" opacity=".2">
+      <ellipse cx="80" cy="20" rx="4" ry="2" transform="rotate(-30,80,20)"/>
+      <ellipse cx="240" cy="55" rx="3" ry="1.5" transform="rotate(20,240,55)"/>
+      <ellipse cx="100" cy="60" rx="3" ry="1.5" transform="rotate(45,100,60)"/>
+      <ellipse cx="220" cy="18" rx="4" ry="2" transform="rotate(-15,220,18)"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">SEDUTOR</text>
+  </svg>`,
+
+  "O Visionário": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="vg" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#12102e"/></linearGradient>
+      <radialGradient id="vg2" cx="50%" cy="50%" r="45%"><stop offset="0%" stop-color="#8080e0" stop-opacity="0.25"/><stop offset="100%" stop-color="#8080e0" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#vg)"/>
+    <circle cx="160" cy="40" r="50" fill="url(#vg2)"/>
+    <!-- Eye / vision symbol -->
+    <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.1">
+      <path d="M-28,0 Q0,-18 28,0 Q0,18 -28,0Z"/>
+      <circle cx="0" cy="0" r="8"/>
+      <circle cx="0" cy="0" r="3" fill="#b8975a" stroke="none"/>
+    </g>
+    <!-- Stars -->
+    <g fill="#b8975a" opacity=".5">
+      <polygon points="60,15 61.5,19 66,19 62.5,21.5 64,26 60,23 56,26 57.5,21.5 54,19 58.5,19" transform="scale(.5) translate(60,10)"/>
+      <circle cx="260" cy="18" r="1.5"/><circle cx="75" cy="55" r="1"/><circle cx="248" cy="52" r="1.2"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">VISIONÁRIO</text>
+  </svg>`,
+
+  "O Guardião": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#120c05"/><stop offset="100%" stop-color="#221508"/></linearGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#gg)"/>
+    <!-- Wood grain lines -->
+    <g stroke="#b8975a" stroke-width=".4" opacity=".12">
+      <path d="M0,20 Q80,18 160,22 Q240,26 320,20" fill="none"/>
+      <path d="M0,35 Q80,32 160,37 Q240,42 320,35" fill="none"/>
+      <path d="M0,50 Q80,47 160,52 Q240,57 320,50" fill="none"/>
+      <path d="M0,65 Q80,62 160,67 Q240,72 320,65" fill="none"/>
+    </g>
+    <!-- Shield -->
+    <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.2">
+      <path d="M0,-22 L18,-12 L18,6 Q18,20 0,26 Q-18,20 -18,6 L-18,-12 Z"/>
+      <!-- Shield cross -->
+      <line x1="0" y1="-16" x2="0" y2="18" stroke-width=".8"/>
+      <line x1="-12" y1="2" x2="12" y2="2" stroke-width=".8"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">GUARDIÃO</text>
+  </svg>`,
+
+  "O Artista": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="artg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#150a18"/><stop offset="100%" stop-color="#241230"/></linearGradient>
+      <radialGradient id="artg2" cx="40%" cy="40%" r="50%"><stop offset="0%" stop-color="#d4a0c8" stop-opacity="0.2"/><stop offset="100%" stop-color="#d4a0c8" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#artg)"/>
+    <ellipse cx="130" cy="35" rx="80" ry="45" fill="url(#artg2)"/>
+    <!-- Brushstroke / wave -->
+    <g fill="none" stroke="#b8975a" stroke-width="1.3" stroke-linecap="round">
+      <path d="M60,50 C90,20 130,55 160,30 C190,5 220,45 260,28" opacity=".9"/>
+      <path d="M70,58 C100,38 130,62 160,45 C190,28 215,55 255,42" opacity=".35" stroke-width=".8"/>
+    </g>
+    <!-- Iris flower simplified -->
+    <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width=".9" opacity=".7">
+      <ellipse cx="0" cy="-10" rx="4" ry="10" transform="rotate(-20)"/>
+      <ellipse cx="0" cy="-10" rx="4" ry="10" transform="rotate(20)"/>
+      <ellipse cx="0" cy="-10" rx="4" ry="10" transform="rotate(70)"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">ARTISTA</text>
+  </svg>`,
+
+  "O Estrategista": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="esg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#050f1a"/><stop offset="100%" stop-color="#0a1e30"/></linearGradient>
+      <radialGradient id="esg2" cx="60%" cy="30%" r="55%"><stop offset="0%" stop-color="#5090c0" stop-opacity="0.2"/><stop offset="100%" stop-color="#5090c0" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#esg)"/>
+    <ellipse cx="190" cy="25" rx="100" ry="35" fill="url(#esg2)"/>
+    <!-- Chess knight / strategy grid -->
+    <g stroke="#b8975a" stroke-width=".5" opacity=".2">
+      <line x1="60" y1="0" x2="60" y2="80"/><line x1="120" y1="0" x2="120" y2="80"/>
+      <line x1="200" y1="0" x2="200" y2="80"/><line x1="260" y1="0" x2="260" y2="80"/>
+      <line x1="0" y1="20" x2="320" y2="20"/><line x1="0" y1="60" x2="320" y2="60"/>
+    </g>
+    <!-- Target / crosshair -->
+    <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.1">
+      <circle cx="0" cy="0" r="18"/>
+      <circle cx="0" cy="0" r="9"/>
+      <circle cx="0" cy="0" r="3" fill="#b8975a" stroke="none"/>
+      <line x1="-25" y1="0" x2="-20" y2="0"/><line x1="20" y1="0" x2="25" y2="0"/>
+      <line x1="0" y1="-25" x2="0" y2="-20"/><line x1="0" y1="20" x2="0" y2="25"/>
+    </g>
+    <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">ESTRATEGISTA</text>
+  </svg>`,
+
+  "O Sábio": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d0d08"/><stop offset="100%" stop-color="#1a1a10"/></linearGradient>
+      <radialGradient id="sbg2" cx="50%" cy="60%" r="50%"><stop offset="0%" stop-color="#a0905a" stop-opacity="0.2"/><stop offset="100%" stop-color="#a0905a" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="320" height="80" fill="url(#sbg)"/>
+    <ellipse cx="160" cy="55" rx="100" ry="35" fill="url(#sbg2)"/>
+    <!-- Ouroboros / circle of wisdom -->
+    <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.1">
+      <circle cx="0" cy="0" r="22" stroke-dasharray="4,1.5"/>
+      <circle cx="0" cy="0" r="12"/>
+      <!-- Yin-yang inspired center -->
+      <path d="M0,-12 A6,6 0 0,1 0,0 A6,6 0 0,0 0,12 A12,12 0 0,1 0,-12Z" fill="#b8975a" opacity=".5" stroke="none"/>
+      <circle cx="0" cy="-6" r="2" fill="#1a1a10" stroke="none"/>
+      <circle cx="0" cy="6" r="2" fill="#b8975a" stroke="none"/>
+    </g>
+    <!-- Roots -->
+    <g stroke="#b8975a" stroke-width=".5" opacity=".2">
+      <path d="M130,65 Q140,70 150,68" fill="none"/><path d="M170,68 Q180,71 190,65" fill="none"/>
+      <path d="M145,72 Q155,76 165,73" fill="none"/>
+    </g>
+    <text x="160" y="72" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">SÁBIO</text>
+  </svg>`
+};
+
+// ─── ARCHETYPE DATA ───────────────────────────────────────────────
+const ARCHETYPES = [
+  { name:"O Soberano",    families:"Orientais ricos, Oudhs, Âmbar, Especiarias quentes", trait:"Poder, status, presença intimidadora" },
+  { name:"O Arquiteto",   families:"Aromáticos secos, Fougères, Chypres estruturados",   trait:"Controle, precisão, minimalismo intencional" },
+  { name:"O Nômade",      families:"Verdes, Aquáticos, Cítricos frescos, Hespérides",    trait:"Liberdade, movimento, autenticidade" },
+  { name:"O Sedutor",     families:"Florais sensuais, Gourmands, Musks quentes",          trait:"Presença magnética, intimidade, carisma" },
+  { name:"O Visionário",  families:"Nicho experimental, Fumaças, Incenso, Ozônicos",      trait:"Originalidade, profundidade intelectual" },
+  { name:"O Guardião",    families:"Madeiras clássicas, Couro, Tabaco, Fougères tradicionais", trait:"Tradição, lealdade, solidez" },
+  { name:"O Artista",     families:"Florais únicos, Especiarias criativas, Resinas, Iris", trait:"Expressão criativa, emoção, sensibilidade" },
+  { name:"O Estrategista",families:"Aquáticos modernos, Ozônicos sofisticados, Frescos",  trait:"Adaptabilidade, leitura social, ambição" },
+  { name:"O Sábio",       families:"Madeiras envelhecidas, Balsâmicos, Terrosos, Musgos", trait:"Introspecção, cultura, maturidade" }
+];
+
+const SHORT_DESC = {
+  "O Soberano":"Orientais, Oudhs, Âmbar · Poder",
+  "O Arquiteto":"Fougères, Chypres · Precisão",
+  "O Nômade":"Verdes, Aquáticos, Cítricos · Liberdade",
+  "O Sedutor":"Florais sensuais, Gourmands · Carisma",
+  "O Visionário":"Nicho experimental, Incenso · Originalidade",
+  "O Guardião":"Madeiras, Couro, Tabaco · Tradição",
+  "O Artista":"Florais únicos, Especiarias · Sensibilidade",
+  "O Estrategista":"Aquáticos modernos, Frescos · Ambição",
+  "O Sábio":"Madeiras envelhecidas, Balsâmicos · Maturidade"
+};
+
+const RADAR_AXES = [
+  'Oriental/Âmbar','Amadeirado','Floral','Aromático/Fougère',
+  'Chypre','Cítrico/Hespéride','Aquático/Ozônico','Gourmand',
+  'Couro/Tabaco','Incenso/Resinoso'
+];
+
+let allPerfumes = [], radarChart = null, selectedGender = 'masculino';
+
+// ─── RENDER ARCHETYPE CHIPS ───────────────────────────────────────
+function buildRefGrid() {
+  const grid = document.getElementById('ref-grid');
+  grid.innerHTML = ARCHETYPES.map(a => `
+    <div class="archetype-chip">
+      <div class="archetype-chip-img">${ARCHETYPE_SVGS[a.name]||''}</div>
+      <div class="archetype-chip-body">
+        <div class="name">${a.name}</div>
+        <div class="desc">${SHORT_DESC[a.name]}</div>
+      </div>
+    </div>`).join('');
+}
+buildRefGrid();
+
+function selectGender(btn) {
+  document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedGender = btn.dataset.gender;
+}
+
+function enforceAltaCap(perfumes) {
+  const max = Math.max(1, Math.floor(perfumes.length * 0.10));
+  let n = 0;
+  return perfumes.map(p => {
+    if ((p.tipo||'nicho')==='alta_perfumaria') {
+      if (n < max) { n++; return p; }
+      return {...p, tipo:'nicho'};
+    }
+    return p;
+  });
+}
+
+function drawRadar(families) {
+  if (radarChart) { radarChart.destroy(); radarChart = null; }
+  const counts = {};
+  RADAR_AXES.forEach(a => counts[a] = 0);
+  (families||[]).forEach(f => { if (counts[f]!==undefined) counts[f]++; });
+  const raw = RADAR_AXES.map(a => counts[a]);
+  const maxVal = Math.max(...raw, 1);
+  // Grid max = maxVal + 1, so data fills the chart properly
+  const gridMax = maxVal + 1;
+  radarChart = new Chart(document.getElementById('radar-chart').getContext('2d'), {
+    type:'radar',
+    data:{
+      labels: RADAR_AXES,
+      datasets:[{
+        label:'Coleção', data: raw,
+        backgroundColor:'rgba(184,151,90,0.18)',
+        borderColor:'rgba(184,151,90,0.9)',
+        borderWidth:2.5,
+        pointBackgroundColor:'#b8975a',
+        pointBorderColor:'#f5f0e8',
+        pointBorderWidth:1.5,
+        pointRadius:5,
+        pointHoverRadius:7
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:true,
+      scales:{r:{
+        min:0, max:gridMax,
+        ticks:{ display:false, stepSize:1 },
+        grid:{ color:'rgba(122,112,101,0.18)', lineWidth:1 },
+        angleLines:{ color:'rgba(122,112,101,0.18)', lineWidth:1 },
+        pointLabels:{ font:{family:"'DM Sans',sans-serif", size:11}, color:'#7a7065', padding:8 }
+      }},
+      plugins:{ legend:{ display:false } }
+    }
+  });
+}
+
+// ─── SHOW ARCHETYPE IMAGE IN RESULT ──────────────────────────────
+function showArchetypeImg(name) {
+  const el = document.getElementById('archetype-result-img');
+  const svg = ARCHETYPE_SVGS[name];
+  if (svg) {
+    el.innerHTML = svg;
+    el.classList.add('visible');
+  }
+}
+
+async function runAnalysis() {
+  const collection   = document.getElementById('input-collection').value.trim();
+  const lifestyle    = document.getElementById('input-lifestyle').value.trim();
+  const questionnaire= document.getElementById('input-questionnaire').value.trim();
+
+  if (!collection) { showError('Insira ao menos a coleção de perfumes do cliente.'); return; }
+
+  document.getElementById('form-area').style.display = 'none';
+  document.getElementById('loading').classList.add('active');
+  document.getElementById('error-msg').classList.remove('active');
+  setLoading('Traçando o perfil olfativo...','Etapa 1 de 3 · Análise');
+
+  const archetypeList = ARCHETYPES.map((a,i)=>`${i+1}. ${a.name} — Famílias: ${a.families} | Traço: ${a.trait}`).join('\n');
+
+  const prompt1 = `Você é especialista em consultoria olfativa de Victor Guerise.
+
+TAREFA — execute tudo e responda apenas JSON:
+
+1. Para cada perfume da coleção, classifique a família olfativa principal usando EXATAMENTE uma destas: Oriental/Âmbar | Amadeirado | Floral | Aromático/Fougère | Chypre | Cítrico/Hespéride | Aquático/Ozônico | Gourmand | Couro/Tabaco | Incenso/Resinoso
+
+2. Extraia as preferências do cliente com base na coleção + estilo de vida + questionário:
+   - O que ele GOSTA (notas, famílias, efeitos, sensações)
+   - O que ele EVITA ou DETESTA (notas, famílias, efeitos — ex: atalcado, floral doce, sabonete, sintético)
+
+3. Trace o perfil olfativo completo.
+
+4. Classifique o arquétipo entre os 9 abaixo com justificativa profunda.
+
+OS 9 ARQUÉTIPOS:
+${archetypeList}
+
+COLEÇÃO:
+${collection}
+
+ESTILO DE VIDA:
+${lifestyle||'Não informado'}
+
+QUESTIONÁRIO:
+${questionnaire||'Não informado'}
+
+Responda APENAS JSON válido, sem markdown, sem texto extra:
+{
+  "collection_families": ["família do perfume 1","família do perfume 2"],
+  "likes": ["gosta de X","prefere Y","aprecia Z"],
+  "dislikes": ["evita atalcado","detesta floral doce","não quer X"],
+  "archetype": "nome exato do arquétipo",
+  "confidence": número inteiro 60-98,
+  "olfactory_profile": "2-3 parágrafos",
+  "dominant_families": ["família1","família2","família3"],
+  "justification": "2-3 parágrafos",
+  "identity_traits": ["traço1","traço2","traço3","traço4"],
+  "secondary_archetype": "nome do arquétipo secundário",
+  "secondary_reason": "1 frase",
+  "consultation_recommendation": "1-2 parágrafos",
+  "collection_gaps": "1-2 parágrafos"
+}`;
+
+  try {
+    const r1 = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:2500, messages:[{role:"user",content:prompt1}] })
+    });
+    const d1 = await r1.json();
+    if (!r1.ok||d1.error) throw new Error(d1.error?.message||'Erro na API (etapa 1)');
+    const profile = JSON.parse(d1.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
+
+    renderProfile(profile);
+    showArchetypeImg(profile.archetype);
+    drawRadar(profile.collection_families||[]);
+
+    document.getElementById('loading').classList.remove('active');
+    document.getElementById('result-panel').classList.add('active');
+    document.getElementById('curadoria-loading').classList.add('active');
+
+    const genderLabel = {masculino:'masculinos e/ou unissex',feminino:'femininos e/ou unissex',ambos:'masculinos, femininos e unissex sem restrição'}[selectedGender];
+    const genderInstruction = {
+      masculino:'Priorize fragrâncias com posicionamento masculino. Unissex aceitos se o sillage fizer sentido para homem. NUNCA fragrâncias claramente femininas.',
+      feminino: 'Priorize fragrâncias com posicionamento feminino. Unissex aceitos. NUNCA fragrâncias claramente masculinas.',
+      ambos:    'Inclua masculinos, femininos e unissex livremente conforme o perfil olfativo.'
+    }[selectedGender];
+
+    const prompt2 = `Você é especialista em perfumaria nicho e alta perfumaria com conhecimento profundo do mercado brasileiro e de composições olfativas.
+
+CONTEXTO DO CLIENTE:
+- Arquétipo: ${profile.archetype} (secundário: ${profile.secondary_archetype})
+- Famílias dominantes: ${(profile.dominant_families||[]).join(', ')}
+- Traços: ${(profile.identity_traits||[]).join(', ')}
+- O QUE ELE GOSTA: ${(profile.likes||[]).join('; ')||'não especificado'}
+- O QUE ELE EVITA / DETESTA: ${(profile.dislikes||[]).join('; ')||'não especificado'}
+- Coleção atual: ${collection}
+- Estilo de vida: ${lifestyle||'não informado'}
+- Questionário: ${questionnaire||'não informado'}
+
+ORIENTAÇÃO DE GÊNERO: ${genderLabel}
+${genderInstruction}
+
+TAREFA: Gere uma curadoria de EXATAMENTE 38 perfumes.
+
+REGRAS ABSOLUTAS:
+1. CADA PERFUME deve fazer sentido real no gosto deste cliente. A justificativa deve ser específica — o que este perfume tem que conecta com o perfil dele.
+2. NUNCA sugerir perfume com notas ou características que o cliente declarou evitar. Zero exceções. Se ele odeia atalcado, nenhum perfume pode ter íris pó, almíscar atalcado, violeta em pó. Se odeia floral doce, zero rosas açucaradas, jasmim açucarado, etc.
+3. Máximo 10% de "alta_perfumaria" (≤4 de 38). Restante: "nicho".
+   - "nicho": Le Labo, Byredo, Serge Lutens, Nasomatto, Frederic Malle, Diptyque, Initio, Xerjoff, Nishane, Memo Paris, Tiziana Terenzi, Orto Parisi, Parfums de Marly, Roja Parfums, BDK, MFK, Matiere Premiere, Vilhelm, D.S.&Durga, Zoologist, Liquides Imaginaires, 19-69, Fueguia 1833, Juliette Has a Gun, Akro, The Harmonist, Bogue Profumo, etc.
+   - "alta_perfumaria": APENAS linhas privées (Chanel Les Exclusifs, Dior La Collection Privée, Hermès Hermessence, Tom Ford Private Blend, Louis Vuitton Parfums, Guerlain L'Art et la Matière, Armani Privé, Prada Olfactories) — NUNCA linhas regulares
+4. Lançados 2010–2025, nunca descontinuados
+5. Disponíveis no Brasil
+6. Nunca repetir perfumes da coleção do cliente
+7. Distribuição:
+   - "essencial": 14 — núcleo do arquétipo, o que ele PRECISA conhecer
+   - "expansao": 14 — ampliam sem sair da zona de conforto
+   - "descoberta": 10 — fronteira, desafiam respeitando as preferências
+8. Campo "genero": "masculino" | "feminino" | "unissex"
+
+Responda APENAS JSON válido, sem markdown:
+{
+  "perfumes": [
+    {
+      "numero": 1,
+      "marca": "nome da marca",
+      "nome": "nome exato do perfume",
+      "ano": 2018,
+      "familia": "família olfativa principal",
+      "tipo": "nicho|alta_perfumaria",
+      "genero": "masculino|feminino|unissex",
+      "categoria": "essencial|expansao|descoberta",
+      "razao": "Por que este perfume específico faz sentido para ESTE cliente"
+    }
+  ]
+}`;
+
+    const r2 = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:8000, messages:[{role:"user",content:prompt2}] })
+    });
+    const d2 = await r2.json();
+    if (!r2.ok||d2.error) throw new Error(d2.error?.message||'Erro na API (curadoria)');
+    const cd = JSON.parse(d2.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
+
+    document.getElementById('curadoria-loading').classList.remove('active');
+    renderCuradoria(enforceAltaCap(cd.perfumes||[]));
+
+  } catch(err) {
+    document.getElementById('form-area').style.display = 'block';
+    document.getElementById('loading').classList.remove('active');
+    document.getElementById('curadoria-loading').classList.remove('active');
+    showError('Erro ao processar: ' + err.message);
+  }
+}
+
+function renderProfile(r) {
+  const parts = (r.archetype||'—').split(' ');
+  document.getElementById('result-archetype-name').innerHTML = parts[0]+' <span>'+parts.slice(1).join(' ')+'</span>';
+  const pct = Math.min(Math.max(r.confidence||0,0),100);
+  document.getElementById('confidence-pct').textContent = pct+'%';
+  setTimeout(()=>document.getElementById('confidence-fill').style.width=pct+'%', 120);
+  document.getElementById('result-olfactory-profile').innerHTML = (r.olfactory_profile||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('result-families').innerHTML = (r.dominant_families||[]).map(f=>`<span class="tag highlight">${f}</span>`).join('');
+  document.getElementById('result-justification').innerHTML = (r.justification||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('result-traits').innerHTML = (r.identity_traits||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('secondary-name').textContent = r.secondary_archetype||'—';
+  document.getElementById('secondary-reason').textContent = r.secondary_reason||'—';
+  document.getElementById('result-recommendation').innerHTML = (r.consultation_recommendation||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('result-gaps').innerHTML = (r.collection_gaps||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('pref-likes').innerHTML = (r.likes||[]).map(l=>`<span class="pref-chip like">✓ ${l}</span>`).join('');
+  document.getElementById('pref-dislikes').innerHTML = (r.dislikes||[]).map(d=>`<span class="pref-chip dislike">✗ ${d}</span>`).join('');
+}
+
+function renderCuradoria(perfumes) {
+  allPerfumes = perfumes;
+  const ge = {masculino:'♂ Masculino',feminino:'♀ Feminino',ambos:'⚭ Ambos / Unissex'};
+  document.getElementById('gender-result-badge').textContent = ge[selectedGender]||selectedGender;
+  document.getElementById('curadoria-count').textContent = `${perfumes.length} perfumes selecionados para este perfil`;
+  document.getElementById('filter-tabs').style.display = 'flex';
+  renderCards(perfumes);
+}
+
+function renderCards(list) {
+  const tL = {nicho:'Nicho',alta_perfumaria:'Alta Perfumaria'};
+  const gC = {masculino:'masc',feminino:'fem',unissex:'unissex'};
+  const gL = {masculino:'Masc',feminino:'Fem',unissex:'Unissex'};
+  document.getElementById('perfume-grid').innerHTML = list.map(p=>{
+    const tipo = p.tipo||'nicho', gen = p.genero||'unissex';
+    return `<div class="perfume-card" data-categoria="${p.categoria}" data-tipo="${tipo}">
+      ${p.categoria==='essencial'?'<div class="perfume-priority">Essencial</div>':''}
+      <div class="perfume-card-top">
+        <div class="perfume-number">${String(p.numero).padStart(2,'0')}</div>
+        <div class="perfume-meta">
+          <span class="perfume-year">${p.ano}</span>
+          <span class="perfume-gender-tag ${gC[gen]||'unissex'}">${gL[gen]||gen}</span>
+        </div>
+      </div>
+      <div class="perfume-brand">${p.marca}</div>
+      <div class="perfume-name">${p.nome}</div>
+      <div class="perfume-tags-row">
+        <span class="perfume-family">${p.familia}</span>
+        <span class="perfume-tipo ${tipo}">${tL[tipo]||tipo}</span>
+      </div>
+      <div class="perfume-reason">${p.razao}</div>
+    </div>`;
+  }).join('');
+}
+
+function filterCards(filtro, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const f = filtro==='todos' ? allPerfumes
+    : (filtro==='nicho'||filtro==='alta_perfumaria') ? allPerfumes.filter(p=>(p.tipo||'nicho')===filtro)
+    : allPerfumes.filter(p=>p.categoria===filtro);
+  renderCards(f);
+}
+
+async function exportPDF() {
+  const btn = document.getElementById('btn-pdf');
+  btn.disabled = true; btn.textContent = 'Gerando PDF...';
+  renderCards(allPerfumes);
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('.filter-tab').classList.add('active');
+  try {
+    const {jsPDF} = window.jspdf;
+    const canvas = await html2canvas(document.getElementById('result-panel'),{scale:1.4,useCORS:true,backgroundColor:'#f5f0e8',logging:false});
+    const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    const pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight(), m=10;
+    const uw=pw-m*2, ih=(canvas.height*uw)/canvas.width;
+    let yPos=0;
+    while(yPos<ih){
+      if(yPos>0) pdf.addPage();
+      const sliceH=Math.min(ph-m*2,ih-yPos);
+      const srcY=(yPos/ih)*canvas.height, srcH=(sliceH/ih)*canvas.height;
+      const sl=document.createElement('canvas'); sl.width=canvas.width; sl.height=srcH;
+      sl.getContext('2d').drawImage(canvas,0,srcY,canvas.width,srcH,0,0,canvas.width,srcH);
+      pdf.addImage(sl.toDataURL('image/jpeg',.9),'JPEG',m,m,uw,sliceH);
+      yPos+=sliceH;
+    }
+    pdf.save('victor-guerise-perfil-olfativo.pdf');
+  } catch(e){ alert('Erro ao gerar PDF: '+e.message); }
+  btn.disabled=false; btn.textContent='↓ Exportar PDF';
+}
+
+function setLoading(t,s){
+  document.getElementById('loading-text').textContent=t;
+  document.getElementById('loading-step').textContent=s;
+}
+function showError(msg){ const e=document.getElementById('error-msg'); e.textContent=msg; e.classList.add('active'); }
+function reset(){
+  document.getElementById('result-panel').classList.remove('active');
+  document.getElementById('form-area').style.display='block';
+  document.getElementById('confidence-fill').style.width='0%';
+  document.getElementById('error-msg').classList.remove('active');
+  document.getElementById('filter-tabs').style.display='none';
+  document.getElementById('perfume-grid').innerHTML='';
+  document.getElementById('curadoria-count').textContent='—';
+  document.getElementById('pref-likes').innerHTML='';
+  document.getElementById('pref-dislikes').innerHTML='';
+  document.getElementById('archetype-result-img').classList.remove('visible');
+  document.getElementById('archetype-result-img').innerHTML='';
+  if(radarChart){radarChart.destroy();radarChart=null;}
+  allPerfumes=[];
+}
+</script>
+</body>
+</html>
