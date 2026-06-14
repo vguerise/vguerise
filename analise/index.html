@@ -742,7 +742,7 @@ Responda APENAS JSON válido, sem markdown, sem texto extra:
 }`;
 
   try {
-    const profile = await callClaude({ model:"claude-sonnet-4-6", max_tokens:2500, messages:[{role:"user",content:prompt1}] });
+    const profile = await callClaude({ model:"claude-sonnet-4-6", max_tokens:8192, messages:[{role:"user",content:prompt1}] });
 
     renderProfile(profile);
     showArchetypeImg(profile.archetype);
@@ -805,7 +805,7 @@ Responda APENAS JSON válido, sem markdown:
   ]
 }`;
 
-    const cd = await callClaude({ model:"claude-sonnet-4-6", max_tokens:8000, messages:[{role:"user",content:prompt2}] });
+    const cd = await callClaude({ model:"claude-sonnet-4-6", max_tokens:16000, messages:[{role:"user",content:prompt2}] });
 
     document.getElementById('curadoria-loading').classList.remove('active');
     renderCuradoria(enforceAltaCap(cd.perfumes||[]));
