@@ -4,31 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Victor Guerise · Classificador de Arquétipos</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js">
-// ─── LOGIN ───────────────────────────────────────────────────────
-const _AU = 'vguerise@gmail.com';
-const _AP = 'Auri24680!';
-
-function doLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pass  = document.getElementById('login-pass').value;
-  const err   = document.getElementById('login-error');
-  if (email === _AU && pass === _AP) {
-    document.getElementById('login-screen').classList.add('hidden');
-    err.textContent = '';
-  } else {
-    err.textContent = 'E-mail ou senha incorretos.';
-    document.getElementById('login-pass').value = '';
-  }
-}
-
-// Allow Enter key to submit login
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !document.getElementById('login-screen').classList.contains('hidden')) {
-    doLogin();
-  }
-});
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
@@ -55,6 +31,7 @@ body{background:var(--parchment);color:var(--ink);font-family:'DM Sans',sans-ser
 .login-input::placeholder{color:rgba(255,255,255,.2);}
 .login-btn{width:100%;margin-top:24px;padding:15px;background:var(--gold);border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:white;cursor:pointer;transition:background .2s;}
 .login-btn:hover{background:var(--gold-light);}
+.login-btn:disabled{opacity:.5;cursor:wait;}
 .login-error{font-size:12px;color:#e07070;text-align:center;margin-top:14px;min-height:18px;letter-spacing:.02em;}
 header{border-bottom:1px solid var(--border);padding:24px 48px;display:flex;align-items:baseline;gap:16px;background:var(--surface);position:sticky;top:0;z-index:10;}
 .logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;}
@@ -205,7 +182,7 @@ textarea::placeholder{color:#b5a99a;}
       <label class="login-label" for="login-pass">Senha</label>
       <input class="login-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="off"/>
     </div>
-    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Entrar</button>
     <div class="login-error" id="login-error"></div>
   </div>
 </div>
@@ -382,6 +359,63 @@ Byredo Bal d'Afrique (Floral Amadeirado)
 </main>
 
 <script>
+// ─── CONFIG — atualizar após deploy do Worker ─────────────────────
+const WORKER_URL = 'https://analise-api.SEU-ACCOUNT.workers.dev';
+
+// ─── AUTH ────────────────────────────────────────────────────────
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  const err   = document.getElementById('login-error');
+  const btn   = document.getElementById('login-btn');
+  err.textContent = 'Verificando...';
+  btn.disabled = true;
+  try {
+    const r = await fetch(`${WORKER_URL}/auth`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pass }),
+    });
+    const d = await r.json();
+    if (r.ok && d.token) {
+      sessionStorage.setItem('analise_token', d.token);
+      document.getElementById('login-screen').classList.add('hidden');
+      err.textContent = '';
+    } else {
+      err.textContent = d.error || 'E-mail ou senha incorretos.';
+      document.getElementById('login-pass').value = '';
+    }
+  } catch {
+    err.textContent = 'Erro de conexão. Tente novamente.';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !document.getElementById('login-screen').classList.contains('hidden')) {
+    doLogin();
+  }
+});
+
+// ─── CLAUDE PROXY ────────────────────────────────────────────────
+async function callClaude(payload) {
+  const token = sessionStorage.getItem('analise_token');
+  const r = await fetch(`${WORKER_URL}/claude`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+  if (r.status === 401) {
+    sessionStorage.removeItem('analise_token');
+    document.getElementById('login-screen').classList.remove('hidden');
+    throw new Error('Sessão expirada. Faça login novamente.');
+  }
+  const d = await r.json();
+  if (!r.ok || d.error) throw new Error(d.error?.message || 'Erro na API');
+  return JSON.parse(d.content.map(b => b.text || '').join('').replace(/```json|```/g, '').trim());
+}
+
 // ─── ARCHETYPE SVGs ───────────────────────────────────────────────
 const ARCHETYPE_SVGS = {
   "O Soberano": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
@@ -655,7 +689,6 @@ function drawRadar(families) {
   (families||[]).forEach(f => { if (counts[f]!==undefined) counts[f]++; });
   const raw = RADAR_AXES.map(a => counts[a]);
   const maxVal = Math.max(...raw, 1);
-  // Grid max = maxVal + 1, so data fills the chart properly
   const gridMax = maxVal + 1;
   radarChart = new Chart(document.getElementById('radar-chart').getContext('2d'), {
     type:'radar',
@@ -687,7 +720,6 @@ function drawRadar(families) {
   });
 }
 
-// ─── SHOW ARCHETYPE IMAGE IN RESULT ──────────────────────────────
 function showArchetypeImg(name) {
   const el = document.getElementById('archetype-result-img');
   const svg = ARCHETYPE_SVGS[name];
@@ -698,9 +730,9 @@ function showArchetypeImg(name) {
 }
 
 async function runAnalysis() {
-  const collection   = document.getElementById('input-collection').value.trim();
-  const lifestyle    = document.getElementById('input-lifestyle').value.trim();
-  const questionnaire= document.getElementById('input-questionnaire').value.trim();
+  const collection    = document.getElementById('input-collection').value.trim();
+  const lifestyle     = document.getElementById('input-lifestyle').value.trim();
+  const questionnaire = document.getElementById('input-questionnaire').value.trim();
 
   if (!collection) { showError('Insira ao menos a coleção de perfumes do cliente.'); return; }
 
@@ -755,13 +787,7 @@ Responda APENAS JSON válido, sem markdown, sem texto extra:
 }`;
 
   try {
-    const r1 = await fetch("https://api.anthropic.com/v1/messages", {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:2500, messages:[{role:"user",content:prompt1}] })
-    });
-    const d1 = await r1.json();
-    if (!r1.ok||d1.error) throw new Error(d1.error?.message||'Erro na API (etapa 1)');
-    const profile = JSON.parse(d1.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
+    const profile = await callClaude({ model:"claude-sonnet-4-6", max_tokens:2500, messages:[{role:"user",content:prompt1}] });
 
     renderProfile(profile);
     showArchetypeImg(profile.archetype);
@@ -827,13 +853,7 @@ Responda APENAS JSON válido, sem markdown:
   ]
 }`;
 
-    const r2 = await fetch("https://api.anthropic.com/v1/messages", {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:8000, messages:[{role:"user",content:prompt2}] })
-    });
-    const d2 = await r2.json();
-    if (!r2.ok||d2.error) throw new Error(d2.error?.message||'Erro na API (curadoria)');
-    const cd = JSON.parse(d2.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
+    const cd = await callClaude({ model:"claude-sonnet-4-6", max_tokens:8000, messages:[{role:"user",content:prompt2}] });
 
     document.getElementById('curadoria-loading').classList.remove('active');
     renderCuradoria(enforceAltaCap(cd.perfumes||[]));
