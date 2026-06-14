@@ -16,7 +16,6 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--parchment);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;}
-/* LOGIN */
 #login-screen{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;align-items:center;justify-content:center;}
 #login-screen.hidden{display:none;}
 .login-box{width:100%;max-width:360px;padding:0 24px;}
@@ -54,8 +53,6 @@ textarea::placeholder{color:#b5a99a;}
 .gender-btn.active{background:var(--ink);border-color:var(--ink);color:var(--parchment);}
 .gender-btn .gender-icon{font-size:18px;display:block;margin-bottom:4px;}
 .gender-btn .gender-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;}
-
-/* ARCHETYPE CHIPS with SVG */
 .archetypes-ref{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:18px 22px;margin-bottom:32px;}
 .archetypes-ref-title{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:14px;}
 .archetypes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
@@ -65,12 +62,9 @@ textarea::placeholder{color:#b5a99a;}
 .archetype-chip-body{padding:9px 11px;}
 .archetype-chip .name{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;}
 .archetype-chip .desc{font-size:10px;color:var(--smoke);margin-top:2px;line-height:1.4;}
-
-/* RESULT archetype image */
 .archetype-result-img{width:100%;height:200px;border-radius:2px;overflow:hidden;margin-bottom:20px;display:none;}
 .archetype-result-img svg{width:100%;height:100%;}
 .archetype-result-img.visible{display:block;}
-
 .btn-classify{width:100%;padding:17px 32px;background:var(--ink);color:var(--parchment);border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:8px;}
 .btn-classify:hover{background:var(--deep);}
 .loading-state{display:none;text-align:center;padding:64px 0;}
@@ -104,12 +98,8 @@ textarea::placeholder{color:#b5a99a;}
 .secondary-archetype{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:15px 18px;}
 .secondary-archetype .name{font-family:'Cormorant Garamond',serif;font-size:17px;}
 .secondary-archetype .reason{font-size:13px;color:var(--smoke);margin-top:3px;line-height:1.5;}
-
-/* RADAR */
 .radar-wrap{display:flex;justify-content:center;padding:8px 0;}
 .radar-wrap canvas{max-width:420px;width:100%!important;height:auto!important;}
-
-/* PREFS */
 .pref-summary{background:#faf6ec;border:1px solid var(--gold-light);border-radius:2px;padding:14px 18px;margin-bottom:4px;}
 .pref-summary-title{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
 .pref-rows{display:flex;flex-wrap:wrap;gap:7px;}
@@ -186,6 +176,7 @@ textarea::placeholder{color:#b5a99a;}
     <div class="login-error" id="login-error"></div>
   </div>
 </div>
+
 <header>
   <div class="logo">Victor <span>Guerise</span></div>
   <span class="tool-label">Classificador de Arquétipos Olfativos</span>
@@ -268,25 +259,19 @@ Byredo Bal d'Afrique (Floral Amadeirado)
         <div class="confidence-pct" id="confidence-pct">—</div>
       </div>
     </div>
-
-    <!-- ARCHETYPE IMAGE -->
     <div class="archetype-result-img" id="archetype-result-img"></div>
-
     <div class="result-block">
       <div class="result-block-label">Perfil Olfativo</div>
       <div class="result-text" id="result-olfactory-profile">—</div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Radar de Famílias · Coleção Atual</div>
       <div class="radar-wrap"><canvas id="radar-chart"></canvas></div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Famílias Dominantes</div>
       <div class="tags-row" id="result-families"></div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Preferências Identificadas</div>
       <div class="pref-summary">
@@ -296,17 +281,14 @@ Byredo Bal d'Afrique (Floral Amadeirado)
         <div class="pref-rows" id="pref-dislikes"></div>
       </div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Por que este arquétipo</div>
       <div class="result-text" id="result-justification">—</div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Traços de Identidade Olfativa</div>
       <div class="tags-row" id="result-traits"></div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Arquétipo Secundário</div>
       <div class="secondary-archetype">
@@ -314,19 +296,15 @@ Byredo Bal d'Afrique (Floral Amadeirado)
         <div class="reason" id="secondary-reason">—</div>
       </div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Recomendação de Consultoria</div>
       <div class="result-text" id="result-recommendation">—</div>
     </div>
-
     <div class="result-block">
       <div class="result-block-label">Gaps & Oportunidades na Coleção</div>
       <div class="result-text" id="result-gaps">—</div>
     </div>
-
     <div class="section-divider"></div>
-
     <div id="curadoria-section">
       <div class="curadoria-header">
         <div class="curadoria-title-block">
@@ -350,7 +328,6 @@ Byredo Bal d'Afrique (Floral Amadeirado)
       </div>
       <div class="perfume-grid" id="perfume-grid"></div>
     </div>
-
     <div class="action-buttons">
       <button class="btn-pdf" id="btn-pdf" onclick="exportPDF()">↓ Exportar PDF</button>
       <button class="btn-reset" onclick="reset()">← Nova análise</button>
@@ -359,34 +336,54 @@ Byredo Bal d'Afrique (Floral Amadeirado)
 </main>
 
 <script>
-// ─── CONFIG — atualizar após deploy do Worker ─────────────────────
-const WORKER_URL = 'https://analise-api.SEU-ACCOUNT.workers.dev';
+// ─── CREDENCIAL ENCRIPTADA ────────────────────────────────────────
+// A API key está encriptada com AES-256-GCM usando PBKDF2(senha, salt, 100k iter).
+// Sem a senha correta é impossível descriptografar.
+const _ENC = {
+  s: 'f895c5451088a56e7aea7e1b8e051cd5',
+  i: '5645b2aa0e28f99d984bfe2c',
+  d: 'ab17ee053a52610cc66b20b615cecc70a68783c3bc02870e7ae6f4145d31e4d6f841c8319a625295639b94269d8b867916c9482702f609f7f1dfa095e2d89a0dd79e88166b85edee163480de8e34f0282135e9dd3b1bcf4aa0d1c50ded4bf4305422168dc5b39b997c5a60ddffd95433d62b1e038a111dd25a5d9650'
+};
+const _EMAIL = 'vguerise@gmail.com';
 
-// ─── AUTH ────────────────────────────────────────────────────────
+let _apiKey = null;
+
+function _h2b(hex) {
+  const b = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < hex.length; i += 2) b[i >> 1] = parseInt(hex.slice(i, i + 2), 16);
+  return b;
+}
+
+// ─── LOGIN ────────────────────────────────────────────────────────
 async function doLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pass  = document.getElementById('login-pass').value;
   const err   = document.getElementById('login-error');
   const btn   = document.getElementById('login-btn');
+
+  if (email !== _EMAIL) {
+    err.textContent = 'E-mail ou senha incorretos.';
+    return;
+  }
+
   err.textContent = 'Verificando...';
   btn.disabled = true;
+
   try {
-    const r = await fetch(`${WORKER_URL}/auth`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password: pass }),
-    });
-    const d = await r.json();
-    if (r.ok && d.token) {
-      sessionStorage.setItem('analise_token', d.token);
-      document.getElementById('login-screen').classList.add('hidden');
-      err.textContent = '';
-    } else {
-      err.textContent = d.error || 'E-mail ou senha incorretos.';
-      document.getElementById('login-pass').value = '';
-    }
+    const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: _h2b(_ENC.s), iterations: 100000, hash: 'SHA-256' },
+      km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+    );
+    // Se a senha estiver errada, decrypt lança exceção (falha na verificação de integridade do AES-GCM)
+    const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: _h2b(_ENC.i) }, key, _h2b(_ENC.d));
+    _apiKey = new TextDecoder().decode(decrypted);
+    document.getElementById('login-screen').classList.add('hidden');
+    err.textContent = '';
   } catch {
-    err.textContent = 'Erro de conexão. Tente novamente.';
+    err.textContent = 'E-mail ou senha incorretos.';
+    document.getElementById('login-pass').value = '';
+    _apiKey = null;
   } finally {
     btn.disabled = false;
   }
@@ -398,19 +395,18 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// ─── CLAUDE PROXY ────────────────────────────────────────────────
+// ─── CHAMADA À API ────────────────────────────────────────────────
 async function callClaude(payload) {
-  const token = sessionStorage.getItem('analise_token');
-  const r = await fetch(`${WORKER_URL}/claude`, {
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': _apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+    },
     body: JSON.stringify(payload),
   });
-  if (r.status === 401) {
-    sessionStorage.removeItem('analise_token');
-    document.getElementById('login-screen').classList.remove('hidden');
-    throw new Error('Sessão expirada. Faça login novamente.');
-  }
   const d = await r.json();
   if (!r.ok || d.error) throw new Error(d.error?.message || 'Erro na API');
   return JSON.parse(d.content.map(b => b.text || '').join('').replace(/```json|```/g, '').trim());
@@ -425,7 +421,6 @@ const ARCHETYPE_SVGS = {
     </defs>
     <rect width="320" height="80" fill="url(#sg)"/>
     <circle cx="160" cy="40" r="55" fill="url(#sg2)"/>
-    <!-- Crown -->
     <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width="1.2">
       <polygon points="0,-22 -18,8 18,8" stroke-linejoin="round"/>
       <line x1="-18" y1="8" x2="18" y2="8"/>
@@ -437,18 +432,13 @@ const ARCHETYPE_SVGS = {
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">SOBERANO</text>
   </svg>`,
-
   "O Arquiteto": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d1520"/><stop offset="100%" stop-color="#1a2535"/></linearGradient>
-    </defs>
+    <defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d1520"/><stop offset="100%" stop-color="#1a2535"/></linearGradient></defs>
     <rect width="320" height="80" fill="url(#ag)"/>
-    <!-- Grid lines -->
     <g stroke="#b8975a" stroke-width=".4" opacity=".25">
       <line x1="80" y1="0" x2="80" y2="80"/><line x1="160" y1="0" x2="160" y2="80"/><line x1="240" y1="0" x2="240" y2="80"/>
       <line x1="0" y1="26" x2="320" y2="26"/><line x1="0" y1="53" x2="320" y2="53"/>
     </g>
-    <!-- Blueprint structure -->
     <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width="1.1">
       <rect x="-20" y="-20" width="40" height="40" stroke-dasharray="3,2"/>
       <line x1="-20" y1="-20" x2="20" y2="20" stroke-width=".6"/>
@@ -459,7 +449,6 @@ const ARCHETYPE_SVGS = {
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">ARQUITETO</text>
   </svg>`,
-
   "O Nômade": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a1a0d"/><stop offset="100%" stop-color="#142b18"/></linearGradient>
@@ -467,7 +456,6 @@ const ARCHETYPE_SVGS = {
     </defs>
     <rect width="320" height="80" fill="url(#ng)"/>
     <ellipse cx="160" cy="25" rx="100" ry="30" fill="url(#ng2)"/>
-    <!-- Compass rose -->
     <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1">
       <circle cx="0" cy="0" r="22" stroke-width=".5" stroke-dasharray="2,3"/>
       <polygon points="0,-20 -5,-5 0,-8 5,-5" fill="#b8975a" stroke="none"/>
@@ -475,13 +463,11 @@ const ARCHETYPE_SVGS = {
       <line x1="-20" y1="0" x2="20" y2="0" stroke-width=".7"/>
       <circle cx="0" cy="0" r="2.5" fill="#b8975a" stroke="none"/>
     </g>
-    <!-- Wind lines -->
     <g stroke="#b8975a" stroke-width=".5" opacity=".3">
       <path d="M40,25 Q80,20 100,30" fill="none"/><path d="M220,30 Q250,22 280,28" fill="none"/>
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">NÔMADE</text>
   </svg>`,
-
   "O Sedutor": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="sedg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0d12"/><stop offset="100%" stop-color="#2e1520"/></linearGradient>
@@ -489,12 +475,10 @@ const ARCHETYPE_SVGS = {
     </defs>
     <rect width="320" height="80" fill="url(#sedg)"/>
     <ellipse cx="160" cy="40" rx="90" ry="40" fill="url(#sedg2)"/>
-    <!-- Intertwined curves / infinity-like -->
     <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width="1.2">
       <path d="M-25,-8 C-15,-22 15,-22 25,-8 C35,6 15,18 0,10 C-15,18 -35,6 -25,-8Z" opacity=".8"/>
       <circle cx="0" cy="0" r="3.5" fill="#c87090" stroke="#b8975a" stroke-width="1"/>
     </g>
-    <!-- Petals scattered -->
     <g fill="#b8975a" opacity=".2">
       <ellipse cx="80" cy="20" rx="4" ry="2" transform="rotate(-30,80,20)"/>
       <ellipse cx="240" cy="55" rx="3" ry="1.5" transform="rotate(20,240,55)"/>
@@ -503,7 +487,6 @@ const ARCHETYPE_SVGS = {
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">SEDUTOR</text>
   </svg>`,
-
   "O Visionário": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="vg" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#12102e"/></linearGradient>
@@ -511,42 +494,32 @@ const ARCHETYPE_SVGS = {
     </defs>
     <rect width="320" height="80" fill="url(#vg)"/>
     <circle cx="160" cy="40" r="50" fill="url(#vg2)"/>
-    <!-- Eye / vision symbol -->
     <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.1">
       <path d="M-28,0 Q0,-18 28,0 Q0,18 -28,0Z"/>
       <circle cx="0" cy="0" r="8"/>
       <circle cx="0" cy="0" r="3" fill="#b8975a" stroke="none"/>
     </g>
-    <!-- Stars -->
     <g fill="#b8975a" opacity=".5">
-      <polygon points="60,15 61.5,19 66,19 62.5,21.5 64,26 60,23 56,26 57.5,21.5 54,19 58.5,19" transform="scale(.5) translate(60,10)"/>
       <circle cx="260" cy="18" r="1.5"/><circle cx="75" cy="55" r="1"/><circle cx="248" cy="52" r="1.2"/>
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">VISIONÁRIO</text>
   </svg>`,
-
   "O Guardião": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#120c05"/><stop offset="100%" stop-color="#221508"/></linearGradient>
-    </defs>
+    <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#120c05"/><stop offset="100%" stop-color="#221508"/></linearGradient></defs>
     <rect width="320" height="80" fill="url(#gg)"/>
-    <!-- Wood grain lines -->
     <g stroke="#b8975a" stroke-width=".4" opacity=".12">
       <path d="M0,20 Q80,18 160,22 Q240,26 320,20" fill="none"/>
       <path d="M0,35 Q80,32 160,37 Q240,42 320,35" fill="none"/>
       <path d="M0,50 Q80,47 160,52 Q240,57 320,50" fill="none"/>
       <path d="M0,65 Q80,62 160,67 Q240,72 320,65" fill="none"/>
     </g>
-    <!-- Shield -->
     <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.2">
       <path d="M0,-22 L18,-12 L18,6 Q18,20 0,26 Q-18,20 -18,6 L-18,-12 Z"/>
-      <!-- Shield cross -->
       <line x1="0" y1="-16" x2="0" y2="18" stroke-width=".8"/>
       <line x1="-12" y1="2" x2="12" y2="2" stroke-width=".8"/>
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">GUARDIÃO</text>
   </svg>`,
-
   "O Artista": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="artg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#150a18"/><stop offset="100%" stop-color="#241230"/></linearGradient>
@@ -554,12 +527,10 @@ const ARCHETYPE_SVGS = {
     </defs>
     <rect width="320" height="80" fill="url(#artg)"/>
     <ellipse cx="130" cy="35" rx="80" ry="45" fill="url(#artg2)"/>
-    <!-- Brushstroke / wave -->
     <g fill="none" stroke="#b8975a" stroke-width="1.3" stroke-linecap="round">
       <path d="M60,50 C90,20 130,55 160,30 C190,5 220,45 260,28" opacity=".9"/>
       <path d="M70,58 C100,38 130,62 160,45 C190,28 215,55 255,42" opacity=".35" stroke-width=".8"/>
     </g>
-    <!-- Iris flower simplified -->
     <g transform="translate(160,40)" fill="none" stroke="#b8975a" stroke-width=".9" opacity=".7">
       <ellipse cx="0" cy="-10" rx="4" ry="10" transform="rotate(-20)"/>
       <ellipse cx="0" cy="-10" rx="4" ry="10" transform="rotate(20)"/>
@@ -567,7 +538,6 @@ const ARCHETYPE_SVGS = {
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">ARTISTA</text>
   </svg>`,
-
   "O Estrategista": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="esg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#050f1a"/><stop offset="100%" stop-color="#0a1e30"/></linearGradient>
@@ -575,13 +545,11 @@ const ARCHETYPE_SVGS = {
     </defs>
     <rect width="320" height="80" fill="url(#esg)"/>
     <ellipse cx="190" cy="25" rx="100" ry="35" fill="url(#esg2)"/>
-    <!-- Chess knight / strategy grid -->
     <g stroke="#b8975a" stroke-width=".5" opacity=".2">
       <line x1="60" y1="0" x2="60" y2="80"/><line x1="120" y1="0" x2="120" y2="80"/>
       <line x1="200" y1="0" x2="200" y2="80"/><line x1="260" y1="0" x2="260" y2="80"/>
       <line x1="0" y1="20" x2="320" y2="20"/><line x1="0" y1="60" x2="320" y2="60"/>
     </g>
-    <!-- Target / crosshair -->
     <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.1">
       <circle cx="0" cy="0" r="18"/>
       <circle cx="0" cy="0" r="9"/>
@@ -591,7 +559,6 @@ const ARCHETYPE_SVGS = {
     </g>
     <text x="160" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#b8975a" letter-spacing="3" opacity=".7">ESTRATEGISTA</text>
   </svg>`,
-
   "O Sábio": `<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d0d08"/><stop offset="100%" stop-color="#1a1a10"/></linearGradient>
@@ -599,16 +566,13 @@ const ARCHETYPE_SVGS = {
     </defs>
     <rect width="320" height="80" fill="url(#sbg)"/>
     <ellipse cx="160" cy="55" rx="100" ry="35" fill="url(#sbg2)"/>
-    <!-- Ouroboros / circle of wisdom -->
     <g transform="translate(160,38)" fill="none" stroke="#b8975a" stroke-width="1.1">
       <circle cx="0" cy="0" r="22" stroke-dasharray="4,1.5"/>
       <circle cx="0" cy="0" r="12"/>
-      <!-- Yin-yang inspired center -->
       <path d="M0,-12 A6,6 0 0,1 0,0 A6,6 0 0,0 0,12 A12,12 0 0,1 0,-12Z" fill="#b8975a" opacity=".5" stroke="none"/>
       <circle cx="0" cy="-6" r="2" fill="#1a1a10" stroke="none"/>
       <circle cx="0" cy="6" r="2" fill="#b8975a" stroke="none"/>
     </g>
-    <!-- Roots -->
     <g stroke="#b8975a" stroke-width=".5" opacity=".2">
       <path d="M130,65 Q140,70 150,68" fill="none"/><path d="M170,68 Q180,71 190,65" fill="none"/>
       <path d="M145,72 Q155,76 165,73" fill="none"/>
@@ -617,7 +581,7 @@ const ARCHETYPE_SVGS = {
   </svg>`
 };
 
-// ─── ARCHETYPE DATA ───────────────────────────────────────────────
+// ─── DADOS DOS ARQUÉTIPOS ─────────────────────────────────────────
 const ARCHETYPES = [
   { name:"O Soberano",    families:"Orientais ricos, Oudhs, Âmbar, Especiarias quentes", trait:"Poder, status, presença intimidadora" },
   { name:"O Arquiteto",   families:"Aromáticos secos, Fougères, Chypres estruturados",   trait:"Controle, precisão, minimalismo intencional" },
@@ -629,7 +593,6 @@ const ARCHETYPES = [
   { name:"O Estrategista",families:"Aquáticos modernos, Ozônicos sofisticados, Frescos",  trait:"Adaptabilidade, leitura social, ambição" },
   { name:"O Sábio",       families:"Madeiras envelhecidas, Balsâmicos, Terrosos, Musgos", trait:"Introspecção, cultura, maturidade" }
 ];
-
 const SHORT_DESC = {
   "O Soberano":"Orientais, Oudhs, Âmbar · Poder",
   "O Arquiteto":"Fougères, Chypres · Precisão",
@@ -641,7 +604,6 @@ const SHORT_DESC = {
   "O Estrategista":"Aquáticos modernos, Frescos · Ambição",
   "O Sábio":"Madeiras envelhecidas, Balsâmicos · Maturidade"
 };
-
 const RADAR_AXES = [
   'Oriental/Âmbar','Amadeirado','Floral','Aromático/Fougère',
   'Chypre','Cítrico/Hespéride','Aquático/Ozônico','Gourmand',
@@ -650,10 +612,8 @@ const RADAR_AXES = [
 
 let allPerfumes = [], radarChart = null, selectedGender = 'masculino';
 
-// ─── RENDER ARCHETYPE CHIPS ───────────────────────────────────────
 function buildRefGrid() {
-  const grid = document.getElementById('ref-grid');
-  grid.innerHTML = ARCHETYPES.map(a => `
+  document.getElementById('ref-grid').innerHTML = ARCHETYPES.map(a => `
     <div class="archetype-chip">
       <div class="archetype-chip-img">${ARCHETYPE_SVGS[a.name]||''}</div>
       <div class="archetype-chip-body">
@@ -665,7 +625,7 @@ function buildRefGrid() {
 buildRefGrid();
 
 function selectGender(btn) {
-  document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   selectedGender = btn.dataset.gender;
 }
@@ -674,7 +634,7 @@ function enforceAltaCap(perfumes) {
   const max = Math.max(1, Math.floor(perfumes.length * 0.10));
   let n = 0;
   return perfumes.map(p => {
-    if ((p.tipo||'nicho')==='alta_perfumaria') {
+    if ((p.tipo||'nicho') === 'alta_perfumaria') {
       if (n < max) { n++; return p; }
       return {...p, tipo:'nicho'};
     }
@@ -686,36 +646,35 @@ function drawRadar(families) {
   if (radarChart) { radarChart.destroy(); radarChart = null; }
   const counts = {};
   RADAR_AXES.forEach(a => counts[a] = 0);
-  (families||[]).forEach(f => { if (counts[f]!==undefined) counts[f]++; });
+  (families||[]).forEach(f => { if (counts[f] !== undefined) counts[f]++; });
   const raw = RADAR_AXES.map(a => counts[a]);
-  const maxVal = Math.max(...raw, 1);
-  const gridMax = maxVal + 1;
+  const gridMax = Math.max(...raw, 1) + 1;
   radarChart = new Chart(document.getElementById('radar-chart').getContext('2d'), {
-    type:'radar',
-    data:{
+    type: 'radar',
+    data: {
       labels: RADAR_AXES,
-      datasets:[{
-        label:'Coleção', data: raw,
-        backgroundColor:'rgba(184,151,90,0.18)',
-        borderColor:'rgba(184,151,90,0.9)',
-        borderWidth:2.5,
-        pointBackgroundColor:'#b8975a',
-        pointBorderColor:'#f5f0e8',
-        pointBorderWidth:1.5,
-        pointRadius:5,
-        pointHoverRadius:7
+      datasets: [{
+        label: 'Coleção', data: raw,
+        backgroundColor: 'rgba(184,151,90,0.18)',
+        borderColor: 'rgba(184,151,90,0.9)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#b8975a',
+        pointBorderColor: '#f5f0e8',
+        pointBorderWidth: 1.5,
+        pointRadius: 5,
+        pointHoverRadius: 7
       }]
     },
-    options:{
-      responsive:true, maintainAspectRatio:true,
-      scales:{r:{
-        min:0, max:gridMax,
-        ticks:{ display:false, stepSize:1 },
-        grid:{ color:'rgba(122,112,101,0.18)', lineWidth:1 },
-        angleLines:{ color:'rgba(122,112,101,0.18)', lineWidth:1 },
-        pointLabels:{ font:{family:"'DM Sans',sans-serif", size:11}, color:'#7a7065', padding:8 }
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      scales: { r: {
+        min: 0, max: gridMax,
+        ticks: { display: false, stepSize: 1 },
+        grid: { color: 'rgba(122,112,101,0.18)', lineWidth: 1 },
+        angleLines: { color: 'rgba(122,112,101,0.18)', lineWidth: 1 },
+        pointLabels: { font: { family: "'DM Sans',sans-serif", size: 11 }, color: '#7a7065', padding: 8 }
       }},
-      plugins:{ legend:{ display:false } }
+      plugins: { legend: { display: false } }
     }
   });
 }
@@ -723,25 +682,21 @@ function drawRadar(families) {
 function showArchetypeImg(name) {
   const el = document.getElementById('archetype-result-img');
   const svg = ARCHETYPE_SVGS[name];
-  if (svg) {
-    el.innerHTML = svg;
-    el.classList.add('visible');
-  }
+  if (svg) { el.innerHTML = svg; el.classList.add('visible'); }
 }
 
 async function runAnalysis() {
   const collection    = document.getElementById('input-collection').value.trim();
   const lifestyle     = document.getElementById('input-lifestyle').value.trim();
   const questionnaire = document.getElementById('input-questionnaire').value.trim();
-
   if (!collection) { showError('Insira ao menos a coleção de perfumes do cliente.'); return; }
 
   document.getElementById('form-area').style.display = 'none';
   document.getElementById('loading').classList.add('active');
   document.getElementById('error-msg').classList.remove('active');
-  setLoading('Traçando o perfil olfativo...','Etapa 1 de 3 · Análise');
+  setLoading('Traçando o perfil olfativo...', 'Etapa 1 de 3 · Análise');
 
-  const archetypeList = ARCHETYPES.map((a,i)=>`${i+1}. ${a.name} — Famílias: ${a.families} | Traço: ${a.trait}`).join('\n');
+  const archetypeList = ARCHETYPES.map((a,i) => `${i+1}. ${a.name} — Famílias: ${a.families} | Traço: ${a.trait}`).join('\n');
 
   const prompt1 = `Você é especialista em consultoria olfativa de Victor Guerise.
 
@@ -799,9 +754,9 @@ Responda APENAS JSON válido, sem markdown, sem texto extra:
 
     const genderLabel = {masculino:'masculinos e/ou unissex',feminino:'femininos e/ou unissex',ambos:'masculinos, femininos e unissex sem restrição'}[selectedGender];
     const genderInstruction = {
-      masculino:'Priorize fragrâncias com posicionamento masculino. Unissex aceitos se o sillage fizer sentido para homem. NUNCA fragrâncias claramente femininas.',
-      feminino: 'Priorize fragrâncias com posicionamento feminino. Unissex aceitos. NUNCA fragrâncias claramente masculinas.',
-      ambos:    'Inclua masculinos, femininos e unissex livremente conforme o perfil olfativo.'
+      masculino: 'Priorize fragrâncias com posicionamento masculino. Unissex aceitos se o sillage fizer sentido para homem. NUNCA fragrâncias claramente femininas.',
+      feminino:  'Priorize fragrâncias com posicionamento feminino. Unissex aceitos. NUNCA fragrâncias claramente masculinas.',
+      ambos:     'Inclua masculinos, femininos e unissex livremente conforme o perfil olfativo.'
     }[selectedGender];
 
     const prompt2 = `Você é especialista em perfumaria nicho e alta perfumaria com conhecimento profundo do mercado brasileiro e de composições olfativas.
@@ -823,17 +778,14 @@ TAREFA: Gere uma curadoria de EXATAMENTE 38 perfumes.
 
 REGRAS ABSOLUTAS:
 1. CADA PERFUME deve fazer sentido real no gosto deste cliente. A justificativa deve ser específica — o que este perfume tem que conecta com o perfil dele.
-2. NUNCA sugerir perfume com notas ou características que o cliente declarou evitar. Zero exceções. Se ele odeia atalcado, nenhum perfume pode ter íris pó, almíscar atalcado, violeta em pó. Se odeia floral doce, zero rosas açucaradas, jasmim açucarado, etc.
+2. NUNCA sugerir perfume com notas ou características que o cliente declarou evitar.
 3. Máximo 10% de "alta_perfumaria" (≤4 de 38). Restante: "nicho".
    - "nicho": Le Labo, Byredo, Serge Lutens, Nasomatto, Frederic Malle, Diptyque, Initio, Xerjoff, Nishane, Memo Paris, Tiziana Terenzi, Orto Parisi, Parfums de Marly, Roja Parfums, BDK, MFK, Matiere Premiere, Vilhelm, D.S.&Durga, Zoologist, Liquides Imaginaires, 19-69, Fueguia 1833, Juliette Has a Gun, Akro, The Harmonist, Bogue Profumo, etc.
    - "alta_perfumaria": APENAS linhas privées (Chanel Les Exclusifs, Dior La Collection Privée, Hermès Hermessence, Tom Ford Private Blend, Louis Vuitton Parfums, Guerlain L'Art et la Matière, Armani Privé, Prada Olfactories) — NUNCA linhas regulares
 4. Lançados 2010–2025, nunca descontinuados
 5. Disponíveis no Brasil
 6. Nunca repetir perfumes da coleção do cliente
-7. Distribuição:
-   - "essencial": 14 — núcleo do arquétipo, o que ele PRECISA conhecer
-   - "expansao": 14 — ampliam sem sair da zona de conforto
-   - "descoberta": 10 — fronteira, desafiam respeitando as preferências
+7. Distribuição: "essencial": 14 | "expansao": 14 | "descoberta": 10
 8. Campo "genero": "masculino" | "feminino" | "unissex"
 
 Responda APENAS JSON válido, sem markdown:
@@ -868,25 +820,25 @@ Responda APENAS JSON válido, sem markdown:
 
 function renderProfile(r) {
   const parts = (r.archetype||'—').split(' ');
-  document.getElementById('result-archetype-name').innerHTML = parts[0]+' <span>'+parts.slice(1).join(' ')+'</span>';
-  const pct = Math.min(Math.max(r.confidence||0,0),100);
-  document.getElementById('confidence-pct').textContent = pct+'%';
-  setTimeout(()=>document.getElementById('confidence-fill').style.width=pct+'%', 120);
-  document.getElementById('result-olfactory-profile').innerHTML = (r.olfactory_profile||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
-  document.getElementById('result-families').innerHTML = (r.dominant_families||[]).map(f=>`<span class="tag highlight">${f}</span>`).join('');
-  document.getElementById('result-justification').innerHTML = (r.justification||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
-  document.getElementById('result-traits').innerHTML = (r.identity_traits||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('result-archetype-name').innerHTML = parts[0] + ' <span>' + parts.slice(1).join(' ') + '</span>';
+  const pct = Math.min(Math.max(r.confidence||0, 0), 100);
+  document.getElementById('confidence-pct').textContent = pct + '%';
+  setTimeout(() => document.getElementById('confidence-fill').style.width = pct + '%', 120);
+  document.getElementById('result-olfactory-profile').innerHTML = (r.olfactory_profile||'').split('\n').filter(Boolean).map(p => `<p>${p}</p>`).join('');
+  document.getElementById('result-families').innerHTML = (r.dominant_families||[]).map(f => `<span class="tag highlight">${f}</span>`).join('');
+  document.getElementById('result-justification').innerHTML = (r.justification||'').split('\n').filter(Boolean).map(p => `<p>${p}</p>`).join('');
+  document.getElementById('result-traits').innerHTML = (r.identity_traits||[]).map(t => `<span class="tag">${t}</span>`).join('');
   document.getElementById('secondary-name').textContent = r.secondary_archetype||'—';
   document.getElementById('secondary-reason').textContent = r.secondary_reason||'—';
-  document.getElementById('result-recommendation').innerHTML = (r.consultation_recommendation||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
-  document.getElementById('result-gaps').innerHTML = (r.collection_gaps||'').split('\n').filter(Boolean).map(p=>`<p>${p}</p>`).join('');
-  document.getElementById('pref-likes').innerHTML = (r.likes||[]).map(l=>`<span class="pref-chip like">✓ ${l}</span>`).join('');
-  document.getElementById('pref-dislikes').innerHTML = (r.dislikes||[]).map(d=>`<span class="pref-chip dislike">✗ ${d}</span>`).join('');
+  document.getElementById('result-recommendation').innerHTML = (r.consultation_recommendation||'').split('\n').filter(Boolean).map(p => `<p>${p}</p>`).join('');
+  document.getElementById('result-gaps').innerHTML = (r.collection_gaps||'').split('\n').filter(Boolean).map(p => `<p>${p}</p>`).join('');
+  document.getElementById('pref-likes').innerHTML = (r.likes||[]).map(l => `<span class="pref-chip like">✓ ${l}</span>`).join('');
+  document.getElementById('pref-dislikes').innerHTML = (r.dislikes||[]).map(d => `<span class="pref-chip dislike">✗ ${d}</span>`).join('');
 }
 
 function renderCuradoria(perfumes) {
   allPerfumes = perfumes;
-  const ge = {masculino:'♂ Masculino',feminino:'♀ Feminino',ambos:'⚭ Ambos / Unissex'};
+  const ge = {masculino:'♂ Masculino', feminino:'♀ Feminino', ambos:'⚭ Ambos / Unissex'};
   document.getElementById('gender-result-badge').textContent = ge[selectedGender]||selectedGender;
   document.getElementById('curadoria-count').textContent = `${perfumes.length} perfumes selecionados para este perfil`;
   document.getElementById('filter-tabs').style.display = 'flex';
@@ -894,10 +846,10 @@ function renderCuradoria(perfumes) {
 }
 
 function renderCards(list) {
-  const tL = {nicho:'Nicho',alta_perfumaria:'Alta Perfumaria'};
-  const gC = {masculino:'masc',feminino:'fem',unissex:'unissex'};
-  const gL = {masculino:'Masc',feminino:'Fem',unissex:'Unissex'};
-  document.getElementById('perfume-grid').innerHTML = list.map(p=>{
+  const tL = {nicho:'Nicho', alta_perfumaria:'Alta Perfumaria'};
+  const gC = {masculino:'masc', feminino:'fem', unissex:'unissex'};
+  const gL = {masculino:'Masc', feminino:'Fem', unissex:'Unissex'};
+  document.getElementById('perfume-grid').innerHTML = list.map(p => {
     const tipo = p.tipo||'nicho', gen = p.genero||'unissex';
     return `<div class="perfume-card" data-categoria="${p.categoria}" data-tipo="${tipo}">
       ${p.categoria==='essencial'?'<div class="perfume-priority">Essencial</div>':''}
@@ -920,11 +872,11 @@ function renderCards(list) {
 }
 
 function filterCards(filtro, btn) {
-  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  const f = filtro==='todos' ? allPerfumes
-    : (filtro==='nicho'||filtro==='alta_perfumaria') ? allPerfumes.filter(p=>(p.tipo||'nicho')===filtro)
-    : allPerfumes.filter(p=>p.categoria===filtro);
+  const f = filtro === 'todos' ? allPerfumes
+    : (filtro === 'nicho' || filtro === 'alta_perfumaria') ? allPerfumes.filter(p => (p.tipo||'nicho') === filtro)
+    : allPerfumes.filter(p => p.categoria === filtro);
   renderCards(f);
 }
 
@@ -932,48 +884,52 @@ async function exportPDF() {
   const btn = document.getElementById('btn-pdf');
   btn.disabled = true; btn.textContent = 'Gerando PDF...';
   renderCards(allPerfumes);
-  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   document.querySelector('.filter-tab').classList.add('active');
   try {
     const {jsPDF} = window.jspdf;
-    const canvas = await html2canvas(document.getElementById('result-panel'),{scale:1.4,useCORS:true,backgroundColor:'#f5f0e8',logging:false});
-    const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-    const pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight(), m=10;
-    const uw=pw-m*2, ih=(canvas.height*uw)/canvas.width;
-    let yPos=0;
-    while(yPos<ih){
-      if(yPos>0) pdf.addPage();
-      const sliceH=Math.min(ph-m*2,ih-yPos);
-      const srcY=(yPos/ih)*canvas.height, srcH=(sliceH/ih)*canvas.height;
-      const sl=document.createElement('canvas'); sl.width=canvas.width; sl.height=srcH;
-      sl.getContext('2d').drawImage(canvas,0,srcY,canvas.width,srcH,0,0,canvas.width,srcH);
-      pdf.addImage(sl.toDataURL('image/jpeg',.9),'JPEG',m,m,uw,sliceH);
-      yPos+=sliceH;
+    const canvas = await html2canvas(document.getElementById('result-panel'), {scale:1.4, useCORS:true, backgroundColor:'#f5f0e8', logging:false});
+    const pdf = new jsPDF({orientation:'portrait', unit:'mm', format:'a4'});
+    const pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight(), m = 10;
+    const uw = pw - m*2, ih = (canvas.height * uw) / canvas.width;
+    let yPos = 0;
+    while (yPos < ih) {
+      if (yPos > 0) pdf.addPage();
+      const sliceH = Math.min(ph - m*2, ih - yPos);
+      const srcY = (yPos / ih) * canvas.height, srcH = (sliceH / ih) * canvas.height;
+      const sl = document.createElement('canvas'); sl.width = canvas.width; sl.height = srcH;
+      sl.getContext('2d').drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+      pdf.addImage(sl.toDataURL('image/jpeg', .9), 'JPEG', m, m, uw, sliceH);
+      yPos += sliceH;
     }
     pdf.save('victor-guerise-perfil-olfativo.pdf');
-  } catch(e){ alert('Erro ao gerar PDF: '+e.message); }
-  btn.disabled=false; btn.textContent='↓ Exportar PDF';
+  } catch(e) { alert('Erro ao gerar PDF: ' + e.message); }
+  btn.disabled = false; btn.textContent = '↓ Exportar PDF';
 }
 
-function setLoading(t,s){
-  document.getElementById('loading-text').textContent=t;
-  document.getElementById('loading-step').textContent=s;
+function setLoading(t, s) {
+  document.getElementById('loading-text').textContent = t;
+  document.getElementById('loading-step').textContent = s;
 }
-function showError(msg){ const e=document.getElementById('error-msg'); e.textContent=msg; e.classList.add('active'); }
-function reset(){
+function showError(msg) {
+  const e = document.getElementById('error-msg');
+  e.textContent = msg;
+  e.classList.add('active');
+}
+function reset() {
   document.getElementById('result-panel').classList.remove('active');
-  document.getElementById('form-area').style.display='block';
-  document.getElementById('confidence-fill').style.width='0%';
+  document.getElementById('form-area').style.display = 'block';
+  document.getElementById('confidence-fill').style.width = '0%';
   document.getElementById('error-msg').classList.remove('active');
-  document.getElementById('filter-tabs').style.display='none';
-  document.getElementById('perfume-grid').innerHTML='';
-  document.getElementById('curadoria-count').textContent='—';
-  document.getElementById('pref-likes').innerHTML='';
-  document.getElementById('pref-dislikes').innerHTML='';
+  document.getElementById('filter-tabs').style.display = 'none';
+  document.getElementById('perfume-grid').innerHTML = '';
+  document.getElementById('curadoria-count').textContent = '—';
+  document.getElementById('pref-likes').innerHTML = '';
+  document.getElementById('pref-dislikes').innerHTML = '';
   document.getElementById('archetype-result-img').classList.remove('visible');
-  document.getElementById('archetype-result-img').innerHTML='';
-  if(radarChart){radarChart.destroy();radarChart=null;}
-  allPerfumes=[];
+  document.getElementById('archetype-result-img').innerHTML = '';
+  if (radarChart) { radarChart.destroy(); radarChart = null; }
+  allPerfumes = [];
 }
 </script>
 </body>
