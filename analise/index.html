@@ -53,6 +53,13 @@ textarea::placeholder{color:#b5a99a;}
 .gender-btn.active{background:var(--ink);border-color:var(--ink);color:var(--parchment);}
 .gender-btn .gender-icon{font-size:18px;display:block;margin-bottom:4px;}
 .gender-btn .gender-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;}
+.indie-toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer;user-select:none;margin-top:14px;}
+.indie-track{width:36px;height:20px;border-radius:10px;background:var(--border);border:1px solid #d4c9b8;transition:background .2s;flex-shrink:0;position:relative;}
+.indie-track.on{background:var(--gold);border-color:var(--gold);}
+.indie-thumb{width:16px;height:16px;border-radius:50%;background:white;position:absolute;top:1px;left:1px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.25);}
+.indie-track.on .indie-thumb{transform:translateX(16px);}
+.indie-label{font-size:12px;color:var(--smoke);line-height:1.4;}
+.indie-label strong{color:var(--ink);font-weight:500;}
 .archetypes-ref{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:18px 22px;margin-bottom:32px;}
 .archetypes-ref-title{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-bottom:14px;}
 .archetypes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
@@ -218,6 +225,10 @@ textarea::placeholder{color:#b5a99a;}
           <span class="gender-icon">⚭</span><span class="gender-label">Ambos / Unissex</span>
         </button>
       </div>
+      <label class="indie-toggle" onclick="toggleIndie()">
+        <div class="indie-track" id="indie-track"><div class="indie-thumb"></div></div>
+        <span class="indie-label"><strong>Incluir ultra-indie</strong> — Bogue, Fueguia 1833, Zoologist, D.S.&amp;Durga, 19-69...</span>
+      </label>
     </div>
     <div class="section">
       <span class="section-label">Etapa 1 · Coleção</span>
@@ -625,6 +636,7 @@ const RADAR_AXES = [
 
 let allPerfumes = [], radarChart = null, selectedGender = 'masculino';
 let correctionMode = false, selectedForCorrection = new Set(), currentAnalysisData = null;
+let includeUltraIndie = false;
 
 function buildRefGrid() {
   document.getElementById('ref-grid').innerHTML = ARCHETYPES.map(a => `
@@ -642,6 +654,10 @@ function selectGender(btn) {
   document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   selectedGender = btn.dataset.gender;
+}
+function toggleIndie() {
+  includeUltraIndie = !includeUltraIndie;
+  document.getElementById('indie-track').classList.toggle('on', includeUltraIndie);
 }
 
 function enforceAltaCap(perfumes) {
@@ -775,6 +791,9 @@ Responda APENAS JSON válido, sem markdown, sem texto extra:
       feminino:  'Priorize fragrâncias com posicionamento feminino. Unissex aceitos. NUNCA fragrâncias claramente masculinas.',
       ambos:     'Inclua masculinos, femininos e unissex livremente conforme o perfil olfativo.'
     }[selectedGender];
+    const nichoBrands = includeUltraIndie
+      ? 'Le Labo, Byredo, Serge Lutens, Nasomatto, Frederic Malle, Diptyque, Initio, Xerjoff, Nishane, Memo Paris, Tiziana Terenzi, Orto Parisi, Parfums de Marly, Roja Parfums, BDK, MFK, Matiere Premiere, Juliette Has a Gun, Bogue Profumo, Fueguia 1833, Zoologist, Liquides Imaginaires, D.S.&Durga, 19-69, Akro, The Harmonist, Vilhelm, Andy Tauer, Slumberhouse, Nobile 1942, etc.'
+      : 'Le Labo, Byredo, Serge Lutens, Nasomatto, Frederic Malle, Diptyque, Initio, Xerjoff, Nishane, Memo Paris, Tiziana Terenzi, Orto Parisi, Parfums de Marly, Roja Parfums, BDK, MFK, Matiere Premiere, Juliette Has a Gun, Kilian, Amouage, Ex Nihilo, Penhaligons, Jeroboam, Nobile 1942, Atelier Cologne, etc. Evite marcas ultra-indie de difícil acesso no Brasil.';
 
     const prompt2 = `Você é especialista em perfumaria nicho e alta perfumaria com conhecimento profundo do mercado brasileiro e de composições olfativas.
 
@@ -799,7 +818,7 @@ REGRAS ABSOLUTAS:
 1. CADA PERFUME deve fazer sentido real no gosto deste cliente. A justificativa deve ser específica — o que este perfume tem que conecta com o perfil dele.
 2. NUNCA sugerir perfume com notas ou características que o cliente declarou evitar.
 3. Máximo 10% de "alta_perfumaria" (≤4 de 38). Restante: "nicho".
-   - "nicho": Priorize marcas disponíveis no Brasil — Le Labo, Byredo, Diptyque, Serge Lutens, Frederic Malle, Nasomatto, Initio, Xerjoff, Nishane, Memo Paris, Tiziana Terenzi, Parfums de Marly, Orto Parisi, BDK, MFK, Matiere Premiere, Jo Malone London, Maison Margiela Replica, Narciso Rodriguez For Her/Him, Jeroboam, Mémoire d'une Odeur, Valentino Uomo Intense, Bottega Veneta, Yves Saint Laurent La Nuit de l'Homme, Carolina Herrera 212, Carolina Herrera Good Girl, Paco Rabanne Invictus, Paco Rabanne 1 Million, Viktor & Rolf Spicebomb, Mont Blanc Explorer, Giorgio Armani Acqua di Giò Profumo, Dolce & Gabbana The One, Juliette Has a Gun, etc. Evite marcas de difícil acesso no Brasil.
+   - "nicho": ${nichoBrands}
    - "alta_perfumaria": APENAS linhas privées (Chanel Les Exclusifs, Dior La Collection Privée, Hermès Hermessence, Tom Ford Private Blend, Louis Vuitton Parfums, Guerlain L'Art et la Matière, Armani Privé, Prada Olfactories) — NUNCA linhas regulares
 4. Lançados 2010–2025, nunca descontinuados
 5. Disponíveis no Brasil
@@ -1185,10 +1204,12 @@ function reset() {
   correctionMode = false;
   selectedForCorrection.clear();
   currentAnalysisData = null;
+  includeUltraIndie = false;
   document.getElementById('btn-fix').classList.remove('active');
   document.getElementById('btn-fix').textContent = '↺ Corrigir Sugestões';
   document.getElementById('btn-apply-fix').style.display = 'none';
   document.getElementById('fix-count').textContent = '0';
+  document.getElementById('indie-track').classList.remove('on');
 }
 </script>
 </body>
