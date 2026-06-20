@@ -408,7 +408,7 @@
     const t = getToken();
     if (!t) return show('screen-login');
     try {
-      const r = await fetch('/api/auth/verify', { headers: { Authorization: `Bearer ${t}` } });
+      const r = await fetch('https://radar-perfumes.vercel.app/api/auth/verify', { headers: { Authorization: `Bearer ${t}` } });
       r.ok ? show('screen-app') : (removeToken(), show('screen-login'));
     } catch {
       show('screen-app');
@@ -425,7 +425,7 @@
     btn.disabled = true;
     btn.textContent = 'Entrando…';
     try {
-      const r = await fetch('/api/auth/login', {
+      const r = await fetch('https://radar-perfumes.vercel.app/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -469,7 +469,7 @@
     results.innerHTML = '<div class="state-box"><div class="spinner"></div>Buscando nas lojas…</div>';
 
     try {
-      const r = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
+      const r = await fetch(`https://radar-perfumes.vercel.app/api/search?q=${encodeURIComponent(query)}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
 
