@@ -1,6 +1,6 @@
 const Anthropic = require('@anthropic-ai/sdk');
 
-const claude = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY });
+const claude = new Anthropic(); // lê ANTHROPIC_API_KEY automaticamente
 
 const STRIP_WORDS = /\b(eau de parfum|eau de toilette|extrait de parfum|edp|edt|ml)\b/gi;
 

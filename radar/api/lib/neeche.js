@@ -1,3 +1,43 @@
+// Tokeniza um string removendo tamanhos (ml) e palavras genéricas
+function coreTokens(str) {
+  return str
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/\d+\s*ml\b/g, '')
+    .replace(/\b(eau de parfum|eau de toilette|extrait|edp|edt|parfum)\b/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/).filter(t => t.length > 1);
+}
+
+// Retorna o produto da VTEX que corresponde sem ambiguidade ao termo buscado
+function pickBestProduct(products, term) {
+  const searchCore = coreTokens(term);
+  const sizeMatch = term.match(/(\d+)\s*ml/i);
+  const searchSize = sizeMatch ? sizeMatch[1] : null;
+
+  const candidates = products.filter(p => {
+    const pCore = coreTokens(p.productName);
+    // Todos os tokens do termo devem aparecer no nome do produto
+    return searchCore.every(t => pCore.includes(t));
+  });
+
+  if (!candidates.length) return null;
+
+  // Se há candidatos com nomes-base diferentes (ex: Naxos vs Naxos Caspian),
+  // e o termo não desambigua, retorna null em vez de adivinhar
+  const uniqueNames = new Set(candidates.map(p => coreTokens(p.productName).join(' ')));
+  if (uniqueNames.size > 1) return null;
+
+  // Se o usuário especificou tamanho, filtra pelo tamanho exato
+  if (searchSize) {
+    const sized = candidates.filter(p => p.productName.includes(searchSize + 'ml') || p.productName.includes(searchSize + ' ml'));
+    if (!sized.length) return null;
+    return sized[0];
+  }
+
+  return candidates[0];
+}
+
 async function searchNeeche(term) {
   const url = `https://www.neeche.com.br/api/catalog_system/pub/products/search?ft=${encodeURIComponent(term)}`;
 
@@ -5,7 +45,7 @@ async function searchNeeche(term) {
   try {
     const r = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; RadarPerfumes/1.0)' },
-      signal: AbortSignal.timeout(12000)
+      signal: AbortSignal.timeout(8000)
     });
     if (!r.ok) return null;
     products = await r.json();
@@ -15,7 +55,9 @@ async function searchNeeche(term) {
 
   if (!Array.isArray(products) || !products.length) return null;
 
-  const p = products[0];
+  const p = pickBestProduct(products, term);
+  if (!p) return null;
+
   const item = p.items?.[0];
   const offer = item?.sellers?.[0]?.commertialOffer;
   if (!offer || offer.Price <= 0) return null;

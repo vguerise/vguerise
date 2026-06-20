@@ -1,6 +1,6 @@
 const Anthropic = require('@anthropic-ai/sdk');
 
-const claude = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY });
+const claude = new Anthropic(); // lê ANTHROPIC_API_KEY automaticamente
 
 const STORES = {
   the_gregs: {
@@ -24,7 +24,7 @@ const STORES = {
 };
 
 const CONFIDENCE_MIN = 90;
-const MAX_HTML = 80000;
+const MAX_HTML = 50000;
 
 async function searchNuvemshop(storeId, term) {
   const store = STORES[storeId];
@@ -37,7 +37,7 @@ async function searchNuvemshop(storeId, term) {
         'Accept-Language': 'pt-BR,pt;q=0.9',
         'Accept': 'text/html'
       },
-      signal: AbortSignal.timeout(12000)
+      signal: AbortSignal.timeout(8000)
     });
     if (!r.ok) return null;
     html = await r.text();
@@ -62,13 +62,17 @@ e retorne APENAS um JSON neste formato, sem texto adicional:
 
 {"found":true,"product_name":"nome exato do produto","price_cents":276900,"product_url":"https://dominio.com/produto","available":true,"confidence":95,"notes":""}
 
-Se não encontrar nenhum produto correspondente, retorne:
-{"found":false}
+Se não encontrar nenhum produto, retorne: {"found":false}
 
-Regras críticas:
+Regras de match (aplique nesta ordem):
+1. NOME: o nome base do produto deve corresponder ao termo buscado, ignorando tamanho/ml. "Xerjoff Naxos" bate com "Xerjoff Naxos 100ml", mas NÃO bate com "Xerjoff Naxos Caspian" (produto diferente).
+2. TAMANHO: se o termo especifica ml (ex: "100ml"), o produto deve ter exatamente esse tamanho. Se o termo não especifica tamanho, aceite qualquer tamanho e registre qual foi encontrado no campo notes.
+3. AMBIGUIDADE: se houver múltiplos produtos com nomes-base distintos que correspondem ao termo (ex: "Naxos" e "Naxos Caspian"), retorne found:false — nunca adivinhe.
+
+Regras de extração:
 - price_cents em centavos inteiros (R$ 2.769,00 → 276900)
-- Se houver preço "de/por", use APENAS o preço "por"
-- confidence < 70 se houver ambiguidade entre produtos similares
+- Se houver preço "de/por", use APENAS o preço "por" (preço atual)
+- confidence < 70 se houver qualquer incerteza sobre match ou preço
 - product_url absoluta com https://
 - Nunca invente preço; se não estiver legível no HTML retorne found:false
 
