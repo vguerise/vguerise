@@ -80,7 +80,9 @@ HTML:
 ${trimmed}`
       }]
     });
-    extracted = JSON.parse(msg.content[0].text.trim());
+    const raw = (msg.content[0].text || '').match(/\{[\s\S]*\}/);
+    if (!raw) return null;
+    extracted = JSON.parse(raw[0]);
   } catch {
     return null;
   }

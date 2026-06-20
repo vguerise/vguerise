@@ -2,6 +2,12 @@ const Anthropic = require('@anthropic-ai/sdk');
 
 const claude = new Anthropic(); // lê ANTHROPIC_API_KEY automaticamente
 
+function parseJson(text) {
+  const match = (text || '').match(/\{[\s\S]*\}/);
+  if (!match) throw new Error('Resposta do Claude sem JSON válido');
+  return JSON.parse(match[0]);
+}
+
 const STRIP_WORDS = /\b(eau de parfum|eau de toilette|extrait de parfum|edp|edt|ml)\b/gi;
 
 function toSlugTokens(str) {
@@ -42,7 +48,7 @@ Termo de busca: "${query}"`
     }]
   });
 
-  return JSON.parse(msg.content[0].text.trim());
+  return parseJson(msg.content[0].text);
 }
 
 module.exports = { normalizeQuery };
