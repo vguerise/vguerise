@@ -1,18 +1,10 @@
 {
   "version": 2,
-  "outputDirectory": ".",
-  "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
-    { "src": "**/*.html", "use": "@vercel/static" }
-  ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/radar", "dest": "/radar/index.html" },
-    { "src": "/radar/(.*)", "dest": "/radar/$1" },
     { "src": "/curso", "dest": "/curso/index.html" },
     { "src": "/lista", "dest": "/lista/index.html" },
     { "src": "/eventos", "dest": "/eventos/index.html" },
-    { "src": "/perfumap", "dest": "/perfumap/index.html" },
-    { "src": "/(.*)", "dest": "/$1" }
+    { "src": "/perfumap", "dest": "/perfumap/index.html" }
   ]
 }
