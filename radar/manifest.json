@@ -1,0 +1,9 @@
+{
+  "name": "Radar · Perfumes Nicho",
+  "short_name": "Radar",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#111111",
+  "background_color": "#111111",
+  "icons": []
+}

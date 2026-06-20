@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <title>Radar · Perfumes Nicho</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E85D04;
+      --orange-light: #F48C06;
+      --black: #111111;
+      --black-soft: #1A1A1A;
+      --charcoal: #2D2D2D;
+      --gray-dark: #444444;
+      --gray-mid: #777777;
+      --gray-light: #E8E8E8;
+      --white: #FFFFFF;
+      --success: #2A9D5C;
+      --danger: #D62828;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100dvh;
+    }
+
+    .screen { display: none; }
+    .screen.active { display: flex; flex-direction: column; min-height: 100dvh; }
+
+    /* ─── LOGIN ─── */
+    #screen-login {
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      background: radial-gradient(ellipse at 50% -10%, #2d1200 0%, var(--black) 55%);
+    }
+
+    .login-card { width: 100%; max-width: 420px; }
+
+    .login-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .login-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1.15;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .login-subtitle {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-mid);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 44px;
+    }
+
+    .login-form { display: flex; flex-direction: column; gap: 12px; }
+
+    .input-field {
+      background: var(--black-soft);
+      border: 1.5px solid var(--charcoal);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      padding: 15px 18px;
+      border-radius: 10px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+
+    .input-field:focus { border-color: var(--orange); }
+    .input-field::placeholder { color: var(--gray-dark); }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 15px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-primary:hover { background: var(--orange-light); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+    .form-error {
+      font-size: 13px;
+      color: var(--danger);
+      text-align: center;
+      min-height: 18px;
+    }
+
+    /* ─── APP ─── */
+    #screen-app { flex-direction: column; }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--charcoal);
+      flex-shrink: 0;
+    }
+
+    .app-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .btn-logout {
+      background: none;
+      border: 1.5px solid var(--charcoal);
+      color: var(--gray-mid);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-logout:hover { border-color: var(--gray-mid); color: var(--white); }
+
+    .search-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 64px;
+    }
+
+    .search-hero.compact {
+      flex: 0;
+      justify-content: flex-start;
+      padding: 28px 24px 0;
+    }
+
+    .search-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .search-title.hidden { display: none; }
+
+    .search-desc {
+      font-size: 14px;
+      color: var(--gray-mid);
+      text-align: center;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .search-desc.hidden { display: none; }
+
+    .search-row {
+      display: flex;
+      width: 100%;
+      max-width: 620px;
+      gap: 8px;
+    }
+
+    .input-search {
+      flex: 1;
+      background: var(--black-soft);
+      border: 1.5px solid var(--charcoal);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-search:focus { border-color: var(--orange); }
+    .input-search::placeholder { color: var(--gray-dark); }
+
+    .btn-search {
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .btn-search:hover { background: var(--orange-light); }
+    .btn-search:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* ─── RESULTS ─── */
+    .results-wrap {
+      width: 100%;
+      max-width: 668px;
+      margin: 0 auto;
+      padding: 24px 24px 48px;
+    }
+
+    .results-meta {
+      font-size: 12px;
+      color: var(--gray-mid);
+      margin-bottom: 16px;
+    }
+
+    .result-card {
+      background: var(--black-soft);
+      border: 1.5px solid var(--charcoal);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .result-card:hover { border-color: var(--gray-dark); }
+    .result-card.cheapest { border-color: var(--orange); }
+
+    .result-rank {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--gray-dark);
+      width: 20px;
+      flex-shrink: 0;
+    }
+
+    .result-card.cheapest .result-rank { color: var(--orange); }
+
+    .result-info { flex: 1; min-width: 0; }
+
+    .result-store {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 4px;
+    }
+
+    .result-name {
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .result-updated {
+      font-size: 11px;
+      color: var(--gray-dark);
+    }
+
+    .result-price-block { text-align: right; flex-shrink: 0; }
+
+    .result-price {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .result-card.cheapest .result-price { color: var(--orange); }
+
+    .btn-offer {
+      display: inline-block;
+      background: none;
+      border: 1.5px solid var(--charcoal);
+      color: var(--gray-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-offer:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+
+    .state-box {
+      text-align: center;
+      color: var(--gray-mid);
+      font-size: 14px;
+      padding: 64px 0;
+    }
+
+    .spinner {
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--charcoal);
+      border-top-color: var(--orange);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin: 0 auto 18px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<!-- ─── TELA DE LOGIN ─── -->
+<div id="screen-login" class="screen">
+  <div class="login-card">
+    <p class="login-eyebrow">Vguerise</p>
+    <h1 class="login-title">Radar de Perfumes Nicho</h1>
+    <p class="login-subtitle">Compare preços em tempo real entre as<br>principais lojas de nicho do Brasil.</p>
+    <form class="login-form" id="form-login" novalidate>
+      <input class="input-field" type="email" id="input-email"
+        placeholder="Seu e-mail" autocomplete="email" required>
+      <button class="btn-primary" type="submit" id="btn-login">Entrar</button>
+      <p class="form-error" id="login-error" role="alert"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ─── TELA DO APP ─── -->
+<div id="screen-app" class="screen">
+  <header class="app-header">
+    <span class="app-brand">Radar · Perfumes</span>
+    <button class="btn-logout" id="btn-logout">Sair</button>
+  </header>
+
+  <div class="search-hero" id="search-hero">
+    <h2 class="search-title" id="search-title">Buscar perfume</h2>
+    <p class="search-desc" id="search-desc">Digite o nome do perfume para comparar preços nas lojas monitoradas</p>
+    <div class="search-row">
+      <input class="input-search" type="text" id="input-search"
+        placeholder="Ex: Xerjoff Naxos 100ml" autocomplete="off" spellcheck="false">
+      <button class="btn-search" id="btn-search">Buscar</button>
+    </div>
+  </div>
+
+  <div class="results-wrap" id="results-wrap"></div>
+</div>
+
+<script>
+(function () {
+  const TOKEN_KEY = 'radar_token';
+
+  function getToken() { return localStorage.getItem(TOKEN_KEY); }
+  function saveToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+  function removeToken() { localStorage.removeItem(TOKEN_KEY); }
+
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function formatBRL(cents) {
+    return (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  function timeAgo(iso) {
+    const h = Math.floor((Date.now() - new Date(iso).getTime()) / 3600000);
+    if (h < 1) return 'agora mesmo';
+    return h === 1 ? 'há 1h' : `há ${h}h`;
+  }
+
+  // ── Init ──
+  (async function init() {
+    const t = getToken();
+    if (!t) return show('screen-login');
+    try {
+      const r = await fetch('/api/auth/verify', { headers: { Authorization: `Bearer ${t}` } });
+      r.ok ? show('screen-app') : (removeToken(), show('screen-login'));
+    } catch {
+      show('screen-app');
+    }
+  })();
+
+  // ── Login ──
+  document.getElementById('form-login').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('input-email').value.trim();
+    const btn = document.getElementById('btn-login');
+    const err = document.getElementById('login-error');
+    err.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Entrando…';
+    try {
+      const r = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Falha no servidor');
+      saveToken(data.token);
+      show('screen-app');
+    } catch (ex) {
+      err.textContent = ex.message;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Entrar';
+    }
+  });
+
+  // ── Logout ──
+  document.getElementById('btn-logout').addEventListener('click', () => {
+    removeToken();
+    document.getElementById('results-wrap').innerHTML = '';
+    document.getElementById('input-search').value = '';
+    document.getElementById('search-hero').classList.remove('compact');
+    document.getElementById('search-title').classList.remove('hidden');
+    document.getElementById('search-desc').classList.remove('hidden');
+    show('screen-login');
+  });
+
+  // ── Busca ──
+  async function doSearch() {
+    const query = document.getElementById('input-search').value.trim();
+    if (!query) return;
+
+    const btn = document.getElementById('btn-search');
+    const results = document.getElementById('results-wrap');
+    const hero = document.getElementById('search-hero');
+
+    btn.disabled = true;
+    hero.classList.add('compact');
+    document.getElementById('search-title').classList.add('hidden');
+    document.getElementById('search-desc').classList.add('hidden');
+    results.innerHTML = '<div class="state-box"><div class="spinner"></div>Buscando nas lojas…</div>';
+
+    try {
+      const r = await fetch('/api/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({ query })
+      });
+
+      if (r.status === 401) { removeToken(); return show('screen-login'); }
+      if (!r.ok) throw new Error(`Erro ${r.status}`);
+
+      const data = await r.json();
+      renderResults(data);
+    } catch (ex) {
+      results.innerHTML = `<div class="state-box">Falha na busca. Tente novamente.</div>`;
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function renderResults({ display_name, results, cached_at }) {
+    const el = document.getElementById('results-wrap');
+    const list = (results || []).filter(r => r.available !== false);
+
+    if (!list.length) {
+      el.innerHTML = '<div class="state-box">Não encontramos esse perfume nas lojas monitoradas.</div>';
+      return;
+    }
+
+    list.sort((a, b) => a.price_cents - b.price_cents);
+    const ago = cached_at ? timeAgo(cached_at) : '';
+
+    el.innerHTML = `
+      <div class="results-meta">${display_name || ''} · atualizado ${ago}</div>
+      ${list.map((item, i) => `
+        <div class="result-card${i === 0 ? ' cheapest' : ''}">
+          <span class="result-rank">#${i + 1}</span>
+          <div class="result-info">
+            <div class="result-store">${item.store_display_name || item.store}</div>
+            <div class="result-name">${item.product_name || display_name || ''}</div>
+            <div class="result-updated">atualizado ${ago}</div>
+          </div>
+          <div class="result-price-block">
+            <div class="result-price">${formatBRL(item.price_cents)}</div>
+            <a class="btn-offer" href="${item.product_url}" target="_blank" rel="noopener noreferrer">ver oferta</a>
+          </div>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  document.getElementById('btn-search').addEventListener('click', doSearch);
+  document.getElementById('input-search').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doSearch();
+  });
+})();
+</script>
+</body>
+</html>
