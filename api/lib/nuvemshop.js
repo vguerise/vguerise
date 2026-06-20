@@ -1,107 +1,215 @@
 const Anthropic = require('@anthropic-ai/sdk');
 
-const claude = new Anthropic(); // lê ANTHROPIC_API_KEY automaticamente
+const claude = new Anthropic();
 
 const STORES = {
   the_gregs: {
     id: 'the_gregs',
     display_name: 'The Gregs Exclusive',
-    domain: 'thegregsexclusive.com',
-    search_url: (q) => `https://thegregsexclusive.com/busca/?q=${encodeURIComponent(q)}`
+    domain: 'thegregsexclusive.com'
   },
   pequi: {
     id: 'pequi',
     display_name: 'Pequi Perfumes',
-    domain: 'pequiperfumes.com.br',
-    search_url: (q) => `https://www.pequiperfumes.com.br/busca/?q=${encodeURIComponent(q)}`
+    domain: 'pequiperfumes.com.br'
   },
   king_of_parfums: {
     id: 'king_of_parfums',
     display_name: 'The King of Parfums',
-    domain: 'thekingofparfums.com.br',
-    search_url: (q) => `https://www.thekingofparfums.com.br/busca/?q=${encodeURIComponent(q)}`
+    domain: 'thekingofparfums.com.br'
   }
 };
 
-const CONFIDENCE_MIN = 90;
-const MAX_HTML = 50000;
+const CONFIDENCE_MIN = 85;
 
-async function searchNuvemshop(storeId, term) {
-  const store = STORES[storeId];
+const FETCH_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+  'Accept-Language': 'pt-BR,pt;q=0.9',
+  'Accept': 'text/html'
+};
 
-  let html;
+async function safeFetch(url) {
   try {
-    const r = await fetch(store.search_url(term), {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept-Language': 'pt-BR,pt;q=0.9',
-        'Accept': 'text/html'
-      },
-      signal: AbortSignal.timeout(8000)
-    });
+    const r = await fetch(url, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(8000) });
     if (!r.ok) return null;
-    html = await r.text();
+    return await r.text();
   } catch {
     return null;
   }
+}
 
-  const trimmed = html.length > MAX_HTML ? html.slice(0, MAX_HTML) : html;
+// Extrai produtos de blocos JSON-LD <script type="application/ld+json"> com @type Product
+function extractJsonLdProducts(html, domain) {
+  const products = [];
+  const blocks = html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) || [];
+  for (const b of blocks) {
+    const content = b.replace(/<script[^>]*>/, '').replace(/<\/script>/, '');
+    try {
+      const data = JSON.parse(content);
+      if (data['@type'] !== 'Product' || !data.name) continue;
+      const offers = Array.isArray(data.offers) ? data.offers[0] : data.offers;
+      if (!offers || !offers.price) continue;
+      const url = offers.url || data.url || data['@id'];
+      if (!url || !url.includes(`${domain}/produtos/`)) continue;
+      const price_cents = Math.round(parseFloat(offers.price) * 100);
+      if (!price_cents || price_cents <= 0 || price_cents > 5000000) continue;
+      products.push({ name: data.name, url, price_cents, available: !offers.availability || offers.availability.endsWith('InStock') });
+    } catch {}
+  }
+  return products;
+}
 
-  let extracted;
+// Extrai produtos do LS.variants em páginas de produto individuais do Nuvemshop
+function extractLsVariants(html) {
+  const m = html.match(/LS\.variants\s*=\s*(\[[\s\S]*?\]);/);
+  if (!m) return null;
+  try {
+    const variants = JSON.parse(m[1]);
+    const v = variants[0];
+    if (!v) return null;
+    return { price_cents: v.price_number_raw, available: v.available !== false };
+  } catch {
+    return null;
+  }
+}
+
+// Extrai nome do produto da página individual via JSON-LD ou title tag
+function extractProductName(html) {
+  const blocks = html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) || [];
+  for (const b of blocks) {
+    const content = b.replace(/<script[^>]*>/, '').replace(/<\/script>/, '');
+    try {
+      const data = JSON.parse(content);
+      if (data['@type'] === 'Product' && data.name) return data.name;
+    } catch {}
+  }
+  // Fallback: og:title
+  const og = html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/);
+  return og ? og[1].replace(/\s*[-|].*$/, '').trim() : null;
+}
+
+async function matchWithClaude(products, term) {
+  const list = products.map(p => `- "${p.name}" → R$${(p.price_cents / 100).toFixed(2)}`).join('\n');
   try {
     const msg = await claude.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 400,
+      max_tokens: 200,
       messages: [{
         role: 'user',
-        content: `Você extrai dados de produtos de uma página de e-commerce em HTML.
+        content: `Dado o termo de busca "${term}" e a lista de produtos abaixo, identifique o melhor match e retorne APENAS um JSON sem texto adicional:
 
-Dado o HTML abaixo de uma página de resultados de busca de uma loja de perfumes,
-encontre o produto que melhor corresponde ao termo de busca "${term}"
-e retorne APENAS um JSON neste formato, sem texto adicional:
+{"found":true,"item_name":"nome exato da lista","confidence":95}
+ou {"found":false}
 
-{"found":true,"product_name":"nome exato do produto","price_cents":276900,"product_url":"https://dominio.com/produto","available":true,"confidence":95,"notes":""}
+Regras:
+- O nome base deve corresponder ao termo (ex: "Xerjoff Naxos" bate com "Xerjoff Naxos 100ml" mas não com "Xerjoff Naxos Caspian")
+- Se o termo especifica ml, o produto deve ter exatamente esse tamanho
+- Prefira produtos sem asterisco (*) — indica versão compartilhável/decant
+- Em ambiguidade entre modelos diferentes: found:false
+- confidence < 85 se houver qualquer incerteza
 
-Se não encontrar nenhum produto, retorne: {"found":false}
-
-Regras de match (aplique nesta ordem):
-1. NOME: o nome base do produto deve corresponder ao termo buscado, ignorando tamanho/ml. "Xerjoff Naxos" bate com "Xerjoff Naxos 100ml", mas NÃO bate com "Xerjoff Naxos Caspian" (produto diferente).
-2. TAMANHO: se o termo especifica ml (ex: "100ml"), o produto deve ter exatamente esse tamanho. Se o termo não especifica tamanho, aceite qualquer tamanho e registre qual foi encontrado no campo notes.
-3. AMBIGUIDADE: se houver múltiplos produtos com nomes-base distintos que correspondem ao termo (ex: "Naxos" e "Naxos Caspian"), retorne found:false — nunca adivinhe.
-
-Regras de extração:
-- price_cents em centavos inteiros (R$ 2.769,00 → 276900)
-- Se houver preço "de/por", use APENAS o preço "por" (preço atual)
-- confidence < 70 se houver qualquer incerteza sobre match ou preço
-- product_url absoluta com https://
-- Nunca invente preço; se não estiver legível no HTML retorne found:false
-
-HTML:
-${trimmed}`
+Produtos:
+${list}`
       }]
     });
     const raw = (msg.content[0].text || '').match(/\{[\s\S]*\}/);
     if (!raw) return null;
-    extracted = JSON.parse(raw[0]);
+    return JSON.parse(raw[0]);
   } catch {
     return null;
   }
+}
 
-  if (!extracted.found) return null;
-  if ((extracted.confidence ?? 0) < CONFIDENCE_MIN) return null;
-  if (!extracted.price_cents || extracted.price_cents <= 0 || extracted.price_cents > 5000000) return null;
-  if (!extracted.product_url?.startsWith(`https://${store.domain}`)) return null;
+// Fase 1: Busca na página de marca (SSR com JSON-LD)
+async function searchViaBrandPage(store, term) {
+  // Tenta 1 palavra depois 2 palavras como slug de marca
+  const parts = term.replace(/[^a-z0-9-]/g, '').split('-').filter(Boolean);
+  for (let n = 1; n <= Math.min(2, parts.length - 1); n++) {
+    const brandSlug = parts.slice(0, n).join('-');
+    const html = await safeFetch(`https://${store.domain}/marcas/${brandSlug}/`);
+    if (!html) continue;
 
-  return {
-    store: store.id,
-    store_display_name: store.display_name,
-    product_name: extracted.product_name,
-    price_cents: extracted.price_cents,
-    currency: 'BRL',
-    product_url: extracted.product_url,
-    available: extracted.available !== false,
-    extraction_confidence: extracted.confidence
-  };
+    const products = extractJsonLdProducts(html, store.domain);
+    if (!products.length) continue;
+
+    const result = await matchWithClaude(products, term);
+    if (!result || !result.found || (result.confidence ?? 0) < CONFIDENCE_MIN) continue;
+
+    const item = products.find(p => p.name === result.item_name);
+    if (!item) continue;
+
+    return {
+      store: store.id,
+      store_display_name: store.display_name,
+      product_name: item.name,
+      price_cents: item.price_cents,
+      currency: 'BRL',
+      product_url: item.url,
+      available: item.available,
+      extraction_confidence: result.confidence
+    };
+  }
+  return null;
+}
+
+// Fase 2: Tentativa direta via slug do produto (para lojas com JSON-LD incompleto nas páginas de marca)
+async function searchViaDirectSlug(store, term) {
+  const slugCandidates = [
+    term,
+    `${term}-edp-100ml`,
+    `${term}-100ml`,
+    `${term}-edp`
+  ];
+
+  for (const slug of slugCandidates) {
+    const url = `https://${store.domain}/produtos/${slug}/`;
+    const html = await safeFetch(url);
+    if (!html) continue;
+
+    // Verificar pelo JSON-LD do produto primeiro
+    const ldProducts = extractJsonLdProducts(html, store.domain);
+    if (ldProducts.length) {
+      const p = ldProducts[0];
+      return {
+        store: store.id,
+        store_display_name: store.display_name,
+        product_name: p.name,
+        price_cents: p.price_cents,
+        currency: 'BRL',
+        product_url: url,
+        available: p.available,
+        extraction_confidence: 92
+      };
+    }
+
+    // Fallback: LS.variants (específico Nuvemshop)
+    const variants = extractLsVariants(html);
+    if (!variants || !variants.price_cents) continue;
+    const name = extractProductName(html);
+    if (!name) continue;
+
+    return {
+      store: store.id,
+      store_display_name: store.display_name,
+      product_name: name,
+      price_cents: variants.price_cents,
+      currency: 'BRL',
+      product_url: url,
+      available: variants.available,
+      extraction_confidence: 88
+    };
+  }
+  return null;
+}
+
+async function searchNuvemshop(storeId, term) {
+  const store = STORES[storeId];
+
+  const brandResult = await searchViaBrandPage(store, term);
+  if (brandResult) return brandResult;
+
+  const directResult = await searchViaDirectSlug(store, term);
+  return directResult || null;
 }
 
 module.exports = { searchNuvemshop };
