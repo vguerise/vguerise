@@ -153,6 +153,8 @@ async function searchViaBrandPage(store, term) {
 }
 
 // Fase 2: Tentativa direta via slug do produto (para lojas com JSON-LD incompleto nas páginas de marca)
+// Usa og:title + LS.variants — NÃO usa extractJsonLdProducts porque em páginas de produto
+// os blocos JSON-LD são de produtos relacionados, não do produto principal.
 async function searchViaDirectSlug(store, term) {
   const slugCandidates = [
     term,
@@ -166,27 +168,14 @@ async function searchViaDirectSlug(store, term) {
     const html = await safeFetch(url);
     if (!html) continue;
 
-    // Verificar pelo JSON-LD do produto primeiro
-    const ldProducts = extractJsonLdProducts(html, store.domain);
-    if (ldProducts.length) {
-      const p = ldProducts[0];
-      return {
-        store: store.id,
-        store_display_name: store.display_name,
-        product_name: p.name,
-        price_cents: p.price_cents,
-        currency: 'BRL',
-        product_url: url,
-        available: p.available,
-        extraction_confidence: 92
-      };
-    }
-
-    // Fallback: LS.variants (específico Nuvemshop)
+    // Preço via LS.variants (Nuvemshop embeds this in all product pages)
     const variants = extractLsVariants(html);
     if (!variants || !variants.price_cents) continue;
-    const name = extractProductName(html);
-    if (!name) continue;
+
+    // Nome via og:title (sempre refere ao produto principal da página)
+    const ogTitle = (html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/) || [])[1];
+    if (!ogTitle) continue;
+    const name = ogTitle.replace(/\s*[-|].*$/, '').trim();
 
     return {
       store: store.id,
