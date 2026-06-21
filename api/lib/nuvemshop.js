@@ -6,17 +6,21 @@ const STORES = {
   the_gregs: {
     id: 'the_gregs',
     display_name: 'The Gregs Exclusive',
-    domain: 'thegregsexclusive.com'
+    domain: 'thegregsexclusive.com',
+    // Padrão observado: brand-name-edp-gender-size
+    slugHint: 'usa padrão "brand-nome-edp-genero-100ml" ex: xerjoff-naxos-edp-unissex-100ml'
   },
   pequi: {
     id: 'pequi',
     display_name: 'Pequi Perfumes',
-    domain: 'pequiperfumes.com.br'
+    domain: 'pequiperfumes.com.br',
+    slugHint: 'usa padrão "brand-nome-edp-size" ex: xerjoff-naxos-edp-100ml ou xerjoff-naxos-edp-100ml1'
   },
   king_of_parfums: {
     id: 'king_of_parfums',
     display_name: 'The King of Parfums',
-    domain: 'www.thekingofparfums.com.br'
+    domain: 'www.thekingofparfums.com.br',
+    slugHint: 'usa padrão curto "brand-nome" ex: xerjoff-naxos ou "brand-nome-edp-100ml"'
   }
 };
 
@@ -30,7 +34,7 @@ const FETCH_HEADERS = {
 
 async function safeFetch(url) {
   try {
-    const r = await fetch(url, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(8000) });
+    const r = await fetch(url, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(7000) });
     if (!r.ok) return null;
     return await r.text();
   } catch {
@@ -38,7 +42,6 @@ async function safeFetch(url) {
   }
 }
 
-// Extrai produtos de blocos JSON-LD <script type="application/ld+json"> com @type Product
 function extractJsonLdProducts(html, domain) {
   const products = [];
   const blocks = html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) || [];
@@ -59,7 +62,6 @@ function extractJsonLdProducts(html, domain) {
   return products;
 }
 
-// Extrai produtos do LS.variants em páginas de produto individuais do Nuvemshop
 function extractLsVariants(html) {
   const m = html.match(/LS\.variants\s*=\s*(\[[\s\S]*?\]);/);
   if (!m) return null;
@@ -71,21 +73,6 @@ function extractLsVariants(html) {
   } catch {
     return null;
   }
-}
-
-// Extrai nome do produto da página individual via JSON-LD ou title tag
-function extractProductName(html) {
-  const blocks = html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) || [];
-  for (const b of blocks) {
-    const content = b.replace(/<script[^>]*>/, '').replace(/<\/script>/, '');
-    try {
-      const data = JSON.parse(content);
-      if (data['@type'] === 'Product' && data.name) return data.name;
-    } catch {}
-  }
-  // Fallback: og:title
-  const og = html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/);
-  return og ? og[1].replace(/\s*[-|].*$/, '').trim() : null;
 }
 
 async function matchWithClaude(products, term) {
@@ -120,9 +107,64 @@ ${list}`
   }
 }
 
-// Fase 1: Busca na página de marca (SSR com JSON-LD)
+// Fase 3: Claude gera slugs específicos para a loja quando as tentativas padrão falham
+async function claudeSlugOracle(store, term) {
+  try {
+    const msg = await claude.messages.create({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 300,
+      messages: [{
+        role: 'user',
+        content: `Você conhece lojas brasileiras de perfumes nicho na plataforma Nuvemshop.
+
+Loja: ${store.display_name} (${store.domain})
+Convenção de slug desta loja: ${store.slugHint}
+
+Produto buscado: "${term}"
+
+Gere até 6 candidatos de slug para a URL do produto nesta loja (/produtos/{slug}/).
+Priorize variações de gênero (unissex, masculino, feminino) e formato (edp, edt, extrait).
+Retorne APENAS um JSON sem texto adicional:
+
+["slug-candidato-1", "slug-candidato-2", "slug-candidato-3"]`
+      }]
+    });
+    const raw = (msg.content[0].text || '').match(/\[[\s\S]*\]/);
+    if (!raw) return [];
+    const slugs = JSON.parse(raw[0]);
+    return Array.isArray(slugs) ? slugs.filter(s => typeof s === 'string' && s.length > 0) : [];
+  } catch {
+    return [];
+  }
+}
+
+// Testa um slug de produto na loja e retorna resultado ou null
+async function tryProductSlug(store, slug) {
+  const url = `https://${store.domain}/produtos/${slug}/`;
+  const html = await safeFetch(url);
+  if (!html) return null;
+
+  const variants = extractLsVariants(html);
+  if (!variants || !variants.price_cents) return null;
+
+  const ogTitle = (html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/) || [])[1];
+  if (!ogTitle) return null;
+  const name = ogTitle.split(/\s*\|\s*/)[0].trim();
+
+  return {
+    store: store.id,
+    store_display_name: store.display_name,
+    product_name: name,
+    price_cents: variants.price_cents,
+    currency: 'BRL',
+    product_url: url,
+    available: variants.available,
+    extraction_confidence: 88
+  };
+}
+
+// Fase 1: Página de marca (SSR com JSON-LD)
 async function searchViaBrandPage(store, term) {
-  // Tenta 1 palavra depois 2 palavras como slug de marca
   const parts = term.replace(/[^a-z0-9-]/g, '').split('-').filter(Boolean);
   for (let n = 1; n <= Math.min(2, parts.length - 1); n++) {
     const brandSlug = parts.slice(0, n).join('-');
@@ -152,53 +194,56 @@ async function searchViaBrandPage(store, term) {
   return null;
 }
 
-// Fase 2: Tentativa direta via slug do produto (para lojas com JSON-LD incompleto nas páginas de marca)
-// Usa og:title + LS.variants — NÃO usa extractJsonLdProducts porque em páginas de produto
-// os blocos JSON-LD são de produtos relacionados, não do produto principal.
+// Fase 2: Testa lista ampla de slugs padrão em paralelo
 async function searchViaDirectSlug(store, term) {
-  const slugCandidates = [
+  const candidates = [
     term,
     `${term}-edp-100ml`,
     `${term}-100ml`,
-    `${term}-edp`
+    `${term}-edp`,
+    // variações de gênero (padrão The Gregs)
+    `${term}-edp-unissex-100ml`,
+    `${term}-unissex-100ml`,
+    `${term}-edp-masculino-100ml`,
+    `${term}-masculino-100ml`,
+    `${term}-edp-feminino-100ml`,
+    `${term}-feminino-100ml`,
+    // outros formatos
+    `${term}-eau-de-parfum-100ml`,
+    `${term}-extrait-de-parfum-100ml`,
+    `${term}-extrait-100ml`,
+    `${term}-edp-50ml`,
   ];
 
-  for (const slug of slugCandidates) {
-    const url = `https://${store.domain}/produtos/${slug}/`;
-    const html = await safeFetch(url);
-    if (!html) continue;
+  const results = await Promise.allSettled(candidates.map(slug => tryProductSlug(store, slug)));
+  const hit = results.find(r => r.status === 'fulfilled' && r.value !== null);
+  return hit ? hit.value : null;
+}
 
-    // Preço via LS.variants (Nuvemshop embeds this in all product pages)
-    const variants = extractLsVariants(html);
-    if (!variants || !variants.price_cents) continue;
+// Fase 3: Claude oracle — gera slugs específicos por loja e testa em paralelo
+async function searchViaClaudeOracle(store, term) {
+  const slugs = await claudeSlugOracle(store, term);
+  if (!slugs.length) return null;
 
-    // Nome via og:title (sempre refere ao produto principal da página)
-    const ogTitle = (html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/) || [])[1];
-    if (!ogTitle) continue;
-    const name = ogTitle.split(/\s*\|\s*/)[0].trim();
-
-    return {
-      store: store.id,
-      store_display_name: store.display_name,
-      product_name: name,
-      price_cents: variants.price_cents,
-      currency: 'BRL',
-      product_url: url,
-      available: variants.available,
-      extraction_confidence: 88
-    };
-  }
-  return null;
+  const results = await Promise.allSettled(slugs.map(slug => tryProductSlug(store, slug)));
+  const hit = results.find(r => r.status === 'fulfilled' && r.value !== null);
+  return hit ? hit.value : null;
 }
 
 async function searchNuvemshop(storeId, term) {
   const store = STORES[storeId];
 
+  // Fase 1: página de marca SSR
   const brandResult = await searchViaBrandPage(store, term);
   if (brandResult) return brandResult;
 
+  // Fase 2: slugs padrão em paralelo
   const directResult = await searchViaDirectSlug(store, term);
-  return directResult || null;
+  if (directResult) return directResult;
+
+  // Fase 3: Claude gera slugs específicos para a loja
+  const oracleResult = await searchViaClaudeOracle(store, term);
+  return oracleResult || null;
 }
 
 module.exports = { searchNuvemshop };
