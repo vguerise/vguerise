@@ -222,6 +222,35 @@
     .modal-price-row.best .modal-price-val { color: var(--orange); }
     .btn-store { display: inline-block; background: none; border: 1.5px solid var(--border); color: var(--gray-700); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-decoration: none; flex-shrink: 0; transition: background 0.2s, border-color 0.2s, color 0.2s; }
     .btn-store:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+
+    /* ─── WISHLIST ─── */
+    .wish-btn { background: none; border: none; cursor: pointer; font-size: 18px; line-height: 1; padding: 4px; color: var(--gray-300); transition: color 0.2s, transform 0.15s; flex-shrink: 0; }
+    .wish-btn:hover { color: var(--orange); transform: scale(1.2); }
+    .wish-btn.active { color: var(--orange); }
+
+    .wishlist-fab { position: relative; background: none; border: 1.5px solid var(--border); color: var(--gray-500); font-size: 17px; padding: 6px 12px; border-radius: 8px; cursor: pointer; line-height: 1; transition: border-color 0.2s, color 0.2s; }
+    .wishlist-fab:hover { border-color: var(--orange); color: var(--orange); }
+    .wishlist-badge { position: absolute; top: -7px; right: -7px; background: var(--orange); color: #fff; font-size: 10px; font-weight: 700; border-radius: 10px; padding: 1px 5px; min-width: 17px; text-align: center; display: none; pointer-events: none; }
+    .wishlist-badge.show { display: block; }
+
+    .wishlist-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 200; }
+    .wishlist-overlay.open { display: block; }
+
+    .wishlist-sidebar { position: fixed; top: 0; right: 0; width: 320px; max-width: 100vw; height: 100dvh; background: var(--card); border-left: 1px solid var(--border); z-index: 201; display: flex; flex-direction: column; transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .wishlist-sidebar.open { transform: translateX(0); }
+
+    .wishlist-sidebar-hdr { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .wishlist-sidebar-title { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 900; color: var(--black); }
+    .wishlist-sidebar-close { background: var(--gray-100); border: none; color: var(--gray-500); font-size: 15px; cursor: pointer; padding: 6px 10px; border-radius: 8px; transition: background 0.15s; }
+    .wishlist-sidebar-close:hover { background: var(--border); color: var(--black); }
+
+    .wishlist-list { flex: 1; overflow-y: auto; padding: 8px 16px; }
+    .wishlist-item { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .wishlist-item:last-child { border-bottom: none; }
+    .wishlist-item-name { flex: 1; font-size: 13px; font-weight: 500; color: var(--black); cursor: pointer; }
+    .wishlist-item-name:hover { color: var(--orange); }
+    .wishlist-item-rm { background: none; border: none; color: var(--gray-300); font-size: 15px; cursor: pointer; padding: 4px; transition: color 0.15s; flex-shrink: 0; }
+    .wishlist-item-rm:hover { color: var(--danger); }
   </style>
 </head>
 <body>
@@ -244,7 +273,10 @@
 <div id="screen-app" class="screen">
   <header class="app-header">
     <span class="app-brand">Radar · Perfumes</span>
-    <button class="btn-logout" id="btn-logout">Sair</button>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="wishlist-fab" id="btn-wishlist" onclick="openWishlistSidebar()" title="Lista de desejos">♡<span class="wishlist-badge" id="wishlist-badge"></span></button>
+      <button class="btn-logout" id="btn-logout">Sair</button>
+    </div>
   </header>
 
   <div class="search-bar">
@@ -262,6 +294,18 @@
 <!-- ─── MODAL (featured detail) ─── -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal-box" id="modal-box"></div>
+</div>
+
+<!-- ─── WISHLIST SIDEBAR ─── -->
+<div class="wishlist-overlay" id="wishlist-overlay" onclick="closeWishlistSidebar()"></div>
+<div class="wishlist-sidebar" id="wishlist-sidebar">
+  <div class="wishlist-sidebar-hdr">
+    <span class="wishlist-sidebar-title">Lista de Desejos</span>
+    <button class="wishlist-sidebar-close" onclick="closeWishlistSidebar()">✕</button>
+  </div>
+  <div class="wishlist-list" id="wishlist-list">
+    <div class="state-box" style="padding:32px 0">Carregando…</div>
+  </div>
 </div>
 
 <script>
@@ -283,9 +327,9 @@
     if (!t) return show('screen-login');
     try {
       const r = await fetch(`${API}/auth/verify`, { headers: { Authorization: `Bearer ${t}` } });
-      if (r.ok) { show('screen-app'); loadFeatured(); }
+      if (r.ok) { show('screen-app'); loadFeatured(); loadWishlist(); }
       else { removeToken(); show('screen-login'); }
-    } catch { show('screen-app'); loadFeatured(); }
+    } catch { show('screen-app'); loadFeatured(); loadWishlist(); }
   })();
 
   // ── Login ──
@@ -299,7 +343,7 @@
       const r = await fetch(`${API}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || 'Falha no servidor');
-      saveToken(data.token); show('screen-app'); loadFeatured();
+      saveToken(data.token); show('screen-app'); loadFeatured(); loadWishlist();
     } catch (ex) { err.textContent = ex.message; }
     finally { btn.disabled = false; btn.textContent = 'Entrar'; }
   });
@@ -307,6 +351,9 @@
   // ── Logout ──
   document.getElementById('btn-logout').addEventListener('click', () => {
     removeToken();
+    wishlistSlugs = new Set();
+    wishlistItems = [];
+    document.getElementById('wishlist-badge').classList.remove('show');
     document.getElementById('input-search').value = '';
     document.getElementById('results-wrap').style.display = 'none';
     document.getElementById('results-wrap').innerHTML = '';
@@ -350,6 +397,8 @@
       <div class="perf-grid">
         ${items.map((item, i) => {
           const letter = esc((item.brand || item.display_name || '?')[0].toUpperCase());
+          const wSlug = esc(item.product_slug || '');
+          const wName = esc(item.display_name || '');
           return `<div class="perf-card" onclick="openFeaturedDetail(${i})">
             ${item.image_url ? `<img class="perf-card-thumb" src="${esc(item.image_url)}" alt="" loading="lazy">` : `<div class="perf-card-placeholder">${letter}</div>`}
             <div class="perf-card-body">
@@ -360,12 +409,16 @@
                   <div class="perf-card-price">${formatBRL(item.min_price)}</div>
                   <div class="perf-card-store">${esc(item.best_store || '')}</div>
                 </div>
-                ${item.savings_pct > 0 ? `<span class="savings-badge">-${item.savings_pct}%</span>` : ''}
+                <div style="display:flex;align-items:center;gap:5px">
+                  ${item.savings_pct > 0 ? `<span class="savings-badge">-${item.savings_pct}%</span>` : ''}
+                  <button class="wish-btn" data-wish-slug="${wSlug}" onclick="toggleWishlist('${wSlug}','${wName}',event)" title="Lista de desejos">♡</button>
+                </div>
               </div>
             </div>
           </div>`;
         }).join('')}
       </div>`;
+    refreshAllWishBtns();
   }
 
   // ─────────────────────────────────────────
@@ -420,7 +473,7 @@
   document.getElementById('modal-overlay').addEventListener('click', e => {
     if (e.target === document.getElementById('modal-overlay')) closeModal();
   });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
 
   // ─────────────────────────────────────────
   // SEARCH
@@ -473,7 +526,10 @@
     el.innerHTML = `
       <div class="results-topbar">
         <span class="results-query">${esc(display_name || '')}${ago ? ` · ${ago}` : ''}</span>
-        <button class="btn-back" onclick="exitSearchMode()">← Ofertas</button>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button class="wish-btn" data-wish-slug="${esc(slug)}" onclick="toggleWishlist('${esc(slug)}','${esc(display_name)}',event)" title="Lista de desejos" style="font-size:22px">♡</button>
+          <button class="btn-back" onclick="exitSearchMode()">← Ofertas</button>
+        </div>
       </div>
 
       <div id="perfume-detail-panel">
@@ -506,6 +562,7 @@
         <div style="text-align:center;padding:20px 0"><span class="mini-spinner"></span></div>
       </div>`;
 
+    refreshAllWishBtns();
     // Carregar detail e comentários em paralelo
     if (slug) {
       loadPerfumeDetail(slug);
@@ -641,11 +698,120 @@
 
   document.getElementById('btn-search').addEventListener('click', doSearch);
   document.getElementById('input-search').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeWishlistSidebar(); } });
+
+  // ─────────────────────────────────────────
+  // WISHLIST
+  // ─────────────────────────────────────────
+  let wishlistSlugs = new Set();
+  let wishlistItems = [];
+
+  async function loadWishlist() {
+    try {
+      const r = await fetch(`${API}/wishlist`, { headers: { Authorization: `Bearer ${getToken()}` } });
+      if (!r.ok) return;
+      const { items } = await r.json();
+      wishlistItems = items || [];
+      wishlistSlugs = new Set(wishlistItems.map(i => i.product_slug));
+      updateWishBadge();
+      refreshAllWishBtns();
+    } catch {}
+  }
+
+  function updateWishBadge() {
+    const badge = document.getElementById('wishlist-badge');
+    if (!badge) return;
+    const n = wishlistSlugs.size;
+    badge.textContent = n;
+    badge.classList.toggle('show', n > 0);
+  }
+
+  function refreshAllWishBtns() {
+    document.querySelectorAll('[data-wish-slug]').forEach(btn => {
+      const slug = btn.dataset.wishSlug;
+      if (!slug) return;
+      const active = wishlistSlugs.has(slug);
+      btn.classList.toggle('active', active);
+      btn.textContent = active ? '♥' : '♡';
+    });
+  }
+
+  async function toggleWishlist(slug, displayName, e) {
+    if (e) e.stopPropagation();
+    if (!slug) return;
+    const inWishlist = wishlistSlugs.has(slug);
+    // Atualização otimista
+    if (inWishlist) {
+      wishlistSlugs.delete(slug);
+      wishlistItems = wishlistItems.filter(i => i.product_slug !== slug);
+    } else {
+      wishlistSlugs.add(slug);
+      wishlistItems.unshift({ product_slug: slug, display_name: displayName || slug });
+    }
+    updateWishBadge();
+    refreshAllWishBtns();
+    renderWishlistList();
+    // Sincronizar com API
+    try {
+      if (!inWishlist) {
+        await fetch(`${API}/wishlist`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, display_name: displayName || slug })
+        });
+      } else {
+        await fetch(`${API}/wishlist?slug=${encodeURIComponent(slug)}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${getToken()}` }
+        });
+      }
+    } catch {}
+  }
+
+  function openWishlistSidebar() {
+    document.getElementById('wishlist-overlay').classList.add('open');
+    document.getElementById('wishlist-sidebar').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderWishlistList();
+  }
+
+  function closeWishlistSidebar() {
+    document.getElementById('wishlist-overlay').classList.remove('open');
+    document.getElementById('wishlist-sidebar').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderWishlistList() {
+    const list = document.getElementById('wishlist-list');
+    if (!list) return;
+    if (!wishlistItems.length) {
+      list.innerHTML = `<div class="state-box" style="padding:40px 0">Sua lista está vazia.<br><span style="font-size:12px;color:var(--gray-300)">Toque em ♡ em qualquer perfume.</span></div>`;
+      return;
+    }
+    list.innerHTML = wishlistItems.map(item => {
+      const s = esc(item.product_slug);
+      const n = esc(item.display_name || item.product_slug);
+      return `<div class="wishlist-item">
+        <span class="wishlist-item-name" onclick="searchFromWishlist('${s}')">${n}</span>
+        <button class="wishlist-item-rm" onclick="toggleWishlist('${s}','${n}')" title="Remover">✕</button>
+      </div>`;
+    }).join('');
+  }
+
+  function searchFromWishlist(slug) {
+    closeWishlistSidebar();
+    document.getElementById('input-search').value = slug;
+    doSearch();
+  }
 
   window.openFeaturedDetail = openFeaturedDetail;
   window.closeModal = closeModal;
   window.exitSearchMode = exitSearchMode;
   window.submitComment = submitComment;
+  window.toggleWishlist = toggleWishlist;
+  window.openWishlistSidebar = openWishlistSidebar;
+  window.closeWishlistSidebar = closeWishlistSidebar;
+  window.searchFromWishlist = searchFromWishlist;
 })();
 </script>
 </body>

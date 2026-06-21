@@ -26,24 +26,39 @@ function extractImageFromLd(html) {
   return og?.[1] || null;
 }
 
-// Busca imagem do produto nas lojas (usa cache do price_cache)
+// Valida se o HTML da página pertence ao produto esperado (evita imagem errada)
+function pageMatchesSlug(html, slug) {
+  const brand = slug.split('-')[0]; // ex: "xerjoff", "montale"
+  const title = (html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || '').toLowerCase();
+  const ogTitle = (html.match(/property="og:title"[^>]+content="([^"]+)"/i)?.[1] || '').toLowerCase();
+  const check = title + ' ' + ogTitle;
+  return check.includes(brand);
+}
+
+// Busca imagem do produto nas lojas — prioriza Neeche (VTEX) por ter dados mais confiáveis
 async function getProductImage(slug) {
   const db = getDb();
   const { data } = await db.from('price_cache').select('results').eq('product_slug', slug).single();
   if (!data || !data.results) return null;
 
   const results = Array.isArray(data.results) ? data.results : JSON.parse(data.results || '[]');
+  const withUrl = results.filter(r => r.product_url);
 
-  // Tentar buscar imagem da página do produto
-  for (const r of results) {
-    if (!r.product_url) continue;
+  // Neeche primeiro (imagens mais confiáveis), depois as outras lojas
+  const sorted = [
+    ...withUrl.filter(r => r.store === 'neeche'),
+    ...withUrl.filter(r => r.store !== 'neeche'),
+  ];
+
+  for (const r of sorted) {
     try {
       const resp = await fetch(r.product_url, {
         headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'text/html' },
-        signal: AbortSignal.timeout(6000)
+        signal: AbortSignal.timeout(7000)
       });
       if (!resp.ok) continue;
       const html = await resp.text();
+      if (!pageMatchesSlug(html, slug)) continue; // rejeita página de produto errado
       const imgUrl = extractImageFromLd(html);
       if (imgUrl) return imgUrl;
     } catch {}
