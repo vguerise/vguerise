@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { getDb } = require('../lib/db');
+﻿const jwt = require('jsonwebtoken');
+const { getDb } = require('../_lib/db');
 
 function cors(res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://vguerise.com.br');
@@ -55,3 +55,4 @@ module.exports = async function handler(req, res) {
 
   return res.status(405).json({ error: 'Método não permitido' });
 };
+

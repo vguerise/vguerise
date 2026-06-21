@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const { getDb } = require('../lib/db');
-const { getPerfumeInfo } = require('../lib/perfume_info');
+﻿const jwt = require('jsonwebtoken');
+const { getDb } = require('../_lib/db');
+const { getPerfumeInfo } = require('../_lib/perfume_info');
 
 function cors(res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://vguerise.com.br');
@@ -38,3 +38,4 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Erro interno' });
   }
 };
+

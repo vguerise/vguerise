@@ -1,9 +1,9 @@
-const { normalizeQuery } = require('../lib/normalize');
-const { searchNeeche } = require('../lib/neeche');
-const { searchNuvemshop } = require('../lib/nuvemshop');
-const { saveCache } = require('../lib/cache');
-const { getDb } = require('../lib/db');
-const { CURATED } = require('../lib/curated');
+﻿const { normalizeQuery } = require('../_lib/normalize');
+const { searchNeeche } = require('../_lib/neeche');
+const { searchNuvemshop } = require('../_lib/nuvemshop');
+const { saveCache } = require('../_lib/cache');
+const { getDb } = require('../_lib/db');
+const { CURATED } = require('../_lib/curated');
 
 function verifyCronSecret(req) {
   const secret = req.headers['x-cron-secret'];
@@ -50,3 +50,4 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ ok: false, query, error: err?.message });
   }
 };
+

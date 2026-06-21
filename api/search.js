@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken');
-const { normalizeQuery } = require('./lib/normalize');
-const { searchNeeche } = require('./lib/neeche');
-const { searchNuvemshop } = require('./lib/nuvemshop');
-const { getCached, saveCache, logSearch } = require('./lib/cache');
-const { getDb } = require('./lib/db');
+﻿const jwt = require('jsonwebtoken');
+const { normalizeQuery } = require('./_lib/normalize');
+const { searchNeeche } = require('./_lib/neeche');
+const { searchNuvemshop } = require('./_lib/nuvemshop');
+const { getCached, saveCache, logSearch } = require('./_lib/cache');
+const { getDb } = require('./_lib/db');
 
 function authGuard(req) {
   const auth = req.headers.authorization || '';
@@ -75,3 +75,4 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Erro interno', detail: err?.message });
   }
 };
+
