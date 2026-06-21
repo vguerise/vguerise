@@ -1,5 +1,6 @@
-﻿const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const { getDb } = require('../_lib/db');
+const { getProductImage } = require('../_lib/perfume_info');
 
 function cors(res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://vguerise.com.br');
@@ -66,7 +67,7 @@ module.exports = async function handler(req, res) {
     const top = deals.slice(0, 12);
     if (top.length === 0) return res.status(200).json({ featured: [], total: 0 });
 
-    // Buscar detalhes apenas do cache — sem Claude, sem timeout
+    // Buscar detalhes do cache
     const slugs = top.map(d => d.slug);
     const { data: details } = await db
       .from('perfume_details')
@@ -81,10 +82,31 @@ module.exports = async function handler(req, res) {
       ...(detailMap[deal.slug] || {})
     }));
 
+    // Busca imagem para produtos sem image_url (máx 3 em paralelo, timeout 5s)
+    const noImage = featured.filter(f => !f.image_url).slice(0, 3);
+    if (noImage.length > 0) {
+      await Promise.race([
+        Promise.allSettled(
+          noImage.map(item =>
+            getProductImage(item.slug)
+              .then(url => {
+                if (!url) return;
+                item.image_url = url;
+                db.from('perfume_details').upsert(
+                  { product_slug: item.slug, display_name: item.display_name || item.slug, image_url: url, updated_at: new Date().toISOString() },
+                  { onConflict: 'product_slug' }
+                ).catch(() => {});
+              })
+              .catch(() => {})
+          )
+        ),
+        new Promise(resolve => setTimeout(resolve, 5000))
+      ]);
+    }
+
     return res.status(200).json({ featured, total: deals.length });
   } catch (err) {
     console.error('[featured] erro:', err?.message, err?.stack);
     return res.status(500).json({ error: 'Erro interno', detail: err?.message });
   }
 };
-
