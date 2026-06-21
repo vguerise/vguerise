@@ -166,17 +166,14 @@ async function searchViaDirectSlug(store, term) {
   for (const slug of slugCandidates) {
     const url = `https://${store.domain}/produtos/${slug}/`;
     const html = await safeFetch(url);
-    console.log(`[nuvemshop:${store.id}] slug=${slug} html=${html ? html.length : 'null'}`);
     if (!html) continue;
 
     // Preço via LS.variants (Nuvemshop embeds this in all product pages)
     const variants = extractLsVariants(html);
-    console.log(`[nuvemshop:${store.id}] variants=${JSON.stringify(variants)}`);
     if (!variants || !variants.price_cents) continue;
 
     // Nome via og:title (sempre refere ao produto principal da página)
     const ogTitle = (html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/) || [])[1];
-    console.log(`[nuvemshop:${store.id}] ogTitle=${ogTitle}`);
     if (!ogTitle) continue;
     const name = ogTitle.split(/\s*\|\s*/)[0].trim();
 
@@ -198,14 +195,10 @@ async function searchNuvemshop(storeId, term) {
   const store = STORES[storeId];
 
   const brandResult = await searchViaBrandPage(store, term);
-  if (brandResult) { console.log(`[nuvemshop:${storeId}] fase1 ok`); return brandResult; }
+  if (brandResult) return brandResult;
 
-  console.log(`[nuvemshop:${storeId}] fase1 nulo, tentando slug direto`);
   const directResult = await searchViaDirectSlug(store, term);
-  if (directResult) { console.log(`[nuvemshop:${storeId}] fase2 ok`); return directResult; }
-
-  console.log(`[nuvemshop:${storeId}] ambas fases nulas`);
-  return null;
+  return directResult || null;
 }
 
 module.exports = { searchNuvemshop };
