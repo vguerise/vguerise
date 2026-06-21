@@ -152,40 +152,12 @@
 
     .btn-logout:hover { border-color: var(--gray-mid); color: var(--white); }
 
-    .search-hero {
-      flex: 1;
+    /* ─── SEARCH ─── */
+    .search-bar {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 48px 24px 64px;
+      padding: 20px 24px 0;
     }
-
-    .search-hero.compact {
-      flex: 0;
-      justify-content: flex-start;
-      padding: 28px 24px 0;
-    }
-
-    .search-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 26px;
-      font-weight: 900;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    .search-title.hidden { display: none; }
-
-    .search-desc {
-      font-size: 14px;
-      color: var(--gray-mid);
-      text-align: center;
-      margin-bottom: 32px;
-      font-weight: 300;
-    }
-
-    .search-desc.hidden { display: none; }
 
     .search-row {
       display: flex;
@@ -201,7 +173,7 @@
       color: var(--white);
       font-family: 'DM Sans', sans-serif;
       font-size: 16px;
-      padding: 16px 20px;
+      padding: 14px 20px;
       border-radius: 12px;
       outline: none;
       transition: border-color 0.2s;
@@ -216,7 +188,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      padding: 16px 24px;
+      padding: 14px 24px;
       border: none;
       border-radius: 12px;
       cursor: pointer;
@@ -227,6 +199,129 @@
     .btn-search:hover { background: var(--orange-light); }
     .btn-search:disabled { opacity: 0.45; cursor: not-allowed; }
 
+    /* ─── FEATURED ─── */
+    #featured-section {
+      padding: 24px 20px 48px;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .featured-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .featured-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .featured-count {
+      font-size: 12px;
+      color: var(--gray-mid);
+    }
+
+    .perf-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 520px) { .perf-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 760px) { .perf-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .perf-card {
+      background: var(--black-soft);
+      border: 1.5px solid var(--charcoal);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .perf-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+
+    .perf-card-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      background: var(--charcoal);
+    }
+
+    .perf-card-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--gray-dark);
+    }
+
+    .perf-card-body { padding: 10px 12px 12px; }
+
+    .perf-card-brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 3px;
+    }
+
+    .perf-card-name {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .perf-card-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .perf-card-price {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--orange);
+    }
+
+    .perf-card-store {
+      font-size: 10px;
+      color: var(--gray-mid);
+      margin-top: 2px;
+    }
+
+    .savings-badge {
+      background: var(--success);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
     /* ─── RESULTS ─── */
     .results-wrap {
       width: 100%;
@@ -236,10 +331,29 @@
     }
 
     .results-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       font-size: 12px;
       color: var(--gray-mid);
       margin-bottom: 16px;
     }
+
+    .btn-back {
+      background: none;
+      border: none;
+      color: var(--orange);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-back:hover { text-decoration: underline; }
 
     .result-card {
       background: var(--black-soft);
@@ -287,10 +401,7 @@
       margin-bottom: 4px;
     }
 
-    .result-updated {
-      font-size: 11px;
-      color: var(--gray-dark);
-    }
+    .result-updated { font-size: 11px; color: var(--gray-dark); }
 
     .result-price-block { text-align: right; flex-shrink: 0; }
 
@@ -341,6 +452,231 @@
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 100;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    @media (min-width: 600px) {
+      .modal-overlay { align-items: center; padding: 24px; }
+      .modal-box { border-radius: 16px; max-width: 540px; }
+    }
+
+    .modal-box {
+      background: var(--black-soft);
+      border: 1.5px solid var(--charcoal);
+      border-radius: 16px 16px 0 0;
+      width: 100%;
+      max-height: 92dvh;
+      overflow-y: auto;
+    }
+
+    .modal-topbar {
+      display: flex;
+      justify-content: flex-end;
+      padding: 12px 14px 0;
+      position: sticky;
+      top: 0;
+      background: var(--black-soft);
+      z-index: 1;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--gray-mid);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 6px;
+      transition: color 0.15s;
+    }
+
+    .modal-close:hover { color: var(--white); }
+
+    .modal-img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-placeholder {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 80px;
+      font-weight: 900;
+      color: var(--gray-dark);
+    }
+
+    .modal-content { padding: 20px 24px 32px; }
+
+    .modal-brand {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    .modal-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .gender-pill {
+      display: inline-block;
+      border: 1px solid var(--charcoal);
+      color: var(--gray-mid);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .modal-description {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--gray-light);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .modal-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 12px;
+    }
+
+    .notes-pyramid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .notes-col-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      margin-bottom: 6px;
+    }
+
+    .note-item {
+      font-size: 13px;
+      color: var(--gray-light);
+      padding: 2px 0;
+      line-height: 1.5;
+    }
+
+    .accords-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+
+    .accord-pill {
+      background: rgba(232,93,4,0.14);
+      color: var(--orange-light);
+      border: 1px solid rgba(232,93,4,0.28);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .price-table {
+      border: 1.5px solid var(--charcoal);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--charcoal);
+      gap: 10px;
+    }
+
+    .price-row:last-child { border-bottom: none; }
+    .price-row.best { background: rgba(232,93,4,0.07); }
+
+    .price-row-rank {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--gray-dark);
+      width: 18px;
+      flex-shrink: 0;
+    }
+
+    .price-row.best .price-row-rank { color: var(--orange); }
+
+    .price-row-store {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .price-row-val {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .price-row.best .price-row-val { color: var(--orange); }
+
+    .btn-store-link {
+      display: inline-block;
+      background: none;
+      border: 1.5px solid var(--charcoal);
+      color: var(--gray-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-store-link:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
   </style>
 </head>
 <body>
@@ -367,9 +703,7 @@
     <button class="btn-logout" id="btn-logout">Sair</button>
   </header>
 
-  <div class="search-hero" id="search-hero">
-    <h2 class="search-title" id="search-title">Buscar perfume</h2>
-    <p class="search-desc" id="search-desc">Digite o nome do perfume para comparar preços nas lojas monitoradas</p>
+  <div class="search-bar">
     <div class="search-row">
       <input class="input-search" type="text" id="input-search"
         placeholder="Ex: Xerjoff Naxos 100ml" autocomplete="off" spellcheck="false">
@@ -377,12 +711,19 @@
     </div>
   </div>
 
-  <div class="results-wrap" id="results-wrap"></div>
+  <div id="featured-section"></div>
+  <div class="results-wrap" id="results-wrap" style="display:none"></div>
+</div>
+
+<!-- ─── MODAL ─── -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box" id="modal-box"></div>
 </div>
 
 <script>
 (function () {
   const TOKEN_KEY = 'radar_token';
+  const API = 'https://radar-perfumes.vercel.app/api';
 
   function getToken() { return localStorage.getItem(TOKEN_KEY); }
   function saveToken(t) { localStorage.setItem(TOKEN_KEY, t); }
@@ -403,15 +744,26 @@
     return h === 1 ? 'há 1h' : `há ${h}h`;
   }
 
+  function esc(str) {
+    return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
   // ── Init ──
   (async function init() {
     const t = getToken();
     if (!t) return show('screen-login');
     try {
-      const r = await fetch('https://radar-perfumes.vercel.app/api/auth/verify', { headers: { Authorization: `Bearer ${t}` } });
-      r.ok ? show('screen-app') : (removeToken(), show('screen-login'));
+      const r = await fetch(`${API}/auth/verify`, { headers: { Authorization: `Bearer ${t}` } });
+      if (r.ok) {
+        show('screen-app');
+        loadFeatured();
+      } else {
+        removeToken();
+        show('screen-login');
+      }
     } catch {
       show('screen-app');
+      loadFeatured();
     }
   })();
 
@@ -425,7 +777,7 @@
     btn.disabled = true;
     btn.textContent = 'Entrando…';
     try {
-      const r = await fetch('https://radar-perfumes.vercel.app/api/auth/login', {
+      const r = await fetch(`${API}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -434,6 +786,7 @@
       if (!r.ok) throw new Error(data.error || 'Falha no servidor');
       saveToken(data.token);
       show('screen-app');
+      loadFeatured();
     } catch (ex) {
       err.textContent = ex.message;
     } finally {
@@ -445,41 +798,180 @@
   // ── Logout ──
   document.getElementById('btn-logout').addEventListener('click', () => {
     removeToken();
-    document.getElementById('results-wrap').innerHTML = '';
     document.getElementById('input-search').value = '';
-    document.getElementById('search-hero').classList.remove('compact');
-    document.getElementById('search-title').classList.remove('hidden');
-    document.getElementById('search-desc').classList.remove('hidden');
+    document.getElementById('results-wrap').style.display = 'none';
+    document.getElementById('results-wrap').innerHTML = '';
+    document.getElementById('featured-section').style.display = '';
     show('screen-login');
   });
 
+  // ── Featured ──
+  let featuredData = [];
+
+  async function loadFeatured() {
+    const section = document.getElementById('featured-section');
+    section.style.display = '';
+    document.getElementById('results-wrap').style.display = 'none';
+    section.innerHTML = '<div class="state-box"><div class="spinner"></div>Carregando ofertas…</div>';
+
+    try {
+      const r = await fetch(`${API}/perfumes/featured`, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      });
+      if (r.status === 401) { removeToken(); return show('screen-login'); }
+      if (!r.ok) throw new Error(`Erro ${r.status}`);
+
+      const { featured } = await r.json();
+      featuredData = featured || [];
+      renderFeatured(featuredData);
+    } catch {
+      section.innerHTML = '<div class="state-box">Não foi possível carregar as ofertas agora.</div>';
+    }
+  }
+
+  function renderFeatured(items) {
+    const section = document.getElementById('featured-section');
+    if (!items.length) {
+      section.innerHTML = '<div class="state-box">Nenhuma oferta disponível ainda.<br>Faça uma busca para começar!</div>';
+      return;
+    }
+
+    section.innerHTML = `
+      <div class="featured-header">
+        <span class="featured-title">Melhores Ofertas</span>
+        <span class="featured-count">${items.length} perfumes</span>
+      </div>
+      <div class="perf-grid">
+        ${items.map((item, i) => {
+          const letter = esc((item.brand || item.display_name || '?')[0].toUpperCase());
+          return `
+            <div class="perf-card" onclick="openDetail(${i})">
+              ${item.image_url
+                ? `<img class="perf-card-thumb" src="${esc(item.image_url)}" alt="" loading="lazy">`
+                : `<div class="perf-card-placeholder">${letter}</div>`}
+              <div class="perf-card-body">
+                <div class="perf-card-brand">${esc(item.brand || '')}</div>
+                <div class="perf-card-name">${esc(item.display_name)}</div>
+                <div class="perf-card-footer">
+                  <div>
+                    <div class="perf-card-price">${formatBRL(item.min_price)}</div>
+                    <div class="perf-card-store">${esc(item.best_store || '')}</div>
+                  </div>
+                  ${item.savings_pct > 0 ? `<span class="savings-badge">-${item.savings_pct}%</span>` : ''}
+                </div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>`;
+  }
+
+  // ── Modal ──
+  function openDetail(idx) {
+    const deal = featuredData[idx];
+    if (!deal) return;
+
+    const sorted = [...(deal.results || [])].filter(r => r.price_cents > 0).sort((a, b) => a.price_cents - b.price_cents);
+    const letter = esc((deal.brand || deal.display_name || '?')[0].toUpperCase());
+    const hasNotes = deal.notes_top?.length || deal.notes_heart?.length || deal.notes_base?.length;
+
+    document.getElementById('modal-box').innerHTML = `
+      <div class="modal-topbar">
+        <button class="modal-close" onclick="closeDetail()">✕</button>
+      </div>
+      ${deal.image_url
+        ? `<img class="modal-img" src="${esc(deal.image_url)}" alt="">`
+        : `<div class="modal-placeholder">${letter}</div>`}
+      <div class="modal-content">
+        <div class="modal-brand">${esc(deal.brand || '')}</div>
+        <div class="modal-name">${esc(deal.display_name)}</div>
+        <span class="gender-pill">${esc(deal.gender || 'unissex')}</span>
+        ${deal.description ? `<p class="modal-description">${esc(deal.description)}</p>` : ''}
+
+        ${hasNotes ? `
+          <div class="modal-section-label">Pirâmide Olfativa</div>
+          <div class="notes-pyramid">
+            <div>
+              <div class="notes-col-label">Topo</div>
+              ${(deal.notes_top || []).map(n => `<div class="note-item">${esc(n)}</div>`).join('')}
+            </div>
+            <div>
+              <div class="notes-col-label">Coração</div>
+              ${(deal.notes_heart || []).map(n => `<div class="note-item">${esc(n)}</div>`).join('')}
+            </div>
+            <div>
+              <div class="notes-col-label">Fundo</div>
+              ${(deal.notes_base || []).map(n => `<div class="note-item">${esc(n)}</div>`).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        ${deal.accords?.length ? `
+          <div class="modal-section-label">Acordes</div>
+          <div class="accords-wrap">
+            ${deal.accords.map(a => `<span class="accord-pill">${esc(a)}</span>`).join('')}
+          </div>
+        ` : ''}
+
+        ${sorted.length ? `
+          <div class="modal-section-label">Comparar Preços</div>
+          <div class="price-table">
+            ${sorted.map((r, i) => `
+              <div class="price-row${i === 0 ? ' best' : ''}">
+                <span class="price-row-rank">#${i + 1}</span>
+                <span class="price-row-store">${esc(r.store_display_name || r.store || '')}</span>
+                <span class="price-row-val">${formatBRL(r.price_cents)}</span>
+                ${r.product_url ? `<a class="btn-store-link" href="${esc(r.product_url)}" target="_blank" rel="noopener">ver</a>` : ''}
+              </div>`).join('')}
+          </div>
+        ` : ''}
+      </div>`;
+
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDetail() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal-overlay')) closeDetail();
+  });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
   // ── Busca ──
+  function exitSearchMode() {
+    document.getElementById('featured-section').style.display = '';
+    document.getElementById('results-wrap').style.display = 'none';
+    document.getElementById('results-wrap').innerHTML = '';
+    document.getElementById('input-search').value = '';
+  }
+
   async function doSearch() {
     const query = document.getElementById('input-search').value.trim();
     if (!query) return;
 
     const btn = document.getElementById('btn-search');
-    const results = document.getElementById('results-wrap');
-    const hero = document.getElementById('search-hero');
+    const rw = document.getElementById('results-wrap');
 
     btn.disabled = true;
-    hero.classList.add('compact');
-    document.getElementById('search-title').classList.add('hidden');
-    document.getElementById('search-desc').classList.add('hidden');
-    results.innerHTML = '<div class="state-box"><div class="spinner"></div>Buscando nas lojas…</div>';
+    document.getElementById('featured-section').style.display = 'none';
+    rw.style.display = '';
+    rw.innerHTML = '<div class="state-box"><div class="spinner"></div>Buscando nas lojas…</div>';
 
     try {
-      const r = await fetch(`https://radar-perfumes.vercel.app/api/search?q=${encodeURIComponent(query)}`, {
+      const r = await fetch(`${API}/search?q=${encodeURIComponent(query)}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
 
       if (r.status === 401) { removeToken(); return show('screen-login'); }
       if (!r.ok) throw new Error(`Erro ${r.status}`);
 
-      const data = await r.json();
-      renderResults(data);
-    } catch (ex) {
-      results.innerHTML = `<div class="state-box">Falha na busca. Tente novamente.</div>`;
+      renderResults(await r.json());
+    } catch {
+      rw.innerHTML = '<div class="state-box">Falha na busca. Tente novamente.</div>';
     } finally {
       btn.disabled = false;
     }
@@ -488,38 +980,48 @@
   function renderResults({ display_name, results, cached_at }) {
     const el = document.getElementById('results-wrap');
     const list = (results || []).filter(r => r.available !== false);
+    const ago = cached_at ? timeAgo(cached_at) : '';
 
     if (!list.length) {
-      el.innerHTML = '<div class="state-box">Não encontramos esse perfume nas lojas monitoradas.</div>';
+      el.innerHTML = `
+        <div class="results-meta">
+          <span></span>
+          <button class="btn-back" onclick="exitSearchMode()">← Ofertas</button>
+        </div>
+        <div class="state-box" style="padding:48px 0">Não encontramos esse perfume nas lojas monitoradas.</div>`;
       return;
     }
 
     list.sort((a, b) => a.price_cents - b.price_cents);
-    const ago = cached_at ? timeAgo(cached_at) : '';
 
     el.innerHTML = `
-      <div class="results-meta">${display_name || ''} · atualizado ${ago}</div>
+      <div class="results-meta">
+        <span>${esc(display_name || '')}${ago ? ` · ${ago}` : ''}</span>
+        <button class="btn-back" onclick="exitSearchMode()">← Ofertas</button>
+      </div>
       ${list.map((item, i) => `
         <div class="result-card${i === 0 ? ' cheapest' : ''}">
           <span class="result-rank">#${i + 1}</span>
           <div class="result-info">
-            <div class="result-store">${item.store_display_name || item.store}</div>
-            <div class="result-name">${item.product_name || display_name || ''}</div>
-            <div class="result-updated">atualizado ${ago}</div>
+            <div class="result-store">${esc(item.store_display_name || item.store)}</div>
+            <div class="result-name">${esc(item.product_name || display_name || '')}</div>
+            ${ago ? `<div class="result-updated">atualizado ${ago}</div>` : ''}
           </div>
           <div class="result-price-block">
             <div class="result-price">${formatBRL(item.price_cents)}</div>
-            <a class="btn-offer" href="${item.product_url}" target="_blank" rel="noopener noreferrer">ver oferta</a>
+            <a class="btn-offer" href="${esc(item.product_url)}" target="_blank" rel="noopener noreferrer">ver oferta</a>
           </div>
-        </div>
-      `).join('')}
-    `;
+        </div>`).join('')}`;
   }
 
   document.getElementById('btn-search').addEventListener('click', doSearch);
   document.getElementById('input-search').addEventListener('keydown', e => {
     if (e.key === 'Enter') doSearch();
   });
+
+  window.openDetail = openDetail;
+  window.closeDetail = closeDetail;
+  window.exitSearchMode = exitSearchMode;
 })();
 </script>
 </body>
