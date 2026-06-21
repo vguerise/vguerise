@@ -3,6 +3,7 @@ const { searchNeeche } = require('../_lib/neeche');
 const { searchNuvemshop } = require('../_lib/nuvemshop');
 const { saveCache } = require('../_lib/cache');
 const { getDb } = require('../_lib/db');
+const { getPerfumeInfo } = require('../_lib/perfume_info');
 const { CURATED } = require('../_lib/curated');
 
 function verifyCronSecret(req) {
@@ -25,6 +26,15 @@ async function refreshOne(query, existingSlugs) {
     .map(r => r.value);
 
   await saveCache(slug, display_name, results);
+
+  // Popula perfume_details (imagem + descrição + notas) para exibir na página inicial
+  // getPerfumeInfo usa cache próprio (TTL 30 dias) — Claude só é chamado na 1ª vez
+  try {
+    await getPerfumeInfo(slug, display_name);
+  } catch (e) {
+    console.warn('[cron/refresh] getPerfumeInfo falhou para', slug, e?.message);
+  }
+
   return { slug, display_name, stores_found: results.length };
 }
 
