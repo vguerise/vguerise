@@ -17,3 +17,27 @@ create table if not exists search_log (
   cache_hit boolean not null,
   created_at timestamptz not null default now()
 );
+
+create table if not exists perfume_details (
+  product_slug text primary key,
+  display_name text not null,
+  brand text,
+  image_url text,
+  description text,
+  notes_top text[],
+  notes_heart text[],
+  notes_base text[],
+  accords text[],
+  gender text,
+  updated_at timestamptz default now()
+);
+
+create table if not exists perfume_comments (
+  id bigserial primary key,
+  product_slug text not null,
+  user_email text not null,
+  comment text not null,
+  created_at timestamptz default now()
+);
+
+create index if not exists idx_perfume_comments_slug on perfume_comments(product_slug);

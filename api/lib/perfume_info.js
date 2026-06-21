@@ -19,9 +19,11 @@ function extractImageFromLd(html) {
       }
     } catch {}
   }
-  // Fallback: og:image
+  // Prefere HTTPS (og:image:secure_url), fallback para og:image
+  const ogSecure = html.match(/<meta[^>]+property="og:image:secure_url"[^>]+content="([^"]+)"/);
+  if (ogSecure?.[1]) return ogSecure[1];
   const og = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/);
-  return og ? og[1] : null;
+  return og?.[1] || null;
 }
 
 // Busca imagem do produto nas lojas (usa cache do price_cache)

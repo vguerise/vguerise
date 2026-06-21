@@ -16,708 +16,228 @@
       --orange-light: #F48C06;
       --orange-pale: #FFF3EC;
       --black: #111111;
-      --gray-900: #1A1A1A;
       --gray-700: #444444;
       --gray-500: #777777;
       --gray-300: #CCCCCC;
       --gray-100: #F2F2F0;
       --white: #FFFFFF;
       --success: #1E8449;
+      --success-bg: #E8F5EE;
+      --success-border: #C3E6CB;
       --danger: #C0392B;
       --bg: #F5F4F1;
-      --card-bg: #FFFFFF;
+      --card: #FFFFFF;
       --border: #E0DED9;
     }
 
-    body {
-      background: var(--bg);
-      color: var(--black);
-      font-family: 'DM Sans', sans-serif;
-      min-height: 100dvh;
-    }
-
+    body { background: var(--bg); color: var(--black); font-family: 'DM Sans', sans-serif; min-height: 100dvh; }
     .screen { display: none; }
     .screen.active { display: flex; flex-direction: column; min-height: 100dvh; }
 
     /* ─── LOGIN ─── */
     #screen-login {
-      align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
+      align-items: center; justify-content: center; padding: 32px 24px;
       background: radial-gradient(ellipse at 50% -20%, #fff3ec 0%, var(--bg) 60%);
     }
-
     .login-card { width: 100%; max-width: 400px; }
-
-    .login-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 32px;
-      text-align: center;
-    }
-
-    .login-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 32px;
-      font-weight: 900;
-      line-height: 1.15;
-      text-align: center;
-      color: var(--black);
-      margin-bottom: 10px;
-    }
-
-    .login-subtitle {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--gray-500);
-      text-align: center;
-      line-height: 1.6;
-      margin-bottom: 40px;
-    }
-
+    .login-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 32px; text-align: center; }
+    .login-title { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 900; line-height: 1.15; text-align: center; color: var(--black); margin-bottom: 10px; }
+    .login-subtitle { font-size: 15px; font-weight: 300; color: var(--gray-500); text-align: center; line-height: 1.6; margin-bottom: 40px; }
     .login-form { display: flex; flex-direction: column; gap: 12px; }
-
-    .input-field {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      color: var(--black);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      padding: 14px 18px;
-      border-radius: 10px;
-      outline: none;
-      width: 100%;
-      transition: border-color 0.2s;
-    }
-
+    .input-field { background: var(--card); border: 1.5px solid var(--border); color: var(--black); font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 14px 18px; border-radius: 10px; outline: none; width: 100%; transition: border-color 0.2s; }
     .input-field:focus { border-color: var(--orange); }
     .input-field::placeholder { color: var(--gray-300); }
-
-    .btn-primary {
-      background: var(--orange);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      padding: 14px 24px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-    }
-
+    .btn-primary { background: var(--orange); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; padding: 14px 24px; border: none; border-radius: 10px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
     .btn-primary:hover { background: var(--orange-light); }
     .btn-primary:active { transform: scale(0.98); }
     .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-    .form-error {
-      font-size: 13px;
-      color: var(--danger);
-      text-align: center;
-      min-height: 18px;
-    }
+    .form-error { font-size: 13px; color: var(--danger); text-align: center; min-height: 18px; }
 
     /* ─── APP ─── */
     #screen-app { flex-direction: column; }
-
-    .app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 24px;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    .app-brand {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-    }
-
-    .btn-logout {
-      background: none;
-      border: 1.5px solid var(--border);
-      color: var(--gray-500);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 7px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
+    .app-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: var(--card); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .app-brand { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); }
+    .btn-logout { background: none; border: 1.5px solid var(--border); color: var(--gray-500); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
     .btn-logout:hover { border-color: var(--gray-500); color: var(--black); }
 
     /* ─── SEARCH ─── */
-    .search-bar {
-      display: flex;
-      justify-content: center;
-      padding: 20px 24px 0;
-    }
-
-    .search-row {
-      display: flex;
-      width: 100%;
-      max-width: 620px;
-      gap: 8px;
-    }
-
-    .input-search {
-      flex: 1;
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      color: var(--black);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      padding: 13px 18px;
-      border-radius: 10px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
+    .search-bar { display: flex; justify-content: center; padding: 20px 24px 0; }
+    .search-row { display: flex; width: 100%; max-width: 620px; gap: 8px; }
+    .input-search { flex: 1; background: var(--card); border: 1.5px solid var(--border); color: var(--black); font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 13px 18px; border-radius: 10px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
     .input-search:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,93,4,0.1); }
     .input-search::placeholder { color: var(--gray-300); }
-
-    .btn-search {
-      background: var(--orange);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      padding: 13px 22px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-
+    .btn-search { background: var(--orange); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; padding: 13px 22px; border: none; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
     .btn-search:hover { background: var(--orange-light); }
     .btn-search:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* ─── FEATURED ─── */
-    #featured-section {
-      padding: 24px 20px 48px;
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .featured-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .featured-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--orange);
-    }
-
-    .featured-count {
-      font-size: 12px;
-      color: var(--gray-500);
-    }
-
-    .perf-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
+    #featured-section { padding: 24px 20px 48px; width: 100%; max-width: 960px; margin: 0 auto; }
+    .featured-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .featured-title { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 900; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); }
+    .featured-count { font-size: 12px; color: var(--gray-500); }
+    .perf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     @media (min-width: 520px) { .perf-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (min-width: 760px) { .perf-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    .perf-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-    }
-
-    .perf-card:hover {
-      border-color: var(--orange);
-      box-shadow: 0 4px 16px rgba(232,93,4,0.12);
-      transform: translateY(-2px);
-    }
-
-    .perf-card-thumb {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      display: block;
-      background: var(--gray-100);
-    }
-
-    .perf-card-placeholder {
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--gray-100);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 40px;
-      font-weight: 900;
-      color: var(--gray-300);
-    }
-
+    .perf-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s; }
+    .perf-card:hover { border-color: var(--orange); box-shadow: 0 4px 16px rgba(232,93,4,0.1); transform: translateY(-2px); }
+    .perf-card-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; background: var(--gray-100); }
+    .perf-card-placeholder { width: 100%; aspect-ratio: 1; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 40px; font-weight: 900; color: var(--gray-300); }
     .perf-card-body { padding: 12px 14px 14px; }
+    .perf-card-brand { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 3px; }
+    .perf-card-name { font-size: 13px; font-weight: 500; color: var(--black); line-height: 1.3; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .perf-card-footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 4px; }
+    .perf-card-price { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: var(--orange); }
+    .perf-card-store { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+    .savings-badge { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
 
-    .perf-card-brand {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 3px;
-    }
+    /* ─── RESULTS WRAP ─── */
+    .results-wrap { width: 100%; max-width: 660px; margin: 0 auto; padding: 20px 20px 48px; }
 
-    .perf-card-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--black);
-      line-height: 1.3;
-      margin-bottom: 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .perf-card-footer {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 4px;
-    }
-
-    .perf-card-price {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
-      font-weight: 900;
-      color: var(--orange);
-    }
-
-    .perf-card-store {
-      font-size: 10px;
-      color: var(--gray-500);
-      margin-top: 2px;
-    }
-
-    .savings-badge {
-      background: #E8F5EE;
-      color: var(--success);
-      border: 1px solid #C3E6CB;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 7px;
-      border-radius: 20px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ─── RESULTS ─── */
-    .results-wrap {
-      width: 100%;
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 24px 24px 48px;
-    }
-
-    .results-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 12px;
-      color: var(--gray-500);
-      margin-bottom: 16px;
-    }
-
-    .btn-back {
-      background: none;
-      border: none;
-      color: var(--orange);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 0;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
+    .results-topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .results-query { font-size: 13px; color: var(--gray-500); }
+    .btn-back { background: none; border: none; color: var(--orange); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; padding: 0; white-space: nowrap; flex-shrink: 0; }
     .btn-back:hover { text-decoration: underline; }
 
-    .result-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
+    /* ─── PERFUME DETAIL PANEL ─── */
+    .perf-detail { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
 
-    .result-card:hover { border-color: var(--gray-300); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    .result-card.cheapest { border-color: var(--orange); box-shadow: 0 2px 12px rgba(232,93,4,0.1); }
+    .perf-detail-hero { display: flex; gap: 16px; padding: 18px; }
 
-    .result-rank {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 900;
-      color: var(--gray-300);
-      width: 20px;
-      flex-shrink: 0;
-    }
-
-    .result-card.cheapest .result-rank { color: var(--orange); }
-
-    .result-info { flex: 1; min-width: 0; }
-
-    .result-store {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--gray-500);
-      margin-bottom: 3px;
-    }
-
-    .result-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--black);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 3px;
-    }
-
-    .result-updated { font-size: 11px; color: var(--gray-300); }
-
-    .result-price-block { text-align: right; flex-shrink: 0; }
-
-    .result-price {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 20px;
-      font-weight: 900;
-      color: var(--black);
-      margin-bottom: 10px;
-    }
-
-    .result-card.cheapest .result-price { color: var(--orange); }
-
-    .btn-offer {
-      display: inline-block;
-      background: none;
-      border: 1.5px solid var(--border);
-      color: var(--gray-700);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 6px 14px;
+    .perf-detail-img {
+      width: 110px;
+      height: 130px;
+      object-fit: contain;
       border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-offer:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
-
-    .state-box {
-      text-align: center;
-      color: var(--gray-500);
-      font-size: 14px;
-      padding: 64px 0;
-    }
-
-    .spinner {
-      width: 26px;
-      height: 26px;
-      border: 2px solid var(--border);
-      border-top-color: var(--orange);
-      border-radius: 50%;
-      animation: spin 0.75s linear infinite;
-      margin: 0 auto 18px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ─── MODAL ─── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 100;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .modal-overlay.open { display: flex; }
-
-    @media (min-width: 600px) {
-      .modal-overlay { align-items: center; padding: 24px; }
-      .modal-box { border-radius: 16px; max-width: 540px; }
-    }
-
-    .modal-box {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px 16px 0 0;
-      width: 100%;
-      max-height: 92dvh;
-      overflow-y: auto;
-    }
-
-    .modal-topbar {
-      display: flex;
-      justify-content: flex-end;
-      padding: 12px 14px 0;
-      position: sticky;
-      top: 0;
-      background: var(--white);
-      z-index: 1;
-    }
-
-    .modal-close {
       background: var(--gray-100);
-      border: none;
-      color: var(--gray-500);
-      font-size: 16px;
-      line-height: 1;
-      cursor: pointer;
-      padding: 7px 10px;
-      border-radius: 8px;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .modal-close:hover { background: var(--border); color: var(--black); }
-
-    .modal-img {
-      width: 100%;
-      max-height: 280px;
-      object-fit: cover;
+      flex-shrink: 0;
       display: block;
     }
 
-    .modal-placeholder {
-      width: 100%;
-      height: 220px;
+    .perf-detail-img-ph {
+      width: 110px;
+      height: 130px;
       background: var(--gray-100);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Montserrat', sans-serif;
-      font-size: 80px;
+      font-size: 36px;
       font-weight: 900;
       color: var(--gray-300);
-    }
-
-    .modal-content { padding: 20px 24px 32px; }
-
-    .modal-brand {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 4px;
-    }
-
-    .modal-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 22px;
-      font-weight: 900;
-      color: var(--black);
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .gender-pill {
-      display: inline-block;
-      background: var(--orange-pale);
-      border: 1px solid rgba(232,93,4,0.2);
-      color: var(--orange);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-bottom: 16px;
-    }
-
-    .modal-description {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--gray-700);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .modal-section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gray-500);
-      margin-bottom: 12px;
-    }
-
-    .notes-pyramid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .notes-col {
-      background: var(--gray-100);
-      border-radius: 8px;
-      padding: 10px 12px;
-    }
-
-    .notes-col-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 8px;
-    }
-
-    .note-item {
-      font-size: 12px;
-      color: var(--gray-700);
-      padding: 2px 0;
-      line-height: 1.5;
-    }
-
-    .accords-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 28px;
-    }
-
-    .accord-pill {
-      background: var(--orange-pale);
-      color: var(--orange);
-      border: 1px solid rgba(232,93,4,0.2);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 20px;
-    }
-
-    .price-table {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: center;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      gap: 10px;
-    }
-
-    .price-row:last-child { border-bottom: none; }
-    .price-row.best { background: var(--orange-pale); }
-
-    .price-row-rank {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 900;
-      color: var(--gray-300);
-      width: 18px;
       flex-shrink: 0;
     }
 
-    .price-row.best .price-row-rank { color: var(--orange); }
+    .perf-detail-info { flex: 1; min-width: 0; }
+    .perf-detail-brand { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 2px; }
+    .perf-detail-name { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 900; color: var(--black); line-height: 1.2; margin-bottom: 6px; }
+    .gender-tag { display: inline-block; background: var(--orange-pale); border: 1px solid rgba(232,93,4,0.2); color: var(--orange); font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-bottom: 10px; }
+    .perf-detail-desc { font-size: 12px; font-weight: 300; color: var(--gray-700); line-height: 1.65; }
 
-    .price-row-store {
-      flex: 1;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--black);
-      min-width: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .perf-detail-body { border-top: 1px solid var(--border); padding: 16px 18px; }
+    .detail-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 10px; }
 
-    .price-row-val {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
-      font-weight: 900;
-      color: var(--black);
-      flex-shrink: 0;
-    }
+    .notes-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+    .notes-col { background: var(--gray-100); border-radius: 8px; padding: 10px; }
+    .notes-col-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
+    .note-item { font-size: 11px; color: var(--gray-700); padding: 1px 0; line-height: 1.5; }
 
-    .price-row.best .price-row-val { color: var(--orange); }
+    .accords-row { display: flex; flex-wrap: wrap; gap: 5px; }
+    .accord-tag { background: var(--orange-pale); color: var(--orange); border: 1px solid rgba(232,93,4,0.2); font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
 
-    .btn-store-link {
-      display: inline-block;
-      background: none;
-      border: 1.5px solid var(--border);
-      color: var(--gray-700);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-      white-space: nowrap;
-    }
+    /* ─── PRICE TABLE ─── */
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 12px; }
 
-    .btn-store-link:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+    .result-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-bottom: 8px; display: flex; align-items: center; gap: 14px; transition: border-color 0.2s; }
+    .result-card:hover { border-color: var(--gray-300); }
+    .result-card.cheapest { border-color: var(--orange); box-shadow: 0 2px 10px rgba(232,93,4,0.08); }
+    .result-rank { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; color: var(--gray-300); width: 20px; flex-shrink: 0; }
+    .result-card.cheapest .result-rank { color: var(--orange); }
+    .result-info { flex: 1; min-width: 0; }
+    .result-store { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 2px; }
+    .result-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .result-price-block { text-align: right; flex-shrink: 0; }
+    .result-price { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; color: var(--black); margin-bottom: 8px; }
+    .result-card.cheapest .result-price { color: var(--orange); }
+    .btn-offer { display: inline-block; background: none; border: 1.5px solid var(--border); color: var(--gray-700); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 8px; text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .btn-offer:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+
+    /* ─── COMMENTS ─── */
+    .comments-section { margin-top: 24px; }
+    .comments-form { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; }
+    .comments-form-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 10px; }
+    .comment-textarea { width: 100%; background: var(--gray-100); border: 1.5px solid var(--border); color: var(--black); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 12px 14px; border-radius: 8px; outline: none; resize: vertical; min-height: 80px; transition: border-color 0.2s; }
+    .comment-textarea:focus { border-color: var(--orange); background: var(--card); }
+    .comment-textarea::placeholder { color: var(--gray-300); }
+    .btn-comment { margin-top: 8px; background: var(--orange); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+    .btn-comment:hover { background: var(--orange-light); }
+    .btn-comment:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .comment-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
+    .comment-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .comment-author { font-size: 12px; font-weight: 700; color: var(--black); }
+    .comment-time { font-size: 11px; color: var(--gray-300); }
+    .comment-text { font-size: 13px; color: var(--gray-700); line-height: 1.6; }
+
+    /* ─── SHARED ─── */
+    .state-box { text-align: center; color: var(--gray-500); font-size: 14px; padding: 48px 0; }
+    .spinner { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin 0.75s linear infinite; margin: 0 auto 14px; }
+    .mini-spinner { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin 0.75s linear infinite; display: inline-block; margin-right: 6px; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: flex-end; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    @media (min-width: 600px) { .modal-overlay { align-items: center; padding: 24px; } .modal-box { border-radius: 16px; max-width: 540px; } }
+    .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px 16px 0 0; width: 100%; max-height: 92dvh; overflow-y: auto; }
+    .modal-topbar { display: flex; justify-content: flex-end; padding: 12px 14px 0; position: sticky; top: 0; background: var(--card); z-index: 1; }
+    .modal-close { background: var(--gray-100); border: none; color: var(--gray-500); font-size: 16px; line-height: 1; cursor: pointer; padding: 6px 10px; border-radius: 8px; transition: background 0.15s; }
+    .modal-close:hover { background: var(--border); color: var(--black); }
+    .modal-img { width: 100%; max-height: 280px; object-fit: cover; display: block; }
+    .modal-placeholder { width: 100%; height: 200px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 72px; font-weight: 900; color: var(--gray-300); }
+    .modal-content { padding: 18px 22px 28px; }
+    .modal-brand { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 3px; }
+    .modal-name { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; color: var(--black); line-height: 1.2; margin-bottom: 6px; }
+    .modal-gender { display: inline-block; background: var(--orange-pale); border: 1px solid rgba(232,93,4,0.2); color: var(--orange); font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 20px; margin-bottom: 14px; }
+    .modal-desc { font-size: 13px; font-weight: 300; color: var(--gray-700); line-height: 1.7; margin-bottom: 20px; }
+    .modal-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 10px; }
+    .modal-notes-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+    .modal-notes-col { background: var(--gray-100); border-radius: 8px; padding: 10px; }
+    .modal-notes-col-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
+    .modal-note-item { font-size: 11px; color: var(--gray-700); padding: 1px 0; line-height: 1.5; }
+    .modal-accords { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 20px; }
+    .modal-accord { background: var(--orange-pale); color: var(--orange); border: 1px solid rgba(232,93,4,0.2); font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
+    .modal-price-table { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .modal-price-row { display: flex; align-items: center; padding: 11px 14px; border-bottom: 1px solid var(--border); gap: 10px; }
+    .modal-price-row:last-child { border-bottom: none; }
+    .modal-price-row.best { background: var(--orange-pale); }
+    .modal-price-rank { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; color: var(--gray-300); width: 18px; flex-shrink: 0; }
+    .modal-price-row.best .modal-price-rank { color: var(--orange); }
+    .modal-price-store { flex: 1; font-size: 13px; font-weight: 500; color: var(--black); min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .modal-price-val { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 900; color: var(--black); flex-shrink: 0; }
+    .modal-price-row.best .modal-price-val { color: var(--orange); }
+    .btn-store { display: inline-block; background: none; border: 1.5px solid var(--border); color: var(--gray-700); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-decoration: none; flex-shrink: 0; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+    .btn-store:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
   </style>
 </head>
 <body>
 
-<!-- ─── TELA DE LOGIN ─── -->
+<!-- ─── LOGIN ─── -->
 <div id="screen-login" class="screen">
   <div class="login-card">
     <p class="login-eyebrow">Vguerise</p>
     <h1 class="login-title">Radar de Perfumes Nicho</h1>
     <p class="login-subtitle">Compare preços em tempo real entre as<br>principais lojas de nicho do Brasil.</p>
     <form class="login-form" id="form-login" novalidate>
-      <input class="input-field" type="email" id="input-email"
-        placeholder="Seu e-mail" autocomplete="email" required>
+      <input class="input-field" type="email" id="input-email" placeholder="Seu e-mail" autocomplete="email" required>
       <button class="btn-primary" type="submit" id="btn-login">Entrar</button>
       <p class="form-error" id="login-error" role="alert"></p>
     </form>
   </div>
 </div>
 
-<!-- ─── TELA DO APP ─── -->
+<!-- ─── APP ─── -->
 <div id="screen-app" class="screen">
   <header class="app-header">
     <span class="app-brand">Radar · Perfumes</span>
@@ -736,7 +256,7 @@
   <div class="results-wrap" id="results-wrap" style="display:none"></div>
 </div>
 
-<!-- ─── MODAL ─── -->
+<!-- ─── MODAL (featured detail) ─── -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal-box" id="modal-box"></div>
 </div>
@@ -749,25 +269,10 @@
   function getToken() { return localStorage.getItem(TOKEN_KEY); }
   function saveToken(t) { localStorage.setItem(TOKEN_KEY, t); }
   function removeToken() { localStorage.removeItem(TOKEN_KEY); }
-
-  function show(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  function formatBRL(cents) {
-    return (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  }
-
-  function timeAgo(iso) {
-    const h = Math.floor((Date.now() - new Date(iso).getTime()) / 3600000);
-    if (h < 1) return 'agora mesmo';
-    return h === 1 ? 'há 1h' : `há ${h}h`;
-  }
-
-  function esc(str) {
-    return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
+  function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+  function formatBRL(cents) { return (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+  function timeAgo(iso) { const h = Math.floor((Date.now() - new Date(iso).getTime()) / 3600000); if (h < 1) return 'agora mesmo'; return h < 24 ? `há ${h}h` : `há ${Math.floor(h/24)}d`; }
+  function esc(s) { return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   // ── Init ──
   (async function init() {
@@ -777,9 +282,7 @@
       const r = await fetch(`${API}/auth/verify`, { headers: { Authorization: `Bearer ${t}` } });
       if (r.ok) { show('screen-app'); loadFeatured(); }
       else { removeToken(); show('screen-login'); }
-    } catch {
-      show('screen-app'); loadFeatured();
-    }
+    } catch { show('screen-app'); loadFeatured(); }
   })();
 
   // ── Login ──
@@ -788,26 +291,14 @@
     const email = document.getElementById('input-email').value.trim();
     const btn = document.getElementById('btn-login');
     const err = document.getElementById('login-error');
-    err.textContent = '';
-    btn.disabled = true;
-    btn.textContent = 'Entrando…';
+    err.textContent = ''; btn.disabled = true; btn.textContent = 'Entrando…';
     try {
-      const r = await fetch(`${API}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      });
+      const r = await fetch(`${API}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || 'Falha no servidor');
-      saveToken(data.token);
-      show('screen-app');
-      loadFeatured();
-    } catch (ex) {
-      err.textContent = ex.message;
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Entrar';
-    }
+      saveToken(data.token); show('screen-app'); loadFeatured();
+    } catch (ex) { err.textContent = ex.message; }
+    finally { btn.disabled = false; btn.textContent = 'Entrar'; }
   });
 
   // ── Logout ──
@@ -820,7 +311,9 @@
     show('screen-login');
   });
 
-  // ── Featured ──
+  // ─────────────────────────────────────────
+  // FEATURED
+  // ─────────────────────────────────────────
   let featuredData = [];
 
   async function loadFeatured() {
@@ -828,14 +321,10 @@
     section.style.display = '';
     document.getElementById('results-wrap').style.display = 'none';
     section.innerHTML = '<div class="state-box"><div class="spinner"></div>Carregando ofertas…</div>';
-
     try {
-      const r = await fetch(`${API}/perfumes/featured`, {
-        headers: { Authorization: `Bearer ${getToken()}` }
-      });
+      const r = await fetch(`${API}/perfumes/featured`, { headers: { Authorization: `Bearer ${getToken()}` } });
       if (r.status === 401) { removeToken(); return show('screen-login'); }
-      if (!r.ok) throw new Error(`Erro ${r.status}`);
-
+      if (!r.ok) throw new Error();
       const { featured } = await r.json();
       featuredData = featured || [];
       renderFeatured(featuredData);
@@ -847,10 +336,9 @@
   function renderFeatured(items) {
     const section = document.getElementById('featured-section');
     if (!items.length) {
-      section.innerHTML = '<div class="state-box">Nenhuma oferta disponível ainda.<br>Faça uma busca para começar!</div>';
+      section.innerHTML = '<div class="state-box">Nenhuma oferta ainda.<br>Faça uma busca para começar!</div>';
       return;
     }
-
     section.innerHTML = `
       <div class="featured-header">
         <span class="featured-title">Melhores Ofertas</span>
@@ -859,105 +347,85 @@
       <div class="perf-grid">
         ${items.map((item, i) => {
           const letter = esc((item.brand || item.display_name || '?')[0].toUpperCase());
-          return `
-            <div class="perf-card" onclick="openDetail(${i})">
-              ${item.image_url
-                ? `<img class="perf-card-thumb" src="${esc(item.image_url)}" alt="" loading="lazy">`
-                : `<div class="perf-card-placeholder">${letter}</div>`}
-              <div class="perf-card-body">
-                <div class="perf-card-brand">${esc(item.brand || '')}</div>
-                <div class="perf-card-name">${esc(item.display_name)}</div>
-                <div class="perf-card-footer">
-                  <div>
-                    <div class="perf-card-price">${formatBRL(item.min_price)}</div>
-                    <div class="perf-card-store">${esc(item.best_store || '')}</div>
-                  </div>
-                  ${item.savings_pct > 0 ? `<span class="savings-badge">-${item.savings_pct}%</span>` : ''}
+          return `<div class="perf-card" onclick="openFeaturedDetail(${i})">
+            ${item.image_url ? `<img class="perf-card-thumb" src="${esc(item.image_url)}" alt="" loading="lazy">` : `<div class="perf-card-placeholder">${letter}</div>`}
+            <div class="perf-card-body">
+              <div class="perf-card-brand">${esc(item.brand || '')}</div>
+              <div class="perf-card-name">${esc(item.display_name)}</div>
+              <div class="perf-card-footer">
+                <div>
+                  <div class="perf-card-price">${formatBRL(item.min_price)}</div>
+                  <div class="perf-card-store">${esc(item.best_store || '')}</div>
                 </div>
+                ${item.savings_pct > 0 ? `<span class="savings-badge">-${item.savings_pct}%</span>` : ''}
               </div>
-            </div>`;
+            </div>
+          </div>`;
         }).join('')}
       </div>`;
   }
 
-  // ── Modal ──
-  function openDetail(idx) {
+  // ─────────────────────────────────────────
+  // FEATURED MODAL
+  // ─────────────────────────────────────────
+  function openFeaturedDetail(idx) {
     const deal = featuredData[idx];
     if (!deal) return;
-
     const sorted = [...(deal.results || [])].filter(r => r.price_cents > 0).sort((a, b) => a.price_cents - b.price_cents);
     const letter = esc((deal.brand || deal.display_name || '?')[0].toUpperCase());
     const hasNotes = deal.notes_top?.length || deal.notes_heart?.length || deal.notes_base?.length;
 
     document.getElementById('modal-box').innerHTML = `
-      <div class="modal-topbar">
-        <button class="modal-close" onclick="closeDetail()">✕</button>
-      </div>
-      ${deal.image_url
-        ? `<img class="modal-img" src="${esc(deal.image_url)}" alt="">`
-        : `<div class="modal-placeholder">${letter}</div>`}
+      <div class="modal-topbar"><button class="modal-close" onclick="closeModal()">✕</button></div>
+      ${deal.image_url ? `<img class="modal-img" src="${esc(deal.image_url)}" alt="">` : `<div class="modal-placeholder">${letter}</div>`}
       <div class="modal-content">
         <div class="modal-brand">${esc(deal.brand || '')}</div>
         <div class="modal-name">${esc(deal.display_name)}</div>
-        <span class="gender-pill">${esc(deal.gender || 'unissex')}</span>
-        ${deal.description ? `<p class="modal-description">${esc(deal.description)}</p>` : ''}
-
+        <span class="modal-gender">${esc(deal.gender || 'unissex')}</span>
+        ${deal.description ? `<p class="modal-desc">${esc(deal.description)}</p>` : ''}
         ${hasNotes ? `
           <div class="modal-section-label">Pirâmide Olfativa</div>
-          <div class="notes-pyramid">
-            <div class="notes-col">
-              <div class="notes-col-label">Topo</div>
-              ${(deal.notes_top || []).map(n => `<div class="note-item">${esc(n)}</div>`).join('')}
-            </div>
-            <div class="notes-col">
-              <div class="notes-col-label">Coração</div>
-              ${(deal.notes_heart || []).map(n => `<div class="note-item">${esc(n)}</div>`).join('')}
-            </div>
-            <div class="notes-col">
-              <div class="notes-col-label">Fundo</div>
-              ${(deal.notes_base || []).map(n => `<div class="note-item">${esc(n)}</div>`).join('')}
-            </div>
-          </div>
-        ` : ''}
-
+          <div class="modal-notes-row">
+            <div class="modal-notes-col"><div class="modal-notes-col-label">Topo</div>${(deal.notes_top||[]).map(n=>`<div class="modal-note-item">${esc(n)}</div>`).join('')}</div>
+            <div class="modal-notes-col"><div class="modal-notes-col-label">Coração</div>${(deal.notes_heart||[]).map(n=>`<div class="modal-note-item">${esc(n)}</div>`).join('')}</div>
+            <div class="modal-notes-col"><div class="modal-notes-col-label">Fundo</div>${(deal.notes_base||[]).map(n=>`<div class="modal-note-item">${esc(n)}</div>`).join('')}</div>
+          </div>` : ''}
         ${deal.accords?.length ? `
           <div class="modal-section-label">Acordes</div>
-          <div class="accords-wrap">
-            ${deal.accords.map(a => `<span class="accord-pill">${esc(a)}</span>`).join('')}
-          </div>
-        ` : ''}
-
+          <div class="modal-accords">${deal.accords.map(a=>`<span class="modal-accord">${esc(a)}</span>`).join('')}</div>` : ''}
         ${sorted.length ? `
           <div class="modal-section-label">Comparar Preços</div>
-          <div class="price-table">
-            ${sorted.map((r, i) => `
-              <div class="price-row${i === 0 ? ' best' : ''}">
-                <span class="price-row-rank">#${i + 1}</span>
-                <span class="price-row-store">${esc(r.store_display_name || r.store || '')}</span>
-                <span class="price-row-val">${formatBRL(r.price_cents)}</span>
-                ${r.product_url ? `<a class="btn-store-link" href="${esc(r.product_url)}" target="_blank" rel="noopener">ver</a>` : ''}
-              </div>`).join('')}
-          </div>
-        ` : ''}
+          <div class="modal-price-table">
+            ${sorted.map((r,i)=>`<div class="modal-price-row${i===0?' best':''}">
+              <span class="modal-price-rank">#${i+1}</span>
+              <span class="modal-price-store">${esc(r.store_display_name||r.store||'')}</span>
+              <span class="modal-price-val">${formatBRL(r.price_cents)}</span>
+              ${r.product_url?`<a class="btn-store" href="${esc(r.product_url)}" target="_blank" rel="noopener">ver</a>`:''}
+            </div>`).join('')}
+          </div>` : ''}
       </div>`;
 
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeDetail() {
+  function closeModal() {
     document.getElementById('modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
   }
 
   document.getElementById('modal-overlay').addEventListener('click', e => {
-    if (e.target === document.getElementById('modal-overlay')) closeDetail();
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
   });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+  // ─────────────────────────────────────────
+  // SEARCH
+  // ─────────────────────────────────────────
+  let currentSlug = null;
 
-  // ── Busca ──
   function exitSearchMode() {
+    currentSlug = null;
     document.getElementById('featured-section').style.display = '';
     document.getElementById('results-wrap').style.display = 'none';
     document.getElementById('results-wrap').innerHTML = '';
@@ -980,10 +448,8 @@
       const r = await fetch(`${API}/search?q=${encodeURIComponent(query)}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       });
-
       if (r.status === 401) { removeToken(); return show('screen-login'); }
       if (!r.ok) throw new Error(`Erro ${r.status}`);
-
       renderResults(await r.json());
     } catch {
       rw.innerHTML = '<div class="state-box">Falha na busca. Tente novamente.</div>';
@@ -992,51 +458,183 @@
     }
   }
 
-  function renderResults({ display_name, results, cached_at }) {
+  function renderResults({ slug, display_name, results, cached_at }) {
+    currentSlug = slug;
     const el = document.getElementById('results-wrap');
-    const list = (results || []).filter(r => r.available !== false);
+    const list = (results || []).filter(r => r.available !== false).sort((a, b) => a.price_cents - b.price_cents);
     const ago = cached_at ? timeAgo(cached_at) : '';
 
-    if (!list.length) {
-      el.innerHTML = `
-        <div class="results-meta">
-          <span></span>
-          <button class="btn-back" onclick="exitSearchMode()">← Ofertas</button>
-        </div>
-        <div class="state-box" style="padding:48px 0">Não encontramos esse perfume nas lojas monitoradas.</div>`;
-      return;
-    }
-
-    list.sort((a, b) => a.price_cents - b.price_cents);
-
     el.innerHTML = `
-      <div class="results-meta">
-        <span>${esc(display_name || '')}${ago ? ` · ${ago}` : ''}</span>
+      <div class="results-topbar">
+        <span class="results-query">${esc(display_name || '')}${ago ? ` · ${ago}` : ''}</span>
         <button class="btn-back" onclick="exitSearchMode()">← Ofertas</button>
       </div>
-      ${list.map((item, i) => `
-        <div class="result-card${i === 0 ? ' cheapest' : ''}">
-          <span class="result-rank">#${i + 1}</span>
+
+      <div id="perfume-detail-panel">
+        <div class="perf-detail"><div class="state-box" style="padding:28px 0"><span class="mini-spinner"></span>Carregando info do perfume…</div></div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Comparar Preços</div>
+
+      ${list.length ? list.map((item, i) => `
+        <div class="result-card${i===0?' cheapest':''}">
+          <span class="result-rank">#${i+1}</span>
           <div class="result-info">
-            <div class="result-store">${esc(item.store_display_name || item.store)}</div>
-            <div class="result-name">${esc(item.product_name || display_name || '')}</div>
-            ${ago ? `<div class="result-updated">atualizado ${ago}</div>` : ''}
+            <div class="result-store">${esc(item.store_display_name||item.store)}</div>
+            <div class="result-name">${esc(item.product_name||display_name||'')}</div>
           </div>
           <div class="result-price-block">
             <div class="result-price">${formatBRL(item.price_cents)}</div>
-            <a class="btn-offer" href="${esc(item.product_url)}" target="_blank" rel="noopener noreferrer">ver oferta</a>
+            <a class="btn-offer" href="${esc(item.product_url)}" target="_blank" rel="noopener">ver oferta</a>
           </div>
-        </div>`).join('')}`;
+        </div>`).join('') : '<div class="state-box" style="padding:32px 0">Não encontramos esse perfume nas lojas monitoradas.</div>'}
+
+      <hr class="divider">
+      <div id="comments-section">
+        <div style="text-align:center;padding:20px 0"><span class="mini-spinner"></span></div>
+      </div>`;
+
+    // Carregar detail e comentários em paralelo
+    if (slug) {
+      loadPerfumeDetail(slug);
+      loadComments(slug);
+    }
+  }
+
+  // ─────────────────────────────────────────
+  // PERFUME DETAIL (no resultado da busca)
+  // ─────────────────────────────────────────
+  async function loadPerfumeDetail(slug) {
+    try {
+      const r = await fetch(`${API}/perfumes/detail?slug=${encodeURIComponent(slug)}`, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      });
+      if (!r.ok) throw new Error();
+      const info = await r.json();
+      renderPerfumeDetail(info);
+    } catch {
+      document.getElementById('perfume-detail-panel').innerHTML = '';
+    }
+  }
+
+  function renderPerfumeDetail(info) {
+    const panel = document.getElementById('perfume-detail-panel');
+    if (!panel) return;
+    const hasNotes = info.notes_top?.length || info.notes_heart?.length || info.notes_base?.length;
+    const letter = esc((info.brand || info.display_name || '?')[0].toUpperCase());
+
+    panel.innerHTML = `
+      <div class="perf-detail">
+        <div class="perf-detail-hero">
+          ${info.image_url
+            ? `<img class="perf-detail-img" src="${esc(info.image_url)}" alt="" loading="lazy">`
+            : `<div class="perf-detail-img-ph">${letter}</div>`}
+          <div class="perf-detail-info">
+            <div class="perf-detail-brand">${esc(info.brand || '')}</div>
+            <div class="perf-detail-name">${esc(info.display_name || '')}</div>
+            ${info.gender ? `<span class="gender-tag">${esc(info.gender)}</span>` : ''}
+            ${info.description ? `<p class="perf-detail-desc">${esc(info.description)}</p>` : ''}
+          </div>
+        </div>
+        ${hasNotes || info.accords?.length ? `
+          <div class="perf-detail-body">
+            ${hasNotes ? `
+              <div class="detail-section-label">Pirâmide Olfativa</div>
+              <div class="notes-row">
+                <div class="notes-col"><div class="notes-col-label">Topo</div>${(info.notes_top||[]).map(n=>`<div class="note-item">${esc(n)}</div>`).join('')}</div>
+                <div class="notes-col"><div class="notes-col-label">Coração</div>${(info.notes_heart||[]).map(n=>`<div class="note-item">${esc(n)}</div>`).join('')}</div>
+                <div class="notes-col"><div class="notes-col-label">Fundo</div>${(info.notes_base||[]).map(n=>`<div class="note-item">${esc(n)}</div>`).join('')}</div>
+              </div>` : ''}
+            ${info.accords?.length ? `
+              <div class="detail-section-label">Acordes</div>
+              <div class="accords-row">${info.accords.map(a=>`<span class="accord-tag">${esc(a)}</span>`).join('')}</div>` : ''}
+          </div>` : ''}
+      </div>`;
+  }
+
+  // ─────────────────────────────────────────
+  // COMMENTS
+  // ─────────────────────────────────────────
+  async function loadComments(slug) {
+    const section = document.getElementById('comments-section');
+    if (!section) return;
+    try {
+      const r = await fetch(`${API}/perfumes/comments?slug=${encodeURIComponent(slug)}`, {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      });
+      if (!r.ok) throw new Error();
+      const { comments } = await r.json();
+      renderComments(slug, comments || []);
+    } catch {
+      renderComments(slug, []);
+    }
+  }
+
+  function renderComments(slug, comments) {
+    const section = document.getElementById('comments-section');
+    if (!section) return;
+
+    section.innerHTML = `
+      <div class="section-label">Opiniões${comments.length ? ` (${comments.length})` : ''}</div>
+      <div class="comments-form">
+        <div class="comments-form-label">Deixe sua opinião</div>
+        <textarea class="comment-textarea" id="comment-input" placeholder="Sua experiência com este perfume…" rows="3"></textarea>
+        <button class="btn-comment" id="btn-comment-submit" onclick="submitComment('${esc(slug)}')">Enviar</button>
+      </div>
+      <div id="comments-list">
+        ${comments.length ? comments.map(c => renderCommentCard(c)).join('') : '<p style="font-size:13px;color:var(--gray-300);text-align:center;padding:12px 0">Seja o primeiro a comentar.</p>'}
+      </div>`;
+  }
+
+  function renderCommentCard(c) {
+    return `<div class="comment-card">
+      <div class="comment-meta">
+        <span class="comment-author">${esc(c.user_email.split('@')[0])}</span>
+        <span class="comment-time">· ${timeAgo(c.created_at)}</span>
+      </div>
+      <p class="comment-text">${esc(c.comment)}</p>
+    </div>`;
+  }
+
+  async function submitComment(slug) {
+    const input = document.getElementById('comment-input');
+    const btn = document.getElementById('btn-comment-submit');
+    const text = (input?.value || '').trim();
+    if (!text || !slug) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    try {
+      const r = await fetch(`${API}/perfumes/comments`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, comment: text })
+      });
+      if (!r.ok) throw new Error();
+      const newComment = await r.json();
+      input.value = '';
+      const list = document.getElementById('comments-list');
+      if (list) {
+        const empty = list.querySelector('p');
+        if (empty) empty.remove();
+        list.insertAdjacentHTML('afterbegin', renderCommentCard(newComment));
+      }
+    } catch {
+      alert('Erro ao enviar comentário. Tente novamente.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar';
+    }
   }
 
   document.getElementById('btn-search').addEventListener('click', doSearch);
-  document.getElementById('input-search').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doSearch();
-  });
+  document.getElementById('input-search').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
 
-  window.openDetail = openDetail;
-  window.closeDetail = closeDetail;
+  window.openFeaturedDetail = openFeaturedDetail;
+  window.closeModal = closeModal;
   window.exitSearchMode = exitSearchMode;
+  window.submitComment = submitComment;
 })();
 </script>
 </body>
