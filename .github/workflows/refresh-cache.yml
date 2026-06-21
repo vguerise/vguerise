@@ -1,0 +1,40 @@
+name: Radar — Refresh Price Cache
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # 00h, 06h, 12h, 18h UTC (a cada 6 horas)
+  workflow_dispatch:          # permite disparar manualmente pelo GitHub
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Buscar lista de perfumes curados
+        id: curated
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          response=$(curl -sf \
+            -H "x-cron-secret: $CRON_SECRET" \
+            "https://radar-perfumes.vercel.app/api/cron/refresh")
+          echo "queries=$(echo "$response" | jq -c '.queries')" >> "$GITHUB_OUTPUT"
+
+      - name: Atualizar cache de cada perfume
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          echo '${{ steps.curated.outputs.queries }}' | jq -r '.[]' | while IFS= read -r q; do
+            echo "==> $q"
+            body=$(jq -n --arg q "$q" '{"query":$q}')
+            status=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
+              -X POST \
+              -H "x-cron-secret: $CRON_SECRET" \
+              -H "Content-Type: application/json" \
+              -d "$body" \
+              "https://radar-perfumes.vercel.app/api/cron/refresh")
+            echo "    HTTP $status — $(cat /tmp/resp.json)"
+            sleep 5
+          done
+          echo "Refresh concluído."
