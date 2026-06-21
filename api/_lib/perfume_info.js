@@ -19,11 +19,14 @@ function extractImageFromLd(html) {
       }
     } catch {}
   }
-  // Prefere HTTPS (og:image:secure_url), fallback para og:image
-  const ogSecure = html.match(/<meta[^>]+property="og:image:secure_url"[^>]+content="([^"]+)"/);
-  if (ogSecure?.[1]) return ogSecure[1];
-  const og = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/);
-  return og?.[1] || null;
+  // Helper: extrai content de meta com property — suporta qualquer ordem de atributos
+  function metaProp(prop) {
+    let m = html.match(new RegExp('<meta[^>]+property="' + prop + '"[^>]+content="([^"]+)"', 'i'));
+    if (m?.[1]) return m[1];
+    m = html.match(new RegExp('<meta[^>]+content="([^"]+)"[^>]+property="' + prop + '"', 'i'));
+    return m?.[1] || null;
+  }
+  return metaProp('og:image:secure_url') || metaProp('og:image') || null;
 }
 
 // Valida se o HTML da página pertence ao produto esperado (evita imagem errada)
@@ -157,4 +160,4 @@ async function getPerfumeInfo(slug, displayName) {
   return row;
 }
 
-module.exports = { getPerfumeInfo };
+module.exports = { getPerfumeInfo, getProductImage };
