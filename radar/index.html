@@ -184,6 +184,9 @@
     .spinner { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin 0.75s linear infinite; margin: 0 auto 14px; }
     .mini-spinner { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--orange); border-radius: 50%; animation: spin 0.75s linear infinite; display: inline-block; margin-right: 6px; vertical-align: middle; }
     @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.6; transform:scale(0.92); } }
+    .result-card.unavailable { opacity: 0.55; }
+    .result-unavailable-label { font-size: 11px; color: var(--gray-300); font-style: italic; }
     .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
 
     /* ─── MODAL ─── */
@@ -320,7 +323,7 @@
     const section = document.getElementById('featured-section');
     section.style.display = '';
     document.getElementById('results-wrap').style.display = 'none';
-    section.innerHTML = '<div class="state-box"><div class="spinner"></div>Carregando ofertas…</div>';
+    section.innerHTML = '<div class="state-box"><div style="font-size:48px;margin-bottom:14px;animation:pulse 1.5s ease-in-out infinite">📡</div><strong>Radar sintonizando</strong><br><span style="font-size:12px;color:var(--gray-300)">buscando as melhores ofertas…</span></div>';
     try {
       const r = await fetch(`${API}/perfumes/featured`, { headers: { Authorization: `Bearer ${getToken()}` } });
       if (r.status === 401) { removeToken(); return show('screen-login'); }
@@ -461,7 +464,10 @@
   function renderResults({ slug, display_name, results, cached_at }) {
     currentSlug = slug;
     const el = document.getElementById('results-wrap');
-    const list = (results || []).filter(r => r.available !== false).sort((a, b) => a.price_cents - b.price_cents);
+    const allStores = (results || []);
+    const withPrice = allStores.filter(r => r.price_cents > 0).sort((a, b) => a.price_cents - b.price_cents);
+    const noPrice = allStores.filter(r => !(r.price_cents > 0));
+    const list = [...withPrice, ...noPrice];
     const ago = cached_at ? timeAgo(cached_at) : '';
 
     el.innerHTML = `
@@ -477,18 +483,23 @@
       <hr class="divider">
       <div class="section-label">Comparar Preços</div>
 
-      ${list.length ? list.map((item, i) => `
-        <div class="result-card${i===0?' cheapest':''}">
-          <span class="result-rank">#${i+1}</span>
+      ${list.length ? list.map((item) => {
+        const hasPrice = item.price_cents > 0;
+        const rank = hasPrice ? withPrice.indexOf(item) + 1 : null;
+        const isBest = rank === 1;
+        return `<div class="result-card${isBest ? ' cheapest' : ''}${!hasPrice ? ' unavailable' : ''}">
+          <span class="result-rank">${rank ? '#' + rank : '—'}</span>
           <div class="result-info">
             <div class="result-store">${esc(item.store_display_name||item.store)}</div>
             <div class="result-name">${esc(item.product_name||display_name||'')}</div>
           </div>
           <div class="result-price-block">
-            <div class="result-price">${formatBRL(item.price_cents)}</div>
-            <a class="btn-offer" href="${esc(item.product_url)}" target="_blank" rel="noopener">ver oferta</a>
+            ${hasPrice
+              ? `<div class="result-price">${formatBRL(item.price_cents)}</div><a class="btn-offer" href="${esc(item.product_url)}" target="_blank" rel="noopener">ver oferta</a>`
+              : `<span class="result-unavailable-label">não encontrado</span>`}
           </div>
-        </div>`).join('') : '<div class="state-box" style="padding:32px 0">Não encontramos esse perfume nas lojas monitoradas.</div>'}
+        </div>`;
+      }).join('') : '<div class="state-box" style="padding:32px 0">Não encontramos esse perfume nas lojas monitoradas.</div>'}
 
       <hr class="divider">
       <div id="comments-section">
