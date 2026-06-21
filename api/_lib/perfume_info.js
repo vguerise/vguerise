@@ -99,7 +99,17 @@ async function getPerfumeInfo(slug, displayName) {
 
   if (cached && cached.notes_top && cached.notes_top.length > 0) {
     const age = (Date.now() - new Date(cached.updated_at).getTime()) / (1000 * 60 * 60 * 24);
-    if (age < CACHE_TTL_DAYS) return cached;
+    if (age < CACHE_TTL_DAYS) {
+      // Dados ok — mas se imagem estiver faltando tenta buscar sem chamar Claude
+      if (!cached.image_url) {
+        const imageUrl = await getProductImage(slug).catch(() => null);
+        if (imageUrl) {
+          await db.from('perfume_details').update({ image_url: imageUrl }).eq('product_slug', slug);
+          return { ...cached, image_url: imageUrl };
+        }
+      }
+      return cached;
+    }
   }
 
   // Gerar dados via Claude

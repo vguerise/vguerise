@@ -33,12 +33,11 @@ module.exports = async function handler(req, res) {
   if (!q) return res.status(400).json({ error: 'Parâmetro q obrigatório' });
 
   try {
-    // 1. slugs existentes para match determinístico
-    const { data: rows } = await getDb().from('price_cache').select('product_slug');
-    const existingSlugs = (rows || []).map(r => r.product_slug);
+    // 1. slugs + nomes existentes para match determinístico com nome correto
+    const { data: rows } = await getDb().from('price_cache').select('product_slug, display_name');
 
     // 2. normalizar termo → slug canônico
-    const { slug, display_name } = await normalizeQuery(q, existingSlugs);
+    const { slug, display_name } = await normalizeQuery(q, rows || []);
 
     // 3. checar cache
     const cached = await getCached(slug);

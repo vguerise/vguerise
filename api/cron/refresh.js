@@ -49,10 +49,9 @@ module.exports = async function handler(req, res) {
 
   try {
     const db = getDb();
-    const { data: rows } = await db.from('price_cache').select('product_slug');
-    const existingSlugs = (rows || []).map(r => r.product_slug);
+    const { data: rows } = await db.from('price_cache').select('product_slug, display_name');
 
-    const result = await refreshOne(String(query).trim(), existingSlugs);
+    const result = await refreshOne(String(query).trim(), rows || []);
     console.log('[cron/refresh] ok:', result.slug, `(${result.stores_found} lojas)`);
     return res.status(200).json({ ok: true, ...result });
   } catch (err) {
