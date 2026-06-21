@@ -21,6 +21,7 @@ const CURATED = [
   'amouage reflection man',
   'memo irish leather',
   'roja parfums elysium pour homme',
+  'nishane hacivat',
 ];
 
 module.exports = { CURATED };
