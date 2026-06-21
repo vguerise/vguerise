@@ -16,7 +16,7 @@ const STORES = {
   king_of_parfums: {
     id: 'king_of_parfums',
     display_name: 'The King of Parfums',
-    domain: 'thekingofparfums.com.br'
+    domain: 'www.thekingofparfums.com.br'
   }
 };
 
@@ -178,7 +178,7 @@ async function searchViaDirectSlug(store, term) {
     const ogTitle = (html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/) || [])[1];
     console.log(`[nuvemshop:${store.id}] ogTitle=${ogTitle}`);
     if (!ogTitle) continue;
-    const name = ogTitle.replace(/\s*[-|].*$/, '').trim();
+    const name = ogTitle.split(/\s*\|\s*/)[0].trim();
 
     return {
       store: store.id,
