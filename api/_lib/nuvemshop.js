@@ -151,6 +151,11 @@ async function tryProductSlug(store, slug) {
   if (!ogTitle) return null;
   const name = ogTitle.split(/\s*\|\s*/)[0].trim();
 
+  // Valida que o produto encontrado corresponde ao slug buscado
+  // (evita aceitar produto errado quando a loja tem URLs inconsistentes)
+  const slugTokens = slug.split('-').filter(t => t.length >= 3);
+  if (!slugTokens.every(t => name.toLowerCase().includes(t))) return null;
+
   return {
     store: store.id,
     store_display_name: store.display_name,
