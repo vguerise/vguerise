@@ -235,20 +235,34 @@ async function searchViaClaudeOracle(store, term) {
   return hit ? hit.value : null;
 }
 
-async function searchNuvemshop(storeId, term) {
-  const store = STORES[storeId];
-
-  // Fase 1: página de marca SSR
+// Busca interna: executa as 3 fases para um termo específico
+async function searchInStore(store, term) {
   const brandResult = await searchViaBrandPage(store, term);
   if (brandResult) return brandResult;
 
-  // Fase 2: slugs padrão em paralelo
   const directResult = await searchViaDirectSlug(store, term);
   if (directResult) return directResult;
 
-  // Fase 3: Claude gera slugs específicos para a loja
   const oracleResult = await searchViaClaudeOracle(store, term);
   return oracleResult || null;
+}
+
+async function searchNuvemshop(storeId, term) {
+  const store = STORES[storeId];
+
+  // Busca versão regular e versão tester em paralelo
+  const [regularRes, testerRes] = await Promise.allSettled([
+    searchInStore(store, term),
+    searchInStore(store, term + '-tester')
+  ]);
+
+  const regular = regularRes.status === 'fulfilled' ? regularRes.value : null;
+  const testerRaw = testerRes.status === 'fulfilled' ? testerRes.value : null;
+  const tester = testerRaw ? { ...testerRaw, is_tester: true } : null;
+
+  if (!regular && !tester) return null;
+  if (regular && tester) return [regular, tester];
+  return regular || tester;
 }
 
 module.exports = { searchNuvemshop };
