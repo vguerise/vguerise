@@ -1,6 +1,6 @@
-const { normalizeQuery } = require('../_lib/normalize');
+﻿const { normalizeQuery } = require('../_lib/normalize');
 const { searchNeeche } = require('../_lib/neeche');
-const { searchNuvemshop } = require('../_lib/nuvemshop');
+const { searchNuvemshop, searchMellalta } = require('../_lib/nuvemshop');
 const { saveCache } = require('../_lib/cache');
 const { getDb } = require('../_lib/db');
 const { getPerfumeInfo } = require('../_lib/perfume_info');
@@ -14,21 +14,21 @@ function verifyCronSecret(req) {
 async function refreshOne(query, existingSlugs) {
   const { slug, display_name } = await normalizeQuery(query, existingSlugs);
 
-  const [r0, r1, r2, r3] = await Promise.allSettled([
+  const [r0, r1, r2, r3, r4, r5] = await Promise.allSettled([
     searchNeeche(slug),
     searchNuvemshop('the_gregs', slug),
     searchNuvemshop('pequi', slug),
     searchNuvemshop('king_of_parfums', slug),
+    searchNuvemshop('rivoli', slug),
+    searchMellalta(slug),
   ]);
 
-  const results = [r0, r1, r2, r3]
+  const results = [r0, r1, r2, r3, r4, r5]
     .filter(r => r.status === 'fulfilled' && r.value !== null)
     .flatMap(r => Array.isArray(r.value) ? r.value : [r.value]);
 
   await saveCache(slug, display_name, results);
 
-  // Popula perfume_details (imagem + descrição + notas) para exibir na página inicial
-  // getPerfumeInfo usa cache próprio (TTL 30 dias) — Claude só é chamado na 1ª vez
   try {
     await getPerfumeInfo(slug, display_name);
   } catch (e) {
@@ -41,7 +41,6 @@ async function refreshOne(query, existingSlugs) {
 module.exports = async function handler(req, res) {
   if (!verifyCronSecret(req)) return res.status(401).json({ error: 'Unauthorized' });
 
-  // GET sem ?q → retorna lista curada para o GitHub Actions ler
   const query = req.query.q || (req.body && req.body.query);
   if (!query) {
     return res.status(200).json({ queries: CURATED, total: CURATED.length });
@@ -52,7 +51,7 @@ module.exports = async function handler(req, res) {
     const { data: rows } = await db.from('price_cache').select('product_slug, display_name');
 
     const result = await refreshOne(String(query).trim(), rows || []);
-    console.log('[cron/refresh] ok:', result.slug, `(${result.stores_found} lojas)`);
+    console.log('[cron/refresh] ok:', result.slug, '(' + result.stores_found + ' lojas)');
     return res.status(200).json({ ok: true, ...result });
   } catch (err) {
     console.error('[cron/refresh] erro:', query, err?.message);
