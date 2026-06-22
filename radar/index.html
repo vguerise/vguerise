@@ -366,7 +366,7 @@
   document.querySelectorAll('.nav-item').forEach(function(b){ b.addEventListener('click',function(){ switchPanel(b.dataset.panel); }); });
 
   function onAppReady(){
-    renderWishlist(); renderCollection();
+    loadFeatured(); renderWishlist(); renderCollection();
     var t=getToken()||'';
     try{ var p=t.split('.'); if(p.length===3){ var pl=JSON.parse(atob(p[1].replace(/-/g,'+').replace(/_/g,'/'))); var el=document.getElementById('sb-email'); if(el&&pl.sub) el.textContent=pl.sub; } }catch(e){}
   }
