@@ -291,6 +291,7 @@
 <script>
 (function(){
   'use strict';
+  var API='https://radar-perfumes.vercel.app';
   var TK='radar_token',WK='radar_wishlist',CK='radar_collection';
   function getToken(){ return localStorage.getItem(TK); }
   function setToken(t){ localStorage.setItem(TK,t); }
@@ -319,7 +320,7 @@
 
   (function(){
     var t=getToken(); if(!t){ showScreen('screen-login'); return; }
-    fetch('/api/auth/verify',{headers:authHdr()}).then(function(r){ if(r.ok){ showScreen('screen-app'); onAppReady(); } else{ clearToken(); showScreen('screen-login'); } }).catch(function(){ showScreen('screen-app'); onAppReady(); });
+    fetch(API+'/api/auth/verify',{headers:authHdr()}).then(function(r){ if(r.ok){ showScreen('screen-app'); onAppReady(); } else{ clearToken(); showScreen('screen-login'); } }).catch(function(){ showScreen('screen-app'); onAppReady(); });
   })();
 
   document.getElementById('form-login').addEventListener('submit',function(e){
@@ -327,7 +328,7 @@
     var em=document.getElementById('input-email').value.trim();
     var btn=document.getElementById('btn-login'),err=document.getElementById('login-error');
     err.textContent=''; btn.disabled=true; btn.textContent='Entrando...';
-    fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})})
+    fetch(API+'/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})})
       .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
       .then(function(res){ if(!res.ok) throw new Error(res.d.error||'Acesso nao autorizado.'); setToken(res.d.token); showScreen('screen-app'); onAppReady(); })
       .catch(function(ex){ err.textContent=ex.message; })
@@ -347,7 +348,7 @@
     btn.disabled=true; hero.classList.add('compact');
     ['hero-tag','hero-title','hero-sub'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.add('hidden'); });
     wrap.innerHTML='<div class="state-box"><div class="spinner"></div>Buscando nas lojas...</div>';
-    fetch('/api/search?q='+encodeURIComponent(q),{headers:authHdr()})
+    fetch(API+'/api/search?q='+encodeURIComponent(q),{headers:authHdr()})
       .then(function(r){ if(r.status===401){ clearToken(); showScreen('screen-login'); return null; } if(!r.ok) throw new Error('erro'); return r.json(); })
       .then(function(data){ if(data) renderResults(data); })
       .catch(function(){ wrap.innerHTML='<div class="state-box">Falha na busca. Tente novamente.<p>Verifique sua conexao.</p></div>'; })
@@ -399,7 +400,7 @@
     var file=e.target.files[0]; if(!file) return;
     var ss=document.getElementById('upload-status'); ss.className='upload-status'; ss.textContent='Processando...';
     var nm=file.name.toLowerCase();
-    function send(p){ fetch('/api/parse-collection',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHdr()),body:JSON.stringify(p)}).then(function(r){ return r.json(); }).then(function(d){ var a=0; (d.perfumes||[]).forEach(function(x){ if(addCollection(x)) a++; }); renderCollection(); ss.textContent=a>0?(a+' perfume'+(a>1?'s':'')+' adicionado'+(a>1?'s':'.')+'.'):('Nenhum novo encontrado.'); }).catch(function(){ ss.className='upload-status err'; ss.textContent='Erro ao processar.'; }); }
+    function send(p){ fetch(API+'/api/parse-collection',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHdr()),body:JSON.stringify(p)}).then(function(r){ return r.json(); }).then(function(d){ var a=0; (d.perfumes||[]).forEach(function(x){ if(addCollection(x)) a++; }); renderCollection(); ss.textContent=a>0?(a+' perfume'+(a>1?'s':'')+' adicionado'+(a>1?'s':'.')+'.'):('Nenhum novo encontrado.'); }).catch(function(){ ss.className='upload-status err'; ss.textContent='Erro ao processar.'; }); }
     if(nm.endsWith('.pdf')){ var r=new FileReader(); r.onload=function(ev){ send({content:ev.target.result.split(',')[1],fileType:'pdf'}); }; r.readAsDataURL(file); }
     else if(nm.endsWith('.txt')){ var r2=new FileReader(); r2.onload=function(ev){ send({content:ev.target.result,fileType:'txt'}); }; r2.readAsText(file); }
     else{ ss.className='upload-status err'; ss.textContent='Use .txt ou .pdf'; }
@@ -413,7 +414,7 @@
     var btn=document.getElementById('btn-send-chat'); inp.value=''; appendMsg('user',esc(msg));
     var tp=appendMsg('assistant','<div class="typing-dots"><span></span><span></span><span></span></div>');
     btn.disabled=true; inp.disabled=true;
-    fetch('/api/chat',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHdr()),body:JSON.stringify({message:msg,history:chatHist,collection:getCollection()})})
+    fetch(API+'/api/chat',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHdr()),body:JSON.stringify({message:msg,history:chatHist,collection:getCollection()})})
       .then(function(r){ if(r.status===401){ clearToken(); showScreen('screen-login'); return null; } return r.json(); })
       .then(function(data){ tp.remove(); if(!data) return; chatHist=data.history||chatHist; appendMsg('assistant',esc(data.reply||'Nao consegui processar.').replace(/\n/g,'<br>')); })
       .catch(function(){ tp.remove(); appendMsg('assistant','Erro de conexao. Tente novamente.'); })
