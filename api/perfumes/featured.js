@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+﻿const jwt = require('jsonwebtoken');
 const { getDb } = require('../_lib/db');
 const { getProductImage } = require('../_lib/perfume_info');
 
@@ -17,7 +17,7 @@ function authGuard(req) {
 module.exports = async function handler(req, res) {
   cors(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (!authGuard(req)) return res.status(401).json({ error: 'Não autorizado' });
+  if (!authGuard(req)) return res.status(401).json({ error: 'Nao autorizado' });
 
   try {
     const db = getDb();
@@ -42,11 +42,15 @@ module.exports = async function handler(req, res) {
       const withPrice = results.filter(r => r.price_cents > 0);
       if (withPrice.length === 0) continue;
 
-      const prices = withPrice.map(r => r.price_cents);
+      // Testers excluidos do calculo de desconto — preco de tester nao deve inflar savings_pct
+      const regularsWithPrice = withPrice.filter(r => !r.is_tester);
+      const priceBase = regularsWithPrice.length > 0 ? regularsWithPrice : withPrice;
+
+      const prices = priceBase.map(r => r.price_cents);
       const min = Math.min(...prices);
       const max = Math.max(...prices);
-      const savings_pct = prices.length >= 2 ? Math.round((1 - min / max) * 100) : 0;
-      const bestResult = withPrice.find(r => r.price_cents === min) || withPrice[0];
+      const savings_pct = priceBase.length >= 2 ? Math.round((1 - min / max) * 100) : 0;
+      const bestResult = priceBase.find(r => r.price_cents === min) || priceBase[0];
 
       deals.push({
         slug: row.product_slug,
@@ -61,13 +65,11 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Ordenar: maior desconto primeiro, empate por menor preço
     deals.sort((a, b) => b.savings_pct - a.savings_pct || a.min_price - b.min_price);
 
     const top = deals.slice(0, 12);
     if (top.length === 0) return res.status(200).json({ featured: [], total: 0 });
 
-    // Buscar detalhes do cache
     const slugs = top.map(d => d.slug);
     const { data: details } = await db
       .from('perfume_details')
@@ -82,7 +84,6 @@ module.exports = async function handler(req, res) {
       ...(detailMap[deal.slug] || {})
     }));
 
-    // Busca imagem para produtos sem image_url (máx 3 em paralelo, timeout 5s)
     const noImage = featured.filter(f => !f.image_url).slice(0, 3);
     if (noImage.length > 0) {
       await Promise.race([
