@@ -187,6 +187,7 @@
     @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.6; transform:scale(0.92); } }
     .result-card.unavailable { opacity: 0.55; }
     .result-unavailable-label { font-size: 11px; color: var(--gray-300); font-style: italic; }
+    .tester-badge { display: inline-block; background: #E8F0FE; color: #1A56DB; border: 1px solid #C3D9FB; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; margin-left: 4px; vertical-align: middle; }
     .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
 
     /* ─── MODAL ─── */
@@ -454,7 +455,7 @@
           <div class="modal-price-table">
             ${sorted.map((r,i)=>`<div class="modal-price-row${i===0?' best':''}">
               <span class="modal-price-rank">#${i+1}</span>
-              <span class="modal-price-store">${esc(r.store_display_name||r.store||'')}</span>
+              <span class="modal-price-store">${esc(r.store_display_name||r.store||'')}${r.is_tester ? '<span class="tester-badge">TESTER</span>' : ''}</span>
               <span class="modal-price-val">${formatBRL(r.price_cents)}</span>
               ${r.product_url?`<a class="btn-store" href="${esc(r.product_url)}" target="_blank" rel="noopener">ver</a>`:''}
             </div>`).join('')}
@@ -546,7 +547,7 @@
         return `<div class="result-card${isBest ? ' cheapest' : ''}${!hasPrice ? ' unavailable' : ''}">
           <span class="result-rank">${rank ? '#' + rank : '—'}</span>
           <div class="result-info">
-            <div class="result-store">${esc(item.store_display_name||item.store)}</div>
+            <div class="result-store">${esc(item.store_display_name||item.store)}${item.is_tester ? '<span class="tester-badge">TESTER</span>' : ''}</div>
             <div class="result-name">${esc(item.product_name||display_name||'')}</div>
           </div>
           <div class="result-price-block">
