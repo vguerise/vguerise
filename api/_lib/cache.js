@@ -1,4 +1,4 @@
-const { getDb } = require('./db');
+﻿const { getDb } = require('./db');
 
 const TTL_HOURS = 6;
 
@@ -15,18 +15,20 @@ async function getCached(slug) {
 async function saveCache(slug, displayName, newResults) {
   const db = getDb();
 
-  // Se já existe cache, preservar resultados de lojas que falharam agora
   const { data: existing } = await db
     .from('price_cache')
     .select('results')
     .eq('product_slug', slug)
     .maybeSingle();
 
+  function resultKey(r) {
+    return r.store + (r.is_tester ? '-tester' : '');
+  }
+
   let merged = newResults;
   if (existing) {
-    const oldByStore = Object.fromEntries(existing.results.map(r => [r.store, r]));
-    const newByStore = Object.fromEntries(newResults.map(r => [r.store, r]));
-    // lojas novas sobrescrevem, lojas ausentes mantêm o valor anterior
+    const oldByStore = Object.fromEntries((existing.results || []).map(r => [resultKey(r), r]));
+    const newByStore = Object.fromEntries(newResults.map(r => [resultKey(r), r]));
     merged = Object.values({ ...oldByStore, ...newByStore });
   }
 
