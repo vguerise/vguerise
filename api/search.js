@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
+﻿const jwt = require('jsonwebtoken');
 const { normalizeQuery } = require('./_lib/normalize');
 const { searchNeeche } = require('./_lib/neeche');
-const { searchNuvemshop } = require('./_lib/nuvemshop');
+const { searchNuvemshop, searchMellalta } = require('./_lib/nuvemshop');
 const { getCached, saveCache, logSearch } = require('./_lib/cache');
 const { getDb } = require('./_lib/db');
 
@@ -27,19 +27,15 @@ module.exports = async function handler(req, res) {
   cors(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
-  if (!authGuard(req)) return res.status(401).json({ error: 'Não autorizado' });
+  if (!authGuard(req)) return res.status(401).json({ error: 'Nao autorizado' });
 
   const q = (req.query.q || '').trim();
-  if (!q) return res.status(400).json({ error: 'Parâmetro q obrigatório' });
+  if (!q) return res.status(400).json({ error: 'Parametro q obrigatorio' });
 
   try {
-    // 1. slugs + nomes existentes para match determinístico com nome correto
     const { data: rows } = await getDb().from('price_cache').select('product_slug, display_name');
-
-    // 2. normalizar termo → slug canônico
     const { slug, display_name } = await normalizeQuery(q, rows || []);
 
-    // 3. checar cache
     const cached = await getCached(slug);
     if (cached) {
       await logSearch(q, slug, true);
@@ -47,27 +43,28 @@ module.exports = async function handler(req, res) {
         slug,
         display_name: cached.display_name,
         cache_status: 'hit',
+        stores_searched: 6,
         results: cached.results
       });
     }
 
-    // 4. buscar nas 4 lojas em paralelo (cada loja pode retornar regular + tester)
-    const [r0, r1, r2, r3] = await Promise.allSettled([
+    const [r0, r1, r2, r3, r4, r5] = await Promise.allSettled([
       searchNeeche(slug),
       searchNuvemshop('the_gregs', slug),
       searchNuvemshop('pequi', slug),
-      searchNuvemshop('king_of_parfums', slug)
+      searchNuvemshop('king_of_parfums', slug),
+      searchNuvemshop('rivoli', slug),
+      searchMellalta(slug)
     ]);
 
-    const results = [r0, r1, r2, r3]
+    const results = [r0, r1, r2, r3, r4, r5]
       .filter(r => r.status === 'fulfilled' && r.value !== null)
       .flatMap(r => Array.isArray(r.value) ? r.value : [r.value]);
 
-    // 5. salvar no cache
     await saveCache(slug, display_name, results);
     await logSearch(q, slug, false);
 
-    return res.status(200).json({ slug, display_name, cache_status: 'miss', results });
+    return res.status(200).json({ slug, display_name, cache_status: 'miss', stores_searched: 6, results });
 
   } catch (err) {
     console.error('[search] erro:', err?.message || err);
