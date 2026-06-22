@@ -1,4 +1,4 @@
-// Tokeniza um string removendo tamanhos (ml) e palavras genéricas
+// Tokeniza um string removendo tamanhos (ml) e palavras genericas
 function coreTokens(str) {
   return str
     .toLowerCase()
@@ -69,6 +69,9 @@ async function searchNeeche(term) {
       available: (offer.AvailableQuantity || 0) > 0,
       extraction_confidence: 100
     };
+    // Imagem direto do response VTEX — nao precisa raspar pagina
+    const rawImageUrl = item?.images?.[0]?.imageUrl || null;
+    if (rawImageUrl) result.image_url = rawImageUrl;
     if (isTester) result.is_tester = true;
     return result;
   }
