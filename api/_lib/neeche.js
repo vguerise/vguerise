@@ -17,7 +17,6 @@ function pickBestProduct(products, term, { excludeTesters = false } = {}) {
 
   let candidates = products.filter(p => {
     const pCore = coreTokens(p.productName);
-    // Todos os tokens do termo devem aparecer no nome do produto
     return searchCore.every(t => pCore.includes(t));
   });
 
@@ -27,12 +26,9 @@ function pickBestProduct(products, term, { excludeTesters = false } = {}) {
 
   if (!candidates.length) return null;
 
-  // Se há candidatos com nomes-base diferentes (ex: Naxos vs Naxos Caspian),
-  // e o termo não desambigua, retorna null em vez de adivinhar
   const uniqueNames = new Set(candidates.map(p => coreTokens(p.productName).join(' ')));
   if (uniqueNames.size > 1) return null;
 
-  // Se o usuário especificou tamanho, filtra pelo tamanho exato
   if (searchSize) {
     const sized = candidates.filter(p => p.productName.includes(searchSize + 'ml') || p.productName.includes(searchSize + ' ml'));
     if (!sized.length) return null;
@@ -77,7 +73,6 @@ async function searchNeeche(term) {
     return result;
   }
 
-  // Busca versão regular (excluindo testers) e versão tester em paralelo
   const regular = pickBestProduct(products, term, { excludeTesters: true });
   const tester = pickBestProduct(products, term + ' tester');
 
@@ -92,4 +87,31 @@ async function searchNeeche(term) {
   return out;
 }
 
-module.exports = { searchNeeche };
+// Retorna os N mais vendidos da Neeche usando a API de catalogo VTEX
+async function browseNeecheBestSellers(limit = 60) {
+  const url = `https://www.neeche.com.br/api/catalog_system/pub/products/search?O=OrderByTopSaleDESC&_from=0&_to=${limit - 1}`;
+  try {
+    const r = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; RadarPerfumes/1.0)' },
+      signal: AbortSignal.timeout(15000)
+    });
+    if (!r.ok) return [];
+    const products = await r.json();
+    if (!Array.isArray(products)) return [];
+    const seen = new Set();
+    const names = [];
+    for (const p of products) {
+      if (!p.productName) continue;
+      const key = coreTokens(p.productName).join(' ');
+      if (!seen.has(key) && !p.productName.toLowerCase().includes('tester')) {
+        seen.add(key);
+        names.push(p.productName);
+      }
+    }
+    return names;
+  } catch {
+    return [];
+  }
+}
+
+module.exports = { searchNeeche, browseNeecheBestSellers };
