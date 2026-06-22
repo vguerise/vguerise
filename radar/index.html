@@ -177,6 +177,57 @@
       .search-bar{flex-direction:column}
       .list-wrap{padding:24px 16px 40px}
     }
+    #featured-section{padding:20px 24px 48px;width:100%;max-width:1000px;margin:0 auto}
+    .featured-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .featured-title{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}
+    .featured-count{font-size:12px;color:var(--text-dim)}
+    .perf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media(min-width:520px){.perf-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:760px){.perf-grid{grid-template-columns:repeat(4,1fr)}}
+    .perf-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s}
+    .perf-card:hover{border-color:var(--orange);box-shadow:0 4px 20px rgba(232,93,4,.15);transform:translateY(-2px)}
+    .perf-card-thumb{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--surface2)}
+    .perf-card-placeholder{width:100%;aspect-ratio:1;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:40px;font-weight:900;color:var(--border-hi)}
+    .perf-card-body{padding:12px 14px 14px}
+    .perf-card-brand{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:3px}
+    .perf-card-name{font-size:13px;font-weight:500;color:var(--text);line-height:1.3;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .perf-card-footer{display:flex;align-items:flex-end;justify-content:space-between;gap:4px}
+    .perf-card-price{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:var(--orange)}
+    .perf-card-store{font-size:10px;color:var(--text-dim);margin-top:2px}
+    .savings-badge{background:rgba(42,157,92,.15);color:#2A9D5C;border:1px solid rgba(42,157,92,.3);font-size:10px;font-weight:700;padding:3px 7px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+    .btn-back{background:none;border:none;color:var(--orange);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;padding:0;white-space:nowrap}
+    .btn-back:hover{text-decoration:underline}
+    .feat-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);align-items:flex-end;justify-content:center;z-index:998;padding:0}
+    .feat-modal-overlay.open{display:flex}
+    @media(min-width:600px){.feat-modal-overlay{align-items:center;padding:20px}}
+    .feat-modal-box{background:var(--surface);border:1px solid var(--border);border-radius:20px 20px 0 0;width:100%;max-width:540px;max-height:92dvh;overflow-y:auto}
+    @media(min-width:600px){.feat-modal-box{border-radius:20px}}
+    .feat-modal-topbar{position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;justify-content:flex-end;z-index:1}
+    .feat-modal-close{background:var(--surface2);border:none;color:var(--text-mid);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .feat-modal-close:hover{background:var(--border-hi);color:var(--text)}
+    .feat-modal-img{width:100%;height:220px;object-fit:contain;background:var(--surface2);display:block}
+    .feat-modal-placeholder{width:100%;height:180px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:64px;font-weight:900;color:var(--border-hi)}
+    .feat-modal-content{padding:20px}
+    .feat-modal-brand{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:5px}
+    .feat-modal-name{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;margin-bottom:8px;line-height:1.2}
+    .feat-modal-gender{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--surface2);border:1px solid var(--border);color:var(--text-mid);margin-bottom:14px}
+    .feat-modal-desc{font-size:14px;color:var(--text-mid);line-height:1.65;margin-bottom:20px;font-weight:300}
+    .feat-modal-section{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin:16px 0 10px}
+    .feat-modal-notes-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+    .feat-modal-notes-col-label{font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+    .feat-modal-note-item{font-size:13px;color:var(--text-mid);padding:2px 0}
+    .feat-modal-accords{display:flex;flex-wrap:wrap;gap:6px}
+    .feat-modal-accord{font-size:12px;padding:4px 10px;border-radius:20px;background:var(--orange-dim);border:1px solid rgba(232,93,4,.2);color:var(--orange)}
+    .feat-modal-price-table{display:flex;flex-direction:column;gap:6px}
+    .feat-modal-price-row{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border)}
+    .feat-modal-price-row.best{border-color:var(--orange);background:linear-gradient(135deg,rgba(232,93,4,.08),var(--surface2))}
+    .feat-modal-price-rank{font-size:11px;font-weight:900;color:var(--text-dim);width:20px;flex-shrink:0}
+    .feat-modal-price-row.best .feat-modal-price-rank{color:var(--orange)}
+    .feat-modal-price-store{flex:1;font-size:13px;font-weight:500}
+    .feat-modal-price-val{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:900;color:var(--text)}
+    .feat-modal-price-row.best .feat-modal-price-val{color:var(--orange)}
+    .feat-modal-btn-store{font-size:11px;font-weight:700;padding:6px 12px;border-radius:7px;border:1px solid var(--border);background:none;color:var(--text-mid);cursor:pointer;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0}
+    .feat-modal-btn-store:hover{background:var(--orange);border-color:var(--orange);color:#fff}
   </style>
 </head>
 <body>
@@ -237,6 +288,7 @@
           <button class="btn-search" id="btn-search">Buscar</button>
         </div>
       </div>
+      <div id="featured-section"></div>
       <div class="results-wrap" id="results-wrap"></div>
     </div>
     <div id="panel-wishlist" class="panel">
@@ -281,6 +333,7 @@
     </div>
   </main>
 </div>
+<div id="feat-modal-overlay" class="feat-modal-overlay" onclick="closeFeatModal()"><div class="feat-modal-box" onclick="event.stopPropagation()"><div class="feat-modal-topbar"><button class="feat-modal-close" onclick="closeFeatModal()">&#x2715;</button></div><div id="feat-modal-content"></div></div></div>
 <div id="img-modal" class="img-modal" onclick="closeModal()">
   <div class="img-modal-box" onclick="event.stopPropagation()">
     <button class="img-modal-close" onclick="closeModal()">&#x2715;</button>
@@ -347,7 +400,7 @@
     var btn=document.getElementById('btn-search'),wrap=document.getElementById('results-wrap'),hero=document.getElementById('search-hero');
     btn.disabled=true; hero.classList.add('compact');
     ['hero-tag','hero-title','hero-sub'].forEach(function(id){ var el=document.getElementById(id); if(el) el.classList.add('hidden'); });
-    wrap.innerHTML='<div class="state-box"><div class="spinner"></div>Buscando nas lojas...</div>';
+    document.getElementById('featured-section').style.display='none'; wrap.innerHTML='<div class="state-box"><div class="spinner"></div>Buscando nas lojas...</div>';
     fetch(API+'/api/search?q='+encodeURIComponent(q),{headers:authHdr()})
       .then(function(r){ if(r.status===401){ clearToken(); showScreen('screen-login'); return null; } if(!r.ok) throw new Error('erro'); return r.json(); })
       .then(function(data){ if(data) renderResults(data); })
@@ -423,6 +476,11 @@
   document.getElementById('btn-send-chat').addEventListener('click',sendChat);
   document.getElementById('input-chat').addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendChat(); } });
 
+  var featuredData=[];
+  function loadFeatured(){var section=document.getElementById('featured-section');section.style.display='';document.getElementById('results-wrap').innerHTML='';var hero=document.getElementById('search-hero');if(hero)hero.classList.remove('compact');['hero-tag','hero-title','hero-sub'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('hidden');});section.innerHTML='<div class="state-box"><div class="spinner"></div>Carregando vitrine...</div>';fetch(API+'/api/perfumes/featured',{headers:authHdr()}).then(function(r){if(r.status===401){clearToken();showScreen('screen-login');return null;}if(!r.ok)throw new Error();return r.json();}).then(function(data){if(!data)return;featuredData=data.featured||[];renderFeatured(featuredData);}).catch(function(){section.innerHTML='<div class="state-box">Vitrine indisponivel agora.<p>Faca uma busca acima para comparar precos.</p></div>';});}
+  function renderFeatured(items){var section=document.getElementById('featured-section');if(!items.length){section.innerHTML='<div class="state-box">Nenhuma oferta ainda.<p>Faca uma busca para comecar!</p></div>';return;}var html='<div class="featured-header"><span class="featured-title">Melhores Ofertas</span><span class="featured-count">'+items.length+' perfumes</span></div><div class="perf-grid">';items.forEach(function(item,i){var letter=esc(((item.brand||item.display_name||'?').charAt(0)||'?').toUpperCase());html+='<div class="perf-card" onclick="openFeaturedDetail('+i+')">';if(item.image_url)html+='<img class="perf-card-thumb" src="'+esc(item.image_url)+'" alt="" loading="lazy" onerror="this.style.display=\\'none\\'">';else html+='<div class="perf-card-placeholder">'+letter+'</div>';html+='<div class="perf-card-body"><div class="perf-card-brand">'+esc(item.brand||'')+'</div><div class="perf-card-name">'+esc(item.display_name||'')+'</div><div class="perf-card-footer"><div><div class="perf-card-price">'+fmtBrl(item.min_price||0)+'</div><div class="perf-card-store">'+esc(item.best_store||'')+'</div></div>';if(item.savings_pct>0)html+='<span class="savings-badge">-'+item.savings_pct+'%</span>';html+='</div></div></div>';});html+='</div>';section.innerHTML=html;}
+  window.openFeaturedDetail=function(idx){var deal=featuredData[idx];if(!deal)return;var sorted=(deal.results||[]).filter(function(r){return r.price_cents>0;}).sort(function(a,b){return a.price_cents-b.price_cents;});var letter=esc(((deal.brand||deal.display_name||'?').charAt(0)||'?').toUpperCase());var hasNotes=(deal.notes_top&&deal.notes_top.length)||(deal.notes_heart&&deal.notes_heart.length)||(deal.notes_base&&deal.notes_base.length);var html='';if(deal.image_url)html+='<img class="feat-modal-img" src="'+esc(deal.image_url)+'" alt="">';else html+='<div class="feat-modal-placeholder">'+letter+'</div>';html+='<div class="feat-modal-content">';if(deal.brand)html+='<div class="feat-modal-brand">'+esc(deal.brand)+'</div>';html+='<div class="feat-modal-name">'+esc(deal.display_name||'')+'</div>';if(deal.gender)html+='<span class="feat-modal-gender">'+esc(deal.gender)+'</span>';if(deal.description)html+='<p class="feat-modal-desc">'+esc(deal.description)+'</p>';if(hasNotes){html+='<div class="feat-modal-section">Piramide Olfativa</div><div class="feat-modal-notes-row">';var noteLabels=[' Topo','Coracao','Fundo'];var noteArrays=[deal.notes_top||[],deal.notes_heart||[],deal.notes_base||[]];noteLabels.forEach(function(label,i){html+='<div><div class="feat-modal-notes-col-label">'+label+'</div>'+noteArrays[i].map(function(n){return '<div class="feat-modal-note-item">'+esc(n)+'</div>';}).join('')+'</div>';});html+='</div>';}if(deal.accords&&deal.accords.length){html+='<div class="feat-modal-section">Acordes</div><div class="feat-modal-accords">'+deal.accords.map(function(a){return '<span class="feat-modal-accord">'+esc(a)+'</span>';}).join('')+'</div>';}if(sorted.length){html+='<div class="feat-modal-section">Comparar Precos</div><div class="feat-modal-price-table">'+sorted.map(function(r,i){return '<div class="feat-modal-price-row'+(i===0?' best':'')+'"><span class="feat-modal-price-rank">#'+(i+1)+'</span><span class="feat-modal-price-store">'+esc(r.store_display_name||r.store||'')+(r.is_tester?'<span class="tester-badge">TESTER</span>':'')+'</span><span class="feat-modal-price-val">'+fmtBrl(r.price_cents)+'</span>'+(r.product_url?'<a class="feat-modal-btn-store" href="'+esc(r.product_url)+'" target="_blank" rel="noopener">ver</a>':'')+'</div>';}).join('')+'</div>';}html+='</div>';document.getElementById('feat-modal-content').innerHTML=html;document.getElementById('feat-modal-overlay').classList.add('open');};
+  window.closeFeatModal=function(){document.getElementById('feat-modal-overlay').classList.remove('open');};
   window.openModal=function(url,name){ document.getElementById('modal-photo').src=url; document.getElementById('modal-name').textContent=name; document.getElementById('img-modal').classList.add('open'); };
   window.closeModal=function(){ document.getElementById('img-modal').classList.remove('open'); document.getElementById('modal-photo').src=''; };
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
