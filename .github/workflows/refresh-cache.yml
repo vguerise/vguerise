@@ -1,17 +1,17 @@
-name: Radar — Refresh Price Cache
+﻿name: Radar — Refresh Price Cache
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # 00h, 06h, 12h, 18h UTC (a cada 6 horas)
+    - cron: '0 */12 * * *'   # 00h e 12h UTC (a cada 12 horas)
   workflow_dispatch:          # permite disparar manualmente pelo GitHub
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
-      - name: Buscar lista de perfumes curados
+      - name: Buscar lista de perfumes a atualizar
         id: curated
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
@@ -37,4 +37,4 @@ jobs:
             echo "    HTTP $status — $(cat /tmp/resp.json)"
             sleep 5
           done
-          echo "Refresh concluído."
+          echo "Refresh concluido."
