@@ -1,5 +1,5 @@
-﻿const { normalizeQuery } = require('../_lib/normalize');
-const { searchNeeche } = require('../_lib/neeche');
+const { normalizeQuery } = require('../_lib/normalize');
+const { searchNeeche, browseNeecheBestSellers } = require('../_lib/neeche');
 const { searchNuvemshop, searchMellalta } = require('../_lib/nuvemshop');
 const { saveCache } = require('../_lib/cache');
 const { getDb } = require('../_lib/db');
@@ -44,16 +44,20 @@ module.exports = async function handler(req, res) {
   const query = req.query.q || (req.body && req.body.query);
 
   if (!query) {
-    // Retorna TODOS os perfumes com cache existente + curados (seed)
+    // Descobre os mais vendidos da Neeche + cache existente + curados
     // O GitHub Actions itera sobre essa lista e atualiza cada um
     try {
       const db = getDb();
-      const { data: cacheRows } = await db.from('price_cache').select('display_name');
+      const [{ data: cacheRows }, neecheBestSellers] = await Promise.all([
+        db.from('price_cache').select('display_name'),
+        browseNeecheBestSellers(60),
+      ]);
       const cached = (cacheRows || []).map(r => r.display_name).filter(Boolean);
-      const allQueries = [...new Set([...CURATED, ...cached])];
+      const allQueries = [...new Set([...CURATED, ...cached, ...neecheBestSellers])];
+      console.log(`[cron/refresh] lista: ${CURATED.length} curados + ${cached.length} cache + ${neecheBestSellers.length} Neeche = ${allQueries.length} total`);
       return res.status(200).json({ queries: allQueries, total: allQueries.length });
     } catch (err) {
-      // Fallback para lista curada se o banco falhar
+      console.error('[cron/refresh] erro ao montar lista:', err?.message);
       return res.status(200).json({ queries: CURATED, total: CURATED.length });
     }
   }
