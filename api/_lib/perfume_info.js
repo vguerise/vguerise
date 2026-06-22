@@ -30,12 +30,14 @@ function extractImageFromLd(html) {
 }
 
 // Valida se o HTML da página pertence ao produto esperado (evita imagem errada)
+// Checa todos os tokens do slug (>=3 chars) no título da página
 function pageMatchesSlug(html, slug) {
-  const brand = slug.split('-')[0]; // ex: "xerjoff", "montale"
+  const tokens = slug.split('-').filter(p => p.length >= 3);
   const title = (html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || '').toLowerCase();
-  const ogTitle = (html.match(/property="og:title"[^>]+content="([^"]+)"/i)?.[1] || '').toLowerCase();
+  const ogTitle = (html.match(/property="og:title"[^>]+content="([^"]+)"/i)?.[1]
+    || html.match(/content="([^"]+)"[^>]+property="og:title"/i)?.[1] || '').toLowerCase();
   const check = title + ' ' + ogTitle;
-  return check.includes(brand);
+  return tokens.every(t => check.includes(t));
 }
 
 // Busca imagem do produto nas lojas — prioriza Neeche (VTEX) por ter dados mais confiáveis
