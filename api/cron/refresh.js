@@ -42,14 +42,25 @@ module.exports = async function handler(req, res) {
   if (!verifyCronSecret(req)) return res.status(401).json({ error: 'Unauthorized' });
 
   const query = req.query.q || (req.body && req.body.query);
+
   if (!query) {
-    return res.status(200).json({ queries: CURATED, total: CURATED.length });
+    // Retorna TODOS os perfumes com cache existente + curados (seed)
+    // O GitHub Actions itera sobre essa lista e atualiza cada um
+    try {
+      const db = getDb();
+      const { data: cacheRows } = await db.from('price_cache').select('display_name');
+      const cached = (cacheRows || []).map(r => r.display_name).filter(Boolean);
+      const allQueries = [...new Set([...CURATED, ...cached])];
+      return res.status(200).json({ queries: allQueries, total: allQueries.length });
+    } catch (err) {
+      // Fallback para lista curada se o banco falhar
+      return res.status(200).json({ queries: CURATED, total: CURATED.length });
+    }
   }
 
   try {
     const db = getDb();
     const { data: rows } = await db.from('price_cache').select('product_slug, display_name');
-
     const result = await refreshOne(String(query).trim(), rows || []);
     console.log('[cron/refresh] ok:', result.slug, '(' + result.stores_found + ' lojas)');
     return res.status(200).json({ ok: true, ...result });
