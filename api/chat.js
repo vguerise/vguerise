@@ -2,8 +2,9 @@ const Anthropic = require('@anthropic-ai/sdk');
 const jwt = require('jsonwebtoken');
 const { normalizeQuery } = require('./_lib/normalize');
 const { searchNeeche } = require('./_lib/neeche');
-const { searchNuvemshop } = require('./_lib/nuvemshop');
+const { searchNuvemshop, searchMellalta } = require('./_lib/nuvemshop');
 const { getCached, saveCache } = require('./_lib/cache');
+const { getDb } = require('./_lib/db');
 
 const claude = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY });
 
@@ -20,18 +21,26 @@ function authGuard(req) {
 }
 
 async function runSearch(term) {
-  const { slug, display_name } = await normalizeQuery(term, []);
+  const db = getDb();
+  const { data: rows } = await db.from('price_cache').select('product_slug, display_name');
+  const { slug, display_name } = await normalizeQuery(term, rows || []);
+
   const cached = await getCached(slug);
   if (cached) return { display_name: cached.display_name, results: cached.results };
+
   const settled = await Promise.allSettled([
     searchNeeche(slug),
     searchNuvemshop('the_gregs', slug),
     searchNuvemshop('pequi', slug),
     searchNuvemshop('king_of_parfums', slug),
     searchNuvemshop('rivoli', slug),
-    searchNuvemshop('mellalta', slug)
+    searchMellalta(slug)
   ]);
-  const results = settled.filter(r => r.status === 'fulfilled' && r.value !== null).map(r => r.value);
+
+  const results = settled
+    .filter(r => r.status === 'fulfilled' && r.value !== null)
+    .flatMap(r => Array.isArray(r.value) ? r.value : [r.value]);
+
   await saveCache(slug, display_name, results);
   return { display_name, results };
 }
@@ -73,7 +82,7 @@ Ao recomendar perfumes:
     input_schema: {
       type: 'object',
       properties: {
-        perfume_name: { type: 'string', description: 'Nome do perfume com marca. Ex: "Xerjoff Naxos", "Nishane Hacivat"' }
+        perfume_name: { type: 'string', description: 'Nome do perfume com marca. Ex: "Xerjoff Naxos", "Nishane Hacivat", "Memo Paris Jazz Club"' }
       },
       required: ['perfume_name']
     }
@@ -107,14 +116,20 @@ Ao recomendar perfumes:
       const toolResults = await Promise.all(toolBlocks.map(async (tb) => {
         try {
           const data = await runSearch(tb.input.perfume_name);
-          const available = (data.results || []).filter(r => r.available !== false).sort((a, b) => a.price_cents - b.price_cents);
+          const available = (data.results || [])
+            .filter(r => r.available !== false && !r.is_tester)
+            .sort((a, b) => a.price_cents - b.price_cents);
           return {
             type: 'tool_result',
             tool_use_id: tb.id,
             content: JSON.stringify({
               display_name: data.display_name,
               found: available.length > 0,
-              results: available.map(r => ({ store: r.store_display_name, price: `R$ ${(r.price_cents/100).toFixed(2).replace('.',',')}`, url: r.product_url }))
+              results: available.map(r => ({
+                store: r.store_display_name,
+                price: `R$ ${(r.price_cents / 100).toFixed(2).replace('.', ',')}`,
+                url: r.product_url
+              }))
             })
           };
         } catch {
