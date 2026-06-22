@@ -7,7 +7,6 @@ const STORES = {
     id: 'the_gregs',
     display_name: 'The Gregs Exclusive',
     domain: 'thegregsexclusive.com',
-    // Padrão observado: brand-name-edp-gender-size
     slugHint: 'usa padrão "brand-nome-edp-genero-100ml" ex: xerjoff-naxos-edp-unissex-100ml'
   },
   pequi: {
@@ -21,6 +20,12 @@ const STORES = {
     display_name: 'The King of Parfums',
     domain: 'www.thekingofparfums.com.br',
     slugHint: 'usa padrão curto "brand-nome" ex: xerjoff-naxos ou "brand-nome-edp-100ml"'
+  },
+  rivoli: {
+    id: 'rivoli',
+    display_name: 'Rivoli Perfumaria',
+    domain: 'www.rivoliperfumaria.com.br',
+    slugHint: 'usa padrão Nuvemshop "brand-nome" ou "brand-nome-edp-100ml" ex: nishane-hacivat-edp-100ml'
   }
 };
 
@@ -54,6 +59,27 @@ function extractJsonLdProducts(html, domain) {
       if (!offers || !offers.price) continue;
       const url = offers.url || data.url || data['@id'];
       if (!url || !url.includes(`${domain}/produtos/`)) continue;
+      const price_cents = Math.round(parseFloat(offers.price) * 100);
+      if (!price_cents || price_cents <= 0 || price_cents > 5000000) continue;
+      products.push({ name: data.name, url, price_cents, available: !offers.availability || offers.availability.endsWith('InStock') });
+    } catch {}
+  }
+  return products;
+}
+
+// Versão sem restrição de caminho — para plataformas fora de Nuvemshop (ex: Tray)
+function extractJsonLdProductsLoose(html) {
+  const products = [];
+  const blocks = html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) || [];
+  for (const b of blocks) {
+    const content = b.replace(/<script[^>]*>/, '').replace(/<\/script>/, '');
+    try {
+      const data = JSON.parse(content);
+      if (data['@type'] !== 'Product' || !data.name) continue;
+      const offers = Array.isArray(data.offers) ? data.offers[0] : data.offers;
+      if (!offers || !offers.price) continue;
+      const url = offers.url || data.url || data['@id'];
+      if (!url) continue;
       const price_cents = Math.round(parseFloat(offers.price) * 100);
       if (!price_cents || price_cents <= 0 || price_cents > 5000000) continue;
       products.push({ name: data.name, url, price_cents, available: !offers.availability || offers.availability.endsWith('InStock') });
@@ -107,7 +133,6 @@ ${list}`
   }
 }
 
-// Fase 3: Claude gera slugs específicos para a loja quando as tentativas padrão falham
 async function claudeSlugOracle(store, term) {
   try {
     const msg = await claude.messages.create({
@@ -138,7 +163,6 @@ Retorne APENAS um JSON sem texto adicional:
   }
 }
 
-// Testa um slug de produto na loja e retorna resultado ou null
 async function tryProductSlug(store, slug) {
   const url = `https://${store.domain}/produtos/${slug}/`;
   const html = await safeFetch(url);
@@ -151,8 +175,6 @@ async function tryProductSlug(store, slug) {
   if (!ogTitle) return null;
   const name = ogTitle.split(/\s*\|\s*/)[0].trim();
 
-  // Valida que o produto encontrado corresponde ao slug buscado
-  // (evita aceitar produto errado quando a loja tem URLs inconsistentes)
   const slugTokens = slug.split('-').filter(t => t.length >= 3);
   if (!slugTokens.every(t => name.toLowerCase().includes(t))) return null;
 
@@ -168,7 +190,6 @@ async function tryProductSlug(store, slug) {
   };
 }
 
-// Fase 1: Página de marca (SSR com JSON-LD)
 async function searchViaBrandPage(store, term) {
   const parts = term.replace(/[^a-z0-9-]/g, '').split('-').filter(Boolean);
   for (let n = 1; n <= Math.min(2, parts.length - 1); n++) {
@@ -199,21 +220,18 @@ async function searchViaBrandPage(store, term) {
   return null;
 }
 
-// Fase 2: Testa lista ampla de slugs padrão em paralelo
 async function searchViaDirectSlug(store, term) {
   const candidates = [
     term,
     `${term}-edp-100ml`,
     `${term}-100ml`,
     `${term}-edp`,
-    // variações de gênero (padrão The Gregs)
     `${term}-edp-unissex-100ml`,
     `${term}-unissex-100ml`,
     `${term}-edp-masculino-100ml`,
     `${term}-masculino-100ml`,
     `${term}-edp-feminino-100ml`,
     `${term}-feminino-100ml`,
-    // outros formatos
     `${term}-eau-de-parfum-100ml`,
     `${term}-extrait-de-parfum-100ml`,
     `${term}-extrait-100ml`,
@@ -225,7 +243,6 @@ async function searchViaDirectSlug(store, term) {
   return hit ? hit.value : null;
 }
 
-// Fase 3: Claude oracle — gera slugs específicos por loja e testa em paralelo
 async function searchViaClaudeOracle(store, term) {
   const slugs = await claudeSlugOracle(store, term);
   if (!slugs.length) return null;
@@ -235,7 +252,6 @@ async function searchViaClaudeOracle(store, term) {
   return hit ? hit.value : null;
 }
 
-// Busca interna: executa as 3 fases para um termo específico
 async function searchInStore(store, term) {
   const brandResult = await searchViaBrandPage(store, term);
   if (brandResult) return brandResult;
@@ -250,7 +266,6 @@ async function searchInStore(store, term) {
 async function searchNuvemshop(storeId, term) {
   const store = STORES[storeId];
 
-  // Busca versão regular e versão tester em paralelo
   const [regularRes, testerRes] = await Promise.allSettled([
     searchInStore(store, term),
     searchInStore(store, term + '-tester')
@@ -265,4 +280,51 @@ async function searchNuvemshop(storeId, term) {
   return regular || tester;
 }
 
-module.exports = { searchNuvemshop };
+// ── Mellalta (plataforma Tray) ──────────────────────────────────────────────
+const MELLALTA = {
+  id: 'mellalta',
+  display_name: 'Mell Alta Perfumaria',
+  search_url: (q) => `https://www.mellaltaperfumaria.com.br/loja/busca.php?loja=1053276&palavra_busca=${encodeURIComponent(q)}`
+};
+
+async function searchMellaltaTerm(term) {
+  const html = await safeFetch(MELLALTA.search_url(term));
+  if (!html) return null;
+
+  const products = extractJsonLdProductsLoose(html);
+  if (!products.length) return null;
+
+  const match = await matchWithClaude(products, term);
+  if (!match || !match.found || (match.confidence ?? 0) < CONFIDENCE_MIN) return null;
+
+  const item = products.find(p => p.name === match.item_name);
+  if (!item) return null;
+
+  return {
+    store: MELLALTA.id,
+    store_display_name: MELLALTA.display_name,
+    product_name: item.name,
+    price_cents: item.price_cents,
+    currency: 'BRL',
+    product_url: item.url,
+    available: item.available,
+    extraction_confidence: match.confidence
+  };
+}
+
+async function searchMellalta(term) {
+  const [regularRes, testerRes] = await Promise.allSettled([
+    searchMellaltaTerm(term),
+    searchMellaltaTerm(term + ' tester')
+  ]);
+
+  const regular = regularRes.status === 'fulfilled' ? regularRes.value : null;
+  const testerRaw = testerRes.status === 'fulfilled' ? testerRes.value : null;
+  const tester = testerRaw ? { ...testerRaw, is_tester: true } : null;
+
+  if (!regular && !tester) return null;
+  if (regular && tester) return [regular, tester];
+  return regular || tester;
+}
+
+module.exports = { searchNuvemshop, searchMellalta };
