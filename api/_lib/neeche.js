@@ -10,16 +10,20 @@ function coreTokens(str) {
 }
 
 // Retorna o produto da VTEX que corresponde sem ambiguidade ao termo buscado
-function pickBestProduct(products, term) {
+function pickBestProduct(products, term, { excludeTesters = false } = {}) {
   const searchCore = coreTokens(term);
   const sizeMatch = term.match(/(\d+)\s*ml/i);
   const searchSize = sizeMatch ? sizeMatch[1] : null;
 
-  const candidates = products.filter(p => {
+  let candidates = products.filter(p => {
     const pCore = coreTokens(p.productName);
     // Todos os tokens do termo devem aparecer no nome do produto
     return searchCore.every(t => pCore.includes(t));
   });
+
+  if (excludeTesters) {
+    candidates = candidates.filter(p => !p.productName.toLowerCase().includes('tester'));
+  }
 
   if (!candidates.length) return null;
 
@@ -55,23 +59,37 @@ async function searchNeeche(term) {
 
   if (!Array.isArray(products) || !products.length) return null;
 
-  const p = pickBestProduct(products, term);
-  if (!p) return null;
+  function buildResult(p, isTester) {
+    const item = p.items?.[0];
+    const offer = item?.sellers?.[0]?.commertialOffer;
+    if (!offer || offer.Price <= 0) return null;
+    const result = {
+      store: 'neeche',
+      store_display_name: 'Neeche',
+      product_name: p.productName,
+      price_cents: Math.round(offer.Price * 100),
+      currency: 'BRL',
+      product_url: `https://www.neeche.com.br/${p.linkText}/p`,
+      available: (offer.AvailableQuantity || 0) > 0,
+      extraction_confidence: 100
+    };
+    if (isTester) result.is_tester = true;
+    return result;
+  }
 
-  const item = p.items?.[0];
-  const offer = item?.sellers?.[0]?.commertialOffer;
-  if (!offer || offer.Price <= 0) return null;
+  // Busca versão regular (excluindo testers) e versão tester em paralelo
+  const regular = pickBestProduct(products, term, { excludeTesters: true });
+  const tester = pickBestProduct(products, term + ' tester');
 
-  return {
-    store: 'neeche',
-    store_display_name: 'Neeche',
-    product_name: p.productName,
-    price_cents: Math.round(offer.Price * 100),
-    currency: 'BRL',
-    product_url: `https://www.neeche.com.br/${p.linkText}/p`,
-    available: (offer.AvailableQuantity || 0) > 0,
-    extraction_confidence: 100
-  };
+  const out = [];
+  const rResult = regular ? buildResult(regular, false) : null;
+  const tResult = tester ? buildResult(tester, true) : null;
+  if (rResult) out.push(rResult);
+  if (tResult) out.push(tResult);
+
+  if (out.length === 0) return null;
+  if (out.length === 1) return out[0];
+  return out;
 }
 
 module.exports = { searchNeeche };
