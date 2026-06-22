@@ -1,4 +1,4 @@
-﻿const { normalizeQuery } = require('../_lib/normalize');
+const { normalizeQuery } = require('../_lib/normalize');
 const { searchNeeche } = require('../_lib/neeche');
 const { searchNuvemshop } = require('../_lib/nuvemshop');
 const { saveCache } = require('../_lib/cache');
@@ -23,7 +23,7 @@ async function refreshOne(query, existingSlugs) {
 
   const results = [r0, r1, r2, r3]
     .filter(r => r.status === 'fulfilled' && r.value !== null)
-    .map(r => r.value);
+    .flatMap(r => Array.isArray(r.value) ? r.value : [r.value]);
 
   await saveCache(slug, display_name, results);
 
@@ -59,4 +59,3 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ ok: false, query, error: err?.message });
   }
 };
-
