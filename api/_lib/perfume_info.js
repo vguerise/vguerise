@@ -5,7 +5,7 @@ const claude = new Anthropic();
 
 const CACHE_TTL_DAYS = 30;
 
-// Extrai URL de imagem do JSON-LD de uma página de produto
+// Extrai URL de imagem do JSON-LD de uma pagina de produto
 function extractImageFromLd(html) {
   const blocks = html.match(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) || [];
   for (const b of blocks) {
@@ -19,7 +19,6 @@ function extractImageFromLd(html) {
       }
     } catch {}
   }
-  // Helper: extrai content de meta com property — suporta qualquer ordem de atributos
   function metaProp(prop) {
     let m = html.match(new RegExp('<meta[^>]+property="' + prop + '"[^>]+content="([^"]+)"', 'i'));
     if (m?.[1]) return m[1];
@@ -29,8 +28,7 @@ function extractImageFromLd(html) {
   return metaProp('og:image:secure_url') || metaProp('og:image') || null;
 }
 
-// Valida se o HTML da página pertence ao produto esperado (evita imagem errada)
-// Checa todos os tokens do slug (>=3 chars) no título da página
+// Valida se o HTML da pagina pertence ao produto esperado
 function pageMatchesSlug(html, slug) {
   const tokens = slug.split('-').filter(p => p.length >= 3);
   const title = (html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || '').toLowerCase();
@@ -40,16 +38,22 @@ function pageMatchesSlug(html, slug) {
   return tokens.every(t => check.includes(t));
 }
 
-// Busca imagem do produto nas lojas — prioriza Neeche (VTEX) por ter dados mais confiáveis
+// Busca imagem do produto:
+// 1. Imagem da API VTEX (Neeche) — direto do JSON de busca, sem scraping, 100% confiavel
+// 2. Fallback: raspa paginas de produto (Neeche primeiro, outros sites depois)
 async function getProductImage(slug) {
   const db = getDb();
   const { data } = await db.from('price_cache').select('results').eq('product_slug', slug).single();
   if (!data || !data.results) return null;
 
   const results = Array.isArray(data.results) ? data.results : JSON.parse(data.results || '[]');
-  const withUrl = results.filter(r => r.product_url);
 
-  // Neeche primeiro (imagens mais confiáveis), depois as outras lojas
+  // Prioridade 1: imagem que veio diretamente do response da VTEX (Neeche)
+  const neecheWithImage = results.find(r => r.store === 'neeche' && r.image_url && !r.is_tester);
+  if (neecheWithImage) return neecheWithImage.image_url;
+
+  // Prioridade 2: raspar paginas — so para perfumes fora da Neeche ou cache antigo
+  const withUrl = results.filter(r => r.product_url && !r.is_tester);
   const sorted = [
     ...withUrl.filter(r => r.store === 'neeche'),
     ...withUrl.filter(r => r.store !== 'neeche'),
@@ -63,7 +67,7 @@ async function getProductImage(slug) {
       });
       if (!resp.ok) continue;
       const html = await resp.text();
-      if (!pageMatchesSlug(html, slug)) continue; // rejeita página de produto errado
+      if (!pageMatchesSlug(html, slug)) continue;
       const imgUrl = extractImageFromLd(html);
       if (imgUrl) return imgUrl;
     } catch {}
@@ -71,7 +75,7 @@ async function getProductImage(slug) {
   return null;
 }
 
-// Gera dados do perfume via Claude (descrição, notas, acordes)
+// Gera dados do perfume via Claude (descricao, notas, acordes)
 async function generatePerfumeInfo(displayName) {
   const msg = await claude.messages.create({
     model: 'claude-sonnet-4-6',
@@ -102,7 +106,7 @@ Regras:
   });
 
   const raw = (msg.content[0].text || '').match(/\{[\s\S]*\}/);
-  if (!raw) throw new Error('Claude não retornou JSON válido');
+  if (!raw) throw new Error('Claude nao retornou JSON valido');
   return JSON.parse(raw[0]);
 }
 
@@ -110,7 +114,6 @@ Regras:
 async function getPerfumeInfo(slug, displayName) {
   const db = getDb();
 
-  // Checar cache
   const { data: cached } = await db
     .from('perfume_details')
     .select('*')
@@ -120,19 +123,17 @@ async function getPerfumeInfo(slug, displayName) {
   if (cached && cached.notes_top && cached.notes_top.length > 0) {
     const age = (Date.now() - new Date(cached.updated_at).getTime()) / (1000 * 60 * 60 * 24);
     if (age < CACHE_TTL_DAYS) {
-      // Dados ok — mas se imagem estiver faltando tenta buscar sem chamar Claude
-      if (!cached.image_url) {
-        const imageUrl = await getProductImage(slug).catch(() => null);
-        if (imageUrl) {
-          await db.from('perfume_details').update({ image_url: imageUrl }).eq('product_slug', slug);
-          return { ...cached, image_url: imageUrl };
-        }
+      // Sempre tenta atualizar imagem via API da Neeche (rapido se disponivel, sem scraping)
+      const freshImage = await getProductImage(slug).catch(() => null);
+      if (freshImage && freshImage !== cached.image_url) {
+        await db.from('perfume_details').update({ image_url: freshImage }).eq('product_slug', slug);
+        return { ...cached, image_url: freshImage };
       }
       return cached;
     }
   }
 
-  // Gerar dados via Claude
+  // Gerar dados via Claude + buscar imagem em paralelo
   const [info, imageUrl] = await Promise.allSettled([
     generatePerfumeInfo(displayName),
     getProductImage(slug)
