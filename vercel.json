@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "functions": {
+    "api/**/*.js": { "maxDuration": 30 }
+  },
   "routes": [
     { "src": "/radar", "dest": "/radar/index.html" },
     { "src": "/curso", "dest": "/curso/index.html" },
