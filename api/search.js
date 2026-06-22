@@ -1,4 +1,4 @@
-﻿const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const { normalizeQuery } = require('./_lib/normalize');
 const { searchNeeche } = require('./_lib/neeche');
 const { searchNuvemshop } = require('./_lib/nuvemshop');
@@ -51,7 +51,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // 4. buscar nas 4 lojas em paralelo
+    // 4. buscar nas 4 lojas em paralelo (cada loja pode retornar regular + tester)
     const [r0, r1, r2, r3] = await Promise.allSettled([
       searchNeeche(slug),
       searchNuvemshop('the_gregs', slug),
@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
 
     const results = [r0, r1, r2, r3]
       .filter(r => r.status === 'fulfilled' && r.value !== null)
-      .map(r => r.value);
+      .flatMap(r => Array.isArray(r.value) ? r.value : [r.value]);
 
     // 5. salvar no cache
     await saveCache(slug, display_name, results);
@@ -74,4 +74,3 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Erro interno', detail: err?.message });
   }
 };
-
