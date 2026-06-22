@@ -34,7 +34,7 @@ const FETCH_HEADERS = {
 
 async function safeFetch(url) {
   try {
-    const r = await fetch(url, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(7000) });
+    const r = await fetch(url, { headers: FETCH_HEADERS, signal: AbortSignal.timeout(5000) });
     if (!r.ok) return null;
     return await r.text();
   } catch {
