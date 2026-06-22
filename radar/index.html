@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -261,7 +261,7 @@
   <div class="login-card">
     <p class="login-eyebrow">Vguerise</p>
     <h1 class="login-title">Radar de Perfumes Nicho</h1>
-    <p class="login-subtitle">Compare preços em tempo real entre as<br>principais lojas de nicho do Brasil.</p>
+    <p class="login-subtitle">Compare preços em tempo real entre as<br>principais lojas de nicho do Brasil.<br><span style="font-size:12px;color:var(--gray-300);display:block;margin-top:10px">Acesso restrito — informe o e-mail cadastrado.</span></p>
     <form class="login-form" id="form-login" novalidate>
       <input class="input-field" type="email" id="input-email" placeholder="Seu e-mail" autocomplete="email" required>
       <button class="btn-primary" type="submit" id="btn-login">Entrar</button>
@@ -328,9 +328,16 @@
     if (!t) return show('screen-login');
     try {
       const r = await fetch(`${API}/auth/verify`, { headers: { Authorization: `Bearer ${t}` } });
-      if (r.ok) { show('screen-app'); loadFeatured(); loadWishlist(); }
-      else { removeToken(); show('screen-login'); }
-    } catch { show('screen-app'); loadFeatured(); loadWishlist(); }
+      if (r.ok) {
+        show('screen-app'); loadFeatured(); loadWishlist();
+        const iq = new URLSearchParams(window.location.search).get('q');
+        if (iq) { document.getElementById('input-search').value = iq; doSearch(); }
+      } else { removeToken(); show('screen-login'); }
+    } catch {
+      show('screen-app'); loadFeatured(); loadWishlist();
+      const iq = new URLSearchParams(window.location.search).get('q');
+      if (iq) { document.getElementById('input-search').value = iq; doSearch(); }
+    }
   })();
 
   // ── Login ──
@@ -482,6 +489,7 @@
   let currentSlug = null;
 
   function exitSearchMode() {
+    history.pushState({}, '', window.location.pathname);
     currentSlug = null;
     document.getElementById('featured-section').style.display = '';
     document.getElementById('results-wrap').style.display = 'none';
@@ -492,6 +500,7 @@
   async function doSearch() {
     const query = document.getElementById('input-search').value.trim();
     if (!query) return;
+    history.pushState({}, '', '?q=' + encodeURIComponent(query));
 
     const btn = document.getElementById('btn-search');
     const rw = document.getElementById('results-wrap');
@@ -515,13 +524,16 @@
     }
   }
 
-  function renderResults({ slug, display_name, results, cached_at }) {
+  function renderResults({ slug, display_name, results, cached_at, stores_searched }) {
     currentSlug = slug;
     const el = document.getElementById('results-wrap');
     const allStores = (results || []);
-    const withPrice = allStores.filter(r => r.price_cents > 0).sort((a, b) => a.price_cents - b.price_cents);
+    const regulars = allStores.filter(r => r.price_cents > 0 && !r.is_tester).sort((a, b) => a.price_cents - b.price_cents);
+    const testers = allStores.filter(r => r.price_cents > 0 && r.is_tester).sort((a, b) => a.price_cents - b.price_cents);
     const noPrice = allStores.filter(r => !(r.price_cents > 0));
-    const list = [...withPrice, ...noPrice];
+    const list = [...regulars, ...testers, ...noPrice];
+    const storesFound = new Set([...regulars, ...testers].map(r => r.store)).size;
+    const total = stores_searched || 6;
     const ago = cached_at ? timeAgo(cached_at) : '';
 
     el.innerHTML = `
@@ -542,7 +554,7 @@
 
       ${list.length ? list.map((item) => {
         const hasPrice = item.price_cents > 0;
-        const rank = hasPrice ? withPrice.indexOf(item) + 1 : null;
+        const rank = hasPrice && !item.is_tester ? regulars.indexOf(item) + 1 : null;
         const isBest = rank === 1;
         return `<div class="result-card${isBest ? ' cheapest' : ''}${!hasPrice ? ' unavailable' : ''}">
           <span class="result-rank">${rank ? '#' + rank : '—'}</span>
@@ -558,6 +570,7 @@
         </div>`;
       }).join('') : '<div class="state-box" style="padding:32px 0">Não encontramos esse perfume nas lojas monitoradas.</div>'}
 
+      <p style="font-size:11px;color:var(--gray-300);text-align:center;margin:4px 0 12px">${storesFound > 0 ? storesFound + ' de ' + total + ' lojas encontraram' : 'verificado em ' + total + ' lojas'}</p>
       <hr class="divider">
       <div id="comments-section">
         <div style="text-align:center;padding:20px 0"><span class="mini-spinner"></span></div>
