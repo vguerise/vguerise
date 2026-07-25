@@ -4,10 +4,10 @@
     "api/**/*.js": { "maxDuration": 30 }
   },
   "routes": [
-    { "src": "/radar", "dest": "/radar/index.html" },
     { "src": "/curso", "dest": "/curso/index.html" },
     { "src": "/lista", "dest": "/lista/index.html" },
-    { "src": "/eventos", "dest": "/eventos/index.html" },
+    { "src": "/jantarolfativo", "dest": "/jantarolfativo/index.html" },
+    { "src": "/eventos", "status": 301, "headers": { "Location": "/jantarolfativo" } },
     { "src": "/perfumap", "dest": "/perfumap/index.html" }
   ]
 }
