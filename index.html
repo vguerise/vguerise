@@ -594,9 +594,12 @@
 
         .precos-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.25rem;
             margin-bottom: 3rem;
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* destaque = card recomendado (permanente) */
@@ -1143,36 +1146,24 @@
                 A consultoria garante que o próximo que você comprar vai ser exatamente o certo para você.
             </p>
 
-            <p class="recomendacao"><strong>Não sabe qual escolher?</strong> A Consultoria Nicho cobre tudo — incluindo designer a pedido.</p>
-
             <div class="precos-grid">
-                <div class="preco-card" data-plan="Consultoria Designer — R$500 (Online)" onclick="selectPlan(this)">
-                    <span class="preco-tag">Online</span>
-                    <div class="preco-modalidade">Consultoria Designer</div>
-                    <div class="preco-local">Via videochamada · Perfumaria designer</div>
-                    <div class="preco-valor"><sup>R$</sup>500</div>
-                    <ul class="preco-lista">
-                        <li>Sessão individual via videochamada</li>
-                        <li>Diagnóstico do perfil olfativo</li>
-                        <li>Curadoria personalizada</li>
-                        <li>Guia escrito completo</li>
-                        <li>Suporte pós-sessão</li>
-                    </ul>
-                </div>
-                <div class="preco-card destaque selected" data-plan="Consultoria Nicho — R$1.000 (Online)" onclick="selectPlan(this)">
+                <div class="preco-card destaque selected" data-plan="Consultoria Nicho — R$5.000 (Online)" onclick="selectPlan(this)">
                     <div class="preco-card-badge-top">Mais escolhido</div>
                     <span class="preco-tag">Online</span>
                     <div class="preco-modalidade">Consultoria Nicho</div>
                     <div class="preco-local">Alta perfumaria, nicho e ultra nicho</div>
-                    <div class="preco-valor"><sup>R$</sup>1.000</div>
+                    <div class="preco-valor"><sup>R$</sup>5.000</div>
                     <ul class="preco-lista">
                         <li>Alta perfumaria, nicho e ultra nicho</li>
-                        <li>Designer incluso a pedido</li>
                         <li>Sessão individual via videochamada</li>
                         <li>Diagnóstico do perfil olfativo</li>
                         <li>Curadoria personalizada</li>
                         <li>Guia escrito completo</li>
-                        <li>Suporte pós-sessão</li>
+                        <li>Designer incluso a pedido</li>
+                        <li>Entrega do primeiro frasco da consultoria, por minha conta</li>
+                        <li>3 meses de concierge comigo — dúvidas, sugestões e indicações</li>
+                        <li>Renovação do concierge disponível ao final do período</li>
+                        <li>Relatório físico entregue em sua casa</li>
                     </ul>
                 </div>
                 <div class="preco-card" data-plan="Consultoria Presencial — Consultar Valores" onclick="selectPlan(this)">
@@ -1180,6 +1171,17 @@
                     <div class="preco-modalidade">Consultoria Presencial</div>
                     <div class="preco-local">Outras cidades · sob orçamento</div>
                     <div class="preco-valor" style="font-size:1.5rem; padding-top:0.4rem;">Consultar Valores</div>
+                    <ul class="preco-lista">
+                        <li>Sessão individual presencial</li>
+                        <li>Diagnóstico do perfil olfativo</li>
+                        <li>Curadoria personalizada</li>
+                        <li>Guia escrito completo</li>
+                        <li>Designer incluso a pedido</li>
+                        <li>Entrega do primeiro frasco da consultoria, por minha conta</li>
+                        <li>3 meses de concierge comigo — dúvidas, sugestões e indicações</li>
+                        <li>Renovação do concierge disponível ao final do período</li>
+                        <li>Relatório físico entregue em sua casa</li>
+                    </ul>
                     <p class="preco-obs" style="margin-top:0.75rem;">Custos de deslocamento e hospedagem incluídos. Solicite orçamento pelo formulário.</p>
                 </div>
             </div>
@@ -1253,8 +1255,7 @@
                             <label class="form-label">Modalidade de interesse</label>
                             <select id="planSelect" class="form-select">
                                 <option value="">Ainda não sei — quero conversar primeiro</option>
-                                <option value="Consultoria Designer — R$500 (Online)">Consultoria Designer — R$500 (Online)</option>
-                                <option value="Consultoria Nicho — R$1.000 (Online)" selected>Consultoria Nicho — R$1.000 (Online)</option>
+                                <option value="Consultoria Nicho — R$5.000 (Online)" selected>Consultoria Nicho — R$5.000 (Online)</option>
                                 <option value="Consultoria Presencial — Consultar Valores">Consultoria Presencial — Consultar Valores</option>
                             </select>
                         </div>
