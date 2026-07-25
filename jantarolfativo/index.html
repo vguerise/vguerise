@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Guerise — Jantar Olfativo</title>
+    <meta name="description" content="Um jantar com experiências olfativas e uma aula ministrada por Victor Guerise. Presencial, em São Paulo, Rio de Janeiro e Brasília.">
+
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '804720092315209');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=804720092315209&ev=ViewContent&noscript=1"
+    /></noscript>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W8W2QNJ6');</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"></noscript>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --orange: #E85D04;
+            --orange-light: #F48C06;
+            --orange-dark: #C14B00;
+            --orange-glow: rgba(232, 93, 4, 0.12);
+            --black: #0A0909;
+            --black-soft: #111111;
+            --charcoal: #1A1A1A;
+            --gray-dark: #2A2A2A;
+            --gray-mid: #888888;
+            --gray-light: #C8C8C8;
+            --white: #FFFFFF;
+            --cream: #F0EBE3;
+            --brown-text: #5A3E2B;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 6rem 0; }
+
+        .badge {
+            display: inline-block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .section-title em { font-style: italic; color: var(--orange); }
+
+        /* NAVBAR */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            padding: 1rem 0;
+            transition: background 0.3s, backdrop-filter 0.3s;
+            background: rgba(10,9,9,0.0);
+        }
+        nav.scrolled {
+            background: rgba(10,9,9,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(232,93,4,0.15);
+        }
+        .nav-inner {
+            max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+        .nav-links a {
+            font-size: 0.88rem; font-weight: 600;
+            color: var(--gray-light); text-decoration: none; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta {
+            background: var(--orange) !important; color: var(--white) !important;
+            padding: 0.5rem 1.25rem; border-radius: 4px; transition: background 0.2s !important;
+        }
+        .nav-cta:hover { background: var(--orange-dark) !important; }
+        .nav-toggle {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; background: none; border: none; padding: 4px;
+        }
+        .nav-toggle span {
+            display: block; width: 24px; height: 2px;
+            background: var(--white); border-radius: 2px; transition: transform 0.3s;
+        }
+
+        /* HERO */
+        #hero {
+            min-height: calc(100vh - 90px);
+            display: flex; align-items: center;
+            position: relative; overflow: hidden;
+            padding: 4rem 0; background: var(--black);
+        }
+        .hero-glow {
+            position: absolute; top: 30%; right: 5%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(232,93,4,0.09) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            display: grid; grid-template-columns: 1.1fr 0.9fr;
+            align-items: center; gap: 4rem;
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-eyebrow {
+            display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;
+        }
+        .hero-eyebrow::before {
+            content: ''; display: block; width: 28px; height: 2px; background: var(--orange);
+        }
+        .hero-eyebrow span {
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 3px; text-transform: uppercase; color: var(--orange);
+        }
+        .hero-title {
+            font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700;
+            line-height: 1.1; margin-bottom: 1.25rem; color: var(--white);
+        }
+        .hero-title em {
+            font-style: italic; font-family: 'Playfair Display', serif; color: var(--orange);
+        }
+        .hero-subtitle {
+            font-size: 1.05rem; color: var(--gray-light);
+            max-width: 460px; margin-bottom: 2rem; line-height: 1.65;
+        }
+        .hero-proof {
+            display: flex; align-items: center; gap: 1.25rem;
+            margin-bottom: 2.25rem; flex-wrap: wrap;
+        }
+        .hero-proof-item {
+            display: flex; align-items: center; gap: 0.4rem;
+            font-size: 0.83rem; color: var(--gray-light);
+        }
+        .hero-proof-item strong { color: var(--white); font-weight: 700; }
+        .hero-proof-sep { width: 1px; height: 16px; background: rgba(255,255,255,0.15); }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 2rem; }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--orange); color: var(--white);
+            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem;
+            padding: 1rem 2.25rem; border-radius: 5px; text-decoration: none;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            background: var(--orange-dark); transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232,93,4,0.4);
+        }
+        .hero-guarantee {
+            font-size: 0.8rem; color: var(--gray-mid);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+
+        /* Hero visual */
+        .hero-visual { display: flex; align-items: center; justify-content: center; }
+        .hero-photo-wrap { position: relative; width: 100%; max-width: 420px; }
+        .hero-photo-frame { position: relative; border-radius: 10px; overflow: hidden; }
+        .hero-photo-frame::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(10,9,9,0.7) 100%);
+        }
+        .hero-photo {
+            width: 100%; display: block; object-fit: cover;
+            aspect-ratio: 3/4; border-radius: 10px;
+        }
+        .hero-stats-overlay {
+            position: absolute; bottom: 1.5rem; left: 0; right: 0; z-index: 3;
+            display: flex; justify-content: center; gap: 0;
+        }
+        .stat-item {
+            text-align: center; padding: 0.75rem 1.5rem;
+            background: rgba(10,9,9,0.88); backdrop-filter: blur(8px);
+            border: 1px solid rgba(232,93,4,0.2);
+        }
+        .stat-item:first-child { border-radius: 8px 0 0 8px; }
+        .stat-item:last-child { border-radius: 0 8px 8px 0; }
+        .stat-item + .stat-item { border-left: none; }
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.6rem;
+            font-weight: 700; color: var(--orange); line-height: 1; margin-bottom: 0.15rem;
+        }
+        .stat-label {
+            font-size: 0.7rem; color: var(--gray-mid);
+            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+        }
+
+        /* PROVA RÁPIDA */
+        #prova-rapida {
+            background: var(--charcoal); padding: 1.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .prova-rapida-inner {
+            display: flex; align-items: center; justify-content: center;
+            gap: 3rem; flex-wrap: wrap;
+        }
+        .prova-num { text-align: center; }
+        .prova-num-valor {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+            font-weight: 700; color: var(--orange); line-height: 1;
+        }
+        .prova-num-label {
+            font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--gray-mid); font-weight: 600; margin-top: 0.2rem;
+        }
+        .prova-sep { width: 1px; height: 36px; background: rgba(255,255,255,0.08); }
+
+        /* SOBRE O JANTAR */
+        #sobre-jantar { background: var(--black); padding: 5rem 0; }
+        .para-quem-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;
+        }
+        .para-quem-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(232,93,4,0.2);
+            border-radius: 12px; padding: 2rem;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .para-quem-card:hover {
+            border-color: var(--orange);
+            box-shadow: 0 8px 32px rgba(232,93,4,0.12);
+        }
+        .para-quem-icon {
+            font-size: 2rem; margin-bottom: 1rem; display: block;
+        }
+        .para-quem-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+            font-weight: 700; color: var(--white); margin-bottom: 0.75rem;
+        }
+        .para-quem-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .para-quem-list li {
+            font-size: 0.92rem; color: var(--gray-light);
+            padding-left: 1.2rem; position: relative; line-height: 1.5;
+        }
+        .para-quem-list li::before {
+            content: '→'; position: absolute; left: 0; color: var(--orange); font-size: 0.8rem;
+        }
+
+        /* AGENDA */
+        #agenda { background: #FAF7F3; padding: 6rem 0; }
+        .formatos-header { text-align: center; margin-bottom: 3.5rem; }
+        .formatos-header .section-title { color: #1A1A1A; }
+        .formatos-header .section-title em { color: #8B3A00; }
+        .formatos-header p { color: var(--brown-text); max-width: 560px; margin: 0 auto; font-size: 1rem; line-height: 1.7; }
+        .formatos-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem;
+        }
+        .formato-card {
+            background: var(--white); border: 2px solid rgba(0,0,0,0.07);
+            border-radius: 12px; padding: 2rem; text-align: center;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+            position: relative;
+        }
+        .formato-card:hover {
+            border-color: rgba(232,93,4,0.4); transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(232,93,4,0.1);
+        }
+        .formato-card.destaque {
+            border-color: var(--orange);
+            background: linear-gradient(160deg, rgba(232,93,4,0.06) 0%, var(--white) 60%);
+            box-shadow: 0 8px 32px rgba(232,93,4,0.15);
+        }
+        .formato-badge-top {
+            position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+            background: var(--orange); color: white; font-size: 0.6rem; font-weight: 800;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            padding: 0.25rem 0.85rem; border-radius: 0 0 6px 6px;
+        }
+        .formato-tag {
+            display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--orange);
+            background: var(--orange-glow); padding: 0.2rem 0.65rem;
+            border-radius: 3px; margin-bottom: 0.75rem;
+        }
+        .formato-nome {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700;
+            color: #1A1A1A; margin-bottom: 0.4rem;
+        }
+        .formato-desc { font-size: 0.82rem; color: #888; margin-bottom: 1rem; line-height: 1.5; }
+        .agenda-data {
+            font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700;
+            color: var(--orange); line-height: 1; margin: 0.5rem 0 0.75rem;
+        }
+        .formato-lista {
+            list-style: none; text-align: left; margin: 0.5rem 0 0;
+            display: flex; flex-direction: column; gap: 0.4rem;
+        }
+        .formato-lista li {
+            font-size: 0.78rem; color: #666; line-height: 1.4;
+            padding-left: 1.1rem; position: relative;
+        }
+        .formato-lista li::before {
+            content: '✓'; position: absolute; left: 0;
+            color: var(--orange); font-size: 0.7rem; font-weight: 700;
+        }
+
+        /* DEPOIMENTOS */
+        #depoimentos { background: var(--black); padding: 6rem 0; }
+        .depoimentos-header { text-align: center; margin-bottom: 3rem; }
+        .depoimentos-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+            max-width: 760px; margin: 0 auto;
+        }
+        .depoimento-card {
+            background: var(--charcoal); border: 1px solid rgba(232,93,4,0.2);
+            border-radius: 12px; overflow: hidden;
+        }
+        .depoimento-video { width: 100%; max-height: 560px; display: block; background: #000; }
+
+        /* SOBRE */
+        #sobre { background: var(--cream); }
+        .sobre-grid {
+            display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center;
+        }
+        .sobre-img-wrap { position: relative; }
+        .sobre-accent {
+            position: absolute; top: -1.5rem; left: -1.5rem;
+            width: 80px; height: 80px;
+            border-top: 3px solid var(--orange); border-left: 3px solid var(--orange);
+            border-radius: 2px;
+        }
+        .sobre-img {
+            width: 100%; border-radius: 18px; display: block; object-fit: cover;
+            aspect-ratio: 4/5; border: 3px solid var(--orange);
+            box-shadow: 0 8px 40px rgba(232,93,4,0.2);
+        }
+        .sobre-badge { color: var(--orange); }
+        .sobre-title { color: #1A1A1A !important; }
+        .sobre-title em { color: #8B3A00 !important; }
+        .sobre-text {
+            font-size: 1rem; color: var(--brown-text);
+            margin-bottom: 1.1rem; line-height: 1.85;
+        }
+        .sobre-text strong { color: #1A1A1A; font-weight: 600; }
+        .sobre-pillars {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 2rem;
+        }
+        .pillar {
+            background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 8px; padding: 1.1rem 1.25rem; transition: border-color 0.2s;
+        }
+        .pillar:hover { border-color: rgba(232,93,4,0.4); }
+        .pillar-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; font-weight: 800;
+            color: #1A1A1A; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;
+        }
+        .pillar-desc { font-size: 0.8rem; color: var(--brown-text); line-height: 1.5; }
+
+        /* FORMULÁRIO */
+        #contato { background: #FAF7F3; }
+        .form-section { max-width: 600px; margin: 0 auto; }
+        .form-trust {
+            display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
+            margin-bottom: 1.5rem; text-align: center;
+        }
+        .form-trust-item { font-size: 0.83rem; color: var(--brown-text); }
+        .form-trust-item .check { color: var(--orange); font-weight: 700; margin-right: 0.3rem; }
+        .consultoria-form-wrap {
+            background: var(--white); border: 2px solid rgba(232,93,4,0.2);
+            border-radius: 14px; padding: 2.5rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+        }
+        .form-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700;
+            margin-bottom: 0.4rem; color: #1A1A1A; text-align: center;
+        }
+        .form-subtitle { font-size: 0.88rem; color: #888; margin-bottom: 1.75rem; text-align: center; }
+        .form-group { margin-bottom: 1rem; }
+        .form-label {
+            display: block; font-size: 0.78rem; font-weight: 700; color: #555;
+            margin-bottom: 0.35rem; letter-spacing: 0.3px; text-transform: uppercase;
+        }
+        .form-input, .form-select {
+            width: 100%; background: #F7F7F7; border: 1.5px solid #E0E0E0;
+            border-radius: 6px; padding: 0.8rem 1rem;
+            font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: #1A1A1A;
+            outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-input::placeholder { color: #AAA; }
+        .form-input:focus, .form-select:focus {
+            border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,93,4,0.1);
+        }
+        .form-btn {
+            width: 100%; background: var(--orange); color: var(--white);
+            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.05rem;
+            padding: 1rem; border: none; border-radius: 8px; cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .form-btn:hover {
+            background: var(--orange-dark); transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232,93,4,0.4);
+        }
+        .form-note {
+            text-align: center; font-size: 0.76rem; color: #999;
+            margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.35rem;
+        }
+
+        /* CROSS-SELL */
+        #crosssell {
+            background: rgba(232,93,4,0.05);
+            border-top: 1px solid rgba(232,93,4,0.15); padding: 2.5rem 0;
+        }
+        .crosssell-inner { text-align: center; max-width: 560px; margin: 0 auto; }
+        .crosssell-label {
+            font-size: 0.72rem; letter-spacing: 2.5px;
+            text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;
+        }
+        .crosssell-desc { font-size: 0.92rem; color: rgba(255,255,255,0.75); margin-bottom: 1.25rem; line-height: 1.6; }
+        .crosssell-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+        .crosssell-link {
+            display: inline-block; padding: 0.6rem 1.5rem; border-radius: 100px;
+            text-decoration: none; font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;
+            text-transform: uppercase; transition: 0.2s;
+        }
+        .crosssell-link.filled { background: var(--orange); color: #fff; }
+        .crosssell-link.filled:hover { background: var(--orange-dark); }
+        .crosssell-link.outline { border: 1px solid rgba(232,93,4,0.4); color: var(--orange); }
+        .crosssell-link.outline:hover { border-color: var(--orange); background: var(--orange-glow); }
+
+        /* FOOTER */
+        footer {
+            background: var(--black-soft); border-top: 1px solid rgba(255,255,255,0.04); padding: 2rem 0;
+        }
+        .footer-inner {
+            display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.1rem;
+            color: var(--white); text-decoration: none;
+        }
+        .footer-logo span { color: var(--orange); }
+        .footer-copy { font-size: 0.8rem; color: var(--gray-mid); }
+
+        /* STICKY CTA MOBILE */
+        .sticky-mobile-cta {
+            display: none; position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(10,9,9,0.97); border-top: 1px solid rgba(232,93,4,0.3);
+            padding: 0.75rem 1.25rem; z-index: 200;
+        }
+        .sticky-mobile-cta .btn-primary { width: 100%; justify-content: center; font-size: 1rem; padding: 1rem; }
+
+        /* ANIMAÇÕES */
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.35)} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+        .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+        .fade-up.delay-1 { animation-delay: 0.15s; }
+        .fade-up.delay-2 { animation-delay: 0.3s; }
+        .fade-up.delay-3 { animation-delay: 0.45s; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .formatos-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+            .para-quem-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 860px) {
+            .depoimentos-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+        }
+        @media (max-width: 800px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(10,9,9,0.98); align-items: center; justify-content: center; gap: 2rem; z-index: 99;
+            }
+            .nav-links.open a { font-size: 1.3rem; }
+            .nav-toggle { display: flex; z-index: 200; }
+            .hero-inner { grid-template-columns: 1fr; text-align: center; padding: 3rem 0 2rem; gap: 2.5rem; }
+            .hero-eyebrow { justify-content: center; }
+            .hero-subtitle { margin: 0 auto 1.75rem; }
+            .hero-actions { justify-content: center; }
+            .hero-proof { justify-content: center; }
+            .hero-photo-wrap { max-width: 280px; margin: 0 auto; }
+            .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .sobre-img-wrap { max-width: 320px; margin: 0 auto; }
+            .sticky-mobile-cta { display: block; }
+            body { padding-bottom: 72px; }
+            .prova-rapida-inner { gap: 1.5rem; }
+            .prova-sep { display: none; }
+        }
+        @media (max-width: 600px) {
+            section { padding: 4rem 0; }
+            .sobre-pillars { grid-template-columns: 1fr; }
+            .hero-stats-overlay { position: relative; bottom: auto; margin-top: 1rem; }
+            .consultoria-form-wrap { padding: 1.75rem 1.25rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8W2QNJ6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="https://vguerise.com.br">Consultoria</a></li>
+                <li><a href="/curso">Curso</a></li>
+                <li><a href="https://pay.hotmart.com/A105191777G?checkoutMode=10" target="_blank">Perfumap</a></li>
+                <li><a href="/lista">Guia R$37</a></li>
+                <li><a href="/jantarolfativo">Jantar Olfativo</a></li>
+                <li><a href="https://wa.me/5521976462812" target="_blank" class="nav-cta">Fale Comigo</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="hero-eyebrow fade-up">
+                        <span>Jantar Olfativo — Evento Presencial</span>
+                    </div>
+
+                    <h1 class="hero-title fade-up delay-1">
+                        Um jantar. Uma aula.<br>
+                        <em>Uma experiência olfativa completa.</em>
+                    </h1>
+                    <p class="hero-subtitle fade-up delay-2">
+                        Uma noite com experiências olfativas guiadas e uma aula ministrada por mim — e, nas próximas edições, também com perfumistas, marcas e convidados da indústria.
+                    </p>
+
+                    <div class="hero-proof fade-up delay-2">
+                        <div class="hero-proof-item"><strong>+27K</strong> seguidores</div>
+                        <div class="hero-proof-sep"></div>
+                        <div class="hero-proof-item"><strong>1ª</strong> edição realizada</div>
+                        <div class="hero-proof-sep"></div>
+                        <div class="hero-proof-item"><strong>3</strong> cidades em agosto</div>
+                    </div>
+
+                    <div class="hero-actions fade-up delay-3">
+                        <a href="#contato" class="btn-primary">
+                            Garantir minha vaga
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="hero-guarantee fade-up delay-3">Resposta em até 24h pelo WhatsApp. Vagas limitadas por cidade.</p>
+                </div>
+
+                <div class="hero-visual fade-up delay-2">
+                    <div class="hero-photo-wrap">
+                        <div class="hero-photo-frame">
+                            <img src="images/victor-eventos.jpg" alt="Victor Guerise — Jantar Olfativo" class="hero-photo"
+                                 width="420" height="560" fetchpriority="high" loading="eager"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none; width:100%; aspect-ratio:3/4; background:var(--charcoal); border-radius:10px; align-items:center; justify-content:center; color:var(--gray-mid); font-size:0.85rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Foto Victor</div>
+                        </div>
+                        <div class="hero-stats-overlay">
+                            <div class="stat-item">
+                                <div class="stat-number">+27K</div>
+                                <div class="stat-label">Seguidores</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1ª</div>
+                                <div class="stat-label">Edição realizada</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Cidades em agosto</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROVA RÁPIDA -->
+    <div id="prova-rapida">
+        <div class="container">
+            <div class="prova-rapida-inner">
+                <div class="prova-num">
+                    <div class="prova-num-valor">+27K</div>
+                    <div class="prova-num-label">seguidores</div>
+                </div>
+                <div class="prova-sep"></div>
+                <div class="prova-num">
+                    <div class="prova-num-valor">1ª edição</div>
+                    <div class="prova-num-label">já realizada</div>
+                </div>
+                <div class="prova-sep"></div>
+                <div class="prova-num">
+                    <div class="prova-num-valor">Jantar + Aula</div>
+                    <div class="prova-num-label">+ experiência olfativa</div>
+                </div>
+                <div class="prova-sep"></div>
+                <div class="prova-num">
+                    <div class="prova-num-valor">Presencial</div>
+                    <div class="prova-num-label">3 cidades em agosto</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOBRE O JANTAR -->
+    <section id="sobre-jantar">
+        <div class="container" style="max-width:900px;">
+            <span class="badge" style="display:block; text-align:center;">O Jantar Olfativo</span>
+            <h2 class="section-title" style="text-align:center; margin-bottom:0.5rem;">
+                Uma noite pensada<br><em>em detalhes.</em>
+            </h2>
+            <p style="text-align:center; color:var(--gray-light); max-width:560px; margin:0 auto 3rem; font-size:1rem; line-height:1.7;">
+                Reuni em uma única noite o que mais gosto de fazer: um jantar completo, uma aula prática de perfumaria e uma experiência olfativa guiada — cercado de gente com o mesmo interesse.
+            </p>
+            <div class="para-quem-grid">
+                <div class="para-quem-card">
+                    <span class="para-quem-icon">🍽️</span>
+                    <div class="para-quem-title">A Experiência</div>
+                    <p style="font-size:0.9rem; color:var(--gray-light); margin-bottom:1rem; line-height:1.6;">Uma noite completa, do início ao fim, sem nada para você se preocupar além de aproveitar.</p>
+                    <ul class="para-quem-list">
+                        <li>Jantar completo e bebidas inclusos</li>
+                        <li>Aula de perfumaria ministrada por mim</li>
+                        <li>Experiência olfativa guiada ao vivo</li>
+                        <li>Ambiente pensado para conversar e trocar</li>
+                    </ul>
+                </div>
+                <div class="para-quem-card">
+                    <span class="para-quem-icon">🧪</span>
+                    <div class="para-quem-title">Convidados & Próximas Edições</div>
+                    <p style="font-size:0.9rem; color:var(--gray-light); margin-bottom:1rem; line-height:1.6;">Quero levar pra você as experiências que tenho com a indústria, feiras e bastidores do setor.</p>
+                    <ul class="para-quem-list">
+                        <li>Já realizamos a primeira edição</li>
+                        <li>Próximas edições com perfumistas convidados</li>
+                        <li>Marcas e nomes da indústria participando</li>
+                        <li>Aulas, encontros e experiências recorrentes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section id="agenda">
+        <div class="container">
+            <div class="formatos-header">
+                <span class="badge">Agenda · Agosto 2026</span>
+                <h2 class="section-title">Escolha sua<br><em>cidade</em></h2>
+                <p>Três datas confirmadas — garanta sua vaga, elas são limitadas.</p>
+            </div>
+
+            <div class="formatos-grid">
+                <div class="formato-card destaque">
+                    <div class="formato-badge-top">Primeira data</div>
+                    <span class="formato-tag">Presencial</span>
+                    <div class="formato-nome">São Paulo</div>
+                    <div class="agenda-data">06/08</div>
+                    <div class="formato-desc">Jantar + Aula + Experiência Olfativa</div>
+                    <ul class="formato-lista">
+                        <li>Jantar completo e bebidas inclusos</li>
+                        <li>Aula ministrada por mim</li>
+                        <li>Experiência olfativa guiada</li>
+                        <li>Vagas limitadas</li>
+                    </ul>
+                </div>
+                <div class="formato-card">
+                    <span class="formato-tag">Presencial</span>
+                    <div class="formato-nome">Rio de Janeiro</div>
+                    <div class="agenda-data">08/08</div>
+                    <div class="formato-desc">Jantar + Aula + Experiência Olfativa</div>
+                    <ul class="formato-lista">
+                        <li>Jantar completo e bebidas inclusos</li>
+                        <li>Aula ministrada por mim</li>
+                        <li>Experiência olfativa guiada</li>
+                        <li>Vagas limitadas</li>
+                    </ul>
+                </div>
+                <div class="formato-card">
+                    <span class="formato-tag">Presencial</span>
+                    <div class="formato-nome">Brasília</div>
+                    <div class="agenda-data">25/08</div>
+                    <div class="formato-desc">Jantar + Aula + Experiência Olfativa</div>
+                    <ul class="formato-lista">
+                        <li>Jantar completo e bebidas inclusos</li>
+                        <li>Aula ministrada por mim</li>
+                        <li>Experiência olfativa guiada</li>
+                        <li>Vagas limitadas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO DE CONTATO -->
+            <div class="form-section" id="contato">
+                <div class="form-trust">
+                    <span class="form-trust-item"><span class="check">&#10003;</span> Resposta em até 24h no WhatsApp</span>
+                    <span class="form-trust-item"><span class="check">&#10003;</span> Sem compromisso nessa primeira conversa</span>
+                    <span class="form-trust-item"><span class="check">&#10003;</span> +27K seguidores acompanhando</span>
+                </div>
+                <div class="consultoria-form-wrap">
+                    <div class="form-title">Solicitar minha vaga</div>
+                    <div class="form-subtitle">Preencha e entrarei em contato em até 24h pelo WhatsApp para confirmar sua vaga.</div>
+                    <form id="eventosForm" onsubmit="handleForm(event)">
+                        <div class="form-group">
+                            <label class="form-label">Nome completo</label>
+                            <input type="text" class="form-input" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">WhatsApp</label>
+                            <input type="tel" class="form-input" placeholder="(21) 99999-9999" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cidade de interesse</label>
+                            <select id="planSelect" class="form-select">
+                                <option value="">Ainda não sei — quero conversar primeiro</option>
+                                <option value="São Paulo — 06/08">São Paulo — 06/08</option>
+                                <option value="Rio de Janeiro — 08/08">Rio de Janeiro — 08/08</option>
+                                <option value="Brasília — 25/08">Brasília — 25/08</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dúvida ou observação (opcional)</label>
+                            <input type="text" class="form-input" placeholder="Ex: vou com acompanhante, restrição alimentar...">
+                        </div>
+                        <button type="submit" class="form-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+                            </svg>
+                            Enviar pelo WhatsApp
+                        </button>
+                        <p class="form-note">Sem spam. Resposta rápida e direta.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos">
+        <div class="container" style="max-width:900px;">
+            <div class="depoimentos-header">
+                <span class="badge">Quem já viveu a experiência</span>
+                <h2 class="section-title">Primeira edição,<br><em>primeiras impressões</em></h2>
+            </div>
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <video class="depoimento-video" controls preload="metadata" playsinline>
+                        <source src="videos/1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="depoimento-card">
+                    <video class="depoimento-video" controls preload="metadata" playsinline>
+                        <source src="videos/3.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre">
+        <div class="container">
+            <div class="sobre-grid">
+                <div class="sobre-img-wrap">
+                    <div class="sobre-accent"></div>
+                    <img src="images/victor-eventos.jpg" alt="Victor Guerise" class="sobre-img" width="460" height="575" loading="lazy"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display:none; width:100%; aspect-ratio:4/5; background:rgba(255,255,255,0.5); border-radius:18px; align-items:center; justify-content:center; color:var(--brown-text); font-size:0.85rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Sua foto aqui</div>
+                </div>
+                <div class="sobre-content">
+                    <span class="badge sobre-badge">Sobre mim</span>
+                    <h2 class="section-title sobre-title">Prazer, <em>Victor Guerise</em></h2>
+                    <p class="sobre-text">Internacionalista de formação, trabalho com clientes high profile desde o início da carreira — e aprendi cedo que <strong>a imagem comunica antes da primeira palavra</strong>.</p>
+                    <p class="sobre-text">Em 2022, mergulhei de cabeça na perfumaria. O que começou como curiosidade virou especialidade — e especialidade virou palco. <strong>Já ensinei mais de 2.000 pessoas a usar o perfume como instrumento de presença e imagem.</strong></p>
+                    <p class="sobre-text">O Jantar Olfativo nasceu de uma vontade: levar as experiências que tenho com a indústria, feiras e bastidores do setor para o público — com aulas, encontros e tudo mais.</p>
+                    <div class="sobre-pillars">
+                        <div class="pillar">
+                            <div class="pillar-title">Didática real</div>
+                            <div class="pillar-desc">Conteúdo técnico traduzido para quem não tem formação em perfumaria</div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-title">Foco em experiência</div>
+                            <div class="pillar-desc">Uma noite pensada em detalhes — não é só uma aula, é um evento completo</div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-title">Bastidores da indústria</div>
+                            <div class="pillar-desc">Feiras, marcas e perfumistas — trago o que vivo de dentro da indústria</div>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-title">Presencial</div>
+                            <div class="pillar-desc">Edições em várias cidades, sempre com vagas limitadas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CROSS-SELL -->
+    <section id="crosssell">
+        <div class="container">
+            <div class="crosssell-inner">
+                <p class="crosssell-label">Prefere começar por aqui?</p>
+                <p class="crosssell-desc">Explore os outros produtos para quem quer aprender ou quer uma consultoria individual.</p>
+                <div class="crosssell-links">
+                    <a href="https://vguerise.com.br" class="crosssell-link filled">Consultoria Individual</a>
+                    <a href="/curso" class="crosssell-link outline">Curso Online — R$197</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <a href="#" class="footer-logo">Victor<span>.</span></a>
+                <p class="footer-copy">&#169; 2026 Victor Guerise. Todos os direitos reservados.</p>
+                <p class="footer-copy"><a href="https://vguerise.com.br" style="color:inherit; text-decoration:none;">vguerise.com.br</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STICKY CTA MOBILE -->
+    <div class="sticky-mobile-cta">
+        <a href="#contato" class="btn-primary">
+            Garantir minha vaga
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </div>
+
+    <script>
+        // Navbar scroll
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // Mobile menu
+        var toggle = document.getElementById('navToggle');
+        var links  = document.getElementById('navLinks');
+        toggle.addEventListener('click', function() { links.classList.toggle('open'); });
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() { links.classList.remove('open'); });
+        });
+
+        // Submit — abre WhatsApp com dados preenchidos
+        function handleForm(e) {
+            e.preventDefault();
+            var form = e.target;
+            var nome = form.querySelector('input[type="text"]').value.trim();
+            var tel  = form.querySelector('input[type="tel"]').value.trim();
+            var cidade = document.getElementById('planSelect').value;
+            var ctx  = form.querySelectorAll('input[type="text"]')[1] ? form.querySelectorAll('input[type="text"]')[1].value.trim() : '';
+            var cidadeTexto = cidade || 'Ainda não decidido — quero conversar';
+            var text = encodeURIComponent(
+                'Olá Victor! Quero garantir minha vaga no Jantar Olfativo.\n\n' +
+                '*Nome:* ' + nome + '\n' +
+                '*WhatsApp:* ' + tel + '\n' +
+                '*Cidade:* ' + cidadeTexto +
+                (ctx ? '\n*Observação:* ' + ctx : '')
+            );
+            if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
+            window.open('https://wa.me/5521976462812?text=' + text, '_blank');
+        }
+
+        // Animações hero
+        document.querySelectorAll('.hero-content .fade-up, .hero-visual .fade-up').forEach(function(el) {
+            el.style.animationPlayState = 'running';
+        });
+    </script>
+</body>
+</html>
