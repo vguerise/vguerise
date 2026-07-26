@@ -344,6 +344,21 @@
         }
         .depoimento-video { width: 100%; max-height: 560px; display: block; background: #000; }
 
+        /* GALERIA */
+        #galeria { background: #FAF7F3; padding: 5rem 0; }
+        .galeria-header { text-align: center; margin-bottom: 2.5rem; }
+        .galeria-header .section-title { color: #1A1A1A; }
+        .galeria-header .section-title em { color: #8B3A00; }
+        .galeria-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+        }
+        .galeria-item {
+            border-radius: 12px; overflow: hidden;
+            border: 2px solid rgba(0,0,0,0.07);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+        }
+        .galeria-img { width: 100%; display: block; object-fit: cover; aspect-ratio: 3/2; }
+
         /* SOBRE */
         #sobre { background: var(--cream); }
         .sobre-grid {
@@ -493,6 +508,7 @@
         }
         @media (max-width: 860px) {
             .depoimentos-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+            .galeria-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
         }
         @media (max-width: 800px) {
             .nav-links { display: none; }
@@ -587,7 +603,7 @@
                 <div class="hero-visual fade-up delay-2">
                     <div class="hero-photo-wrap">
                         <div class="hero-photo-frame">
-                            <img src="images/victor-eventos.jpg" alt="Victor Guerise — Jantar Olfativo" class="hero-photo"
+                            <img src="images/hero-jantar.jpg" alt="Victor Guerise ministrando a aula do Jantar Olfativo" class="hero-photo"
                                  width="420" height="560" fetchpriority="high" loading="eager"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div style="display:none; width:100%; aspect-ratio:3/4; background:var(--charcoal); border-radius:10px; align-items:center; justify-content:center; color:var(--gray-mid); font-size:0.85rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Foto Victor</div>
@@ -639,6 +655,28 @@
         </div>
     </div>
 
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos">
+        <div class="container" style="max-width:900px;">
+            <div class="depoimentos-header">
+                <span class="badge">Quem já viveu a experiência</span>
+                <h2 class="section-title">Primeira edição,<br><em>primeiras impressões</em></h2>
+            </div>
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <video class="depoimento-video" controls preload="metadata" playsinline>
+                        <source src="videos/1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="depoimento-card">
+                    <video class="depoimento-video" controls preload="metadata" playsinline>
+                        <source src="videos/3.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SOBRE O JANTAR -->
     <section id="sobre-jantar">
         <div class="container" style="max-width:900px;">
@@ -672,6 +710,24 @@
                         <li>Aulas, encontros e experiências recorrentes</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria">
+        <div class="container">
+            <div class="galeria-header">
+                <span class="badge">Registros da 1ª edição</span>
+                <h2 class="section-title">Como foi<br><em>na prática</em></h2>
+            </div>
+            <div class="galeria-grid">
+                <figure class="galeria-item">
+                    <img src="images/galeria-1.jpg" alt="Victor Guerise ministrando a aula 'A Arte da Perfumaria' no Jantar Olfativo" class="galeria-img" loading="lazy">
+                </figure>
+                <figure class="galeria-item">
+                    <img src="images/galeria-2.jpg" alt="Grupo de convidados do Jantar Olfativo" class="galeria-img" loading="lazy">
+                </figure>
             </div>
         </div>
     </section>
@@ -765,28 +821,6 @@
                         </button>
                         <p class="form-note">Sem spam. Resposta rápida e direta.</p>
                     </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DEPOIMENTOS -->
-    <section id="depoimentos">
-        <div class="container" style="max-width:900px;">
-            <div class="depoimentos-header">
-                <span class="badge">Quem já viveu a experiência</span>
-                <h2 class="section-title">Primeira edição,<br><em>primeiras impressões</em></h2>
-            </div>
-            <div class="depoimentos-grid">
-                <div class="depoimento-card">
-                    <video class="depoimento-video" controls preload="metadata" playsinline>
-                        <source src="videos/1.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="depoimento-card">
-                    <video class="depoimento-video" controls preload="metadata" playsinline>
-                        <source src="videos/3.mp4" type="video/mp4">
-                    </video>
                 </div>
             </div>
         </div>
