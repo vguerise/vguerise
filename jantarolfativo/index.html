@@ -750,7 +750,7 @@
                     <div class="formato-desc">Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A História e a Arte da Perfumaria</li>
+                        <li>Aula ministrada por mim</li>
                         <li>Experiência olfativa guiada</li>
                         <li>Vagas limitadas</li>
                     </ul>
@@ -762,7 +762,7 @@
                     <div class="formato-desc">Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A História e a Arte da Perfumaria</li>
+                        <li>Aula ministrada por mim</li>
                         <li>Experiência olfativa guiada</li>
                         <li>Vagas limitadas</li>
                     </ul>
@@ -774,7 +774,7 @@
                     <div class="formato-desc">Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A História e a Arte da Perfumaria</li>
+                        <li>Aula ministrada por mim</li>
                         <li>Experiência olfativa guiada</li>
                         <li>Vagas limitadas</li>
                     </ul>
@@ -808,10 +808,6 @@
                                 <option value="Rio de Janeiro — 08/08">Rio de Janeiro — 08/08</option>
                                 <option value="Brasília — 25/08">Brasília — 25/08</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Dúvida ou observação (opcional)</label>
-                            <input type="text" class="form-input" placeholder="Ex: vou com acompanhante, restrição alimentar...">
                         </div>
                         <button type="submit" class="form-btn">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -922,14 +918,12 @@
             var nome = form.querySelector('input[type="text"]').value.trim();
             var tel  = form.querySelector('input[type="tel"]').value.trim();
             var cidade = document.getElementById('planSelect').value;
-            var ctx  = form.querySelectorAll('input[type="text"]')[1] ? form.querySelectorAll('input[type="text"]')[1].value.trim() : '';
             var cidadeTexto = cidade || 'Ainda não decidido — quero conversar';
             var text = encodeURIComponent(
                 'Olá Victor! Quero garantir minha vaga no Jantar Olfativo.\n\n' +
                 '*Nome:* ' + nome + '\n' +
                 '*WhatsApp:* ' + tel + '\n' +
-                '*Cidade:* ' + cidadeTexto +
-                (ctx ? '\n*Observação:* ' + ctx : '')
+                '*Cidade:* ' + cidadeTexto
             );
             if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
             window.open('https://wa.me/5521976462812?text=' + text, '_blank');
