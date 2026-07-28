@@ -297,11 +297,23 @@
             background: linear-gradient(160deg, rgba(232,93,4,0.06) 0%, var(--white) 60%);
             box-shadow: 0 8px 32px rgba(232,93,4,0.15);
         }
+        .formato-card.esgotado {
+            border-color: rgba(0,0,0,0.08);
+            background: #F5F5F3;
+            opacity: 0.75;
+            filter: grayscale(0.4);
+        }
+        .formato-card.esgotado:hover {
+            border-color: rgba(0,0,0,0.08); transform: none; box-shadow: none;
+        }
         .formato-badge-top {
             position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
             background: var(--orange); color: white; font-size: 0.6rem; font-weight: 800;
             letter-spacing: 1.5px; text-transform: uppercase;
             padding: 0.25rem 0.85rem; border-radius: 0 0 6px 6px;
+        }
+        .formato-badge-top.esgotado {
+            background: #A11515;
         }
         .formato-tag {
             display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 2px;
@@ -762,8 +774,8 @@
             </div>
 
             <div class="formatos-grid">
-                <div class="formato-card destaque">
-                    <div class="formato-badge-top">Primeira data</div>
+                <div class="formato-card esgotado">
+                    <div class="formato-badge-top esgotado">Esgotado</div>
                     <span class="formato-tag">Presencial</span>
                     <div class="formato-nome">São Paulo</div>
                     <div class="agenda-data">06/08</div>
@@ -772,7 +784,7 @@
                         <li>Jantar completo e bebidas inclusos</li>
                         <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
-                        <li>Vagas limitadas</li>
+                        <li>Sem vagas disponíveis</li>
                     </ul>
                 </div>
                 <div class="formato-card">
@@ -823,7 +835,7 @@
                         <div class="form-group">
                             <label class="form-label">Cidade de interesse</label>
                             <select id="planSelect" class="form-select">
-                                <option value="São Paulo · 06/08">São Paulo · 06/08</option>
+                                <option value="São Paulo · 06/08" disabled>São Paulo · 06/08 (Esgotado)</option>
                                 <option value="Rio de Janeiro · 18/08">Rio de Janeiro · 18/08</option>
                                 <option value="Brasília · 24/08">Brasília · 24/08</option>
                             </select>
