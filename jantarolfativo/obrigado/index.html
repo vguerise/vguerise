@@ -139,6 +139,7 @@
         <p class="subtitle" id="subtitleText">Sua vaga está garantida. Me manda seu WhatsApp abaixo para eu te enviar todos os detalhes do evento (endereço, horário e orientações).</p>
 
         <form id="obrigadoForm" onsubmit="handleObrigadoForm(event)">
+            <input type="text" id="nomeInput" class="form-input" placeholder="Nome" required>
             <input type="tel" id="telInput" class="form-input" placeholder="(21) 99999-9999" required>
             <button type="submit" class="form-btn">
                 Enviar meu WhatsApp
@@ -162,9 +163,11 @@
 
         function handleObrigadoForm(e) {
             e.preventDefault();
+            var nome = document.getElementById('nomeInput').value.trim();
             var tel = document.getElementById('telInput').value.trim();
             var text = encodeURIComponent(
                 'Olá Victor! Acabei de garantir minha vaga no Jantar Olfativo' + (cidade ? ' em ' + cidade : '') + '.\n\n' +
+                '*Nome:* ' + nome + '\n' +
                 '*Cidade:* ' + (cidade || 'Não informada') + '\n' +
                 '*Meu WhatsApp:* ' + tel
             );
