@@ -342,6 +342,21 @@
             content: '✓'; position: absolute; left: 0;
             color: var(--orange); font-size: 0.7rem; font-weight: 700;
         }
+        .formato-cta {
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+            width: 100%; margin-top: 1.5rem;
+            background: var(--orange); color: var(--white);
+            font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700;
+            padding: 0.8rem 1rem; border-radius: 6px; border: none;
+            text-decoration: none; cursor: pointer;
+            transition: background 0.2s;
+        }
+        .formato-cta:hover { background: var(--orange-dark); }
+        .formato-cta:disabled,
+        .formato-cta[aria-disabled="true"] {
+            background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.4);
+            cursor: not-allowed; pointer-events: none;
+        }
 
         /* DEPOIMENTOS */
         #depoimentos { background: var(--black); padding: 6rem 0; }
@@ -409,56 +424,6 @@
             color: #1A1A1A; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;
         }
         .pillar-desc { font-size: 0.8rem; color: var(--brown-text); line-height: 1.5; }
-
-        /* FORMULÁRIO */
-        #contato { background: #FAF7F3; }
-        .form-section { max-width: 600px; margin: 0 auto; }
-        .form-trust {
-            display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
-            margin-bottom: 1.5rem; text-align: center;
-        }
-        .form-trust-item { font-size: 0.83rem; color: var(--brown-text); }
-        .form-trust-item .check { color: var(--orange); font-weight: 700; margin-right: 0.3rem; }
-        .consultoria-form-wrap {
-            background: var(--white); border: 2px solid rgba(232,93,4,0.2);
-            border-radius: 14px; padding: 2.5rem;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
-        }
-        .form-title {
-            font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700;
-            margin-bottom: 0.4rem; color: #1A1A1A; text-align: center;
-        }
-        .form-subtitle { font-size: 0.88rem; color: #888; margin-bottom: 1.75rem; text-align: center; }
-        .form-group { margin-bottom: 1rem; }
-        .form-label {
-            display: block; font-size: 0.78rem; font-weight: 700; color: #555;
-            margin-bottom: 0.35rem; letter-spacing: 0.3px; text-transform: uppercase;
-        }
-        .form-input, .form-select {
-            width: 100%; background: #F7F7F7; border: 1.5px solid #E0E0E0;
-            border-radius: 6px; padding: 0.8rem 1rem;
-            font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: #1A1A1A;
-            outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .form-input::placeholder { color: #AAA; }
-        .form-input:focus, .form-select:focus {
-            border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,93,4,0.1);
-        }
-        .form-btn {
-            width: 100%; background: var(--orange); color: var(--white);
-            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.05rem;
-            padding: 1rem; border: none; border-radius: 8px; cursor: pointer;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-            margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-        }
-        .form-btn:hover {
-            background: var(--orange-dark); transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(232,93,4,0.4);
-        }
-        .form-note {
-            text-align: center; font-size: 0.76rem; color: #999;
-            margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.35rem;
-        }
 
         /* CROSS-SELL */
         #crosssell {
@@ -594,7 +559,7 @@
                     </p>
 
                     <div class="hero-proof fade-up delay-2">
-                        <div class="hero-proof-item"><strong>+27K</strong> seguidores</div>
+                        <div class="hero-proof-item"><strong>+34K</strong> seguidores</div>
                         <div class="hero-proof-sep"></div>
                         <div class="hero-proof-item"><strong>Recorrente</strong>, novas edições sempre</div>
                         <div class="hero-proof-sep"></div>
@@ -602,7 +567,7 @@
                     </div>
 
                     <div class="hero-actions fade-up delay-3">
-                        <a href="#contato" class="btn-primary">
+                        <a href="#agenda" class="btn-primary">
                             Garantir minha vaga
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -620,20 +585,6 @@
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div style="display:none; width:100%; aspect-ratio:3/4; background:var(--charcoal); border-radius:10px; align-items:center; justify-content:center; color:var(--gray-mid); font-size:0.85rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Foto Victor</div>
                         </div>
-                        <div class="hero-stats-overlay">
-                            <div class="stat-item">
-                                <div class="stat-number">+27K</div>
-                                <div class="stat-label">Seguidores</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">Recorrente</div>
-                                <div class="stat-label">Novas edições sempre</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">3</div>
-                                <div class="stat-label">Cidades em agosto</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -645,7 +596,7 @@
         <div class="container">
             <div class="prova-rapida-inner">
                 <div class="prova-num">
-                    <div class="prova-num-valor">+27K</div>
+                    <div class="prova-num-valor">+34K</div>
                     <div class="prova-num-label">seguidores</div>
                 </div>
                 <div class="prova-sep"></div>
@@ -786,6 +737,7 @@
                         <li>Experiência olfativa guiada</li>
                         <li>Sem vagas disponíveis</li>
                     </ul>
+                    <button class="formato-cta" disabled>Esgotado</button>
                 </div>
                 <div class="formato-card">
                     <span class="formato-tag">Presencial</span>
@@ -798,6 +750,12 @@
                         <li>Experiência olfativa guiada</li>
                         <li>Vagas limitadas</li>
                     </ul>
+                    <a class="formato-cta" data-cidade="Brasília" href="#agenda" target="_blank" rel="noopener">
+                        Garantir minha vaga
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                 </div>
                 <div class="formato-card">
                     <span class="formato-tag">Presencial</span>
@@ -810,36 +768,12 @@
                         <li>Experiência olfativa guiada</li>
                         <li>Vagas limitadas</li>
                     </ul>
-                </div>
-            </div>
-
-            <!-- FORMULÁRIO DE CONTATO -->
-            <div class="form-section" id="contato">
-                <div class="form-trust">
-                    <span class="form-trust-item"><span class="check">&#10003;</span> Confirmação imediata após o pagamento</span>
-                    <span class="form-trust-item"><span class="check">&#10003;</span> Pagamento 100% seguro</span>
-                    <span class="form-trust-item"><span class="check">&#10003;</span> +27K seguidores acompanhando</span>
-                </div>
-                <div class="consultoria-form-wrap">
-                    <div class="form-title">Garantir minha vaga</div>
-                    <div class="form-subtitle">Escolha sua cidade e finalize o pagamento para garantir sua vaga.</div>
-                    <form id="eventosForm" onsubmit="handleForm(event)">
-                        <div class="form-group">
-                            <label class="form-label">Cidade de interesse</label>
-                            <select id="planSelect" class="form-select">
-                                <option value="Rio de Janeiro" disabled>Rio de Janeiro · 18/08 (Esgotado)</option>
-                                <option value="Brasília">Brasília · 24/08</option>
-                                <option value="Curitiba">Curitiba · 27/08</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="form-btn">
-                            Garantir minha vaga
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <p class="form-note">Pagamento processado por Mercado Pago / Pagar.me.</p>
-                    </form>
+                    <a class="formato-cta" data-cidade="Curitiba" href="#agenda" target="_blank" rel="noopener">
+                        Garantir minha vaga
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -911,7 +845,7 @@
 
     <!-- STICKY CTA MOBILE -->
     <div class="sticky-mobile-cta">
-        <a href="#contato" class="btn-primary">
+        <a href="#agenda" class="btn-primary">
             Garantir minha vaga
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -936,26 +870,29 @@
 
         // ==== CONFIG: agenda e links de pagamento por cidade ====
         // Troque apenas "link_pagamento" pela URL do checkout (Mercado Pago / Pagar.me) de cada cidade.
-        // vagas: 0 = esgotado (mantenha a option correspondente com "disabled" no HTML acima).
+        // vagas: 0 = esgotado (mantenha o card e a option correspondentes marcados como esgotado no HTML acima).
         var AGENDA_JANTAR = {
             'Rio de Janeiro': { data: '18/08', vagas: 0,    link_pagamento: '' },
             'Brasília':       { data: '24/08', vagas: null, link_pagamento: 'https://mpago.la/2Quw2yq' },
             'Curitiba':       { data: '27/08', vagas: null, link_pagamento: 'https://mpago.la/1mLCoC8' }
         };
 
-        // Submit: redireciona para o link de pagamento da cidade escolhida
-        function handleForm(e) {
-            e.preventDefault();
-            var cidade = document.getElementById('planSelect').value;
+        // Liga cada botão "Garantir minha vaga" dos cards ao link de pagamento da cidade
+        document.querySelectorAll('.formato-cta[data-cidade]').forEach(function(cta) {
+            var cidade = cta.getAttribute('data-cidade');
             var info = AGENDA_JANTAR[cidade];
-            if (!info || info.vagas === 0) return;
-            if (!info.link_pagamento) {
-                alert('Link de pagamento ainda não configurado para ' + cidade + '.');
+            if (!info || !info.link_pagamento) {
+                cta.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Link de pagamento ainda não configurado para ' + cidade + '.');
+                });
                 return;
             }
-            if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
-            window.open(info.link_pagamento, '_blank');
-        }
+            cta.href = info.link_pagamento;
+            cta.addEventListener('click', function() {
+                if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
+            });
+        });
 
         // Animações hero
         document.querySelectorAll('.hero-content .fade-up, .hero-visual .fade-up').forEach(function(el) {
