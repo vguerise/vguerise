@@ -816,37 +816,29 @@
             <!-- FORMULÁRIO DE CONTATO -->
             <div class="form-section" id="contato">
                 <div class="form-trust">
-                    <span class="form-trust-item"><span class="check">&#10003;</span> Resposta em até 24h no WhatsApp</span>
-                    <span class="form-trust-item"><span class="check">&#10003;</span> Sem compromisso nessa primeira conversa</span>
+                    <span class="form-trust-item"><span class="check">&#10003;</span> Confirmação imediata após o pagamento</span>
+                    <span class="form-trust-item"><span class="check">&#10003;</span> Pagamento 100% seguro</span>
                     <span class="form-trust-item"><span class="check">&#10003;</span> +27K seguidores acompanhando</span>
                 </div>
                 <div class="consultoria-form-wrap">
-                    <div class="form-title">Solicitar minha vaga</div>
-                    <div class="form-subtitle">Preencha e entrarei em contato em até 24h pelo WhatsApp para confirmar sua vaga.</div>
+                    <div class="form-title">Garantir minha vaga</div>
+                    <div class="form-subtitle">Escolha sua cidade e finalize o pagamento para garantir sua vaga.</div>
                     <form id="eventosForm" onsubmit="handleForm(event)">
-                        <div class="form-group">
-                            <label class="form-label">Nome completo</label>
-                            <input type="text" class="form-input" placeholder="Seu nome" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">WhatsApp</label>
-                            <input type="tel" class="form-input" placeholder="(21) 99999-9999" required>
-                        </div>
                         <div class="form-group">
                             <label class="form-label">Cidade de interesse</label>
                             <select id="planSelect" class="form-select">
-                                <option value="Rio de Janeiro · 18/08" disabled>Rio de Janeiro · 18/08 (Esgotado)</option>
-                                <option value="Brasília · 24/08">Brasília · 24/08</option>
-                                <option value="Curitiba · 27/08">Curitiba · 27/08</option>
+                                <option value="Rio de Janeiro" disabled>Rio de Janeiro · 18/08 (Esgotado)</option>
+                                <option value="Brasília">Brasília · 24/08</option>
+                                <option value="Curitiba">Curitiba · 27/08</option>
                             </select>
                         </div>
                         <button type="submit" class="form-btn">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+                            Garantir minha vaga
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            Enviar pelo WhatsApp
                         </button>
-                        <p class="form-note">Sem spam. Resposta rápida e direta.</p>
+                        <p class="form-note">Pagamento processado por Mercado Pago / Pagar.me.</p>
                     </form>
                 </div>
             </div>
@@ -942,22 +934,27 @@
             a.addEventListener('click', function() { links.classList.remove('open'); });
         });
 
-        // Submit: abre WhatsApp com dados preenchidos
+        // ==== CONFIG: agenda e links de pagamento por cidade ====
+        // Troque apenas "link_pagamento" pela URL do checkout (Mercado Pago / Pagar.me) de cada cidade.
+        // vagas: 0 = esgotado (mantenha a option correspondente com "disabled" no HTML acima).
+        var AGENDA_JANTAR = {
+            'Rio de Janeiro': { data: '18/08', vagas: 0,    link_pagamento: '' },
+            'Brasília':       { data: '24/08', vagas: null, link_pagamento: '' },
+            'Curitiba':       { data: '27/08', vagas: null, link_pagamento: '' }
+        };
+
+        // Submit: redireciona para o link de pagamento da cidade escolhida
         function handleForm(e) {
             e.preventDefault();
-            var form = e.target;
-            var nome = form.querySelector('input[type="text"]').value.trim();
-            var tel  = form.querySelector('input[type="tel"]').value.trim();
             var cidade = document.getElementById('planSelect').value;
-            var cidadeTexto = cidade || 'Ainda não decidido, quero conversar';
-            var text = encodeURIComponent(
-                'Olá Victor! Quero garantir minha vaga no Jantar Olfativo.\n\n' +
-                '*Nome:* ' + nome + '\n' +
-                '*WhatsApp:* ' + tel + '\n' +
-                '*Cidade:* ' + cidadeTexto
-            );
+            var info = AGENDA_JANTAR[cidade];
+            if (!info || info.vagas === 0) return;
+            if (!info.link_pagamento) {
+                alert('Link de pagamento ainda não configurado para ' + cidade + '.');
+                return;
+            }
             if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
-            window.open('https://wa.me/5521976462812?text=' + text, '_blank');
+            window.open(info.link_pagamento, '_blank');
         }
 
         // Animações hero
