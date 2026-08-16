@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado! | Jantar Olfativo — Victor Guerise</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '804720092315209');
+    fbq('track', 'PageView');
+    fbq('track', 'Purchase', {currency: 'BRL'});
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=804720092315209&ev=Purchase&noscript=1"
+    /></noscript>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W8W2QNJ6');
+    dataLayer.push({event: 'purchase', ecommerce: {currency: 'BRL'}});
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Sans:wght@400;500;600;700&display=swap">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --orange: #E85D04;
+            --orange-dark: #C14B00;
+            --black: #0A0909;
+            --charcoal: #1A1A1A;
+            --gray-light: #C8C8C8;
+            --gray-mid: #888888;
+            --white: #FFFFFF;
+        }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.65;
+        }
+        .card {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+        .check-badge {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: rgba(232,93,4,0.12);
+            border: 1.5px solid var(--orange);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--orange);
+        }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        h1 em { font-style: italic; color: var(--orange); }
+        .subtitle {
+            font-size: 0.98rem;
+            color: var(--gray-light);
+            margin-bottom: 2rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .form-input {
+            width: 100%;
+            background: var(--charcoal);
+            border: 1.5px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 0.95rem 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            color: var(--white);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-input::placeholder { color: var(--gray-mid); }
+        .form-input:focus { border-color: var(--orange); }
+        .form-btn {
+            width: 100%;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .form-btn:hover { background: var(--orange-dark); transform: translateY(-2px); }
+        .note {
+            font-size: 0.8rem;
+            color: var(--gray-mid);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="check-badge">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12.5l5 5L20 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <h1>Obrigado e seja muito bem-vindo(a) ao <em>Jantar Olfativo</em>!</h1>
+        <p class="subtitle">Sua vaga está garantida. Me manda seu WhatsApp abaixo para eu te enviar todos os detalhes do evento (endereço, horário e orientações).</p>
+
+        <form id="obrigadoForm" onsubmit="handleObrigadoForm(event)">
+            <input type="tel" id="telInput" class="form-input" placeholder="(21) 99999-9999" required>
+            <button type="submit" class="form-btn">
+                Enviar meu WhatsApp
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </form>
+        <p class="note">Vou te chamar por lá em breve com todos os detalhes.</p>
+    </div>
+
+    <script>
+        function handleObrigadoForm(e) {
+            e.preventDefault();
+            var tel = document.getElementById('telInput').value.trim();
+            var text = encodeURIComponent(
+                'Olá Victor! Acabei de garantir minha vaga no Jantar Olfativo.\n\n' +
+                '*Meu WhatsApp:* ' + tel
+            );
+            window.open('https://wa.me/5521976462812?text=' + text, '_blank');
+        }
+    </script>
+</body>
+</html>
