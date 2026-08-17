@@ -1,3 +1,7 @@
 name = "jantar-checkout"
 main = "worker.js"
 compatibility_date = "2024-09-23"
+
+[[kv_namespaces]]
+binding = "VAGAS_KV"
+id = "e4f89a02316f43a1b6ef3fd9539ef5ce"
