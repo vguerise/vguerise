@@ -761,7 +761,7 @@
                         <li>Jantar completo e bebidas inclusos</li>
                         <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
-                        <li>Vagas limitadas</li>
+                        <li data-vagas-texto>Vagas limitadas</li>
                     </ul>
                     <div class="formato-qtd">
                         <button type="button" class="qtd-btn" data-qtd-menos aria-label="Diminuir quantidade">−</button>
@@ -786,7 +786,7 @@
                         <li>Jantar completo e bebidas inclusos</li>
                         <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
-                        <li>Vagas limitadas</li>
+                        <li data-vagas-texto>Vagas limitadas</li>
                     </ul>
                     <div class="formato-qtd">
                         <button type="button" class="qtd-btn" data-qtd-menos aria-label="Diminuir quantidade">−</button>
@@ -909,15 +909,64 @@
         });
 
         // ==== CONFIG: carrinho de vagas do Jantar Olfativo ====
-        var CHECKOUT_WORKER_URL = 'https://jantar-checkout.jantar-checkout.workers.dev/checkout';
+        var WORKER_BASE_URL = 'https://jantar-checkout.jantar-checkout.workers.dev';
+        var CHECKOUT_WORKER_URL = WORKER_BASE_URL + '/checkout';
+        var VAGAS_WORKER_URL = WORKER_BASE_URL + '/vagas';
         var PRECO_POR_VAGA = 1100; // deve ser igual ao PRECO_POR_VAGA do worker (workers/jantar-checkout/worker.js)
-        var QUANTIDADE_MAXIMA = 6;
+        var QUANTIDADE_MAXIMA_COMPRA = 6; // máximo por compra, mesmo com vagas de sobra
 
         function formatarReais(valor) {
             return 'R$ ' + valor.toLocaleString('pt-BR');
         }
 
-        document.querySelectorAll('[data-checkout-card]').forEach(function(card) {
+        function marcarEsgotado(card) {
+            card.classList.add('esgotado');
+            var badge = document.createElement('div');
+            badge.className = 'formato-badge-top esgotado';
+            badge.textContent = 'Esgotado';
+            card.insertBefore(badge, card.firstChild);
+
+            var vagasTexto = card.querySelector('[data-vagas-texto]');
+            if (vagasTexto) vagasTexto.textContent = 'Sem vagas disponíveis';
+
+            var qtdBox = card.querySelector('.formato-qtd');
+            var seguro = card.querySelector('.formato-seguro');
+            var btnCheckout = card.querySelector('[data-checkout-btn]');
+            if (qtdBox) qtdBox.remove();
+            if (seguro) seguro.remove();
+            if (btnCheckout) {
+                btnCheckout.textContent = 'Esgotado';
+                btnCheckout.disabled = true;
+            }
+        }
+
+        var cardsCheckout = document.querySelectorAll('[data-checkout-card]');
+
+        fetch(VAGAS_WORKER_URL)
+            .then(function(res) { return res.json(); })
+            .then(function(vagasPorCidade) {
+                cardsCheckout.forEach(function(card) {
+                    var cidade = card.getAttribute('data-cidade');
+                    var restantes = vagasPorCidade[cidade];
+                    if (typeof restantes !== 'number') return;
+
+                    if (restantes <= 0) {
+                        marcarEsgotado(card);
+                        return;
+                    }
+
+                    var vagasTexto = card.querySelector('[data-vagas-texto]');
+                    if (vagasTexto) {
+                        vagasTexto.textContent = restantes <= 5
+                            ? 'Restam apenas ' + restantes + ' vaga' + (restantes === 1 ? '' : 's')
+                            : 'Vagas limitadas';
+                    }
+                    card.dataset.vagasRestantes = restantes;
+                });
+            })
+            .catch(function() { /* se a checagem de vagas falhar, mantém o texto padrão e deixa comprar normalmente */ });
+
+        cardsCheckout.forEach(function(card) {
             var cidade = card.getAttribute('data-cidade');
             var qtdValor = card.querySelector('[data-qtd-valor]');
             var subtotalEl = card.querySelector('[data-subtotal]');
@@ -926,15 +975,20 @@
             var btnCheckout = card.querySelector('[data-checkout-btn]');
             var qtd = 1;
 
+            function limiteQtd() {
+                var restantes = card.dataset.vagasRestantes;
+                return restantes ? Math.min(QUANTIDADE_MAXIMA_COMPRA, Number(restantes)) : QUANTIDADE_MAXIMA_COMPRA;
+            }
+
             function atualizar() {
                 qtdValor.textContent = qtd;
                 subtotalEl.textContent = formatarReais(qtd * PRECO_POR_VAGA);
                 btnMenos.disabled = qtd <= 1;
-                btnMais.disabled = qtd >= QUANTIDADE_MAXIMA;
+                btnMais.disabled = qtd >= limiteQtd();
             }
 
             btnMenos.addEventListener('click', function() { if (qtd > 1) { qtd--; atualizar(); } });
-            btnMais.addEventListener('click', function() { if (qtd < QUANTIDADE_MAXIMA) { qtd++; atualizar(); } });
+            btnMais.addEventListener('click', function() { if (qtd < limiteQtd()) { qtd++; atualizar(); } });
             atualizar();
 
             btnCheckout.addEventListener('click', function() {
