@@ -936,7 +936,7 @@
 
     <!-- BARRA DE URGÊNCIA -->
     <div id="urgencia-bar">
-        <strong>Apenas <span class="vagas-count">7</span> vagas restantes neste mês</strong>, agenda fechando. <a href="#consultoria">Garantir minha vaga &rarr;</a>
+        <strong>Apenas <span class="vagas-count">2</span> vagas restantes neste mês</strong>, agenda fechando. <a href="#consultoria">Garantir minha vaga &rarr;</a>
     </div>
 
     <!-- NAVBAR -->
@@ -968,7 +968,7 @@
 
                     <div class="urgency-chip fade-up delay-1">
                         <span class="urgency-dot"></span>
-                        <span class="vagas-count">7</span> vagas restantes neste mês
+                        <span class="vagas-count">2</span> vagas restantes neste mês
                     </div>
 
                     <h1 class="hero-title fade-up delay-1">
@@ -1152,7 +1152,7 @@
                 <h2 class="section-title">Escolha sua <em>modalidade</em></h2>
                 <div class="urgency-pill">
                     <span class="urgency-dot"></span>
-                    <strong class="vagas-count">7</strong>&nbsp;vagas restantes neste mês, agenda quase fechada
+                    <strong class="vagas-count">2</strong>&nbsp;vagas restantes neste mês, agenda quase fechada
                 </div>
             </div>
 
@@ -1343,11 +1343,9 @@
     </div>
 
     <script>
-        // Vagas: número aleatório entre 5 e 10, gerado uma vez por sessão
+        // Vagas: número real de vagas abertas no mês (atualize aqui manualmente quando mudar)
         (function() {
-            var stored = sessionStorage.getItem('vagasCount');
-            var count = stored ? parseInt(stored) : Math.floor(Math.random() * 6) + 5;
-            sessionStorage.setItem('vagasCount', count);
+            var count = 2;
             document.querySelectorAll('.vagas-count').forEach(function(el) {
                 el.textContent = count;
             });
