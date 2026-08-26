@@ -529,7 +529,7 @@
         /* Passos */
         .passos {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 0;
             margin-bottom: 5rem;
             position: relative;
@@ -538,8 +538,8 @@
             content: '';
             position: absolute;
             top: 2rem;
-            left: calc(12.5% + 0.5rem);
-            right: calc(12.5% + 0.5rem);
+            left: calc(16.66% + 0.5rem);
+            right: calc(16.66% + 0.5rem);
             height: 1px;
             background: linear-gradient(to right, var(--orange) 0%, rgba(232,93,4,0.15) 100%);
         }
@@ -594,9 +594,10 @@
 
         .precos-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr;
+            max-width: 440px;
             gap: 1.25rem;
-            margin-bottom: 3rem;
+            margin: 0 auto 3rem;
         }
 
         /* destaque = card recomendado (permanente) */
@@ -878,7 +879,6 @@
         @media (max-width: 1000px) {
             .passos { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
             .passos::before { display: none; }
-            .precos-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
         }
 
         @media (max-width: 860px) {
@@ -976,7 +976,7 @@
                         Você só não encontrou o seu. <em>Ainda</em>.
                     </h1>
                     <p class="hero-subtitle fade-up delay-2">
-                        Consultoria olfativa individual: traço seu perfil olfativo, descubro seu arquétipo e entrego a curadoria certa em uma sessão.
+                        Consultoria olfativa individual: traço seu perfil olfativo, descubro seu arquétipo e entrego a curadoria certa em dois encontros.
                     </p>
 
                     <div class="hero-proof fade-up delay-2">
@@ -1042,7 +1042,7 @@
                 </div>
                 <div class="prova-sep"></div>
                 <div class="prova-num">
-                    <div class="prova-num-valor">1 sessão</div>
+                    <div class="prova-num-valor">2 encontros</div>
                     <div class="prova-num-label">resultado concreto</div>
                 </div>
             </div>
@@ -1064,7 +1064,7 @@
             </ul>
             <p class="dor-fechamento">
                 Isso não é falta de dinheiro. É falta de direção.<br>
-                <strong>A consultoria resolve isso em uma sessão.</strong>
+                <strong>A consultoria resolve isso em dois encontros.</strong>
             </p>
         </div>
     </section>
@@ -1119,37 +1119,32 @@
             <div class="consultoria-header">
                 <span class="badge">Consultoria Pessoal</span>
                 <h2 class="section-title">Como funciona a <em>consultoria</em></h2>
-                <p class="section-subtitle" style="margin:0 auto;">Uma sessão individual, do diagnóstico à entrega: resultado concreto para a sua coleção.</p>
+                <p class="section-subtitle" style="margin:0 auto;">Dois encontros individuais, do diagnóstico à entrega, com acompanhamento nos ajustes finais.</p>
             </div>
 
-            <!-- 4 PASSOS -->
+            <!-- 3 PASSOS -->
             <div class="passos">
                 <div class="passo">
                     <div class="passo-num">01</div>
-                    <div class="passo-title">Questionário de Perfil</div>
-                    <p class="passo-desc">Você responde um questionário sobre estilo de vida, rotina, personalidade e os momentos em que usa perfume.</p>
+                    <div class="passo-title">Conversamos Sobre Você</div>
+                    <p class="passo-desc">Conversamos sobre seus hábitos, seu dia a dia, gostos e coleção. A partir disso, identifico seu arquétipo e perfil olfativo.</p>
                 </div>
                 <div class="passo">
                     <div class="passo-num">02</div>
-                    <div class="passo-title">Diagnóstico Olfativo</div>
-                    <p class="passo-desc">Analiso suas respostas para traçar seu perfil olfativo e descobrir seu arquétipo olfativo dominante, identificando os gaps da sua coleção.</p>
+                    <div class="passo-title">Entrega do Relatório</div>
+                    <p class="passo-desc">No segundo encontro, entrego o relatório e explico passo a passo o porquê de cada diagnóstico, além de uma curadoria exclusiva e personalizada para dar um norte ao futuro da sua coleção.</p>
                 </div>
                 <div class="passo">
                     <div class="passo-num">03</div>
-                    <div class="passo-title">Curadoria Personalizada</div>
-                    <p class="passo-desc">Monto uma seleção exclusiva com indicação de ocasião, como usar e onde comprar.</p>
-                </div>
-                <div class="passo">
-                    <div class="passo-num">04</div>
-                    <div class="passo-title">Entrega & Acompanhamento</div>
-                    <p class="passo-desc">Você recebe um documento completo e segue com concierge ilimitado — 6 meses no plano Semestral ou 12 meses no Anual — além de 1 ou 2 perfumes por minha conta, conforme a modalidade escolhida.</p>
+                    <div class="passo-title">Feedbacks & Ajustes</div>
+                    <p class="passo-desc">Depois das provas iniciais, ajustamos as correções e mudamos o que você quiser nas sugestões.</p>
                 </div>
             </div>
 
-            <!-- PREÇOS -->
+            <!-- PREÇO -->
             <div class="precos-header">
                 <span class="badge">Investimento</span>
-                <h2 class="section-title">Escolha sua <em>modalidade</em></h2>
+                <h2 class="section-title">Sua <em>consultoria</em></h2>
                 <div class="urgency-pill">
                     <span class="urgency-dot"></span>
                     <strong class="vagas-count">2</strong>&nbsp;vagas restantes neste mês, agenda quase fechada
@@ -1162,64 +1157,24 @@
             </p>
 
             <div class="precos-grid">
-                <div class="preco-card destaque selected" data-plan="Consultoria Semestral · R$10.000 (Online)" onclick="selectPlan(this)">
-                    <div class="preco-card-badge-top">Mais escolhido</div>
-                    <span class="preco-tag">Online · Semestral</span>
-                    <div class="preco-modalidade">Consultoria Semestral</div>
+                <div class="preco-card destaque selected" data-plan="Consultoria Individual · R$10.000 (Online)" onclick="selectPlan(this)">
+                    <span class="preco-tag">Online</span>
+                    <div class="preco-modalidade">Consultoria Individual</div>
                     <div class="preco-local">Alta perfumaria, nicho e ultra nicho</div>
                     <div class="preco-valor"><sup>R$</sup>10.000</div>
                     <div class="preco-highlights">
                         <div class="preco-highlight-item"><span class="preco-highlight-icon">🎁</span><span><strong>1 perfume</strong> da consultoria, por minha conta</span></div>
-                        <div class="preco-highlight-item"><span class="preco-highlight-icon">🕊️</span><span><strong>Concierge ilimitado por 6 meses</strong>: dúvidas, sugestões e indicações</span></div>
+                        <div class="preco-highlight-item"><span class="preco-highlight-icon">🕊️</span><span><strong>Concierge ilimitado</strong>: dúvidas, sugestões e indicações</span></div>
                     </div>
                     <ul class="preco-lista">
                         <li>Alta perfumaria, nicho e ultra nicho</li>
-                        <li>Sessão individual via videochamada</li>
+                        <li>Dois encontros individuais via videochamada</li>
                         <li>Diagnóstico do perfil olfativo</li>
                         <li>Curadoria personalizada</li>
                         <li>Guia escrito completo</li>
                         <li>Designer incluso a pedido</li>
                         <li>Relatório físico entregue em sua casa</li>
-                        <li>Upgrade para o plano anual disponível ao final do semestre</li>
                     </ul>
-                </div>
-                <div class="preco-card" data-plan="Consultoria Anual · R$18.000 (Online)" onclick="selectPlan(this)">
-                    <div class="preco-card-badge-top" style="background:#1A1A1A;">Mais completo</div>
-                    <span class="preco-tag">Online · Anual</span>
-                    <div class="preco-modalidade">Consultoria Anual</div>
-                    <div class="preco-local">Alta perfumaria, nicho e ultra nicho</div>
-                    <div class="preco-valor"><sup>R$</sup>18.000</div>
-                    <div class="preco-highlights">
-                        <div class="preco-highlight-item"><span class="preco-highlight-icon">🎁</span><span><strong>2 perfumes</strong> da consultoria, por minha conta</span></div>
-                        <div class="preco-highlight-item"><span class="preco-highlight-icon">🕊️</span><span><strong>Concierge ilimitado por 12 meses</strong>: dúvidas, sugestões e indicações</span></div>
-                    </div>
-                    <ul class="preco-lista">
-                        <li>Alta perfumaria, nicho e ultra nicho</li>
-                        <li>Sessão individual via videochamada</li>
-                        <li>Diagnóstico do perfil olfativo</li>
-                        <li>Curadoria personalizada</li>
-                        <li>Guia escrito completo</li>
-                        <li>Designer incluso a pedido</li>
-                        <li>Relatório físico entregue em sua casa</li>
-                        <li>Renovação do concierge disponível ao final do ano</li>
-                    </ul>
-                </div>
-                <div class="preco-card" data-plan="Consultoria Presencial · Consultar Valores" onclick="selectPlan(this)">
-                    <span class="preco-tag">Presencial</span>
-                    <div class="preco-modalidade">Consultoria Presencial</div>
-                    <div class="preco-local">Outras cidades · sob orçamento</div>
-                    <div class="preco-valor" style="font-size:1.5rem; padding-top:0.4rem;">Consultar Valores</div>
-                    <ul class="preco-lista">
-                        <li>Sessão individual presencial</li>
-                        <li>Diagnóstico do perfil olfativo</li>
-                        <li>Curadoria personalizada</li>
-                        <li>Guia escrito completo</li>
-                        <li>Designer incluso a pedido</li>
-                        <li>Perfume(s) da consultoria incluso(s), conforme o pacote</li>
-                        <li>Concierge incluso, conforme o pacote combinado</li>
-                        <li>Relatório físico entregue em sua casa</li>
-                    </ul>
-                    <p class="preco-obs" style="margin-top:0.75rem;">Custos de deslocamento e hospedagem incluídos. Solicite orçamento pelo formulário.</p>
                 </div>
             </div>
 
@@ -1288,9 +1243,7 @@
                             <label class="form-label">Modalidade de interesse</label>
                             <select id="planSelect" class="form-select">
                                 <option value="">Ainda não sei, quero conversar primeiro</option>
-                                <option value="Consultoria Semestral · R$10.000 (Online)" selected>Consultoria Semestral · R$10.000 (Online)</option>
-                                <option value="Consultoria Anual · R$18.000 (Online)">Consultoria Anual · R$18.000 (Online)</option>
-                                <option value="Consultoria Presencial · Consultar Valores">Consultoria Presencial · Consultar Valores</option>
+                                <option value="Consultoria Individual · R$10.000 (Online)" selected>Consultoria Individual · R$10.000 (Online)</option>
                             </select>
                         </div>
                         <button type="submit" class="form-btn">
