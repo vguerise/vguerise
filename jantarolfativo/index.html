@@ -1020,7 +1020,9 @@
                     .then(function(data) {
                         clearTimeout(timeoutId);
                         if (!data.init_point) throw new Error(data.error || 'Erro desconhecido');
-                        if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout', { value: qtd * PRECO_POR_VAGA, currency: 'BRL' });
+                        if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout', { value: qtd * PRECO_POR_VAGA, currency: 'BRL', num_items: qtd });
+                        window.dataLayer = window.dataLayer || [];
+                        dataLayer.push({ event: 'begin_checkout', ecommerce: { currency: 'BRL', value: qtd * PRECO_POR_VAGA } });
                         window.location.href = data.init_point;
                     })
                     .catch(function(err) {

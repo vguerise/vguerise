@@ -18,10 +18,9 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '804720092315209');
     fbq('track', 'PageView');
-    fbq('track', 'Purchase', {currency: 'BRL'});
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=804720092315209&ev=Purchase&noscript=1"
+    src="https://www.facebook.com/tr?id=804720092315209&ev=PageView&noscript=1"
     /></noscript>
 
     <!-- Google Tag Manager -->
@@ -30,7 +29,32 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-W8W2QNJ6');
-    dataLayer.push({event: 'purchase', ecommerce: {currency: 'BRL'}});
+    </script>
+
+    <script>
+    // Purchase só é disparado com pagamento aprovado (sem status=pending na URL de retorno).
+    // valor/qtd vêm do Worker jantar-checkout via back_urls do Mercado Pago.
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var status = params.get('status');
+        var valor = Number(params.get('valor'));
+        var qtd = Number(params.get('qtd')) || 1;
+
+        if (status === 'pending') return;
+
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Purchase', {
+                value: valor || undefined,
+                currency: 'BRL',
+                num_items: qtd,
+            });
+        }
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            event: 'purchase',
+            ecommerce: { currency: 'BRL', value: valor || undefined },
+        });
+    })();
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

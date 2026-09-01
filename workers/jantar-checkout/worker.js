@@ -91,8 +91,8 @@ export default {
           currency_id: 'BRL',
         }],
         back_urls: {
-          success: `${SITE_URL}/obrigado?cidade=${encodeURIComponent(cidade)}`,
-          pending: `${SITE_URL}/obrigado?cidade=${encodeURIComponent(cidade)}&status=pending`,
+          success: `${SITE_URL}/obrigado?cidade=${encodeURIComponent(cidade)}&valor=${qtd * PRECO_POR_VAGA}&qtd=${qtd}`,
+          pending: `${SITE_URL}/obrigado?cidade=${encodeURIComponent(cidade)}&valor=${qtd * PRECO_POR_VAGA}&qtd=${qtd}&status=pending`,
           failure: `${SITE_URL}?erro=pagamento`,
         },
         auto_return: 'approved',
