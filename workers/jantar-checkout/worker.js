@@ -13,8 +13,9 @@ const PRECO_POR_VAGA = 1100; // R$ — mesmo valor em todas as cidades
 const QUANTIDADE_MAXIMA = 6; // máximo por compra
 
 const CIDADES = {
-  'Brasília': { data: '24/08' },
-  'Curitiba': { data: '27/08' },
+  'São Paulo': { data: '10/09' },
+  'Vitória': { data: '15/09' },
+  'Ribeirão Preto': { data: '21/09' },
 };
 
 function corsHeaders(origin) {
