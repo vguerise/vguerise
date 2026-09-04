@@ -14,7 +14,6 @@ const QUANTIDADE_MAXIMA = 6; // máximo por compra
 
 const CIDADES = {
   'São Paulo': { data: '10/09' },
-  'Vitória': { data: '15/09' },
   'Ribeirão Preto': { data: '21/09' },
 };
 
