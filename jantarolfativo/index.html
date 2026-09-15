@@ -279,6 +279,21 @@
         .formatos-header .section-title { color: #1A1A1A; }
         .formatos-header .section-title em { color: #8B3A00; }
         .formatos-header p { color: var(--brown-text); max-width: 560px; margin: 0 auto; font-size: 1rem; line-height: 1.7; }
+        .agenda-tema-wrap { text-align: center; margin-bottom: 2rem; }
+        .agenda-tema {
+            display: inline-block; padding: 0.65rem 1.5rem; border-radius: 999px;
+            background: rgba(232,93,4,0.08); border: 1px solid rgba(232,93,4,0.3);
+            color: var(--orange-dark); font-weight: 700; font-size: 1.05rem;
+        }
+        .agenda-aviso { text-align: center; max-width: 640px; margin: 0 auto 2.5rem; }
+        .agenda-aviso .aviso-vagas {
+            display: block; color: var(--orange-dark); font-weight: 800;
+            font-size: 1.2rem; margin-bottom: 0.4rem;
+        }
+        .agenda-aviso .aviso-pagamento {
+            display: block; color: var(--brown-text); font-weight: 600;
+            font-size: 1.05rem; line-height: 1.6;
+        }
         .formatos-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;
         }
@@ -755,8 +770,14 @@
                 <p>Cinco datas confirmadas: garanta sua vaga, elas são limitadas.</p>
             </div>
 
-            <p style="text-align:center; font-weight:600; margin:0 0 8px;">⚠️ Vagas limitadas por cidade</p>
-            <p style="text-align:center; margin:0 0 28px;">Participação no evento mediante pagamento e confirmação via WhatsApp pós venda.</p>
+            <div class="agenda-tema-wrap">
+                <span class="agenda-tema">Tema de Outubro: Perfumaria, Neurociência e Imagem</span>
+            </div>
+
+            <p class="agenda-aviso">
+                <span class="aviso-vagas">⚠️ Vagas limitadas por cidade</span>
+                <span class="aviso-pagamento">Participação no evento mediante pagamento e confirmação via WhatsApp pós venda.</span>
+            </p>
 
             <div class="formatos-grid">
                 <div class="formato-card" data-checkout-card data-cidade="Ribeirão Preto">
@@ -766,7 +787,6 @@
                     <div class="formato-desc">Restaurante La Madunina · Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
                         <li data-vagas-texto>Vagas limitadas</li>
                     </ul>
@@ -790,7 +810,6 @@
                     <div class="formato-desc">Restaurante Aspas · Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
                         <li data-vagas-texto>Vagas limitadas</li>
                     </ul>
@@ -814,7 +833,6 @@
                     <div class="formato-desc">Restaurante Tero · Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
                         <li data-vagas-texto>Vagas limitadas</li>
                     </ul>
@@ -838,7 +856,6 @@
                     <div class="formato-desc">Restaurante Soho · Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
                         <li data-vagas-texto>Vagas limitadas</li>
                     </ul>
@@ -862,7 +879,6 @@
                     <div class="formato-desc">Restaurante Maska · Jantar + Aula + Experiência Olfativa</div>
                     <ul class="formato-lista">
                         <li>Jantar completo e bebidas inclusos</li>
-                        <li>Tema: A Arte e a História da Perfumaria</li>
                         <li>Experiência olfativa guiada</li>
                         <li data-vagas-texto>Vagas limitadas</li>
                     </ul>
