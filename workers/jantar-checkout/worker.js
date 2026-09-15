@@ -16,6 +16,8 @@ const CIDADES = {
   'Ribeirão Preto': { data: '21/09' },
   'Balneário Camboriú': { data: '06/10' },
   'Vitória': { data: '07/10' },
+  'Brasília': { data: '15/10' },
+  'Rio de Janeiro': { data: '20/10' },
 };
 
 function corsHeaders(origin) {
