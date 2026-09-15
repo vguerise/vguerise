@@ -340,7 +340,13 @@
             font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700;
             color: #1A1A1A; margin-bottom: 0.4rem;
         }
-        .formato-desc { font-size: 0.82rem; color: #888; margin-bottom: 1rem; line-height: 1.5; }
+        .formato-restaurante {
+            font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700;
+            color: var(--orange-dark); margin-bottom: 0.35rem;
+        }
+        .formato-tagline { font-size: 0.95rem; font-weight: 600; color: var(--brown-text); margin-bottom: 1.25rem; line-height: 1.5; }
+        .formato-vagas-status { font-size: 0.8rem; font-weight: 700; color: var(--orange-dark); margin: 0.5rem 0 0; }
+        .formato-vagas-status:empty { display: none; margin: 0; }
         .formato-qtd {
             display: flex; align-items: center; justify-content: center; gap: 1rem;
             margin-top: 1.5rem;
@@ -784,12 +790,9 @@
                     <span class="formato-tag">Presencial</span>
                     <div class="formato-nome">Ribeirão Preto</div>
                     <div class="agenda-data">21/09</div>
-                    <div class="formato-desc">Restaurante La Madunina · Jantar + Aula + Experiência Olfativa</div>
-                    <ul class="formato-lista">
-                        <li>Jantar completo e bebidas inclusos</li>
-                        <li>Experiência olfativa guiada</li>
-                        <li data-vagas-texto>Vagas limitadas</li>
-                    </ul>
+                    <div class="formato-restaurante">Restaurante La Madunina</div>
+                    <div class="formato-tagline">Jantar + Aula + Experiência Olfativa</div>
+                    <p class="formato-vagas-status" data-vagas-texto></p>
                     <div class="formato-qtd">
                         <button type="button" class="qtd-btn" data-qtd-menos aria-label="Diminuir quantidade">−</button>
                         <span class="formato-qtd-valor" data-qtd-valor>1</span>
@@ -807,12 +810,9 @@
                     <span class="formato-tag">Presencial</span>
                     <div class="formato-nome">Balneário Camboriú</div>
                     <div class="agenda-data">06/10</div>
-                    <div class="formato-desc">Restaurante Aspas · Jantar + Aula + Experiência Olfativa</div>
-                    <ul class="formato-lista">
-                        <li>Jantar completo e bebidas inclusos</li>
-                        <li>Experiência olfativa guiada</li>
-                        <li data-vagas-texto>Vagas limitadas</li>
-                    </ul>
+                    <div class="formato-restaurante">Restaurante Aspas</div>
+                    <div class="formato-tagline">Jantar + Aula + Experiência Olfativa</div>
+                    <p class="formato-vagas-status" data-vagas-texto></p>
                     <div class="formato-qtd">
                         <button type="button" class="qtd-btn" data-qtd-menos aria-label="Diminuir quantidade">−</button>
                         <span class="formato-qtd-valor" data-qtd-valor>1</span>
@@ -830,12 +830,9 @@
                     <span class="formato-tag">Presencial</span>
                     <div class="formato-nome">Vitória</div>
                     <div class="agenda-data">07/10</div>
-                    <div class="formato-desc">Restaurante Tero · Jantar + Aula + Experiência Olfativa</div>
-                    <ul class="formato-lista">
-                        <li>Jantar completo e bebidas inclusos</li>
-                        <li>Experiência olfativa guiada</li>
-                        <li data-vagas-texto>Vagas limitadas</li>
-                    </ul>
+                    <div class="formato-restaurante">Restaurante Tero</div>
+                    <div class="formato-tagline">Jantar + Aula + Experiência Olfativa</div>
+                    <p class="formato-vagas-status" data-vagas-texto></p>
                     <div class="formato-qtd">
                         <button type="button" class="qtd-btn" data-qtd-menos aria-label="Diminuir quantidade">−</button>
                         <span class="formato-qtd-valor" data-qtd-valor>1</span>
@@ -853,12 +850,9 @@
                     <span class="formato-tag">Presencial</span>
                     <div class="formato-nome">Brasília</div>
                     <div class="agenda-data">15/10</div>
-                    <div class="formato-desc">Restaurante Soho · Jantar + Aula + Experiência Olfativa</div>
-                    <ul class="formato-lista">
-                        <li>Jantar completo e bebidas inclusos</li>
-                        <li>Experiência olfativa guiada</li>
-                        <li data-vagas-texto>Vagas limitadas</li>
-                    </ul>
+                    <div class="formato-restaurante">Restaurante Soho</div>
+                    <div class="formato-tagline">Jantar + Aula + Experiência Olfativa</div>
+                    <p class="formato-vagas-status" data-vagas-texto></p>
                     <div class="formato-qtd">
                         <button type="button" class="qtd-btn" data-qtd-menos aria-label="Diminuir quantidade">−</button>
                         <span class="formato-qtd-valor" data-qtd-valor>1</span>
@@ -876,12 +870,9 @@
                     <span class="formato-tag">Presencial</span>
                     <div class="formato-nome">Rio de Janeiro</div>
                     <div class="agenda-data">20/10</div>
-                    <div class="formato-desc">Restaurante Maska · Jantar + Aula + Experiência Olfativa</div>
-                    <ul class="formato-lista">
-                        <li>Jantar completo e bebidas inclusos</li>
-                        <li>Experiência olfativa guiada</li>
-                        <li data-vagas-texto>Vagas limitadas</li>
-                    </ul>
+                    <div class="formato-restaurante">Restaurante Maska</div>
+                    <div class="formato-tagline">Jantar + Aula + Experiência Olfativa</div>
+                    <p class="formato-vagas-status" data-vagas-texto></p>
                     <div class="formato-qtd">
                         <button type="button" class="qtd-btn" data-qtd-menos aria-label="Diminuir quantidade">−</button>
                         <span class="formato-qtd-valor" data-qtd-valor>1</span>
@@ -1035,7 +1026,7 @@
                     if (vagasTexto) {
                         vagasTexto.textContent = restantes <= 5
                             ? 'Restam apenas ' + restantes + ' vaga' + (restantes === 1 ? '' : 's')
-                            : 'Vagas limitadas';
+                            : '';
                     }
                     card.dataset.vagasRestantes = restantes;
                 });
