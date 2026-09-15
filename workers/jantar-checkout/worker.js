@@ -16,6 +16,7 @@ const CIDADES = {
   'Ribeirão Preto': { data: '21/09' },
   'Balneário Camboriú': { data: '06/10' },
   'Vitória': { data: '07/10' },
+  'São Paulo': { data: '08/10' },
   'Brasília': { data: '15/10' },
   'Rio de Janeiro': { data: '20/10' },
 };
