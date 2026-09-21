@@ -129,10 +129,8 @@ h1:focus,h2:focus{outline:none}
 .perf-retry,.perf-more{align-self:flex-start;display:inline-flex;align-items:center;height:44px;padding:0 18px;background:transparent;border:1px solid var(--orange);
   border-radius:999px;color:var(--white);font-size:14px;font-weight:500;cursor:pointer}
 .pcard{display:flex;gap:14px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:16px}
-.pimg{flex-shrink:0;width:92px;height:116px;background:#FFFFFF;border-radius:12px;display:flex;
-  align-items:center;justify-content:center;overflow:hidden}
-.pimg img{max-width:100%;max-height:100%;object-fit:contain;padding:6px}
-.pimg.ph{background:#1D1D1D;color:var(--orange);font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500}
+.pimg{flex-shrink:0;width:92px;height:116px;background:#1D1D1D;color:var(--orange);border-radius:12px;display:flex;
+  align-items:center;justify-content:center;overflow:hidden;font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500}
 .pbody{min-width:0;flex:1}
 .pbrand{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 .pname{margin:4px 0 0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:23px;line-height:1.08;color:var(--white)}
@@ -286,7 +284,7 @@ h1:focus,h2:focus{outline:none}
         </div>
         <div id="perfList" aria-live="polite"></div>
         <button id="perfMore" class="perf-more" type="button" hidden>Ver outras sugestões</button>
-        <p class="perf-note">Sugestões geradas automaticamente a partir de uma pesquisa na web. Preços e disponibilidade podem variar. Imagens e links pertencem às respectivas fontes.</p>
+        <p class="perf-note">Sugestões geradas automaticamente a partir de uma pesquisa na web. Preços e disponibilidade podem variar. Links pertencem às respectivas fontes.</p>
       </section>
     </div>
 
@@ -644,22 +642,7 @@ h1:focus,h2:focus{outline:none}
 
     var wrap = document.createElement('div');
     wrap.className = 'pimg';
-    function placeholder() {
-      wrap.className = 'pimg ph';
-      wrap.textContent = (p.brand || '?').charAt(0).toUpperCase();
-    }
-    if (isHttps(p.image_url)) {
-      var img = document.createElement('img');
-      img.alt = 'Frasco do perfume ' + p.name + ', ' + p.brand;
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.referrerPolicy = 'no-referrer';
-      img.addEventListener('error', placeholder);
-      img.src = p.image_url;
-      wrap.appendChild(img);
-    } else {
-      placeholder();
-    }
+    wrap.textContent = (p.brand || '?').charAt(0).toUpperCase();
 
     var body = document.createElement('div');
     body.className = 'pbody';
