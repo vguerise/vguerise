@@ -92,6 +92,9 @@ h1:focus,h2:focus{outline:none}
 .field input{width:100%;height:54px;padding:0 16px;background:var(--card);border:1px solid var(--line);
   border-radius:12px;color:var(--white);font-size:16px}
 .field input::placeholder{color:#7A7A7A}
+.field textarea{width:100%;min-height:64px;padding:14px 16px;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;color:var(--white);font-size:16px;resize:vertical}
+.field textarea::placeholder{color:#7A7A7A}
 .checks{margin-top:18px;display:flex;flex-direction:column;gap:4px}
 .check{display:flex;align-items:flex-start;gap:12px;min-height:44px;padding:6px 0;cursor:pointer}
 .check input{flex-shrink:0;width:22px;height:22px;margin:0;accent-color:var(--orange)}
@@ -222,6 +225,10 @@ h1:focus,h2:focus{outline:none}
         <label for="em">E-mail</label>
         <input id="em" name="email" type="email" maxlength="254" inputmode="email" placeholder="seu@email.com" autocomplete="email" required>
       </div>
+      <div class="field">
+        <label for="favs">Seus 3 perfumes favoritos hoje <span class="opt-tag">(opcional)</span></label>
+        <textarea id="favs" name="favorites" maxlength="300" rows="2" placeholder="Ex.: Bleu de Chanel, Sauvage, Aventus"></textarea>
+      </div>
       <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="checks">
@@ -265,6 +272,11 @@ h1:focus,h2:focus{outline:none}
       <div class="label-caps fams-title">Famílias olfativas que combinam com você</div>
       <div id="fams"></div>
 
+      <section id="analysisCard" class="sec-card" hidden>
+        <div class="label-caps">Sua leitura personalizada</div>
+        <p id="analysisText" class="muted"></p>
+      </section>
+
       <section class="perf" aria-labelledby="perfTitle">
         <div id="perfTitle" class="label-caps">Perfumes para o seu perfil</div>
         <div id="perfSeg" class="seg" role="group" aria-label="Filtrar perfumes por público">
@@ -303,7 +315,8 @@ h1:focus,h2:focus{outline:none}
     CTA_URL: 'https://wa.me/5521976462812',   // destino do botão "Falar com Victor Guerise"
     CONSENT_VERSION: 'v1',                    // mude quando alterar os textos de consentimento
     QUIZ_VERSION: 'v2',                       // mude quando alterar perguntas ou pesos
-    PERFUMES_FUNCTION: 'suggest-perfumes'     // nome da Edge Function que pesquisa os perfumes na web
+    PERFUMES_FUNCTION: 'suggest-perfumes',    // nome da Edge Function que pesquisa os perfumes na web
+    ANALYSIS_FUNCTION: 'analyze-profile'      // nome da Edge Function que gera a leitura personalizada
   };
 
   /* ============ DADOS ============ */
@@ -366,7 +379,7 @@ h1:focus,h2:focus{outline:none}
   /* ============ UTIL ============ */
   var $ = function (id) { return document.getElementById(id); };
   var SCREENS = ['intro', 'gender', 'quiz', 'capture', 'result'];
-  var state = { qi: 0, answers: [], locked: false, gender: null, sending: false };
+  var state = { qi: 0, answers: [], locked: false, gender: null, sending: false, analysisReq: 0 };
 
   function nm(a) { return state.gender === 'f' ? a.f : a.name; }
   function sh(a) { return state.gender === 'f' ? a.fs : a.short; }
@@ -509,6 +522,35 @@ h1:focus,h2:focus{outline:none}
     perf.aud = state.gender === 'f' ? 'f' : 'm';
     perf.level = LEVEL_KEYS[state.answers[Q.length - 1]] || 'int';
     loadPerfumes();
+    loadAnalysis(top.a.k, sec.a.k, perf.aud, perf.level, $('favs').value.trim().slice(0, 300));
+  }
+
+  /* ============ LEITURA PERSONALIZADA (arquétipo + perfumes favoritos) ============ */
+  function loadAnalysis(archKey, secKey, aud, level, favorites) {
+    var card = $('analysisCard'), req = ++state.analysisReq;
+    card.hidden = true;
+    if (!favorites || !perfEnabled()) return;   // opcional: sem texto, sem chamada, sem custo
+
+    var headers = { 'Content-Type': 'application/json', 'apikey': CONFIG.SUPABASE_KEY };
+    if (CONFIG.SUPABASE_KEY.indexOf('eyJ') === 0) headers['Authorization'] = 'Bearer ' + CONFIG.SUPABASE_KEY;
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 40000);
+
+    fetch(CONFIG.SUPABASE_URL.replace(/\/+$/, '') + '/functions/v1/' + CONFIG.ANALYSIS_FUNCTION, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({ archetype: archKey, secondary: secKey, audience: aud, level: level, favorites: favorites }),
+      signal: ctrl.signal
+    }).then(function (r) {
+      clearTimeout(timer);
+      return r.json().catch(function () { return {}; });
+    }).then(function (j) {
+      if (req !== state.analysisReq) return;
+      if (j.status === 'ok' && j.analysis) {
+        $('analysisText').textContent = j.analysis;
+        card.hidden = false;
+      }
+    }).catch(function () { clearTimeout(timer); });
   }
 
   /* ============ PERFUMES (pesquisa na web via Supabase Edge Function) ============ */
@@ -776,6 +818,7 @@ h1:focus,h2:focus{outline:none}
       scores: c.scores,
       answers: state.answers.slice(),
       level: lvl ? lvl.t : null,
+      favorites: $('favs').value.trim().slice(0, 300) || null,
       utm: utmParams(),
       page: location.origin + location.pathname
     };
@@ -859,6 +902,7 @@ h1:focus,h2:focus{outline:none}
   });
   $('againBtn').addEventListener('click', function () {
     perf.req++;
+    state.analysisReq++;
     resetRun();
     state.gender = null;
     form.reset();
