@@ -187,6 +187,39 @@ async function findImage(pageUrl: string): Promise<string | null> {
   return (await imageOk(u.href)) ? u.href : null;
 }
 
+const stripDiacritics = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+function tokensOf(s: string): string[] {
+  return stripDiacritics(s.toLowerCase()).split(/[^a-z0-9]+/).filter((t) => t.length >= 3);
+}
+
+// Quando a URL principal não tem imagem aproveitável, tenta outras URLs que já
+// apareceram na mesma busca e parecem falar do mesmo perfume (sem custo extra de API).
+async function findImageWithFallback(
+  o: { brand: string; name: string; source_url: string },
+  seen: Map<string, string>,
+  primaryUrls: Set<string>,
+  deadline: number,
+): Promise<string | null> {
+  const direct = await findImage(o.source_url).catch(() => null);
+  if (direct) return direct;
+
+  const toks = tokensOf(o.brand + " " + o.name);
+  const candidates = Array.from(seen.values())
+    .filter((u) => !primaryUrls.has(norm(u)))
+    .map((u) => ({ u, score: toks.reduce((acc, t) => acc + (stripDiacritics(u.toLowerCase()).includes(t) ? 1 : 0), 0) }))
+    .filter((c) => c.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((c) => c.u);
+
+  for (const cand of candidates) {
+    if (Date.now() > deadline) break;
+    const img = await findImage(cand).catch(() => null);
+    if (img) return img;
+  }
+  return null;
+}
+
 function extractJson(text: string): any {
   const a = text.indexOf("{"), b = text.lastIndexOf("}");
   if (a < 0 || b <= a) return null;
@@ -277,8 +310,10 @@ async function generate(arch: string, aud: string, level: string) {
   }
   if (out.length < 3) throw new Error("menos de 3 perfumes válidos na resposta");
 
+  const primaryUrls = new Set(out.map((o) => norm(o.source_url)));
+  const imageDeadline = deadline - 5_000;
   await Promise.all(out.map(async (o) => {
-    o.image_url = await findImage(o.source_url).catch(() => null);
+    o.image_url = await findImageWithFallback(o, seen, primaryUrls, imageDeadline).catch(() => null);
   }));
 
   return { perfumes: out, generated_at: new Date().toISOString() };
