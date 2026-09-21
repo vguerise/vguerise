@@ -53,6 +53,9 @@ h1:focus,h2:focus{outline:none}
 
 /* intro */
 #intro .mid{flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px}
+.intro-photo{width:132px;aspect-ratio:2/3;margin:0 auto;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:0 14px 34px rgba(0,0,0,.5)}
+.intro-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
 #intro h1{font-size:clamp(48px,15vw,66px);line-height:.96}
 #intro h1 em{color:var(--orange)}
 #intro p{margin:0;font-size:17px;line-height:1.5;color:var(--muted)}
@@ -160,9 +163,10 @@ h1:focus,h2:focus{outline:none}
   <section id="intro" class="screen">
     <div class="brand">Victor Guerise</div>
     <div class="mid">
+      <div class="intro-photo"><img src="images/hero.jpg" alt="Victor Guerise" width="900" height="1350" fetchpriority="high"></div>
       <div class="eyebrow">Teste de arquétipo olfativo</div>
       <h1 class="display" tabindex="-1">Qual é o seu <em>arquétipo</em> olfativo?</h1>
-      <p>Sete perguntas rápidas para descobrir, entre nove arquétipos, qual presença você carrega e quais famílias de perfume combinam com ela.</p>
+      <p>Oito perguntas rápidas para descobrir, entre nove arquétipos, qual presença você carrega e quais famílias de perfume combinam com ela.</p>
     </div>
     <div class="foot">
       <button class="btn" id="startBtn" type="button">Começar o teste</button>
@@ -219,10 +223,6 @@ h1:focus,h2:focus{outline:none}
       <div class="field">
         <label for="em">E-mail</label>
         <input id="em" name="email" type="email" maxlength="254" inputmode="email" placeholder="seu@email.com" autocomplete="email" required>
-      </div>
-      <div class="field">
-        <label for="favs">Seus 3 perfumes favoritos hoje <span class="opt-tag">(opcional)</span></label>
-        <textarea id="favs" name="favorites" maxlength="300" rows="2" placeholder="Ex.: Bleu de Chanel, Sauvage, Aventus"></textarea>
       </div>
       <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
@@ -309,7 +309,7 @@ h1:focus,h2:focus{outline:none}
     CONTACT_EMAIL: 'vguerise@gmail.com',      // e-mail para pedidos de correção/exclusão (LGPD)
     CTA_URL: 'https://wa.me/5521976462812',   // destino do botão "Falar com Victor Guerise"
     CONSENT_VERSION: 'v1',                    // mude quando alterar os textos de consentimento
-    QUIZ_VERSION: 'v2',                       // mude quando alterar perguntas ou pesos
+    QUIZ_VERSION: 'v3',                       // mude quando alterar perguntas ou pesos
     PERFUMES_FUNCTION: 'suggest-perfumes',    // nome da Edge Function que pesquisa os perfumes na web
     ANALYSIS_FUNCTION: 'analyze-profile'      // nome da Edge Function que gera a leitura personalizada
   };
@@ -328,9 +328,11 @@ h1:focus,h2:focus{outline:none}
     { k:'SAB', name:'O Sábio',        short:'Sábio',        f:'A Sábia',        fs:'Sábia',        traits:'Introspecção, cultura, longa maturidade, contemplação', fams:['Madeiras envelhecidas','Balsâmicos','Terrosos','Musgos'] }
   ];
 
-  // w = pontos por arquétipo (2 = principal, 1 = secundário). A última pergunta (nível) não pontua.
+  // w = pontos por arquétipo (2 = principal, 1 = secundário). Perguntas com noScore:true não pontuam.
   // Textos sem flexão de gênero: servem para qualquer pessoa.
   var Q = [
+    { q:'Quais são os seus 3 perfumes favoritos hoje?', type:'text', noScore:true, opts:[],
+      placeholder:'Ex.: Bleu de Chanel, Sauvage, Aventus' },
     { q:'Que impressão você quer deixar quando chega num lugar?', opts:[
       { t:'Que ninguém ignore minha presença',                    w:{SOB:2,SED:1} },
       { t:'Que sintam que tenho tudo sob controle',               w:{ARQ:2,SOB:1} },
@@ -365,7 +367,7 @@ h1:focus,h2:focus{outline:none}
       { t:'Encontros e noites a dois',                            w:{SED:2,ART:1} },
       { t:'Exposições, música e conversas que inspiram',          w:{ART:2,VIS:1} },
       { t:'Momentos a sós, leitura, contemplação',                w:{SAB:2,ARQ:1} } ] },
-    { q:'Qual é o seu nível com perfumes?', opts:[
+    { q:'Qual é o seu nível com perfumes?', noScore:true, opts:[
       { t:'Estou começando',            w:{} },
       { t:'Tenho de 3 a 10 perfumes',   w:{} },
       { t:'Coleciono e conheço bem',    w:{} } ] }
@@ -390,6 +392,11 @@ h1:focus,h2:focus{outline:none}
     state.qi = 0; state.answers = []; state.locked = false;
   }
 
+  // Pergunta 1 (obrigatória, texto livre): os 3 perfumes favoritos.
+  function favoritesAnswer() {
+    return (state.answers[0] || '').toString().trim().slice(0, 300);
+  }
+
   /* ============ PERGUNTAS ============ */
   function renderQ() {
     var q = Q[state.qi];
@@ -399,11 +406,17 @@ h1:focus,h2:focus{outline:none}
     $('bar').style.width = pct + '%';
     $('bar').parentNode.setAttribute('aria-valuenow', pct);
     $('qtext').textContent = q.q;
-    $('qnote').hidden = (state.qi !== Q.length - 1);
+    $('qnote').hidden = !q.noScore;
     $('back').hidden = (state.qi === 0);
 
     var box = $('opts');
     box.innerHTML = '';
+
+    if (q.type === 'text') {
+      renderTextQ(q, box);
+      return;
+    }
+
     q.opts.forEach(function (o, oi) {
       var b = document.createElement('button');
       b.type = 'button';
@@ -421,6 +434,58 @@ h1:focus,h2:focus{outline:none}
     });
   }
 
+  function renderTextQ(q, box) {
+    var wrap = document.createElement('div');
+    wrap.className = 'field';
+
+    var input = document.createElement('textarea');
+    input.id = 'qTextInput';
+    input.rows = 2;
+    input.maxLength = 300;
+    input.placeholder = q.placeholder || '';
+    input.value = state.answers[state.qi] || '';
+    wrap.appendChild(input);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn';
+    btn.style.marginTop = '18px';
+    btn.textContent = 'Continuar';
+    wrap.appendChild(btn);
+
+    function valid() { return input.value.trim().length >= 3; }
+    function sync() { btn.disabled = !valid(); }
+    sync();
+
+    input.addEventListener('input', sync);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (valid()) advance(); }
+    });
+    btn.addEventListener('click', advance);
+
+    function advance() {
+      if (state.locked || !valid()) return;
+      state.locked = true;
+      state.answers[state.qi] = input.value.trim();
+      goNext();
+      state.locked = false;
+    }
+
+    box.appendChild(wrap);
+    setTimeout(function () { input.focus({ preventScroll: true }); }, 30);
+  }
+
+  function goNext() {
+    if (state.qi >= Q.length - 1) {
+      show('capture');
+    } else {
+      state.qi++;
+      renderQ();
+      $('qtext').setAttribute('tabindex', '-1');
+      $('qtext').focus({ preventScroll: true });
+    }
+  }
+
   function pick(oi) {
     if (state.locked) return;
     state.locked = true;
@@ -428,14 +493,7 @@ h1:focus,h2:focus{outline:none}
     renderQ();
     setTimeout(function () {
       state.locked = false;
-      if (state.qi >= Q.length - 1) {
-        show('capture');
-      } else {
-        state.qi++;
-        renderQ();
-        $('qtext').setAttribute('tabindex', '-1');
-        $('qtext').focus({ preventScroll: true });
-      }
+      goNext();
     }, 220);
   }
 
@@ -448,8 +506,8 @@ h1:focus,h2:focus{outline:none}
       if (!o) return;
       Object.keys(o.w).forEach(function (k) {
         scores[k] += o.w[k];
-        if (i === 0) tie[k] += o.w[k] * 0.01;   // desempate: pergunta 1, depois pergunta 2
-        if (i === 1) tie[k] += o.w[k] * 0.001;
+        if (i === 1) tie[k] += o.w[k] * 0.01;   // desempate: 1ª pergunta com pontuação, depois a 2ª
+        if (i === 2) tie[k] += o.w[k] * 0.001;
       });
     });
     var ranked = ARCH.map(function (a, i) {
@@ -517,7 +575,7 @@ h1:focus,h2:focus{outline:none}
     perf.aud = state.gender === 'f' ? 'f' : 'm';
     perf.level = LEVEL_KEYS[state.answers[Q.length - 1]] || 'int';
     loadPerfumes();
-    loadAnalysis(top.a.k, sec.a.k, perf.aud, perf.level, $('favs').value.trim().slice(0, 300));
+    loadAnalysis(top.a.k, sec.a.k, perf.aud, perf.level, favoritesAnswer());
   }
 
   /* ============ LEITURA PERSONALIZADA (arquétipo + perfumes favoritos) ============ */
@@ -793,7 +851,7 @@ h1:focus,h2:focus{outline:none}
       scores: c.scores,
       answers: state.answers.slice(),
       level: lvl ? lvl.t : null,
-      favorites: $('favs').value.trim().slice(0, 300) || null,
+      favorites: favoritesAnswer() || null,
       utm: utmParams(),
       page: location.origin + location.pathname
     };
