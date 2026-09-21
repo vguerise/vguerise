@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0B0B">
+<title>Qual é o seu arquétipo olfativo? — Victor Guerise</title>
+<meta name="description" content="Sete perguntas rápidas para descobrir, entre nove arquétipos, qual presença você carrega e quais famílias de perfume combinam com ela.">
+<link rel="canonical" href="https://vguerise.com.br/testedeperfil">
+<meta property="og:title" content="Qual é o seu arquétipo olfativo?">
+<meta property="og:description" content="Teste gratuito de arquétipo olfativo, por Victor Guerise.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vguerise.com.br/testedeperfil">
+<meta property="og:image" content="https://vguerise.com.br/images/victor-hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0B0B; --orange:#FF6A13; --white:#FFFFFF;
+  --card:#141414; --line:#2E2E2E; --muted:#B5B5B5; --dim:#8A8A8A;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--black);color:var(--white);font-family:'DM Sans',system-ui,sans-serif;line-height:1.4}
+button,input{font-family:inherit}
+a{color:var(--orange)}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+h1,h2,h3{margin:0}
+h1:focus,h2:focus{outline:none}
+
+.app{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh}
+.screen{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;
+  padding:calc(28px + env(safe-area-inset-top)) 24px calc(32px + env(safe-area-inset-bottom))}
+.screen[hidden]{display:none}
+.screen.flush{padding:0}
+
+.brand{font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}
+.display{font-family:'Cormorant Garamond',serif;font-weight:500}
+.muted{color:var(--muted)}
+.dim{color:var(--dim)}
+.label-caps{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.lead{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--muted)}
+
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:58px;
+  background:var(--orange);color:var(--black);border:0;border-radius:14px;
+  font-size:16px;font-weight:700;letter-spacing:.02em;cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 4px;background:transparent;
+  border:0;color:var(--dim);font-size:14px;font-weight:500;cursor:pointer}
+
+/* intro */
+#intro .mid{flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px}
+#intro h1{font-size:clamp(48px,15vw,66px);line-height:.96}
+#intro h1 em{color:var(--orange)}
+#intro p{margin:0;font-size:17px;line-height:1.5;color:var(--muted)}
+#intro .foot{display:flex;flex-direction:column;align-items:center;gap:14px;font-size:13px;color:var(--dim)}
+
+/* opções (perguntas e tratamento) */
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;padding:14px 16px;text-align:left;
+  font-size:16px;line-height:1.3;color:var(--white);background:var(--card);border:1px solid var(--line);
+  border-radius:14px;cursor:pointer}
+.opt[aria-pressed="true"]{background:#24120A;border-color:var(--orange)}
+@media (hover:hover){.opt:hover{border-color:var(--orange)}}
+.opt strong{display:block;font-weight:500}
+.opt small{display:block;margin-top:2px;font-size:13px;color:var(--dim)}
+.badge{flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid var(--orange);color:var(--orange);
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+/* tratamento */
+#gender h2{margin-top:10px;font-size:clamp(30px,9vw,36px);line-height:1.08}
+#gender .opts{margin-top:26px}
+
+/* quiz */
+.topbar{display:flex;align-items:center;justify-content:space-between}
+.count{font-size:13px;font-weight:500;color:var(--dim)}
+.progress{margin-top:20px;height:3px;background:#2A2A2A;border-radius:2px}
+.progress > div{height:3px;background:var(--orange);border-radius:2px;transition:width .25s ease}
+#qtext{margin:36px 0 8px;font-size:clamp(28px,8.6vw,34px);line-height:1.08}
+#qnote{margin:0;font-size:13px;color:var(--dim)}
+#opts{margin-top:22px}
+#back{margin-top:auto}
+
+/* capture */
+#capture h2{margin-top:10px;font-size:clamp(32px,9.6vw,38px);line-height:1.05}
+.field{margin-top:14px}
+.field:first-of-type{margin-top:22px}
+.field label{display:block;margin-bottom:6px;font-size:13px;font-weight:500;color:#D6D6D6}
+.field input{width:100%;height:54px;padding:0 16px;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;color:var(--white);font-size:16px}
+.field input::placeholder{color:#7A7A7A}
+.checks{margin-top:18px;display:flex;flex-direction:column;gap:4px}
+.check{display:flex;align-items:flex-start;gap:12px;min-height:44px;padding:6px 0;cursor:pointer}
+.check input{flex-shrink:0;width:22px;height:22px;margin:0;accent-color:var(--orange)}
+.check span{font-size:13px;line-height:1.45;color:#D6D6D6}
+.check .opt-tag{color:var(--dim)}
+#submitBtn{margin-top:18px}
+.form-error{margin:12px 0 0;font-size:14px;font-weight:500;line-height:1.4;color:var(--orange)}
+.form-error[hidden]{display:none}
+.legal{margin:12px 0 0;font-size:12px;line-height:1.45;color:var(--dim)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* result */
+.res-top{padding:calc(28px + env(safe-area-inset-top)) 24px 36px;background:var(--black)}
+#topName{margin-top:8px;font-size:clamp(40px,13vw,52px);line-height:1}
+#topTraits{margin-top:8px;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:21px;line-height:1.25;color:var(--muted)}
+#radar{display:block;width:100%;max-width:380px;margin:18px auto 0}
+.radar-cap{margin-top:4px;text-align:center;font-size:12px;color:var(--dim)}
+.sec-card{margin-top:24px;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+#secName{margin-top:6px;font-size:30px;line-height:1.05}
+#secTraits{margin-top:4px;font-size:14px;line-height:1.4;color:var(--muted)}
+.fams-title{margin-top:26px}
+#fams{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+#fams span{padding:8px 14px;border:1px solid var(--orange);border-radius:999px;font-size:14px}
+/* perfumes sugeridos */
+.perf{margin-top:34px}
+.seg{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.seg button{height:44px;padding:0 16px;background:transparent;border:1px solid var(--line);border-radius:999px;
+  color:var(--muted);font-size:14px;font-weight:500;cursor:pointer}
+.seg button[aria-pressed="true"]{border-color:var(--orange);color:var(--white);background:#24120A}
+#perfList{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.perf-msg{margin:0;font-size:14px;line-height:1.5;color:var(--muted)}
+.perf-retry,.perf-more{align-self:flex-start;display:inline-flex;align-items:center;height:44px;padding:0 18px;background:transparent;border:1px solid var(--orange);
+  border-radius:999px;color:var(--white);font-size:14px;font-weight:500;cursor:pointer}
+.pcard{display:flex;gap:14px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+.pimg{flex-shrink:0;width:92px;height:116px;background:#FFFFFF;border-radius:12px;display:flex;
+  align-items:center;justify-content:center;overflow:hidden}
+.pimg img{max-width:100%;max-height:100%;object-fit:contain;padding:6px}
+.pimg.ph{background:#1D1D1D;color:var(--orange);font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500}
+.pbody{min-width:0;flex:1}
+.pbrand{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.pname{margin:4px 0 0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:23px;line-height:1.08;color:var(--white)}
+.pmeta{margin-top:4px;font-size:12px;color:var(--orange)}
+.pwhy{margin:8px 0 0;font-size:14px;line-height:1.45;color:#D6D6D6}
+.plink{display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:500}
+.perf-more{margin-top:14px}
+.perf-more[hidden]{display:none}
+.perf-note{margin:14px 0 0;font-size:12px;line-height:1.45;color:var(--dim)}
+.sk .sk-bar{background:#242424;border-radius:8px;animation:pulse 1.4s ease-in-out infinite}
+.sk .pimg{background:#242424}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.sk .sk-bar{animation:none}}
+.res-cta{flex:1;padding:36px 24px calc(40px + env(safe-area-inset-bottom));background:var(--white);color:var(--black)}
+.res-cta h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:34px;line-height:1.05}
+.res-cta p{margin:12px 0 0;font-size:15px;line-height:1.5;color:#333}
+.res-cta .btn{margin-top:22px}
+.res-cta .again{display:flex;justify-content:center;margin-top:10px}
+.res-cta .again button{height:44px;padding:0 12px;background:transparent;border:0;color:var(--black);
+  font-size:14px;font-weight:500;text-decoration:underline;cursor:pointer}
+.res-cta .handle{margin-top:18px;text-align:center;font-size:13px;color:#555}
+</style>
+</head>
+<body>
+<noscript><p style="padding:24px">Este teste precisa de JavaScript para funcionar.</p></noscript>
+
+<div class="app">
+
+  <!-- INÍCIO -->
+  <section id="intro" class="screen">
+    <div class="brand">Victor Guerise</div>
+    <div class="mid">
+      <div class="eyebrow">Teste de arquétipo olfativo</div>
+      <h1 class="display" tabindex="-1">Qual é o seu <em>arquétipo</em> olfativo?</h1>
+      <p>Sete perguntas rápidas para descobrir, entre nove arquétipos, qual presença você carrega e quais famílias de perfume combinam com ela.</p>
+    </div>
+    <div class="foot">
+      <button class="btn" id="startBtn" type="button">Começar o teste</button>
+      <span>Gratuito · menos de 2 minutos</span>
+    </div>
+  </section>
+
+  <!-- TRATAMENTO -->
+  <section id="gender" class="screen" hidden>
+    <div class="brand">Victor Guerise</div>
+    <div class="eyebrow" style="margin-top:28px">Antes de começar</div>
+    <h2 class="display" tabindex="-1">Como você prefere que o resultado fale com você?</h2>
+    <p class="lead">Só muda a forma dos nomes dos arquétipos. O teste é o mesmo para todos.</p>
+    <div class="opts">
+      <button class="opt" type="button" data-g="m">
+        <span class="badge">O</span>
+        <span><strong>No masculino</strong><small>ex.: O Soberano, O Artista</small></span>
+      </button>
+      <button class="opt" type="button" data-g="f">
+        <span class="badge">A</span>
+        <span><strong>No feminino</strong><small>ex.: A Soberana, A Artista</small></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- PERGUNTAS -->
+  <section id="quiz" class="screen" hidden>
+    <div class="topbar">
+      <div class="brand">Victor Guerise</div>
+      <div class="count"><span id="qnum">1</span> / <span id="qtotal">7</span></div>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Progresso do teste" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="bar" style="width:0"></div></div>
+    <h2 id="qtext" class="display" tabindex="-1"></h2>
+    <p id="qnote" hidden>Esta pergunta não altera o seu arquétipo. Serve só para personalizar as recomendações.</p>
+    <div id="opts" class="opts"></div>
+    <button id="back" class="btn-ghost" type="button" hidden>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      Voltar
+    </button>
+  </section>
+
+  <!-- CAPTURA -->
+  <section id="capture" class="screen" hidden>
+    <div class="brand">Victor Guerise</div>
+    <div class="eyebrow" style="margin-top:28px">Resultado pronto</div>
+    <h2 class="display" tabindex="-1">Seu arquétipo está pronto.</h2>
+    <p class="lead">Informe seus dados para ver o resultado completo, com o radar do seu perfil, e receber a leitura por e-mail.</p>
+
+    <form id="leadForm" novalidate>
+      <div class="field">
+        <label for="nm">Nome</label>
+        <input id="nm" name="name" type="text" maxlength="100" placeholder="Seu nome" autocomplete="given-name" required>
+      </div>
+      <div class="field">
+        <label for="em">E-mail</label>
+        <input id="em" name="email" type="email" maxlength="254" inputmode="email" placeholder="seu@email.com" autocomplete="email" required>
+      </div>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="checks">
+        <label class="check">
+          <input type="checkbox" id="cAdult">
+          <span>Tenho 18 anos ou mais.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="cConsent">
+          <span>Concordo com o tratamento dos meus dados pessoais (nome, e-mail e respostas) para gerar o meu resultado, conforme a <a id="policyLink" href="#" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="cMkt">
+          <span>Quero receber conteúdos e novidades de Victor Guerise por e-mail. Posso cancelar quando quiser. <span class="opt-tag">(opcional)</span></span>
+        </label>
+      </div>
+
+      <button id="submitBtn" class="btn" type="submit" disabled>Ver meu arquétipo</button>
+      <p id="formError" class="form-error" role="alert" hidden>Não foi possível salvar seus dados agora. Confira sua conexão e tente de novo.</p>
+      <p class="legal">Você pode corrigir ou excluir seus dados a qualquer momento pelo e-mail <span id="contactMail"></span>.</p>
+    </form>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="result" class="screen flush" hidden>
+    <div class="res-top">
+      <div class="brand">Victor Guerise</div>
+      <div class="eyebrow" style="margin-top:32px">Seu arquétipo olfativo</div>
+      <h2 id="topName" class="display" tabindex="-1"></h2>
+      <div id="topTraits"></div>
+
+      <svg id="radar" viewBox="0 0 340 320" role="img" aria-label="Radar dos nove arquétipos olfativos"></svg>
+      <div class="radar-cap">Quanto mais longe do centro, mais forte o traço.</div>
+
+      <div class="sec-card">
+        <div class="label-caps">Arquétipo secundário</div>
+        <div id="secName" class="display"></div>
+        <div id="secTraits"></div>
+      </div>
+
+      <div class="label-caps fams-title">Famílias olfativas que combinam com você</div>
+      <div id="fams"></div>
+
+      <section class="perf" aria-labelledby="perfTitle">
+        <div id="perfTitle" class="label-caps">Perfumes para o seu perfil</div>
+        <div id="perfSeg" class="seg" role="group" aria-label="Filtrar perfumes por público">
+          <button type="button" data-aud="m" aria-pressed="true">Masculinos</button>
+          <button type="button" data-aud="f" aria-pressed="false">Femininos</button>
+          <button type="button" data-aud="all" aria-pressed="false">Todos</button>
+        </div>
+        <div id="perfList" aria-live="polite"></div>
+        <button id="perfMore" class="perf-more" type="button" hidden>Ver outras sugestões</button>
+        <p class="perf-note">Sugestões geradas automaticamente a partir de uma pesquisa na web. Preços e disponibilidade podem variar. Imagens e links pertencem às respectivas fontes.</p>
+      </section>
+    </div>
+
+    <div class="res-cta">
+      <h3>Quer uma leitura completa?</h3>
+      <p>Este teste é o primeiro passo. Na consultoria individual, Victor Guerise analisa a sua coleção e desenha o seu perfil olfativo completo.</p>
+      <a id="cta" class="btn" href="#">Falar com Victor Guerise</a>
+      <div class="again"><button id="againBtn" type="button">Refazer o teste</button></div>
+      <div class="handle">@vguerise</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============ CONFIGURAÇÃO — edite aqui ============ */
+  var CONFIG = {
+    SUPABASE_URL: 'https://zbltxuemnuuheafqjbsl.supabase.co',
+    SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpibHR4dWVtbnV1aGVhZnFqYnNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5NTQxNTIsImV4cCI6MjEwNTUzMDE1Mn0.Uu3dhxsC_dSQnPbCY4dm25Q-8DI5QZwIxC33DkkH2Oc', // chave PÚBLICA anon. NUNCA coloque a service_role aqui.
+    SUPABASE_TABLE: 'quiz_responses',         // tabela criada pelo arquivo supabase.sql
+    POLICY_URL: 'https://vguerise.com.br/privacidade',    // página ainda não publicada — ver docs/politica-de-privacidade-rascunho.md
+    CONTACT_EMAIL: 'vguerise@gmail.com',      // e-mail para pedidos de correção/exclusão (LGPD)
+    CTA_URL: 'https://wa.me/5521976462812',   // destino do botão "Falar com Victor Guerise"
+    CONSENT_VERSION: 'v1',                    // mude quando alterar os textos de consentimento
+    QUIZ_VERSION: 'v2',                       // mude quando alterar perguntas ou pesos
+    PERFUMES_FUNCTION: 'suggest-perfumes'     // nome da Edge Function que pesquisa os perfumes na web
+  };
+
+  /* ============ DADOS ============ */
+  // name/short = forma masculina (canônica). f/fs = forma feminina.
+  var ARCH = [
+    { k:'SOB', name:'O Soberano',     short:'Soberano',     f:'A Soberana',     fs:'Soberana',     traits:'Poder, status, presença intimidadora', fams:['Orientais ricos','Oudhs','Âmbar','Especiarias quentes'] },
+    { k:'ARQ', name:'O Arquiteto',    short:'Arquiteto',    f:'A Arquiteta',    fs:'Arquiteta',    traits:'Controle, precisão, minimalismo intencional', fams:['Aromáticos secos','Fougères','Chypres estruturados'] },
+    { k:'NOM', name:'O Nômade',       short:'Nômade',       f:'A Nômade',       fs:'Nômade',       traits:'Liberdade, movimento, autenticidade', fams:['Verdes','Aquáticos','Cítricos frescos','Hespérides'] },
+    { k:'SED', name:'O Sedutor',      short:'Sedutor',      f:'A Sedutora',     fs:'Sedutora',     traits:'Presença magnética, intimidade, carisma', fams:['Florais sensuais','Gourmands','Musks quentes'] },
+    { k:'VIS', name:'O Visionário',   short:'Visionário',   f:'A Visionária',   fs:'Visionária',   traits:'Originalidade, profundidade intelectual, disrupção', fams:['Nicho experimental','Fumaças','Incenso','Ozônicos incomuns'] },
+    { k:'GUA', name:'O Guardião',     short:'Guardião',     f:'A Guardiã',      fs:'Guardiã',      traits:'Tradição, lealdade, solidez, permanência', fams:['Madeiras clássicas','Couro','Tabaco','Fougères tradicionais'] },
+    { k:'ART', name:'O Artista',      short:'Artista',      f:'A Artista',      fs:'Artista',      traits:'Expressão criativa, emoção, sensibilidade estética', fams:['Florais únicos','Especiarias criativas','Resinas','Íris'] },
+    { k:'EST', name:'O Estrategista', short:'Estrategista', f:'A Estrategista', fs:'Estrategista', traits:'Adaptabilidade, leitura social, ambição calibrada', fams:['Aquáticos modernos','Ozônicos sofisticados','Frescos elegantes'] },
+    { k:'SAB', name:'O Sábio',        short:'Sábio',        f:'A Sábia',        fs:'Sábia',        traits:'Introspecção, cultura, longa maturidade, contemplação', fams:['Madeiras envelhecidas','Balsâmicos','Terrosos','Musgos'] }
+  ];
+
+  // w = pontos por arquétipo (2 = principal, 1 = secundário). A última pergunta (nível) não pontua.
+  // Textos sem flexão de gênero: servem para qualquer pessoa.
+  var Q = [
+    { q:'Que impressão você quer deixar quando chega num lugar?', opts:[
+      { t:'Que ninguém ignore minha presença',                    w:{SOB:2,SED:1} },
+      { t:'Que sintam que tenho tudo sob controle',               w:{ARQ:2,SOB:1} },
+      { t:'Que sou leve, livre, à vontade',                       w:{NOM:2,EST:1} },
+      { t:'Que minha presença é magnética, difícil de esquecer',  w:{SED:2,SOB:1} },
+      { t:'Que sou diferente de todo mundo ali',                  w:{VIS:2,NOM:1} } ] },
+    { q:'Qual frase mais parece com você?', opts:[
+      { t:'Prefiro o que é clássico e comprovado',                w:{GUA:2,ARQ:1} },
+      { t:'Prefiro o que ninguém mais está usando',               w:{VIS:2,ART:1} },
+      { t:'Prefiro entender o ambiente antes de me posicionar',   w:{EST:2,SAB:1} },
+      { t:'Prefiro pensar bastante antes de agir',                w:{SAB:2,GUA:1} } ] },
+    { q:'Como você se veste na maioria dos dias?', opts:[
+      { t:'Alfaiataria, peças de qualidade e caimento perfeito',  w:{SOB:2,ARQ:1} },
+      { t:'Minimalista, poucas peças, tudo combina',              w:{ARQ:2,EST:1} },
+      { t:'Casual, confortável, prático',                         w:{NOM:2,SAB:1} },
+      { t:'Com um detalhe autoral que ninguém mais tem',          w:{ART:2,VIS:1} },
+      { t:'Peças clássicas que duram anos',                       w:{GUA:2,SAB:1} } ] },
+    { q:'Que grupo de cheiros mais te atrai?', opts:[
+      { t:'Especiarias quentes, âmbar, oud',                      w:{SOB:2,SED:1} },
+      { t:'Doce, baunilha, algo envolvente',                      w:{SED:2,ART:1} },
+      { t:'Madeira, couro, tabaco',                               w:{GUA:2,SAB:1} },
+      { t:'Fumaça, incenso, algo diferente',                      w:{VIS:2,ART:1} },
+      { t:'Verde, cítrico, brisa marítima',                       w:{NOM:2,EST:1} },
+      { t:'Florais, rosa, jasmim, flor de laranjeira',            w:{SED:2,ART:1} } ] },
+    { q:'E qual destes?', opts:[
+      { t:'Aromático seco, lavanda, vetiver',                     w:{ARQ:2,GUA:1} },
+      { t:'Flor incomum, íris, resina',                           w:{ART:2,VIS:1} },
+      { t:'Musgo, terra, madeira envelhecida',                    w:{SAB:2,GUA:1} },
+      { t:'Aquático moderno, limpo e elegante',                   w:{EST:2,NOM:1} } ] },
+    { q:'Em que situação o perfume faz mais diferença para você?', opts:[
+      { t:'Reuniões e negociações importantes',                   w:{EST:2,SOB:1} },
+      { t:'Encontros e noites a dois',                            w:{SED:2,ART:1} },
+      { t:'Exposições, música e conversas que inspiram',          w:{ART:2,VIS:1} },
+      { t:'Momentos a sós, leitura, contemplação',                w:{SAB:2,ARQ:1} } ] },
+    { q:'Qual é o seu nível com perfumes?', opts:[
+      { t:'Estou começando',            w:{} },
+      { t:'Tenho de 3 a 10 perfumes',   w:{} },
+      { t:'Coleciono e conheço bem',    w:{} } ] }
+  ];
+
+  /* ============ UTIL ============ */
+  var $ = function (id) { return document.getElementById(id); };
+  var SCREENS = ['intro', 'gender', 'quiz', 'capture', 'result'];
+  var state = { qi: 0, answers: [], locked: false, gender: null, sending: false };
+
+  function nm(a) { return state.gender === 'f' ? a.f : a.name; }
+  function sh(a) { return state.gender === 'f' ? a.fs : a.short; }
+
+  function show(id, focusSel) {
+    SCREENS.forEach(function (s) { $(s).hidden = (s !== id); });
+    window.scrollTo(0, 0);
+    var h = focusSel ? $(id).querySelector(focusSel) : $(id).querySelector('h1,h2');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  }
+
+  function resetRun() {
+    state.qi = 0; state.answers = []; state.locked = false;
+  }
+
+  /* ============ PERGUNTAS ============ */
+  function renderQ() {
+    var q = Q[state.qi];
+    $('qnum').textContent = state.qi + 1;
+    $('qtotal').textContent = Q.length;
+    var pct = Math.round(((state.qi + 1) / Q.length) * 100);
+    $('bar').style.width = pct + '%';
+    $('bar').parentNode.setAttribute('aria-valuenow', pct);
+    $('qtext').textContent = q.q;
+    $('qnote').hidden = (state.qi !== Q.length - 1);
+    $('back').hidden = (state.qi === 0);
+
+    var box = $('opts');
+    box.innerHTML = '';
+    q.opts.forEach(function (o, oi) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.setAttribute('aria-pressed', state.answers[state.qi] === oi ? 'true' : 'false');
+      var badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = 'ABCDEF'.charAt(oi);
+      var txt = document.createElement('span');
+      txt.textContent = o.t;
+      b.appendChild(badge);
+      b.appendChild(txt);
+      b.addEventListener('click', function () { pick(oi); });
+      box.appendChild(b);
+    });
+  }
+
+  function pick(oi) {
+    if (state.locked) return;
+    state.locked = true;
+    state.answers[state.qi] = oi;
+    renderQ();
+    setTimeout(function () {
+      state.locked = false;
+      if (state.qi >= Q.length - 1) {
+        show('capture');
+      } else {
+        state.qi++;
+        renderQ();
+        $('qtext').setAttribute('tabindex', '-1');
+        $('qtext').focus({ preventScroll: true });
+      }
+    }, 220);
+  }
+
+  /* ============ PONTUAÇÃO ============ */
+  function compute() {
+    var scores = {}, tie = {};
+    ARCH.forEach(function (a) { scores[a.k] = 0; tie[a.k] = 0; });
+    state.answers.forEach(function (oi, i) {
+      var o = Q[i] && Q[i].opts[oi];
+      if (!o) return;
+      Object.keys(o.w).forEach(function (k) {
+        scores[k] += o.w[k];
+        if (i === 0) tie[k] += o.w[k] * 0.01;   // desempate: pergunta 1, depois pergunta 2
+        if (i === 1) tie[k] += o.w[k] * 0.001;
+      });
+    });
+    var ranked = ARCH.map(function (a, i) {
+      return { a: a, i: i, s: scores[a.k], t: scores[a.k] + tie[a.k] };
+    }).sort(function (x, y) { return y.t - x.t; });
+    return { scores: scores, ranked: ranked };
+  }
+
+  /* ============ RADAR ============ */
+  function radarSVG(vals, topIdx) {
+    var cx = 170, cy = 160, R = 100;
+    function P(i, r) {
+      var a = (-90 + 40 * i) * Math.PI / 180;
+      return [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
+    }
+    function f(n) { return n.toFixed(2); }
+    function poly(r) {
+      return ARCH.map(function (_, i) { return P(i, r).map(f).join(','); }).join(' ');
+    }
+    var s = '';
+    [25, 50, 75, 100].forEach(function (p) {
+      s += '<polygon points="' + poly(R * p / 100) + '" fill="none" stroke="' + (p === 100 ? '#3A3A3A' : '#2A2A2A') + '" stroke-width="1"/>';
+    });
+    ARCH.forEach(function (_, i) {
+      var p = P(i, R);
+      s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + f(p[0]) + '" y2="' + f(p[1]) + '" stroke="#3A3A3A" stroke-width="1"/>';
+    });
+    var dp = vals.map(function (v, i) { return P(i, R * v).map(f).join(','); }).join(' ');
+    s += '<polygon points="' + dp + '" fill="rgba(255,106,19,0.30)" stroke="#FF6A13" stroke-width="2" stroke-linejoin="round"/>';
+    vals.forEach(function (v, i) {
+      var p = P(i, R * v);
+      s += '<circle cx="' + f(p[0]) + '" cy="' + f(p[1]) + '" r="3.5" fill="#FF6A13"/>';
+    });
+    ARCH.forEach(function (a, i) {
+      var p = P(i, 124);
+      s += '<text x="' + f(p[0]) + '" y="' + f(p[1]) + '" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="500" fill="' +
+           (i === topIdx ? '#FF6A13' : '#CFCFCF') + '" font-family="DM Sans, system-ui, sans-serif">' + sh(a) + '</text>';
+    });
+    return s;
+  }
+
+  /* ============ RESULTADO ============ */
+  function renderResult() {
+    var c = compute();
+    var top = c.ranked[0], sec = c.ranked[1];
+    var max = Math.max.apply(null, [1].concat(ARCH.map(function (a) { return c.scores[a.k]; })));
+    var vals = ARCH.map(function (a) { return Math.max(0.1, c.scores[a.k] / max); });
+
+    $('topName').textContent = nm(top.a);
+    $('topTraits').textContent = top.a.traits;
+    $('radar').innerHTML = radarSVG(vals, top.i);
+    $('radar').setAttribute('aria-label', 'Radar dos nove arquétipos olfativos. Arquétipo principal: ' + nm(top.a) + '. Secundário: ' + nm(sec.a) + '.');
+    $('secName').textContent = nm(sec.a);
+    $('secTraits').textContent = sec.a.traits;
+
+    var fams = $('fams');
+    fams.innerHTML = '';
+    top.a.fams.forEach(function (f) {
+      var sp = document.createElement('span');
+      sp.textContent = f;
+      fams.appendChild(sp);
+    });
+
+    perf.key = top.a.k;
+    perf.aud = state.gender === 'f' ? 'f' : 'm';
+    perf.level = LEVEL_KEYS[state.answers[Q.length - 1]] || 'int';
+    loadPerfumes();
+  }
+
+  /* ============ PERFUMES (pesquisa na web via Supabase Edge Function) ============ */
+  var perf = { key: null, aud: 'm', level: 'int', req: 0, pool: [], shown: {} };
+  var LEVEL_KEYS = ['ini', 'int', 'col'];   // mesma ordem das opções da última pergunta do teste
+  var TARGET = {                             // mix de perfis exibido para cada nível
+    ini: ['designer', 'designer', 'nicho'],
+    int: ['designer', 'nicho', 'exclusivo'],
+    col: ['nicho', 'nicho', 'exclusivo']
+  };
+
+  function perfEnabled() { return !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_KEY); }
+  function isHttps(u) { return typeof u === 'string' && /^https:\/\//i.test(u); }
+  function pid(p) { return ((p.brand || '') + '|' + (p.name || '')).toLowerCase(); }
+  function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  // Sorteia 3 do pool: um por perfil-alvo do nível, sem repetir marca (quando possível).
+  // "avoid" = perfumes já exibidos, para "Ver outras sugestões" mostrar novidades.
+  function pickThree(pool, level, avoid) {
+    var used = {}, brands = {}, out = [];
+    function ok(p, allowBrandRepeat) {
+      return !used[pid(p)] && !(avoid && avoid[pid(p)]) &&
+             (allowBrandRepeat || !brands[(p.brand || '').toLowerCase()]);
+    }
+    function take(p) {
+      used[pid(p)] = 1;
+      brands[(p.brand || '').toLowerCase()] = 1;
+      out.push(p);
+    }
+    (TARGET[level] || TARGET.int).forEach(function (tier) {
+      var c = pool.filter(function (p) { return p.tier === tier && ok(p, false); });
+      if (c.length) take(rand(c));
+    });
+    while (out.length < 3) {
+      var c = pool.filter(function (p) { return ok(p, false); });
+      if (!c.length) c = pool.filter(function (p) { return ok(p, true); });
+      if (!c.length) break;
+      take(rand(c));
+    }
+    return out;
+  }
+
+  function setSeg() {
+    Array.prototype.forEach.call(document.querySelectorAll('#perfSeg button'), function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-aud') === perf.aud ? 'true' : 'false');
+    });
+  }
+
+  function perfMsg(text, withRetry) {
+    $('perfMore').hidden = true;
+    var box = $('perfList');
+    box.innerHTML = '';
+    var p = document.createElement('p');
+    p.className = 'perf-msg';
+    p.textContent = text;
+    box.appendChild(p);
+    if (withRetry) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'perf-retry';
+      b.textContent = 'Tentar de novo';
+      b.addEventListener('click', loadPerfumes);
+      box.appendChild(b);
+    }
+  }
+
+  function perfSkeleton() {
+    $('perfMore').hidden = true;
+    var box = $('perfList');
+    box.innerHTML = '';
+    var note = document.createElement('p');
+    note.className = 'perf-msg';
+    note.textContent = 'Buscando sugestões para o seu perfil… na primeira vez pode levar até 1 minuto.';
+    box.appendChild(note);
+    for (var i = 0; i < 3; i++) {
+      var s = document.createElement('div');
+      s.className = 'pcard sk';
+      s.setAttribute('aria-hidden', 'true');
+      s.innerHTML = '<div class="pimg"></div><div class="pbody">' +
+        '<div class="sk-bar" style="height:12px;width:40%"></div>' +
+        '<div class="sk-bar" style="height:20px;width:70%;margin-top:10px"></div>' +
+        '<div class="sk-bar" style="height:12px;width:95%;margin-top:14px"></div>' +
+        '<div class="sk-bar" style="height:12px;width:80%;margin-top:6px"></div></div>';
+      box.appendChild(s);
+    }
+  }
+
+  function perfCard(p) {
+    var card = document.createElement('article');
+    card.className = 'pcard';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'pimg';
+    function placeholder() {
+      wrap.className = 'pimg ph';
+      wrap.textContent = (p.brand || '?').charAt(0).toUpperCase();
+    }
+    if (isHttps(p.image_url)) {
+      var img = document.createElement('img');
+      img.alt = 'Frasco do perfume ' + p.name + ', ' + p.brand;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.referrerPolicy = 'no-referrer';
+      img.addEventListener('error', placeholder);
+      img.src = p.image_url;
+      wrap.appendChild(img);
+    } else {
+      placeholder();
+    }
+
+    var body = document.createElement('div');
+    body.className = 'pbody';
+    var brand = document.createElement('div');
+    brand.className = 'pbrand';
+    brand.textContent = p.brand;
+    var name = document.createElement('h4');
+    name.className = 'pname';
+    name.textContent = p.name;
+    body.appendChild(brand);
+    body.appendChild(name);
+
+    var meta = [p.concentration, p.tier].filter(Boolean).join(' · ');
+    if (meta) {
+      var m = document.createElement('div');
+      m.className = 'pmeta';
+      m.textContent = meta;
+      body.appendChild(m);
+    }
+    var why = document.createElement('p');
+    why.className = 'pwhy';
+    why.textContent = p.why;
+    body.appendChild(why);
+
+    if (isHttps(p.source_url)) {
+      var a = document.createElement('a');
+      a.className = 'plink';
+      a.href = p.source_url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer nofollow';
+      a.textContent = 'Ver na fonte · ' + (p.source_domain || 'site');
+      body.appendChild(a);
+    }
+
+    card.appendChild(wrap);
+    card.appendChild(body);
+    return card;
+  }
+
+  // Mostra 3 do pool. more=true => tenta só perfumes ainda não exibidos.
+  function perfShow(more) {
+    var want = Math.min(3, perf.pool.length);
+    var picks = pickThree(perf.pool, perf.level, more ? perf.shown : null);
+    if (picks.length < want) {                 // já mostrou quase tudo: recomeça o sorteio
+      perf.shown = {};
+      picks = pickThree(perf.pool, perf.level, null);
+    }
+    picks.forEach(function (p) { perf.shown[pid(p)] = 1; });
+    var box = $('perfList');
+    box.innerHTML = '';
+    picks.forEach(function (p) { box.appendChild(perfCard(p)); });
+    $('perfMore').hidden = perf.pool.length <= 3;
+  }
+
+  function perfRender(data) {
+    perf.pool = (data && data.perfumes) || [];
+    perf.shown = {};
+    if (!perf.pool.length) { perfMsg('Não encontramos sugestões agora.', true); return; }
+    perfShow(false);
+  }
+
+  function perfFetch(attempt, reqId) {
+    var headers = { 'Content-Type': 'application/json', 'apikey': CONFIG.SUPABASE_KEY };
+    if (CONFIG.SUPABASE_KEY.indexOf('eyJ') === 0) headers['Authorization'] = 'Bearer ' + CONFIG.SUPABASE_KEY;
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 150000);
+    return fetch(CONFIG.SUPABASE_URL.replace(/\/+$/, '') + '/functions/v1/' + CONFIG.PERFUMES_FUNCTION, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({ archetype: perf.key, audience: perf.aud, level: perf.level }),
+      signal: ctrl.signal
+    }).then(function (r) {
+      clearTimeout(timer);
+      return r.json().catch(function () { return {}; });
+    }).then(function (j) {
+      if (reqId !== perf.req) return null;                 // a pessoa mudou o filtro ou refez o teste
+      if (j.status === 'ok') return j;
+      if (j.status === 'pending' && attempt < 25) {        // outra pessoa disparou a mesma busca: aguarda
+        return new Promise(function (res) { setTimeout(res, 6000); }).then(function () {
+          return perfFetch(attempt + 1, reqId);
+        });
+      }
+      throw new Error('perfumes');
+    });
+  }
+
+  function loadPerfumes() {
+    if (!perf.key) return;
+    var reqId = ++perf.req;
+    perf.pool = [];
+    perf.shown = {};
+    setSeg();
+    if (!perfEnabled()) {
+      perfMsg('Modo demonstração: configure o Supabase e a função suggest-perfumes para ver as sugestões.');
+      return;
+    }
+    perfSkeleton();
+    perfFetch(0, reqId).then(function (d) {
+      if (reqId !== perf.req || !d) return;
+      perfRender(d);
+    }).catch(function () {
+      if (reqId !== perf.req) return;
+      perfMsg('Não foi possível buscar as sugestões agora.', true);
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('#perfSeg button'), function (b) {
+    b.addEventListener('click', function () {
+      var a = b.getAttribute('data-aud');
+      if (a === perf.aud) return;
+      perf.aud = a;
+      loadPerfumes();
+    });
+  });
+  $('perfMore').addEventListener('click', function () { perfShow(true); });
+
+  /* ============ CAPTURA + SUPABASE ============ */
+  var form = $('leadForm');
+  var emailRe = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  function formValid() {
+    return $('nm').value.trim().length > 1 &&
+           emailRe.test($('em').value.trim()) &&
+           $('cAdult').checked &&
+           $('cConsent').checked;
+  }
+  function syncBtn() { $('submitBtn').disabled = state.sending || !formValid(); }
+  ['nm', 'em', 'cAdult', 'cConsent', 'cMkt'].forEach(function (id) {
+    $(id).addEventListener('input', syncBtn);
+    $(id).addEventListener('change', syncBtn);
+  });
+
+  function utmParams() {
+    var p = new URLSearchParams(location.search), o = {}, has = false;
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (k) {
+      var v = p.get(k);
+      if (v) { o[k] = v.slice(0, 100); has = true; }
+    });
+    return has ? o : null;
+  }
+
+  function buildPayload() {
+    var c = compute();
+    var lvl = Q[Q.length - 1].opts[state.answers[Q.length - 1]];
+    return {
+      name: $('nm').value.trim(),
+      email: $('em').value.trim().toLowerCase(),
+      treatment: state.gender || 'm',
+      is_adult: $('cAdult').checked,
+      consent_processing: $('cConsent').checked,
+      consent_marketing: $('cMkt').checked,
+      consent_version: CONFIG.CONSENT_VERSION,
+      quiz_version: CONFIG.QUIZ_VERSION,
+      archetype: c.ranked[0].a.name,      // sempre a forma canônica (masculina), para agrupar nos relatórios
+      secondary: c.ranked[1].a.name,
+      scores: c.scores,
+      answers: state.answers.slice(),
+      level: lvl ? lvl.t : null,
+      utm: utmParams(),
+      page: location.origin + location.pathname
+    };
+  }
+
+  // Devolve uma Promise<boolean>: true = salvo (ou modo demonstração), false = falhou.
+  function saveToSupabase(payload) {
+    if (!CONFIG.SUPABASE_URL || !CONFIG.SUPABASE_KEY) {
+      console.info('[modo demonstração] Supabase não configurado, nada foi enviado:', payload);
+      return Promise.resolve(true);
+    }
+    var headers = {
+      'Content-Type': 'application/json',
+      'apikey': CONFIG.SUPABASE_KEY,
+      'Prefer': 'return=minimal'          // a chave pública só pode inserir, não ler
+    };
+    if (CONFIG.SUPABASE_KEY.indexOf('eyJ') === 0) {   // chave anon no formato JWT
+      headers['Authorization'] = 'Bearer ' + CONFIG.SUPABASE_KEY;
+    }
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 10000);
+    return fetch(CONFIG.SUPABASE_URL.replace(/\/+$/, '') + '/rest/v1/' + encodeURIComponent(CONFIG.SUPABASE_TABLE), {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(payload),
+      signal: ctrl.signal
+    }).then(function (r) {
+      clearTimeout(timer);
+      if (!r.ok) console.warn('Supabase respondeu', r.status);
+      return r.ok;
+    }).catch(function (err) {
+      clearTimeout(timer);
+      console.warn('Falha ao salvar no Supabase:', err);
+      return false;
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (state.sending || !formValid()) return;
+    $('formError').hidden = true;
+
+    if (form.website.value) {            // honeypot: robôs preenchem, pessoas não
+      renderResult();
+      show('result', '#topName');
+      return;
+    }
+
+    state.sending = true;
+    $('submitBtn').textContent = 'Enviando…';
+    syncBtn();
+
+    saveToSupabase(buildPayload()).then(function (ok) {
+      state.sending = false;
+      $('submitBtn').textContent = 'Ver meu arquétipo';
+      syncBtn();
+      if (ok) {
+        renderResult();
+        show('result', '#topName');
+      } else {
+        $('formError').hidden = false;
+      }
+    });
+  });
+
+  /* ============ NAVEGAÇÃO ============ */
+  $('startBtn').addEventListener('click', function () {
+    resetRun();
+    show('gender');
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#gender [data-g]'), function (b) {
+    b.addEventListener('click', function () {
+      state.gender = b.getAttribute('data-g');
+      resetRun();
+      renderQ();
+      show('quiz', '#qtext');
+    });
+  });
+  $('back').addEventListener('click', function () {
+    if (state.qi > 0) { state.qi--; renderQ(); $('qtext').focus({ preventScroll: true }); }
+  });
+  $('againBtn').addEventListener('click', function () {
+    perf.req++;
+    resetRun();
+    state.gender = null;
+    form.reset();
+    $('formError').hidden = true;
+    syncBtn();
+    show('intro', 'h1');
+  });
+
+  /* ============ CONFIG NA PÁGINA ============ */
+  $('policyLink').href = CONFIG.POLICY_URL;
+  $('contactMail').textContent = CONFIG.CONTACT_EMAIL;
+  $('cta').href = CONFIG.CTA_URL;
+})();
+</script>
+</body>
+</html>
