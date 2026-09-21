@@ -1,7 +1,7 @@
 // =====================================================================
 // suggest-perfumes — Supabase Edge Function
 // Recebe { archetype: "SED", audience: "m" | "f" | "all", level: "ini" | "int" | "col" }
-// e devolve um POOL de até 8 perfumes reais, pesquisados na web, com imagem e link da fonte.
+// e devolve um POOL de até 8 perfumes reais, pesquisados na web, com link da fonte.
 // O site sorteia 3 desse pool a cada visita.
 //
 // Deploy:
@@ -20,7 +20,6 @@ const ALLOWED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") ?? "")
 
 const LOCK_MS = 150_000;          // evita duas gerações simultâneas da mesma combinação
 const FAIL_COOLDOWN_MS = 300_000; // após falha, espera 5 min antes de tentar de novo
-const UA = "Mozilla/5.0 (compatible; VictorGuerisePerfumeBot/1.0)";
 
 const sb = createClient(
   Deno.env.get("SUPABASE_URL")!,
@@ -107,8 +106,6 @@ function json(body: unknown, status: number, cors: Record<string, string>) {
 const norm = (u: string) => u.replace(/#.*$/, "").replace(/\/+$/, "").toLowerCase();
 const clean = (v: unknown, max: number) =>
   typeof v === "string" ? v.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim().slice(0, max) : "";
-const decodeEntities = (s: string) =>
-  s.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&#x2F;/gi, "/");
 
 // Só https, sem localhost e sem IP literal (proteção básica contra SSRF).
 function safeHttpsUrl(u: string): URL | null {
@@ -122,102 +119,6 @@ function safeHttpsUrl(u: string): URL | null {
   } catch {
     return null;
   }
-}
-
-async function readLimited(res: Response, max: number): Promise<string> {
-  const reader = res.body?.getReader();
-  if (!reader) return "";
-  const dec = new TextDecoder();
-  let out = "", n = 0;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done || !value) break;
-    n += value.length;
-    out += dec.decode(value, { stream: true });
-    if (n >= max) { await reader.cancel(); break; }
-  }
-  return out;
-}
-
-function metaImage(html: string, base: string): string | null {
-  const metas = html.match(/<meta\b[^>]*>/gi) ?? [];
-  for (const want of ["og:image:secure_url", "og:image", "twitter:image", "twitter:image:src"]) {
-    for (const tag of metas) {
-      const prop = /(?:property|name)\s*=\s*["']([^"']+)["']/i.exec(tag)?.[1]?.toLowerCase();
-      if (prop !== want) continue;
-      const content = /content\s*=\s*["']([^"']+)["']/i.exec(tag)?.[1];
-      if (!content) continue;
-      try { return new URL(decodeEntities(content), base).href; } catch { /* tenta o próximo */ }
-    }
-  }
-  return null;
-}
-
-async function imageOk(url: string): Promise<boolean> {
-  try {
-    const r = await fetch(url, {
-      headers: { "user-agent": UA, "range": "bytes=0-2047", "accept": "image/*" },
-      redirect: "follow",
-      signal: AbortSignal.timeout(6000),
-    });
-    const ok = (r.status === 200 || r.status === 206) &&
-      (r.headers.get("content-type") ?? "").toLowerCase().startsWith("image/") &&
-      !!safeHttpsUrl(r.url);
-    await r.body?.cancel();
-    return ok;
-  } catch {
-    return false;
-  }
-}
-
-// Abre a página do produto e lê a imagem que o próprio site publica para pré-visualização (og:image).
-async function findImage(pageUrl: string): Promise<string | null> {
-  const page = safeHttpsUrl(pageUrl);
-  if (!page) return null;
-  const res = await fetch(page.href, {
-    headers: { "user-agent": UA, "accept": "text/html,application/xhtml+xml" },
-    redirect: "follow",
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!res.ok || !safeHttpsUrl(res.url)) { await res.body?.cancel(); return null; }
-  const html = await readLimited(res, 600_000);
-  const img = metaImage(html, res.url);
-  const u = img ? safeHttpsUrl(img) : null;
-  if (!u) return null;
-  return (await imageOk(u.href)) ? u.href : null;
-}
-
-const stripDiacritics = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
-function tokensOf(s: string): string[] {
-  return stripDiacritics(s.toLowerCase()).split(/[^a-z0-9]+/).filter((t) => t.length >= 3);
-}
-
-// Quando a URL principal não tem imagem aproveitável, tenta outras URLs que já
-// apareceram na mesma busca e parecem falar do mesmo perfume (sem custo extra de API).
-async function findImageWithFallback(
-  o: { brand: string; name: string; source_url: string },
-  seen: Map<string, string>,
-  primaryUrls: Set<string>,
-  deadline: number,
-): Promise<string | null> {
-  const direct = await findImage(o.source_url).catch(() => null);
-  if (direct) return direct;
-
-  const toks = tokensOf(o.brand + " " + o.name);
-  const candidates = Array.from(seen.values())
-    .filter((u) => !primaryUrls.has(norm(u)))
-    .map((u) => ({ u, score: toks.reduce((acc, t) => acc + (stripDiacritics(u.toLowerCase()).includes(t) ? 1 : 0), 0) }))
-    .filter((c) => c.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3)
-    .map((c) => c.u);
-
-  for (const cand of candidates) {
-    if (Date.now() > deadline) break;
-    const img = await findImage(cand).catch(() => null);
-    if (img) return img;
-  }
-  return null;
 }
 
 function extractJson(text: string): any {
@@ -265,7 +166,7 @@ async function generate(arch: string, aud: string, level: string) {
   let text = "";
 
   for (let i = 0; i < 3; i++) {
-    const left = deadline - Date.now() - 15_000;   // reserva tempo para buscar as imagens
+    const left = deadline - Date.now();
     if (left < 20_000) break;
     const data = await callClaude(messages, Math.min(100_000, left));
     for (const block of data.content ?? []) {
@@ -292,7 +193,6 @@ async function generate(arch: string, aud: string, level: string) {
     const brand = clean(p?.brand, 60), name = clean(p?.name, 90), why = clean(p?.why, 320);
     const url = src ? safeHttpsUrl(src) : null;
     const id = (brand + "|" + name).toLowerCase();
-    // uma página por perfume: página repetida daria a mesma imagem para perfumes diferentes
     if (!url || !brand || !name || !why || dupes.has(id) || usedUrls.has(norm(url.href))) continue;
     dupes.add(id);
     usedUrls.add(norm(url.href));
@@ -304,17 +204,10 @@ async function generate(arch: string, aud: string, level: string) {
       why,
       source_url: url.href,
       source_domain: url.hostname.replace(/^www\./, ""),
-      image_url: null as string | null,
     });
     if (out.length === POOL_SIZE) break;
   }
   if (out.length < 3) throw new Error("menos de 3 perfumes válidos na resposta");
-
-  const primaryUrls = new Set(out.map((o) => norm(o.source_url)));
-  const imageDeadline = deadline - 5_000;
-  await Promise.all(out.map(async (o) => {
-    o.image_url = await findImageWithFallback(o, seen, primaryUrls, imageDeadline).catch(() => null);
-  }));
 
   return { perfumes: out, generated_at: new Date().toISOString() };
 }
