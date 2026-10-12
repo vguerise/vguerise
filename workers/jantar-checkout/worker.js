@@ -14,11 +14,9 @@ const QUANTIDADE_MAXIMA = 6; // máximo por compra
 
 const CIDADES = {
   'Ribeirão Preto': { data: '21/09' },
-  'Balneário Camboriú': { data: '06/10' },
-  'Vitória': { data: '07/10' },
-  'São Paulo': { data: '08/10' },
   'Brasília': { data: '15/10' },
   'Rio de Janeiro': { data: '20/10' },
+  'Goiânia': { data: '28/10' },
 };
 
 function corsHeaders(origin) {
