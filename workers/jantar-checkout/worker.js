@@ -13,9 +13,14 @@ const PRECO_POR_VAGA = 1100; // R$ — mesmo valor em todas as cidades
 const QUANTIDADE_MAXIMA = 6; // máximo por compra
 
 const CIDADES = {
-  'Brasília': { data: '15/10' },
-  'Rio de Janeiro': { data: '20/10' },
-  'Goiânia': { data: '28/10' },
+  'Belo Horizonte': { data: '17/11' },
+  'São Paulo': { data: '19/11' },
+  'Vitória': { data: '24/11' },
+  'Ribeirão Preto': { data: '25/11' },
+  'Curitiba': { data: '03/12' },
+  'Rio de Janeiro': { data: '08/12' },
+  'Fortaleza': { data: '15/12' },
+  'Recife': { data: '17/12' },
 };
 
 function corsHeaders(origin) {
